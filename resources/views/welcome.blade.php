@@ -12,8 +12,10 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-image: url("{{url('image/everglowtn.jpg')}}");
+                background-repeat: no-repeat;
+                background-size: cover;
+                color: white;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -45,13 +47,13 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 100px;
             }
 
             .links > a {
-                color: #636b6f;
+                color: white;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 25px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
@@ -81,18 +83,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Everglow
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs">Aisha</a>
+                    <a href="https://laracasts.com">E:U</a>
+                    <a href="https://laravel-news.com">Yiren</a>
+                    <a href="https://blog.laravel.com">Serim</a>
+                    <a href="https://nova.laravel.com">Si Hyeon</a>
+                    <a href="https://forge.laravel.com">Mia</a>
                 </div>
             </div>
         </div>
