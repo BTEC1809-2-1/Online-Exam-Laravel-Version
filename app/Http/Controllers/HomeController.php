@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Services\Exam\ExamService;
+use App\Services\Question\QuestionService;
 class HomeController extends Controller
 {
+    protected $examService;
+    protected $questionService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ExamService $examService, QuestionService $questionService)
     {
         $this->middleware('auth');
+        $this->examService = $examService;
+        $this->questionService = $questionService;
     }
 
     /**
@@ -21,8 +26,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+
+
+    public function index(){
+        $listExam = $this->examService->getUpcomingExam();
+        $listQuestion = $this->questionService->getRecentlyAddedQuestion();
+        return view('home', compact('listExam','listQuestion'));
     }
 }
