@@ -2,6 +2,9 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
+@section('script')
+    <script type="text/javascript" src="{{asset('js/toggleEditUpdate.js')}}"></script>
+@endsection
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -14,7 +17,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form id="form">
                             <div class="form-row">
                                 <div class="col">
 
@@ -66,7 +69,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-block">Edit this Question</button>
+                                <button id="edit" type="submit" class="btn btn-success btn-block">Edit</button>
                                 <button type="submit" class="btn btn-danger btn-block">Delete this Question</button>
                             </div>
 

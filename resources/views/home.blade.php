@@ -53,7 +53,6 @@
                                 <td>{{$exam->status}}</td>
                                 <td>
                                     <button type=button" class="btn btn-success"><a href="{{route('get.exam.detail', ['id' => $exam->id])}}">View detail</a></button>
-                                    <button type=button" class="btn btn-info"><a href="{{route('get.exam.detail', ['id' => $exam->id])}}">Edit</a></button>
                                     <button type=button" class="btn btn-danger"><a href="{{route('get.exam.detail', ['id' => $exam->id])}}">Delete</a></button>
                                 </td>
                             </tr>
@@ -90,7 +89,6 @@
                                 <td>{{$question->subject}}</td>
                                 <td>
                                 <button type="button" class="btn btn-success"><a href="{{route('get.question.detail', ['id' => $question->id])}}">View detail</a></button>
-                                    <button type="button" class="btn btn-info"><a href="{{route('get.question.detail', ['id' => $question->id])}}">Edit</a></button>
                                     <button type="button" class="btn btn-danger"><a href="{{route('get.question.detail', ['id' => $question->id])}}">Delete</a></button>
                                 </td>
                             </tr>
