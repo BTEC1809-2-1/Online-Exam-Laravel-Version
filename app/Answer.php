@@ -3,9 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
-class Exam extends Model
+class Answer extends Model
 {
      /**
      * The primary key associated with the table.
@@ -15,25 +14,20 @@ class Exam extends Model
     protected $primaryKey = 'id';
     protected $keyType ='string';
 
-    use Notifiable;
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'semester', 'classroom', 'start_at','duration','status'
-    ];
+        'id', 'answer', 'is_correct'
+     ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
+     protected $casts = [
+        'question_id'=>'bigint',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'created_by' => 'string',
         'updated_by' => 'string'
-    ];
+     ];
 }

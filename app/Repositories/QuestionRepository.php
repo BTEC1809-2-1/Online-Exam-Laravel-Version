@@ -41,12 +41,5 @@ class QuestionRepository extends BaseRepository {
 
         return $query->findOrFail($id);
     }
-    public function storageQuestion($id, $question, $type, $subject){
-        DB::table('questions')->insert([
-            ['id' => $id],
-            ['question' => $question],
-            ['type' => $type],
-            ['subject' => $subject]
-        ]);
-    }
+
 }

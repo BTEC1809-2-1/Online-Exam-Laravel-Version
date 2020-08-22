@@ -18,7 +18,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    @if(session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('error') }}
+                        </div>
+                    @endif
                     Welcome home <b>{{ Auth::user()->name }}</b>
 
                 </div>
@@ -29,8 +33,8 @@
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-end mb-3">
-                    <button type="button" class="btn btn-primary mx-2"><a href="{{route('create.exam')}}">Create New Exam</a></button>
-                        <button type="button" class="btn btn-primary mx-2"><a href="{{route('get.exam.list')}}">View All Exams</a></button>
+                        <a href="{{route('create.exam')}}"><button type="button" class="btn btn-primary mx-2">Create New Exam</button></a>
+                        <a href="{{route('get.exam.list')}}"><button type="button" class="btn btn-primary mx-2">View All Exams</button></a>
                     </div>
                     <table class="table">
                         <thead>
@@ -52,8 +56,8 @@
                                 <td>{{$exam->start_at}}</td>
                                 <td>{{$exam->status}}</td>
                                 <td>
-                                    <button type=button" class="btn btn-success"><a href="{{route('get.exam.detail', ['id' => $exam->id])}}">View detail</a></button>
-                                    <button type=button" class="btn btn-danger"><a href="{{route('get.exam.detail', ['id' => $exam->id])}}">Delete</a></button>
+                                    <a href="{{route('get.exam.detail', ['id' => $exam->id])}}"><button type=button" class="btn btn-success">View detail</button></a>
+                                    <a href="{{route('get.exam.detail', ['id' => $exam->id])}}"><button type=button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -67,8 +71,8 @@
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-end mb-3">
-                        <button type="button" class="btn btn-primary mx-2"><a href="{{route('create.question')}}">Create New question</a></button>
-                        <button type="button" class="btn btn-primary mx-2"><a href="{{route('get.question.list')}}">View All Question</a></button>
+                        <a href="{{route('get.question.list')}}"><button type="button" class="btn btn-primary mx-2">View All Question</button></a>
+                        <a href="{{route('create.question')}}"><button type="button" class="btn btn-primary mx-2">Create New question</button></a>
                     </div>
                     <table class="table">
                         <thead>
@@ -88,8 +92,8 @@
                                 <td>{{$question->type}}</td>
                                 <td>{{$question->subject}}</td>
                                 <td>
-                                <button type="button" class="btn btn-success"><a href="{{route('get.question.detail', ['id' => $question->id])}}">View detail</a></button>
-                                    <button type="button" class="btn btn-danger"><a href="{{route('get.question.detail', ['id' => $question->id])}}">Delete</a></button>
+                                <a href="{{route('get.question.detail', ['id' => $question->id])}}"><button type="button" class="btn btn-success">View detail</button></a>
+                                    <a href="{{route('get.question.detail', ['id' => $question->id])}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                             @endforeach

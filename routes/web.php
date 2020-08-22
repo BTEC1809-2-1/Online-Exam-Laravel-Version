@@ -25,12 +25,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/Question/Create', 'Question\QuestionController@create')->name('create.question');
+    Route::post('/Question/Store', 'Question\QuestionController@store')->name('question.store');
+    Route::get('/Question/Delete/{id}','Question\QuestionController@delete')->name('question.delete');
     Route::get('/Question/Detail/{id}', 'Question\QuestionController@getQuestionDetail')->name('get.question.detail');
     Route::get('/Question/List', 'Question\QuestionController@getQuestionList')->name('get.question.list');
+    Route::get('/Question/{id}/Answer', 'Question\QuestionController@addAnswer')->name('question.add.answer');
+    Route::post('/Question/{qid}/Answer/Store', 'Question\QuestionController@storeAnswer')->name('question.answer.store');
 
     Route::get('/Exam/Create', 'Exam\ExamController@create')->name('create.exam');
     Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
     Route::get('/Exam/List','Exam\ExamController@getExamList')->name('get.exam.list');
-
 });
 

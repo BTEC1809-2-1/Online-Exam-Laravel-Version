@@ -13,7 +13,12 @@
                 <div class="card">
 
                     <div class="card-header">
-                        Question Detail
+                        <div class="row justify-content-between px-4">
+                            <span class="my-auto">
+                                Question Detail
+                            </span>
+                            <a href="{{route('question.add.answer', ['id' => $question->id])}}"><button class="btn btn-primary">Add answers to this question</button></a>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -69,12 +74,18 @@
                             </div>
 
                             <div class="form-group">
-                                <button id="edit" type="submit" class="btn btn-success btn-block">Edit</button>
-                                <button type="submit" class="btn btn-danger btn-block">Delete this Question</button>
+                                <a>
+                                    <button id="edit" type="submit" class="btn btn-success btn-block">
+                                        Edit
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div class="form-group">
+                                <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn btn-danger btn-block" role="button">Delete</a>
                             </div>
 
                         </form>
-
                     </div>
                 </div>
             </div>

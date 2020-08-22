@@ -13,24 +13,24 @@
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form action="{{route('question.store')}}" method="POST">
                             @csrf
 
                             <div class="form-group">
                                 <label for="">Question ID</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="id">
                             </div>
 
                             <div class="form-group">
                                 <label for="">Question</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="question">
                             </div>
 
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
                                     <label for="">Type</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="type">
                                         <option>Multiple choices of 4</option>
                                         <option>Multiple choices of 2</option>
                                         <option>True False</option>
@@ -39,7 +39,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="">Subject</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="subject">
                                         <option>Information Technology</option>
                                         <option>Business Management</option>
                                         <option>Designing</option>

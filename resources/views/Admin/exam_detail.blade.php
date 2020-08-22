@@ -13,7 +13,14 @@
                 <div class="card">
 
                     <div class="card-header">
-                        Exam Detail
+                        <div class="row justify-content-between px-3">
+                            <span class="my-auto">
+                                Exam Detail
+                            </span>
+                            <button type="button" class="btn btn-info">
+                                Questions list
+                            </button>
+                        </div>
                     </div>
 
                     <div class="card-body">
