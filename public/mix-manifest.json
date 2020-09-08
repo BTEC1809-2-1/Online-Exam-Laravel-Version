@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/admin-dashboard.css": "/css/admin-dashboard.css",
+    "/css/admin.css": "/css/admin.css",
     "/js/hiddenCheckbox.js": "/js/hiddenCheckbox.js",
     "/js/toggleEditUpdate.js": "/js/toggleEditUpdate.js"
 }

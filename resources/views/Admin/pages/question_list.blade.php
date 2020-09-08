@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Admin.layouts.admin')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
@@ -25,7 +25,7 @@
             </div>
            <div class="card">
                 <div class="card-header">
-                    Exam list
+                    Question list
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-end mb-3">
@@ -36,25 +36,42 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Semester</th>
-                                <th scope="col">Class</th>
-                                <th scope="col">Start At</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Question</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Subject</th>
                                 <th scope="col colspan-3" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($listExam as $exam)
+                            @foreach($listQuestion as $question)
                             <tr>
-                                <th>{{$exam->id}}</th>
-                                <td>{{$exam->semester}}</td>
-                                <td>{{$exam->classroom}}</td>
-                                <td>{{$exam->start_at}}</td>
-                                <td>{{$exam->status}}</td>
+                                <th>{{$question->id}}</th>
+                                <td>{{$question->question}}</td>
+                                <td>{{$question->type}}</td>
+                                <td>{{$question->subject}}</td>
                                 <td>
-                                    <button type=button" class="btn btn-success"><a href="Exam/Detail/{{$exam->id}}">View detail</a></button>
-                                    <button type=button" class="btn btn-info"><a href="Exam/Edit/{{$exam->id}}">Edit</a></button>
-                                    <button type=button" class="btn btn-danger"><a href="Exam/Delete/{{$exam->id}}">Delete</a></button>
+
+                                <button type="button" class="btn btn-success">
+                                    <a href="{{route('get.question.detail',
+                                                ['id' => $question->id])}}">
+                                        View detail
+                                    </a>
+                                </button>
+
+                                <button type="button" class="btn btn-info">
+                                    <a href="{{route('get.question.detail',
+                                            ['id' => $question->id])}}">
+                                            Edit
+                                    </a>
+                                </button>
+
+                                <button type="button" class="btn btn-danger">
+                                    <a href="{{route('get.question.detail',
+                                    ['id' => $question->id])}}">
+                                        Delete
+                                    </a>
+                                </button>
+
                                 </td>
                             </tr>
                             @endforeach
