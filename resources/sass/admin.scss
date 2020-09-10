@@ -46,7 +46,7 @@
         }
     }
     .content{
-        width: 85vw;
+        width: 100%;
         .header{
             min-height: 60px;
             width: 100%;
@@ -62,7 +62,10 @@
             }
         }
         .container{
-            max-width: 1350px;
+            width: 100%;
+            .row{
+                width: 100%;
+            }
         }
         .card {
             margin-top: 1em;

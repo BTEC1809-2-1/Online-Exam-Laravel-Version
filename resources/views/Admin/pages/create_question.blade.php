@@ -1,11 +1,14 @@
 @extends('Admin.layouts.admin')
 @section('style')
-	<link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/question.css') }}">
+@endsection
+@section('script')
+<script type="text/javascript" src="{{asset('js/changeAnswerByQuestionType.js')}}"></script>
 @endsection
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-8">
+		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
 					Create New Question
@@ -24,29 +27,27 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="">Type</label>
-								<select class="form-control" name="type">
-									<option>Multiple choices of 4</option>
-									<option>Multiple choices of 2</option>
-									<option>True False</option>
+								<select class="form-control" id="questionType" name="questionType">
+									<option selected></option>
+									<option value="mc4">Multiple choices of 4</option>
+									<option value="tf">True False</option>
 								</select>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="">Subject</label>
 								<select class="form-control" name="subject" id="subject">
+									<option selected></option>
 									<option>Information Technology</option>
 									<option>Business Management</option>
 									<option>Designing</option>
 								</select>
 							</div>
 						</div>
-						<div class="form-row">
-							@if ('subject'=='Information Technology')
-                                hello world
-                            @else
-                                Ga`
-							@endif
+						//TODO: add answer group here
+						<div class="form-row answer-block my-2" id="answer-block">
+                            
 						</div>
-						<button type="submit" class="btn btn-success btn-block">Create Question</button>
+						<button type="submit" class="btn question-create btn-block">Create Question</button>
 					</form>
 				</div>
 			</div>

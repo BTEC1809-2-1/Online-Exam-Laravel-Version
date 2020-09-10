@@ -55,7 +55,7 @@
 }
 
 .wrapper .content {
-  width: 85vw;
+  width: 100%;
 }
 
 .wrapper .content .header {
@@ -75,7 +75,11 @@
 }
 
 .wrapper .content .container {
-  max-width: 1350px;
+  width: 100%;
+}
+
+.wrapper .content .container .row {
+  width: 100%;
 }
 
 .wrapper .content .card {

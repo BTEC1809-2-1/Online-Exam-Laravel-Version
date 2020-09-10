@@ -5,7 +5,7 @@
 @section('content')
     @csrf
     <div class="content">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center w-100">
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">
@@ -24,7 +24,6 @@
                             </div>
                         @endif
                         Welcome home <b>{{ Auth::user()->name }}</b>
-
                     </div>
                 </div>
                 <div class="card">
@@ -33,8 +32,8 @@
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-end mb-3 px-5">
-                            <a href="/Create"><button type="button" class="btn btn-primary mx-2">Create New Exam</button></a>
-                            <a href="/List"><button type="button" class="btn btn-primary mx-2">View All Exams</button></a>
+                            <a href="Exam/Create"><button type="button" class="btn btn-primary mx-2">Create New Exam</button></a>
+                            <a href="Exam/List"><button type="button" class="btn btn-primary mx-2">View All Exams</button></a>
                         </div>
                         <table class="table">
                             <thead>
@@ -48,7 +47,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($listExam as $exam)
+                                @foreach($listExam ?? '' as $exam)
                                 <tr>
                                     <th>{{$exam->id}}</th>
                                     <td>{{$exam->semester}}</td>
@@ -64,7 +63,7 @@
                             </tbody>
                         </table>
                     </div>
-               </div>
+                </div>
             </div>
         </div>
     </div>

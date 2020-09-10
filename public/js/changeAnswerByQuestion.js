@@ -81,34 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/hiddenCheckbox.js":
-/*!****************************************!*\
-  !*** ./resources/js/hiddenCheckbox.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$('#form').submit(function () {
-  if (document.getElementById("autoSizingCheck").checked) {
-    document.getElementById('autoSizingCheck2').disabled = true;
-  }
-});
-
-/***/ }),
-
-/***/ 3:
-/*!**********************************************!*\
-  !*** multi ./resources/js/hiddenCheckbox.js ***!
-  \**********************************************/
+/***/ 2:
+/*!******************************************************!*\
+  !*** multi ./resources/js/changeAnswerByQuestion.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/btec/onlineexam/resources/js/hiddenCheckbox.js */"./resources/js/hiddenCheckbox.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/lebinhan/Workspace/btec/onlineexam/resources/js/changeAnswerByQuestion.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

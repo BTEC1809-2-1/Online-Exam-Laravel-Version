@@ -1,0 +1,23 @@
+label {
+  color: #000000;
+}
+
+.question-create {
+  background: #ff99bb;
+  color: #ffffff;
+}
+
+.question-delete {
+  background: #8A2BE2;
+}
+
+.question-edit {
+  background: #f26b8a;
+  color: #ffffff;
+}
+
+.answer-block {
+  min-height: 30px;
+  border: 1px solid #8A2BE2;
+}
+

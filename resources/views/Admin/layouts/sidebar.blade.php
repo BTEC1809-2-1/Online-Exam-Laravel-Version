@@ -11,13 +11,10 @@
                 </a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="#">Home 1</a>
+                        <a href="{{route('create.exam')}}">Create new Exam</a>
                     </li>
                     <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
+                        <a href="{{route('get.exam.list')}}">List all exam</a>
                     </li>
                 </ul>
             </li>
@@ -29,22 +26,21 @@
             </a>
             <ul class="collapse list-unstyled" id="questionManagement">
                 <li>
-                    <a href="#">Page 1</a>
+                    <a href="{{route('create.question')}}">Create new question</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
+                    <a href="{{route('get.question.list')}}">List all question</a>
                 </li>
             </ul>
             </li>
             <hr>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <a href="{{route('logout')}}">Logout</a>
+            {{-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-copy"></i>
                 Student management
             </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
+            {{-- Do I even need this? Let's just leave it here, just in case we need it later--}}
+            {{-- <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
                     <a href="#">Page 1</a>
                 </li>
@@ -54,7 +50,7 @@
                 <li>
                     <a href="#">Page 3</a>
                 </li>
-            </ul>
+            </ul> --}}
             </li>
         </ul>
         <div class="trademark mt-auto">

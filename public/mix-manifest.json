@@ -2,6 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
+    "/css/question.css": "/css/question.css",
+    "/js/changeAnswerByQuestionType.js": "/js/changeAnswerByQuestionType.js",
     "/js/hiddenCheckbox.js": "/js/hiddenCheckbox.js",
     "/js/toggleEditUpdate.js": "/js/toggleEditUpdate.js"
 }

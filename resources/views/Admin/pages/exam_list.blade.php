@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
 @section('content')
+    //TODO: also change all buttons in this page to pink
 <div class="container" style="background-image:url({{url('/images/myimage.jpg')}})">
     @csrf
     <div class="card">

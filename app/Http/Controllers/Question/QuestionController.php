@@ -27,7 +27,7 @@ class QuestionController extends Controller
 
     public function create(){
 
-        return view('Admin.create_question');
+        return view('Admin.pages.create_question');
 
     }
 
@@ -58,14 +58,14 @@ class QuestionController extends Controller
     public function getQuestionList(){
 
         $listQuestion = $this->questionService->getQuestionList();
-        return view('Admin/question_list', compact('listQuestion'));
+        return view('Admin.pages.question_list', compact('listQuestion'));
 
     }
 
     public function getQuestionDetail($id){
 
         $question = $this->questionService->getQuestionDetail($id);
-        return view('Admin.question_detail', compact('question'));
+        return view('Admin.pages.question_detail', compact('question'));
 
     }
 

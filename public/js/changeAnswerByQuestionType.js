@@ -81,34 +81,55 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/hiddenCheckbox.js":
-/*!****************************************!*\
-  !*** ./resources/js/hiddenCheckbox.js ***!
-  \****************************************/
+/***/ "./resources/js/changeAnswerByQuestionType.js":
+/*!****************************************************!*\
+  !*** ./resources/js/changeAnswerByQuestionType.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('#form').submit(function () {
-  if (document.getElementById("autoSizingCheck").checked) {
-    document.getElementById('autoSizingCheck2').disabled = true;
-  }
+$(document).ready(function () {
+  $("#questionType").change(function () {
+    var selectedValue = $(this).find(":selected").val();
+    console.log(selectedValue);
+
+    switch (selectedValue) {
+      case "mc4":
+        multipleChoiceOfFour();
+        break;
+
+      case "tf":
+        trueFalse();
+        break;
+
+      default:
+        $("#answer-block").empty();
+        break;
+    }
+  });
 });
+
+function multipleChoiceOfFour() {
+  $("#answer-block").empty();
+  var html = '<input type="text" class="">' + '<input type="radio">' + 'is correct' + '<input type="text" class="">' + '<input type="radio">' + 'is correct' + '<input type="text" class="">' + '<input type="radio">' + 'is correct' + '<input type="text" class="">' + '<input type="radio">' + 'is correct';
+  $("#answer-block").append(html);
+}
 
 /***/ }),
 
-/***/ 3:
-/*!**********************************************!*\
-  !*** multi ./resources/js/hiddenCheckbox.js ***!
-  \**********************************************/
+/***/ 2:
+/*!**********************************************************!*\
+  !*** multi ./resources/js/changeAnswerByQuestionType.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/btec/onlineexam/resources/js/hiddenCheckbox.js */"./resources/js/hiddenCheckbox.js");
+module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/btec/onlineexam/resources/js/changeAnswerByQuestionType.js */"./resources/js/changeAnswerByQuestionType.js");
 
 
 /***/ })
