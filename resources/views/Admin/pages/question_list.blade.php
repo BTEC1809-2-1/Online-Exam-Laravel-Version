@@ -34,7 +34,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-end mb-3">
-                        <button type="button" class="btn question-create mx-5">Create New question</button>
+                        <a href="{{route('create.question')}}">
+                            <button type="button" class="btn question-create mx-5">Create New question</button>
+                        </a>
                     </div>
                     <table class="table">
                         <thead>
