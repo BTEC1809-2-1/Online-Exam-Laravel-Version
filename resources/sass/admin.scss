@@ -1,0 +1,81 @@
+@import 'variables';
+
+.wrapper{
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    color: $white;
+    .sidebar{
+        width: 15vw;
+        min-height: 100vh;
+        .sidebar-header{
+            width: 100%;
+            background: $custom-pink-dark;
+            padding: 1em 2em;
+            h3 {
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+        .btn-home{
+            text-align: center;
+            a{
+                color: $white;
+                font-weight: bold;
+                font-size: 25px;
+            }
+        }
+        nav {
+            background: $custom-pink;
+            position: relative;
+            ul{
+                padding: 1em;
+            }
+            a{
+                color: $white;
+                font-size: 20px;
+            }
+            .trademark{
+                background: $custom-pink-dark;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                padding: 1em;
+                font-size: 18px;
+            }
+        }
+    }
+    .content{
+        width: 100%;
+        .header{
+            min-height: 60px;
+            width: 100%;
+            background:  $custom-pink-lighter;
+            text-align: center;
+            .app-name {
+                display: inline-block;
+                width: 60%;
+                padding: 0.5em;
+                color: $white;
+                font-weight: bold;
+                font-size: 25px;
+            }
+        }
+        .container{
+            width: 100%;
+            .row{
+                width: 100%;
+            }
+        }
+        .card {
+            margin-top: 1em;
+            .card-header{
+                background:$custom-pink-dark;
+                color: $white;
+            }
+        }
+        a {
+            color: white;
+        }
+    }
+}

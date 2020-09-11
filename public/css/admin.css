@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  color: #ffffff;
+}
+
+.wrapper .sidebar {
+  width: 15vw;
+  min-height: 100vh;
+}
+
+.wrapper .sidebar .sidebar-header {
+  width: 100%;
+  background: #ff66b5;
+  padding: 1em 2em;
+}
+
+.wrapper .sidebar .sidebar-header h3 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.wrapper .sidebar .btn-home {
+  text-align: center;
+}
+
+.wrapper .sidebar .btn-home a {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.wrapper .sidebar nav {
+  background: #ff99bb;
+  position: relative;
+}
+
+.wrapper .sidebar nav ul {
+  padding: 1em;
+}
+
+.wrapper .sidebar nav a {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.wrapper .sidebar nav .trademark {
+  background: #ff66b5;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1em;
+  font-size: 18px;
+}
+
+.wrapper .content {
+  width: 100%;
+}
+
+.wrapper .content .header {
+  min-height: 60px;
+  width: 100%;
+  background: #ffe6ee;
+  text-align: center;
+}
+
+.wrapper .content .header .app-name {
+  display: inline-block;
+  width: 60%;
+  padding: 0.5em;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.wrapper .content .container {
+  width: 100%;
+}
+
+.wrapper .content .container .row {
+  width: 100%;
+}
+
+.wrapper .content .card {
+  margin-top: 1em;
+}
+
+.wrapper .content .card .card-header {
+  background: #ff66b5;
+  color: #ffffff;
+}
+
+.wrapper .content a {
+  color: white;
+}
+

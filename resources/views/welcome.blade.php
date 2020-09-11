@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Thich mot ban gai BTEC</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -83,16 +83,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Everglow
+                    Tau Hai Cuc Manh
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Aisha</a>
-                    <a href="https://laracasts.com">E:U</a>
-                    <a href="https://laravel-news.com">Yiren</a>
-                    <a href="https://blog.laravel.com">Serim</a>
-                    <a href="https://nova.laravel.com">Si Hyeon</a>
-                    <a href="https://forge.laravel.com">Mia</a>
+                    <a href="https://laravel.com/docs">BTEC CMS</a>
+                    <a href="https://laracasts.com">BTEC AP</a>
+                    <a href="https://laravel-news.com">BTEC Fanpage</a>
+                    <a href="https://blog.laravel.com">BTEC Confession</a>
+                    <a href="https://nova.laravel.com">BTEC Website</a>
                 </div>
             </div>
         </div>

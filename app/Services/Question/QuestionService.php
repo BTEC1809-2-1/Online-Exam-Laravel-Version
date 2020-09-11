@@ -3,6 +3,7 @@
 namespace App\Services\Question;
 
 use App\Repositories\QuestionRepository;
+use GuzzleHttp\Psr7\Request;
 
 class QuestionService {
 
@@ -32,5 +33,10 @@ class QuestionService {
     return $questionDetail;
 
   }
+  public function storeAnswer(){
 
+
+
+ }
 }
+

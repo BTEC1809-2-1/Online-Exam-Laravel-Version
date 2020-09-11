@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Services\Question\QuestionService;
-class HomeController extends Controller
+class AdminController extends Controller
 {
     protected $examService;
     protected $questionService;
@@ -31,6 +31,6 @@ class HomeController extends Controller
     public function index(){
         $listExam = $this->examService->getUpcomingExam();
         $listQuestion = $this->questionService->getRecentlyAddedQuestion();
-        return view('home', compact('listExam','listQuestion'));
+        return view('Admin.pages.admin-dashboard', compact('listExam','listQuestion'));
     }
 }

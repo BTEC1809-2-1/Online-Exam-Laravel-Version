@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('Admin.layouts.admin')
 @section('style')
-    <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection
 @section('script')
     <script type="text/javascript" src="{{asset('js/toggleEditUpdate.js')}}"></script>
@@ -13,7 +13,11 @@
                 <div class="card">
 
                     <div class="card-header">
-                        Question Detail
+                        <div class="row justify-content-between px-4">
+                            <span class="my-auto">
+                                Question Detail
+                            </span>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -69,12 +73,18 @@
                             </div>
 
                             <div class="form-group">
-                                <button id="edit" type="submit" class="btn btn-success btn-block">Edit</button>
-                                <button type="submit" class="btn btn-danger btn-block">Delete this Question</button>
+                                <a>
+                                    <button id="edit" type="submit" class="btn question-edit btn-block">
+                                        Edit
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div class="form-group">
+                                <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn question-delete btn-block" role="button">Delete</a>
                             </div>
 
                         </form>
-
                     </div>
                 </div>
             </div>

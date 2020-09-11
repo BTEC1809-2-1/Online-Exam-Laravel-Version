@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('Admin.layouts.admin')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
 @section('content')
+    //TODO: Change button color to pink
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
