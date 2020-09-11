@@ -13,6 +13,7 @@ use App\Exceptions\Handler;
 use Exception;
 use PhpParser\Node\Stmt\TryCatch;
 use App\Repositories\AnswerRepository;
+use Carbon\Carbon;
 
 class QuestionController extends Controller
 {
@@ -39,12 +40,12 @@ class QuestionController extends Controller
     }
 
     public function store(Request $request){
-
         try {
+            $date =  date('Ymd')+date('Hsi');
             $question = new Question();
-            $question->id = $request->id;
+            $question->id = $request->subject.$request->questionType.$date;
             $question->question = $request->question;
-            $question->type = $request->type;
+            $question->type = $request->questionType;
             $question->subject = $request->subject;
             $question->created_by = $request->user()->name;
             $question->save();

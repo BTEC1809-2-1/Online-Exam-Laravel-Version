@@ -6,13 +6,13 @@ $(document).ready(function() {
             .val();
         console.log(selectedValue);
         switch (selectedValue) {
-            case "sc4":
+            case "SC4":
                 singleChoiceOfFour();
                 break;
-            case "mc4":
+            case "MC4":
                 multipleChoiceOfFour();
                 break;
-            case "tf":
+            case "TF":
                 trueFalse();
                 break;
             default:
