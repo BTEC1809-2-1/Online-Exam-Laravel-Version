@@ -28,7 +28,8 @@
 							<div class="form-group col-md-6">
 								<label for="">Type</label>
 								<select class="form-control" id="questionType" name="questionType">
-									<option selected></option>
+                                    <option selected></option>
+                                    <option value="sc4">Single choices of 4</option>
 									<option value="mc4">Multiple choices of 4</option>
 									<option value="tf">True False</option>
 								</select>
@@ -43,9 +44,9 @@
 								</select>
 							</div>
 						</div>
-						//TODO: add answer group here
-						<div class="form-row answer-block my-2" id="answer-block">
-                            
+                        //TODO: add answer group here
+						<div class="form-row answer-block mb-2">
+                            <div class="col" id="answer-block"></div>
 						</div>
 						<button type="submit" class="btn question-create btn-block">Create Question</button>
 					</form>

@@ -17,7 +17,6 @@ label {
 }
 
 .answer-block {
-  min-height: 30px;
-  border: 1px solid #8A2BE2;
+  color: black;
 }
 
