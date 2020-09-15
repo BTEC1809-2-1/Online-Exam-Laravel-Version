@@ -131,7 +131,7 @@ function multipleChoiceOfFour() {
 
 function trueFalse() {
   $("#answer-block").empty();
-  $("#answer-block").append("\n        <div class=\"form-group\">\n            <label for\"firstAnswer\">First Answer</label>\n            <input type=\"text\" class=\"form-control\" name=\"answer[1]>\n            <div class=\"form-check\">\n                <input class=\"form-check-input\" type=\"radio\">\n                <label class=\"form-check-label\" > Is True </label>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for\"firstAnswer\">Second Answer</label>\n            <input type=\"text\" class=\"form-control\" name=\"answer[2]>\n            <div class=\"form-check\">\n                <input class=\"form-check-input\" type=\"radio \">\n                <label class=\"form-check-label\" > Is true </label>\n            </div>\n        </div>\n    ");
+  $("#answer-block").append("\n    <div class=\"form-group\">\n    <label for\"firstAnswer\">First Answer</label>\n    <input type=\"text\" class=\"form-control\">\n    <div class=\"form-check\">\n        <input class=\"form-check-input\" type=\"radio\">\n        <label class=\"form-check-label\" > is correct </label>\n    </div>\n    </div>\n    <div class=\"form-group\">\n        <label for\"firstAnswer\">Second Answer</label>\n        <input type=\"text\" class=\"form-control\">\n        <div class=\"form-check\">\n            <input class=\"form-check-input\" type=\"radio\">\n            <label class=\"form-check-label\" > is correct </label>\n        </div>\n    </div>\n    ");
 }
 
 /***/ }),

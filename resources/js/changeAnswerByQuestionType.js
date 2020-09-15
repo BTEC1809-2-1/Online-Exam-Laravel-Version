@@ -103,21 +103,21 @@ function multipleChoiceOfFour() {
 function trueFalse(){
     $("#answer-block").empty();
     $("#answer-block").append(`
-        <div class="form-group">
-            <label for"firstAnswer">First Answer</label>
-            <input type="text" class="form-control" name="answer[1]>
-            <div class="form-check">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" > Is True </label>
-            </div>
+    <div class="form-group">
+    <label for"firstAnswer">First Answer</label>
+    <input type="text" class="form-control">
+    <div class="form-check">
+        <input class="form-check-input" type="radio">
+        <label class="form-check-label" > is correct </label>
+    </div>
+    </div>
+    <div class="form-group">
+        <label for"firstAnswer">Second Answer</label>
+        <input type="text" class="form-control">
+        <div class="form-check">
+            <input class="form-check-input" type="radio">
+            <label class="form-check-label" > is correct </label>
         </div>
-        <div class="form-group">
-            <label for"firstAnswer">Second Answer</label>
-            <input type="text" class="form-control" name="answer[2]>
-            <div class="form-check">
-                <input class="form-check-input" type="radio ">
-                <label class="form-check-label" > Is true </label>
-            </div>
-        </div>
+    </div>
     `);
 }
