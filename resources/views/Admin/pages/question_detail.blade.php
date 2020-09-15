@@ -78,9 +78,12 @@
                                 @endforeach
                             </div>
                             <div class="form-group">
-                                <button id="edit" class="btn question-edit btn-block">
-                                    Edit
-                                </button>
+                                <button id="edit" class="btn btn-block question-edit">Edit</button>
+                            </div>
+                            <div class="form-group" id="update">
+                                <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn question-edit btn-block" role="button">Update</a>
+                            </div>
+                            <div class="form-group">
                                 <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn question-delete btn-block" role="button">Delete</a>
                             </div>
                         </form>

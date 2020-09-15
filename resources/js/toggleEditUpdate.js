@@ -1,13 +1,14 @@
 
 $(document).ready(function(){
     $(function(){
-        $('#edit').click( function(e) {
+        $('#edit').one('click' ,function(e) {
             e.preventDefault();
-            $(this).html() == "Edit" ? play_int() : $('#form').submit();
+            $(this).html() == "Edit" ? updateOn() : $('#form').submit();
         });
     });
-    function play_int() {
-        $('#edit').html("Update");
+    function updateOn() {
+        $('#edit').parent().css('display','none');
+        $('#update').show();
         $(":input").prop('readonly', false);
     }
 });
