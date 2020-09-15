@@ -28,6 +28,7 @@ Route::get('/Question/Detail/{id}', 'Question\QuestionController@getQuestionDeta
 Route::get('/Question/List', 'Question\QuestionController@getQuestionList')->name('get.question.list');
 Route::get('/Question/{id}/Answer', 'Question\QuestionController@addAnswer')->name('question.add.answer');
 Route::post('/Question/{qid}/Answer/Store', 'Question\QuestionController@storeAnswer')->name('question.answer.store');
+Route::get('/Question/Update/{id}','Question\QuestionController@getQuestionList')->name('question.update');
 
 Route::get('/Exam/Create', 'Exam\ExamController@create')->name('create.exam');
 Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
