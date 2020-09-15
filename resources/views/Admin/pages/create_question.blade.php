@@ -11,16 +11,12 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					Create New Question
+                    Create New Question
 				</div>
 				<div class="card-body">
 					<form action="{{route('question.store')}}" method="POST">
 							@csrf
-						<div class="form-group">
-							<label for="">Question ID</label>
-							<input type="text" class="form-control" name="id">
-						</div>
-						<div class="form-group">
+                        <div class="form-group">
 							<label for="">Question</label>
 							<input type="text" class="form-control" name="question">
 						</div>
@@ -29,22 +25,21 @@
 								<label for="">Type</label>
 								<select class="form-control" id="questionType" name="questionType">
                                     <option selected></option>
-                                    <option value="sc4">Single choices of 4</option>
-									<option value="mc4">Multiple choices of 4</option>
-									<option value="tf">True False</option>
+                                    <option value="SC4">Single choices of 4</option>
+									<option value="MC4">Multiple choices of 4</option>
+									<option value="TF">True False</option>
 								</select>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="">Subject</label>
 								<select class="form-control" name="subject" id="subject">
 									<option selected></option>
-									<option>Information Technology</option>
-									<option>Business Management</option>
-									<option>Designing</option>
+									<option value="IT">Information Technology</option>
+									<option value="BM">Business Management</option>
+									<option value="DS">Designing</option>
 								</select>
 							</div>
 						</div>
-                        //TODO: add answer group here
 						<div class="form-row answer-block mb-2">
                             <div class="col" id="answer-block"></div>
 						</div>

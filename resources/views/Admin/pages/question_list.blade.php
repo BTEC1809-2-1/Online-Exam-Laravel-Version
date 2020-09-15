@@ -10,7 +10,6 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Dashboard') }}
-
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -18,18 +17,26 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    Welcome home <b>{{ Auth::user()->name }}</b>
-
+                    <div class="row text-center justify-content-between">
+                        <b class="my-auto ml-md-5">{{ Auth::user()->name }}</b>
+                        <nav class="navbar navbar-light justify-content-between">
+                            <form class="form-inline">
+                                <input class="form-control mr-sm-2 w-80" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-search my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                        </nav>
+                    </div>
                 </div>
             </div>
-           <div class="card">
+            <div class="card">
                 <div class="card-header">
                     Question list
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-end mb-3">
-                        <button type="button" class="btn question-create mx-5">Create New question</button>
+                        <a href="{{route('create.question')}}">
+                            <button type="button" class="btn question-create mx-5">Create New question</button>
+                        </a>
                     </div>
                     <table class="table">
                         <thead>
@@ -49,7 +56,6 @@
                                 <td>{{$question->type}}</td>
                                 <td>{{$question->subject}}</td>
                                 <td>
-
                                 <button type="button" class="btn question-edit">
                                     <a href="{{route('get.question.detail',
                                                 ['id' => $question->id])}}">
@@ -62,14 +68,13 @@
                                         Delete
                                     </a>
                                 </button>
-
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-           </div>
+            </div>
         </div>
     </div>
 </div>
