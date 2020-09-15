@@ -20,6 +20,7 @@ class QuestionController extends Controller
     protected $questionService;
 
     public function __construct(QuestionService $questionService){
+        $this->middleware('auth');
         $this->questionService = $questionService;
     }
     public function create(){

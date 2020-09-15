@@ -28,17 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
-    protected function authenticated(Request $request, $user)
-    {
-        return redirect('/dashboard');
-    }
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        return redirect('/login');
-    }
     /**
      * Create a new controller instance.
      *
