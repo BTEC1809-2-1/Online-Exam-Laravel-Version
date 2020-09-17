@@ -30,7 +30,7 @@ function singleChoiceOfFour() {
         <label for"firstAnswer">First Answer</label>
         <input type="text" class="form-control" name="answer[1]">
         <div class="form-check">
-            <input class="form-check-input" type="radio">
+            <input class="form-check-input" type="radio" name="is_correct[1]"  value="1">
             <label class="form-check-label" > is correct </label>
         </div>
         </div>
@@ -39,7 +39,7 @@ function singleChoiceOfFour() {
         <label for"firstAnswer">Second Answer</label>
         <input type="text" class="form-control" name="answer[2]">
         <div class="form-check">
-            <input class="form-check-input" type="radio">
+            <input class="form-check-input" type="radio" name="is_correct[2]"  value="1">
             <label class="form-check-label" > is correct </label>
         </div>
         </div>
@@ -47,7 +47,7 @@ function singleChoiceOfFour() {
             <label for"firstAnswer">Third Answer</label>
             <input type="text" class="form-control" name="answer[3]">
             <div class="form-check">
-                <input class="form-check-input" type="radio">
+                <input class="form-check-input" type="radio" name="is_correct[3]"  value="1">
                 <label class="form-check-label" > is correct </label>
             </div>
         </div>
@@ -55,7 +55,7 @@ function singleChoiceOfFour() {
             <label for"firstAnswer">Fourth Answer</label>
             <input type="text" class="form-control" name="answer[4]">
             <div class="form-check">
-                <input class="form-check-input" type="radio">
+                <input class="form-check-input" type="radio" name="is_correct[4]"  value="1">
                 <label class="form-check-label" > is correct </label>
             </div>
         </div>
@@ -64,36 +64,38 @@ function singleChoiceOfFour() {
 
 function multipleChoiceOfFour() {
     $("#answer-block").empty();
+
     $("#answer-block").append(`
         <div class="form-group">
-            <label for"firstAnswer">First Answer</label>
-            <input type="text" class="form-control">
-            <div class="form-check">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" > is correct </label>
-            </div>
+        <label for"firstAnswer">First Answer</label>
+        <input type="text" class="form-control" name="answer[1]">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="is_correct"  value="1">
+            <label class="form-check-label" > is correct </label>
         </div>
+        </div>
+
         <div class="form-group">
-            <label for"firstAnswer">Second Answer</label>
-            <input type="text" class="form-control">
-            <div class="form-check">
-                <input class="form-check-input" type="radio">
-                <label class="form-check-label" > is correct </label>
-            </div>
+        <label for"firstAnswer">Second Answer</label>
+        <input type="text" class="form-control" name="answer[2]">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="is_correct"  value="1">
+            <label class="form-check-label" > is correct </label>
+        </div>
         </div>
         <div class="form-group">
             <label for"firstAnswer">Third Answer</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="answer[3]">
             <div class="form-check">
-                <input class="form-check-input" type="radio">
+                <input class="form-check-input" type="radio" name="is_correct"  value="1">
                 <label class="form-check-label" > is correct </label>
             </div>
         </div>
         <div class="form-group">
             <label for"firstAnswer">Fourth Answer</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="answer[4]">
             <div class="form-check">
-                <input class="form-check-input" type="radio">
+                <input class="form-check-input" type="radio" name="is_correct"  value="1">
                 <label class="form-check-label" > is correct </label>
             </div>
         </div>
@@ -103,21 +105,21 @@ function multipleChoiceOfFour() {
 function trueFalse(){
     $("#answer-block").empty();
     $("#answer-block").append(`
-    <div class="form-group">
-    <label for"firstAnswer">First Answer</label>
-    <input type="text" class="form-control">
-    <div class="form-check">
-        <input class="form-check-input" type="radio">
-        <label class="form-check-label" > is correct </label>
-    </div>
-    </div>
-    <div class="form-group">
-        <label for"firstAnswer">Second Answer</label>
-        <input type="text" class="form-control">
+        <div class="form-group">
+        <label for"firstAnswer">First Answer</label>
+        <input type="text" class="form-control" name="answer[1]">
         <div class="form-check">
-            <input class="form-check-input" type="radio">
+            <input class="form-check-input" type="radio" name="is_correct" value="1">
             <label class="form-check-label" > is correct </label>
         </div>
-    </div>
+        </div>
+
+        <div class="form-group">
+        <label for"firstAnswer">Second Answer</label>
+        <input type="text" class="form-control" name="answer[2]">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="is_correct"  value="1">
+            <label class="form-check-label" > is correct </label>
+        </div>
     `);
 }

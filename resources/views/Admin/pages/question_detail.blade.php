@@ -83,10 +83,41 @@
                             <div class="form-group" id="update">
                                 <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn question-edit btn-block" role="button">Update</a>
                             </div>
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                                Delete this question
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete this question?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
                             <div class="form-group">
-                                <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn question-delete btn-block" role="button">Delete</a>
+                                <label for="">ID</label>
+                                <input type="text" class="form-control" value="{{$question->id}}">
+                                <label for="">Question</label>
+                                <input type="text" class="form-control" value="{{$question->question}}">
+                                <label for="">Subject</label>
+                                <input type="text" class="form-control" value="{{$question->subject}}">
                             </div>
                         </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="form-group">
+                            <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn question-delete btn-block" role="button">Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>

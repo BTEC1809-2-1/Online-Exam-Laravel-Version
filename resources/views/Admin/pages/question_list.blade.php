@@ -17,6 +17,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                    @endif
                     <div class="row text-center justify-content-between">
                         <b class="my-auto ml-md-5">{{ Auth::user()->name }}</b>
                         <nav class="navbar navbar-light justify-content-between">
@@ -55,19 +62,17 @@
                                 <td>{{$question->question}}</td>
                                 <td>{{$question->type}}</td>
                                 <td>{{$question->subject}}</td>
-                                <td>
-                                <button type="button" class="btn question-edit">
-                                    <a href="{{route('get.question.detail',
-                                                ['id' => $question->id])}}">
-                                        View detail
-                                    </a>
-                                </button>
-                                <button type="button" class="btn question-delete">
-                                    <a href="{{route('get.question.detail',
-                                    ['id' => $question->id])}}">
-                                        Delete
-                                    </a>
-                                </button>
+                                <td class="text-right">
+                                    <button type="button" class="btn question-edit">
+                                        <a href="{{route('get.question.detail',
+                                                    ['id' => $question->id])}}">
+                                            View detail
+                                        </a>
+                                    </button>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Delete this question
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -76,6 +81,8 @@
                 </div>
             </div>
         </div>
+       
     </div>
+
 </div>
 @endsection

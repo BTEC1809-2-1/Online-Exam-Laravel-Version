@@ -32,4 +32,9 @@ class AnswerRepository extends BaseRepository {
                     ->where('question_id', '=' , $question_id);
         return $answers;
     }
+
+    public function delete($question_id)
+    {
+        Answer::where('question_id', '=', $question_id)->delete();
+    }
 }
