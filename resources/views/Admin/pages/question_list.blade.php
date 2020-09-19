@@ -78,10 +78,13 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="row justify-content-center pagination">
+                        {{$listQuestion->links()}}
+                    </div>
                 </div>
             </div>
         </div>
-       
+
     </div>
 
 </div>
