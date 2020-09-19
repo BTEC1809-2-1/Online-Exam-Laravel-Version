@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Answer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AnswerRepository extends BaseRepository {
@@ -22,11 +23,10 @@ class AnswerRepository extends BaseRepository {
         return $query;
     }
 
-    /**
-     * Take $question_id parameter
-     * Search for every answer in DB match with the parameter
-     * Receive all matched questions
-     */
+    public function saveAnswer(Request $request){
+
+    }
+
     public function getAnswers($question_id){
         $answers = Answer::all()
                     ->where('question_id', '=' , $question_id);
