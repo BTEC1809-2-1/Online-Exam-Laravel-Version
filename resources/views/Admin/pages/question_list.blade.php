@@ -12,18 +12,21 @@
                     {{ __('Dashboard') }}
                 </div>
                 <div class="card-body">
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
+
                     @if (\Session::has('success'))
-                    <div class="alert alert-success">
-                        <ul>
-                            <li>{!! \Session::get('success') !!}</li>
-                        </ul>
-                    </div>
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{!! \Session::get('success') !!}</li>
+                            </ul>
+                        </div>
                     @endif
+
                     <div class="row text-center justify-content-between">
                         <b class="my-auto ml-md-5">{{ Auth::user()->name }}</b>
                         <nav class="navbar navbar-light justify-content-between">
@@ -33,6 +36,7 @@
                             </form>
                         </nav>
                     </div>
+
                 </div>
             </div>
             <div class="card">
@@ -55,6 +59,7 @@
                                 <th scope="col colspan-3" class="text-center">Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach($listQuestion as $question)
                             <tr>
@@ -69,18 +74,16 @@
                                             View detail
                                         </a>
                                     </button>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                        Delete this question
-                                    </button>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+
                     <div class="row justify-content-center pagination">
                         {{$listQuestion->links()}}
                     </div>
+
                 </div>
             </div>
         </div>
