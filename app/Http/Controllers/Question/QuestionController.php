@@ -58,7 +58,6 @@ class QuestionController extends Controller
     */
     public function store(Request $request){
         try {
-            $date =  date('Ymd')+date('Hsi');
 
             $date =  date('Ymd')+date('Hsi');// Convert dateTime to string with ymdhsi format so it can be sums with subject ID
             $question = new Question();
@@ -67,14 +66,12 @@ class QuestionController extends Controller
             $question->type = $request->questionType;
             $question->subject = $request->subject;
             $question->created_by = $request->user()->name;
-            $questionId = $request->subject.$request->questionType.$date;
-            if($question->save())
-            {
-                $data = [];
+            $data = [];
+            if($question->save()){
                 foreach($request->answer as $index=>$answer){
                     $data += [
                         $index => [
-                            'id' => $request->subject.$request->questionType.$date.'1',
+                            'id' => $request->subject.$request->questionType.$date.$index,
                             'question_id' => $request->subject.$request->questionType.$date,
                             'answer' => $request->answer[$index],
                             'is_correct' => 0,
@@ -83,6 +80,7 @@ class QuestionController extends Controller
                 }
                 Answer::insert($data);
             };
+            return redirect()->route('get.question.list')->with('success', 'Add successfully');
         }catch(\Exception $e){
             return redirect()->route('get.question.list')->with('error', 'Chiu');
         }
