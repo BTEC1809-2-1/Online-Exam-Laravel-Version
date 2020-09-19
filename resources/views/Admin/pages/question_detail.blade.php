@@ -58,10 +58,11 @@
                                 </div>
                             </div>
                             <div class="form-row">
+                                <?php $counter = 1;?>
                                 @foreach ($answers as $aIndex=>$answer)
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="">Answer {{$aIndex}}</label>
+                                        <label for="">Answer <?php echo $counter; $counter++?></label>
                                         <input type="text" class="form-control" value="{{$answer->answer}}" readonly>
                                     </div>
                                 </div>
