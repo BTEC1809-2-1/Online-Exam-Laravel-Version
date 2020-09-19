@@ -14,6 +14,7 @@ class Answer extends Model
     protected $primaryKey = 'id';
     protected $keyType ='string';
 
+    public $timestamps = true;
     protected $fillable = [
         'id', 'answer', 'is_correct'
      ];

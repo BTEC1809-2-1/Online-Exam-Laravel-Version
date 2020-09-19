@@ -24,7 +24,7 @@ class QuestionRepository extends BaseRepository {
 
     public function getAllQuestion()
     {
-        $listExam = DB::table('questions')->get();
+        $listExam = DB::table('questions')->paginate(5);
         return $listExam;
     }
 

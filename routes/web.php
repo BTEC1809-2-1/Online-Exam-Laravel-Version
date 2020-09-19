@@ -33,3 +33,4 @@ Route::get('/Question/Update/{id}','Question\QuestionController@getQuestionList'
 Route::get('/Exam/Create', 'Exam\ExamController@create')->name('create.exam');
 Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
 Route::get('/Exam/List', 'Exam\ExamController@getExamList')->name('get.exam.list');
+
