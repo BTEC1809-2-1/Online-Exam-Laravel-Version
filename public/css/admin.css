@@ -12,7 +12,7 @@
 
 .wrapper .sidebar .sidebar-header {
   width: 100%;
-  background: #ff66b5;
+  background: #5bc4db;
   padding: 1em 2em;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .wrapper .sidebar nav {
-  background: #ff99bb;
+  background: #5bc4db;
   position: relative;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .wrapper .sidebar nav .trademark {
-  background: #ff66b5;
+  background: #1b88b3;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -61,7 +61,7 @@
 .wrapper .content .header {
   min-height: 60px;
   width: 100%;
-  background: #ffe6ee;
+  background: #b4e5ec;
   text-align: center;
 }
 
@@ -87,8 +87,12 @@
 }
 
 .wrapper .content .card .card-header {
-  background: #ff66b5;
+  background: #1480b6;
   color: #ffffff;
+}
+
+.wrapper .content .card .card-body {
+  color: #5bc4db;
 }
 
 .wrapper .content a {

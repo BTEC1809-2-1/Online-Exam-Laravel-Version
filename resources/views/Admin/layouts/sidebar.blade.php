@@ -2,7 +2,7 @@
     <nav class="sidebar">
         <ul class="list-unstyled components">
             <div class="btn-home">
-                <a href="#">Home</a>
+                <a href="{{route('dashboard')}}">Nơi em là nhà</a>
             </div>
             <hr>
             <li class="active">
@@ -34,10 +34,13 @@
                 </ul>
             </li>
             <hr>
-                <a href="{{route('logout')}}">Logout</a>
+                <a href="{{route('logout')}}"> Hãy ra khỏi người đó đi</a>
         </ul>
         <div class="trademark mt-auto">
-            @Copyright BinhAn 2020
+            Tình em lớn như đại dương <br>
+            Nồng ấm như hoa báo xuân, <br>
+            Đã cho anh sức sống <br>
+            Để đi tới tận cuối chân trời...
         </div>
     </nav>
 </div>

@@ -34,16 +34,16 @@
 								<label for="">Subject</label>
 								<select class="form-control" name="subject" id="subject">
 									<option selected></option>
-									<option value="IT">Information Technology</option>
-									<option value="BM">Business Management</option>
-									<option value="DS">Designing</option>
+									<option value="IT">Môn có thầy Linh dạy</option>
+									<option value="BM">Môn có em <3</option>
+									<option value="DS">Môn gì đây?</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-row answer-block mb-2">
                             <div class="col" id="answer-block"></div>
 						</div>
-						<button type="submit" class="btn question-create btn-block">Create Question</button>
+						<button type="submit" class="btn question-create-button btn-block">Create Question</button>
 					</form>
 				</div>
 			</div>

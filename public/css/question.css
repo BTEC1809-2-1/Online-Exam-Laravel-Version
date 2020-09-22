@@ -10,18 +10,13 @@ label {
   color: #000000;
 }
 
-.question-create {
-  background: #ff99bb;
+.question-create-button {
+  background: #517db2;
   color: #ffffff;
 }
 
 .question-delete {
   background: #8A2BE2;
-}
-
-.question-edit {
-  background: #f26b8a;
-  color: #ffffff;
 }
 
 .answer-block {
@@ -34,5 +29,10 @@ label {
 
 .pagination {
   color: black;
+}
+
+.button-search {
+  background: #517db2;
+  color: white;
 }
 

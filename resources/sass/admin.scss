@@ -10,7 +10,7 @@
         min-height: 100vh;
         .sidebar-header{
             width: 100%;
-            background: $custom-pink-dark;
+            background: $mau-hann-thich-body;
             padding: 1em 2em;
             h3 {
                 text-align: center;
@@ -26,7 +26,7 @@
             }
         }
         nav {
-            background: $custom-pink;
+            background: $mau-hann-thich-body;
             position: relative;
             ul{
                 padding: 1em;
@@ -36,7 +36,7 @@
                 font-size: 20px;
             }
             .trademark{
-                background: $custom-pink-dark;
+                background: $mau-hann-thich-footer;
                 position: absolute;
                 bottom: 0;
                 width: 100%;
@@ -50,7 +50,7 @@
         .header{
             min-height: 60px;
             width: 100%;
-            background:  $custom-pink-lighter;
+            background:  $mau-hann-thich-header;
             text-align: center;
             .app-name {
                 display: inline-block;
@@ -70,8 +70,12 @@
         .card {
             margin-top: 1em;
             .card-header{
-                background:$custom-pink-dark;
+                background: $mau-hann-thich-cardheader;
                 color: $white;
+            }
+
+            .card-body {
+                color: $mau-hann-thich-body;
             }
         }
         a {
