@@ -10,7 +10,7 @@
         <div class="card-header">Exam list</div>
             <div class="card-body">
                 <div class="row justify-content-end px-5 mb-3">
-                    <button type="button" class="btn general-use-button mx-2">Create New Exam</button>
+                    <a href="{{route('create.exam')}}"class="btn create-button mx-2">Create New Exam</a>
                 </div>
                 <table class="table">
                     <thead>
@@ -19,7 +19,7 @@
                             <th scope="col">Semester</th>
                             <th scope="col">Class</th>
                             <th scope="col">Start At</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" class="text-center">Status</th>
                             <th scope="col" class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -30,10 +30,10 @@
                             <td>{{$exam->semester}}</td>
                             <td>{{$exam->classroom}}</td>
                             <td>{{$exam->start_at}}</td>
-                            <td>{{$exam->status}}</td>
-                            <td>
-                                <button type=button" class="btn btn-success"><a href="Detail/{{$exam->id}}">View detail</a></button>
-                                <button type=button" class="btn btn-danger"><a href="Delete/{{$exam->id}}">Delete</a></button>
+                            <td class="text-center">{{$exam->status}}</td>
+                            <td class="text-center">
+                                <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
+                                {{-- <button type=button" class="btn btn-danger"><a href="Delete/{{$exam->id}}">Delete</a></button> --}}
                             </td>
                         </tr>
                         @endforeach
@@ -43,4 +43,11 @@
         </div>
     </div>
 </div>
+@section('script')
+    <script>
+        $(document).ready(function(){
+            
+        });
+    </script>
+@endsection
 @endsection

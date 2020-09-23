@@ -11,32 +11,23 @@ class ExamService {
   protected $examRepository;
 
   public function __construct(ExamRepository $examRepository){
-
     $this->examRepository = $examRepository;
-
   }
+
   public function getExamList(){
-
     return $this->examRepository->getAllExam();
-
   }
 
   public function getUpcomingExam(){
-
     return $this->examRepository->getUpcomingExam();
-
   }
 
   public function getExamDetail($id){
-
     return $this->examRepository->getExam($id);
-
   }
 
   public function storageExam(Request $request){
-
     $exam = new Exam;
-
     $exam->id = $request->input('id');
     $exam->semester = $request->input('semester');
     $exam->classroom = $request->input('classroom');
@@ -44,9 +35,6 @@ class ExamService {
     $exam->status = $request->input('status');
     $exam->duration = $request->input('duration');
     $exam->created_by = Auth::user()->name;
-
     $exam->save();
-
   }
-
 }

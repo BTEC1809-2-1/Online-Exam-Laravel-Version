@@ -10910,8 +10910,22 @@ a.text-dark:focus {
   font-weight: bolder;
 }
 
+.search-button {
+  background: #517db2;
+  color: white;
+}
+
+.create-button {
+  background: #517db2;
+  color: #ffffff;
+}
+
 .detail-button {
   background: #2789e6;
   color: #ffffff;
+}
+
+.delete-button {
+  background: #8A2BE2;
 }
 

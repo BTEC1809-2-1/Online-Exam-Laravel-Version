@@ -13,9 +13,17 @@
     font-weight: bolder;
 }
 .search-button {
-
+    background: $mau-ao-hann-hay-mac;
+    color: white;
+}
+.create-button{
+    background: $mau-ao-hann-hay-mac;
+    color: $white;
 }
 .detail-button {
     background: $mau-hann-thich-background;
     color: $white;
+}
+.delete-button{
+    background: $custom-blueviolet;
 }

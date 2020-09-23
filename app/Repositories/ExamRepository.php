@@ -30,10 +30,8 @@ class ExamRepository extends BaseRepository {
     }
 
     public function getUpcomingExam(){
-
         $listExam = DB::table('exams')->limit(3)->get();
         return $listExam;
-
     }
 
     public function getExam($id)

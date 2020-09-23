@@ -12,7 +12,6 @@
                     {{ __('Dashboard') }}
                 </div>
                 <div class="card-body">
-
                     @if (\Session::has('error'))
                         <div class="alert alert-danger" role="alert">
                             <ul>
@@ -20,7 +19,6 @@
                             </ul>
                         </div>
                     @endif
-
                     @if (\Session::has('success'))
                         <div class="alert alert-success">
                             <ul>
@@ -28,13 +26,14 @@
                             </ul>
                         </div>
                     @endif
-
                     <div class="row text-center justify-content-between">
                         <b class="my-auto ml-md-5">{{ Auth::user()->name }}</b>
                         <nav class="navbar navbar-light justify-content-between">
                             <form class="form-inline">
-                                <input class="form-control mr-sm-2 w-80" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn button-search my-2 my-sm-0" type="submit">Search</button>
+                                @csrf
+                                <input class="form-control mr-sm-2 w-80" type="search" placeholder="Search" aria-label="Search" id="search">
+                                <button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
+                                <div class="questionList"></div>
                             </form>
                         </nav>
                     </div>
@@ -61,7 +60,6 @@
                                 <th scope="col colspan-3" class="text-center">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach($listQuestion as $question)
                             <tr>
@@ -79,16 +77,39 @@
                             @endforeach
                         </tbody>
                     </table>
-
                     <div class="row justify-content-center pagination">
                         {{$listQuestion->links()}}
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $('#search').on('keyup change', function(){
+                console.log('haha');
+                var query = $(this).val();
+                if(query != '')
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('search') }}",
+                        method:"POST",
+                        data:{query:query, _token:_token},
+                        success:function(data){
+                            $('#questionList').fadeIn();
+                            $('#questionList').html(data);
+                        }
+                    });
+                }
+            });
+        });
+        $(document).on('click', 'li', function(){
+            $('#search').val($(this).text());
+            $('#questionList').fadeOut();
+        });
+    </script>
+@endsection
 @endsection

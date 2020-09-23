@@ -10,15 +10,6 @@ label {
   color: #000000;
 }
 
-.question-create-button {
-  background: #517db2;
-  color: #ffffff;
-}
-
-.question-delete {
-  background: #8A2BE2;
-}
-
 .answer-block {
   color: black;
 }
@@ -29,10 +20,5 @@ label {
 
 .pagination {
   color: black;
-}
-
-.button-search {
-  background: #517db2;
-  color: white;
 }
 

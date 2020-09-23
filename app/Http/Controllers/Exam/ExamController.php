@@ -35,6 +35,10 @@ class ExamController extends Controller
         return view('Admin.pages.create_exam');
     }
 
+    public function store(){
+
+    }
+
     public function storageExam(){
         //$this->examService->storageExam();
     }
