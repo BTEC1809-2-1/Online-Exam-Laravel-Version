@@ -47,7 +47,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($listExam ?? '' as $exam)
+                                @foreach($listExam as $exam)
                                 <tr>
                                     <th>{{$exam->id}}</th>
                                     <td>{{$exam->semester}}</td>
@@ -55,8 +55,7 @@
                                     <td>{{$exam->start_at}}</td>
                                     <td class="text-center">{{$exam->status}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}"><button type=button" class="btn detail-button">View detail</button></a>
-                                        {{-- <a href="{{route('get.exam.detail', ['id' => $exam->id])}}"><button type=button" class="btn btn-danger">Delete</button></a> --}}
+                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}" class="btn detail-button">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach

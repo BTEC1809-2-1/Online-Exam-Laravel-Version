@@ -1,6 +1,6 @@
 @extends('Admin.layouts.admin')
 @section('style')
-	<link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 @endsection
 @section('script')
 	<script type="text/javascript" src="{{asset('js/toggleEditUpdate.js')}}"></script>
@@ -40,34 +40,48 @@
 									<div class="form-group">
 										<label for="">Duration</label>
 										<input type="text" class="form-control" value="{{$exam->duration}}" readonly>
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-group">
+                                    </div>
+                                    <div class="form-group">
 										<label for="">Status</label>
 										<input type="text" class="form-control" value="{{$exam->status}}" readonly>
 									</div>
-									<div class="form-group">
-										<label for="">Created at</label>
-										<input type="text" class="form-control" value="{{$exam->created_at}}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="">Creted by</label>
-										<input type="text" class="form-control" value="{{$exam->created_by}}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="">Updated at</label>
-										<input type="text" class="form-control" value="{{$exam->updated_at}}" readonly>
-									</div>
-									<div class="form-group">
-										<label for="">Updated by</label>
-										<input type="text" class="form-control" value="{{$exam->updated_by}}" readonly>
-									</div>
+								</div>
+								<div class="col exam-question" style="max-height: 500px;
+                                                                        overflow-y: scroll; 
+                                                                        margin-bottom: 2em;">
+									<div class="form-row justify-content-center">
+										<label for="">Question List</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <table class="table" >
+                                            <thead>
+                                                <tr>
+                                                    <th class="w-10">#</th>
+                                                    <th class="w-60">Question</th>
+                                                    <th class="w-40 text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                <?php $i = 0;?>
+                                                @foreach ($questions as $question)
+                                                    <tr>
+                                                        <td><?php echo $i;?></td>
+                                                        <td>{{$question}}</td>
+                                                        <td class="text-right">
+                                                            <a class="btn detail-button">Detail</a>
+                                                            <a class="btn create-button">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $i++;?>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
 								</div>
 							</div>
 							<div class="form-group">
-								<button id="edit" class="btn btn-success btn-block">Edit</button>
-								<button type="submit" class="btn btn-danger btn-block">Delete this Exam</button>
+								<button id="edit" class="btn detail-button btn-block">Edit</button>
+								<button type="submit" class="btn create-button btn-block">Delete this Exam</button>
 							</div>
 						</form>
 					</div>

@@ -43,7 +43,7 @@
 						<div class="form-row answer-block mb-2">
                             <div class="col" id="answer-block"></div>
 						</div>
-						<button type="submit" class="btn question-create-button btn-block">Create Question</button>
+						<button type="submit" class="btn create-button btn-block">Create Question</button>
 					</form>
 				</div>
 			</div>

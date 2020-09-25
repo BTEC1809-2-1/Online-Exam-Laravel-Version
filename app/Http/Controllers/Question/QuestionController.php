@@ -64,7 +64,6 @@ class QuestionController extends Controller
             $date =  date('Ymd')+date('Hsi');
             $question = new Question();
             $question->id = $request->subject.$request->questionType.$date;
-            $question_id =  $question->id;
             $question->question = $request->question;
             $question->type = $request->questionType;
             $question->subject = $request->subject;

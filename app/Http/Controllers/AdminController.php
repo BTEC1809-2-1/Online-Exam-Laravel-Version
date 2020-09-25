@@ -27,7 +27,6 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-
     public function index(){
         $listExam = $this->examService->getUpcomingExam();
         $listQuestion = $this->questionService->getRecentlyAddedQuestion();

@@ -11,7 +11,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="{{route('create.exam')}}">Create new Exam</a>
+                        <a href="{{route('create.exam')}}"  id="create-exam">Create new Exam</a>
                     </li>
                     <li>
                         <a href="{{route('get.exam.list')}}">List all exam</a>
