@@ -66,8 +66,8 @@
     @section('script')
         <script>
             $(document).ready(function(){
-                $('#homeSubmenu').show();
-                $('#create-exam').css('background', 'mau-hann-thich-header');
+                $('#examManagement').show();
+                $('#examCreate').css({'background-color': 'pink', 'border-radius':'15px'});
             });
         </script>
     @endsection

@@ -6,14 +6,14 @@
             </div>
             <hr>
             <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="#examManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     Exam management
                 </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
+                <ul class="collapse list-unstyled" id="examManagement">
+                    <li id="examCreate" class="text-center">
                         <a href="{{route('create.exam')}}"  id="create-exam">Create new Exam</a>
                     </li>
-                    <li>
+                    <li id="examList" class="text-center">
                         <a href="{{route('get.exam.list')}}">List all exam</a>
                     </li>
                 </ul>
@@ -25,10 +25,10 @@
                     Question Management
                 </a>
                 <ul class="collapse list-unstyled" id="questionManagement">
-                    <li>
+                    <li id="questionCreate" class="text-center">
                         <a href="{{route('create.question')}}">Create new question</a>
                     </li>
-                    <li>
+                    <li id="questionList" class="text-center">
                         <a href="{{route('get.question.list')}}">List all question</a>
                     </li>
                 </ul>
