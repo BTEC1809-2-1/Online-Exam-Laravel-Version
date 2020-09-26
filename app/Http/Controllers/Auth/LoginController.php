@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//gg login
+use Socialite;
+use _Auth;
+use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
