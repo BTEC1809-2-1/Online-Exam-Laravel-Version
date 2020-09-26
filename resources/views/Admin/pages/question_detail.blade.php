@@ -79,10 +79,10 @@
                                 @endforeach
                             </div>
                             <div class="form-group">
-                                <button id="edit" class="btn btn-block question-edit">Edit</button>
+                                <button id="edit" class="btn btn-block detail-button">Edit</button>
                             </div>
                             <div class="form-group" id="update">
-                                <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn question-edit btn-block" role="button">Update</a>
+                                <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn detail-button btn-block" role="button">Update</a>
                             </div>
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
                                 Delete this question
