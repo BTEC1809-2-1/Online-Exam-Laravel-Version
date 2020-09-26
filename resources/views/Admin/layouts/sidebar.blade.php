@@ -34,7 +34,9 @@
                 </ul>
             </li>
             <hr>
+            <li class="text-center" style="background-color: red; border-radius: 15px;">
                 <a href="{{route('logout')}}"> Hãy ra khỏi người đó đi</a>
+            </li>
         </ul>
         <div class="trademark mt-auto">
             Tình em lớn như đại dương <br>
