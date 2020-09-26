@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   width: 100%;
-  align-items: stretch;
+  align-items: right;
   color: #ffffff;
 }
 
@@ -97,5 +97,9 @@
 
 .wrapper .content a {
   color: white;
+}
+
+.wrapper .content a :hover {
+  text-decoration: none;
 }
 
