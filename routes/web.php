@@ -36,3 +36,5 @@ Route::get('/Exam/List', 'Exam\ExamController@getExamList')->name('get.exam.list
 
 Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
 
+Route::get('auth/{provider}','Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback','Auth\LoginController@redirectToProvider');
