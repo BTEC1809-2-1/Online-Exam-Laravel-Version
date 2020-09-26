@@ -2,9 +2,7 @@
 @section('style')
 	<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 @endsection
-@section('script')
-	<script type="text/javascript" src="{{asset('js/toggleEditUpdate.js')}}"></script>
-@endsection
+
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">
@@ -47,7 +45,7 @@
 									</div>
 								</div>
 								<div class="col exam-question" style="max-height: 500px;
-                                                                        overflow-y: scroll; 
+                                                                        overflow-y: scroll;
                                                                         margin-bottom: 2em;">
 									<div class="form-row justify-content-center">
 										<label for="">Question List</label>
@@ -88,5 +86,22 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
+    @section('script')
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(function(){
+                    $('#edit').one('click' ,function(e) {
+                        e.preventDefault();
+                        $(this).html() == "Edit" ? updateOn() : $('#form').submit();
+                    });
+                });
+                function updateOn() {
+                    $('#edit').parent().css('display','none');
+                    $('#update').show();
+                    $(":input").prop('readonly', false);
+                }
+            });
+        </script>
+    @endsection
  @endsection

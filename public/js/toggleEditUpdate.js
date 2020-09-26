@@ -93,20 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  $(function () {
-    $('#edit').one('click', function (e) {
-      e.preventDefault();
-      $(this).html() == "Edit" ? updateOn() : $('#form').submit();
-    });
-  });
-
-  function updateOn() {
-    $('#edit').parent().css('display', 'none');
-    $('#update').show();
-    $(":input").prop('readonly', false);
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/lebinhan/Workspace/btec/onlineexam/resources/js/toggleEditUpdate.js'");
 
 /***/ }),
 

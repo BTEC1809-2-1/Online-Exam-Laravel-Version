@@ -2,9 +2,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection
-@section('script')
-    <script type="text/javascript" src="{{asset('js/toggleEditUpdate.js')}}"></script>
-@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -124,4 +122,21 @@
             </div>
         </div>
     </div>
+    @section('script')
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(function(){
+                    $('#edit').one('click' ,function(e) {
+                        e.preventDefault();
+                        $(this).html() == "Edit" ? updateOn() : $('#form').submit();
+                    });
+                });
+                function updateOn() {
+                    $('#edit').parent().css('display','none');
+                    $('#update').show();
+                    $(":input").prop('readonly', false);
+                }
+            });
+        </script>
+    @endsection
 @endsection
