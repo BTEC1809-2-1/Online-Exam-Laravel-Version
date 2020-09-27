@@ -5,7 +5,7 @@
                 <a href="{{route('dashboard')}}">Nơi em là nhà</a>
             </div>
             <hr>
-            <li class="active">
+            <li class="active text-center">
                 <a href="#examManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     Exam management
                 </a>
@@ -18,7 +18,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="text-center">
                 <hr>
                 <a href="#questionManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-copy"></i>
@@ -34,7 +34,7 @@
                 </ul>
             </li>
             <hr>
-            <li class="text-center" style="background-color: red; border-radius: 15px;">
+            <li class="text-center logout">
                 <a href="{{route('logout')}}"> Hãy ra khỏi người đó đi</a>
             </li>
         </ul>
@@ -46,4 +46,19 @@
         </div>
     </nav>
 </div>
+<style>
+    .btn-home {
+        
+    }
+    .logout {
+        background-color: none;
+    }
+    .logout:hover {
+        background-color: red; 
+        border-radius: 15px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+</style>
 
