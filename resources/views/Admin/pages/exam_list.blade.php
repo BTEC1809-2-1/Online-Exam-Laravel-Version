@@ -33,12 +33,14 @@
                                 <td class="text-center">{{$exam->status}}</td>
                                 <td class="text-center">
                                     <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
-                                    {{-- <button type=button" class="btn btn-danger"><a href="Delete/{{$exam->id}}">Delete</a></button> --}}
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="row justify-content-center ">
+                        {{$listExam->links()}}
+                    </div>
                 </div>
             </div>
         </div>

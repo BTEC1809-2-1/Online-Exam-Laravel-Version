@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class ExamController extends Controller
 {
@@ -41,7 +42,7 @@ class ExamController extends Controller
     }
 
     public function getExamList(){
-        $listExam = $this->examService->getExamList();
+        $listExam = DB::table('exams')->paginate(6);
         return view('Admin.pages.exam_list', compact('listExam'));
     }
 
