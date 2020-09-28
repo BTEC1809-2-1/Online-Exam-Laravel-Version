@@ -2,7 +2,7 @@
     <nav class="sidebar">
         <ul class="list-unstyled components">
             <div class="btn-home">
-                <a href="{{route('dashboard')}}">Nơi em là nhà</a>
+                <a href="{{route('dashboard')}}">YTHNTD</a>
             </div>
             <hr>
             <li class="active text-center">
@@ -38,23 +38,20 @@
                 <a href="{{route('logout')}}"> Hãy ra khỏi người đó đi</a>
             </li>
         </ul>
-        <div class="trademark mt-auto">
-            Tình em lớn như đại dương <br>
-            Nồng ấm như hoa báo xuân, <br>
-            Đã cho anh sức sống <br>
-            Để đi tới tận cuối chân trời...
+        <div class="trademark mt-auto text-center">
+                Hi Binh An ne`
         </div>
     </nav>
 </div>
 <style>
     .btn-home {
-        
+
     }
     .logout {
         background-color: none;
     }
     .logout:hover {
-        background-color: red; 
+        background-color: red;
         border-radius: 15px;
     }
     a:hover {
