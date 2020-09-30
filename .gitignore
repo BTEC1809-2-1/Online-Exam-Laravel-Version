@@ -16,3 +16,9 @@ public/js/changeAnswerByQuestionType.js
 public/js/hiddenCheckbox.js
 
 .vscode/settings.json
+
+.idea/onlineexam.iml
+
+.idea/php.xml
+
+.idea/workspace.xml

@@ -78,8 +78,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button id="edit" class="btn detail-button btn-block">Edit</button>
-								<button type="submit" class="btn create-button btn-block">Delete this Exam</button>
+                                <button type="button" id="editButton" class="btn detail-button btn-block">Edit</button>
+                                <button type="submit" id="updateButton" class="btn detail-button btn-block mt-0">Update</button>
+								<button type="button" class="btn create-button btn-block">Delete this Exam</button>
 							</div>
 						</form>
 					</div>
@@ -90,17 +91,12 @@
     @section('script')
         <script type="text/javascript">
             $(document).ready(function(){
-                $(function(){
-                    $('#edit').one('click' ,function(e) {
-                        e.preventDefault();
-                        $(this).html() == "Edit" ? updateOn() : $('#form').submit();
-                    });
+                $('#updateButton').hide();
+                $('#editButton').on('click', function(){
+                    $(this).hide();
+                    $('#updateButton').toggle();
+                    $('input[type=text]').prop('readonly', false);
                 });
-                function updateOn() {
-                    $('#edit').parent().css('display','none');
-                    $('#update').show();
-                    $(":input").prop('readonly', false);
-                }
             });
         </script>
     @endsection
