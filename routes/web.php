@@ -38,3 +38,4 @@ Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
 
 Route::get('auth/{provider}','Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback','Auth\LoginController@redirectToProvider');
+Route::resource('doexam','AnswerController');
