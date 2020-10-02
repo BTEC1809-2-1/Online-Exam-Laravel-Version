@@ -34,8 +34,9 @@ Route::post('/Exam/Create', 'Exam\ExamController@store')->name('exam.store');
 Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
 Route::get('/Exam/List', 'Exam\ExamController@getExamList')->name('get.exam.list');
 
-Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
+Route::get('/Student/Ready', 'Student\StudentController@showReadyPage')->name('ready.pages');
+Route::get('/Student/Do-Exam', 'Student\StudentController@showDoExamPage')->name('do.exam.page');
+Route::post('/Student/Do-exam','Student\StudentController@submitExam')->name('submit.exam');
 
 Route::get('auth/{provider}','Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback','Auth\LoginController@redirectToProvider');
-Route::resource('doexam','AnswerController');
