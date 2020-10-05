@@ -31,9 +31,9 @@ return [
     ],
     //gg login
     'google' => [
-        'client_id' => 'GOOGLE_ID',
-        'client_secret' => 'GOOGLE_SECRET',
-        'redirect' => 'GOOGLE_URL',
+        'client_id' => '921701995075-ba94u6c37tppmh435pnukenr2mqqqog7.apps.googleusercontent.com',
+        'client_secret' => 'MmYgb1sg6Nnw6TAFolAmgsas',
+        'redirect' => 'http://127.0.0.1:8000/callback/google',
     ],
 
 ];
