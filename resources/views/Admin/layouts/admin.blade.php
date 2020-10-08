@@ -26,7 +26,15 @@
             @include('Admin.layouts.sidebar')
         </div>
         <div class="content">
-            @include('Admin.layouts.header')
+            <div class="header border border-black">
+                <div class="app-name">
+                    @if (\Route::current()->getName() == 'dashboard')
+                        Home
+                    @else
+                        @yield('pagename')
+                    @endif
+                </div>
+            </div>
             @yield('content')
         </div>
     </div>

@@ -14,11 +14,12 @@ class CreateStudentAnswersTable extends Migration
     public function up()
     {
         Schema::create('student_answers', function (Blueprint $table) {
-            $table->primary('id');
+            $table->string('id');
             $table->string('student_id');
             $table->string('question_id');
             $table->tinyInteger('answer');
             $table->timestamps();
+            $table->primary('id');
         });
     }
 

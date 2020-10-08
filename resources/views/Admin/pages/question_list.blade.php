@@ -1,6 +1,17 @@
 @extends('Admin.layouts.admin')
+@section('pagename')
+Question List
+@endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('#questionManagement').show();
+        $('#questionList').css({'background-color':'pink', 'border-radius':'5px'});
+    });
+</script>
 @endsection
 @section('content')
     <div class="container" style="background-image:url({{url('/images/myimage.jpg')}})">
@@ -27,7 +38,7 @@
                             </div>
                         @endif
                         <div class="row text-center justify-content-between">
-                            <b class="my-auto ml-md-5">{{ Auth::user()->name }}</b>
+                            <b class="my-auto ml-md-5"> <span style="color: black">Login as </span> {{ Auth::user()->name }}</b>
                             <nav class="navbar navbar-light justify-content-between">
                                 <form class="form-inline">
                                     @csrf
@@ -85,12 +96,4 @@
             </div>
         </div>
     </div>
-    @section('script')
-        <script>
-            $(document).ready(function(){
-                $('#questionManagement').show();
-                $('#questionList').css({'background-color':'pink', 'border-radius':'15px'});
-            });
-        </script>
-    @endsection
 @endsection

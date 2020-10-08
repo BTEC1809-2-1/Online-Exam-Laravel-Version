@@ -1,4 +1,7 @@
 @extends('Admin.layouts.admin')
+@section('pagename')
+Create New Question
+@endsection
 @section('style')
 	<link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection
@@ -51,8 +54,8 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#questionManagement').show();
-                $('#questionCreate').css({'background-color':'pink', 'border-radius':'15px'});
-                
+                $('#questionCreate').css({'background-color':'pink', 'border-radius':'5px'});
+
                 $("#questionType").change(function() {
                     var selectedValue = $(this)
                         .find(":selected")

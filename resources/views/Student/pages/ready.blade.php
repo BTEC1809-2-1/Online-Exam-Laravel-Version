@@ -3,7 +3,12 @@
   <title>Yeu Thu Hang Nhat Tren Doi</title>
 @endsection
 @section('style')
-
+    <style>
+        input[readonly]
+        {
+            background: white;
+        }
+    </style>
 @endsection
 @section('content')
   <div class="container p-5">
@@ -19,7 +24,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroup-sizing-default">Student ID</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -27,7 +32,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroup-sizing-default">Subject</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
                     </div>
                 </div>
                 <div class="row ">
@@ -36,7 +41,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Start Time</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
                         </div>
                     </div>
                     <div class="col">
@@ -44,7 +49,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Duration</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
                         </div>
                     </div>
                     <div class="col pr-0">
@@ -52,7 +57,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Count Down</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
                         </div>
                     </div>
                 </div>

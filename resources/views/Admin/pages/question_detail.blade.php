@@ -1,4 +1,7 @@
 @extends('Admin.layouts.admin')
+@section('pagename')
+Question Detail
+@endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection

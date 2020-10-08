@@ -49,7 +49,7 @@
         <script>
             $(document).ready(function(){
                 $('#examManagement').show();
-                $('#examList').css({'background-color':'pink', 'border-radius':'15px'});
+                $('#examList').css({'background-color':'pink', 'border-radius':'5px'});
             });
         </script>
     @endsection
