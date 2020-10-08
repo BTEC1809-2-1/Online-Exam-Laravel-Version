@@ -4,6 +4,12 @@
             <a href="{{route('dashboard')}}" class="bg-white"><img src="{{asset('image/bteclogo.png')}}" alt="" id="logo"></a>
         </div>
         <ul class="list-unstyled components">
+            <div class="btn-home">
+                <a href="{{route('dashboard')}}">
+                    <img src="https://klc.edu.sg/wp-content/uploads/BTEC_ACP.png" alt="logobtec" width="200" height="123">
+                </a>
+            </div>
+            <hr>
             <li class="active text-center">
                 <a href="#examManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     Exam management
@@ -34,7 +40,7 @@
             </li>
             <hr>
             <li class="text-center logout">
-                <a href="{{route('logout')}}">Logout</a>
+                <a href="{{route('logout')}}"> Hãy ra khỏi người đó đi</a>
             </li>
         </ul>
     </nav>

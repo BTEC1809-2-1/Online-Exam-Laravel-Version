@@ -301,7 +301,7 @@
                                 </button>
                             </div>
                             <div class="login-gg col-md">
-                                <a href=" {{ url('auth/google') }}" class="btn btn-primary" style="background-color: white; color: black; padding-left:20px; padding-right:20px;margin-left:17px;">
+                                <a href=" {{ url('/auth/redirect/google') }}" class="btn btn-primary" style="background-color: white; color: black; padding-left:20px; padding-right:20px;margin-left:17px;">
                                 <img src="https://accounts.google.com/favicon.ico" alt="" width="24" height="24">Sign in with Google</a>
                             </div>
                         </div>
