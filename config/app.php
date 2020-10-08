@@ -133,7 +133,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-    
+
 
     'providers' => [
 
@@ -229,9 +229,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        //login gg 
+        //login gg
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-    ],
-    
+        //authorization
+        'PermissionServiceProvider' => Spatie\Permission\PermissionServiceProvider::class,
+        ],
+
 
 ];

@@ -2,7 +2,9 @@
     <nav class="sidebar">
         <ul class="list-unstyled components">
             <div class="btn-home">
-                <a href="{{route('dashboard')}}">YTHNTD</a>
+                <a href="{{route('dashboard')}}">
+                    <img src="https://klc.edu.sg/wp-content/uploads/BTEC_ACP.png" alt="logobtec" width="200" height="123">
+                </a>
             </div>
             <hr>
             <li class="active text-center">
@@ -35,7 +37,7 @@
             </li>
             <hr>
             <li class="text-center logout">
-                <a href="{{route('logout')}}"> Hãy ra khỏi người đó đi</a>
+                <a href="{{route('logout')}}"> Logout </a>
             </li>
         </ul>
         <div class="trademark mt-auto text-center">
