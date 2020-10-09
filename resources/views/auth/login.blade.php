@@ -318,7 +318,7 @@
             <h1>Sign in</h1>
             <span>Use education email if you are students</span>
 			<div class="social-container">
-				<a href="{{ route('login.provider', 'google') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="{{ route('login.google', 'google') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
 			</div>
 			<span>or use account if you are lecturer</span>
             <input id="email" type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus/>

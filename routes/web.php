@@ -41,5 +41,5 @@ Route::post('/Student/Do-exam','Student\StudentController@submitExam')->name('su
 Route::get('auth/{provider}','Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback','Auth\LoginController@redirectToProvider');
 
-Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect')->name('login.google');
  Route::get('/callback/{provider}', 'SocialController@callback');
