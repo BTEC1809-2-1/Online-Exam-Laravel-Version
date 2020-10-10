@@ -1,7 +1,7 @@
 <div class="sidebar">
     <nav class="sidebar">
-        <div class="btn-home border border-top-black border-bottom-black">
-            <a href="{{route('dashboard')}}" class="bg-white"><img src="{{asset('image/bteclogo.png')}}" alt="" id="logo"></a>
+        <div class="btn-home">
+            <a href="{{route('admin')}}" class="bg-white"><img src="{{asset('image/bteclogo.png')}}" alt="" id="logo"></a>
         </div>
         <ul class="list-unstyled components">
             <li class="active text-center">

@@ -6,7 +6,7 @@
 }
 
 .wrapper .sidebar {
-  width: 15vw;
+  min-width: 280px;
   min-height: 100vh;
 }
 
