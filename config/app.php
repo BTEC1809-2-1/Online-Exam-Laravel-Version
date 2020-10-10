@@ -235,5 +235,9 @@ return [
         'PermissionServiceProvider' => Spatie\Permission\PermissionServiceProvider::class,
         ],
 
+    'role' => [
+        'student' => '1',
+        'admin' => '2'
+    ],
 
 ];
