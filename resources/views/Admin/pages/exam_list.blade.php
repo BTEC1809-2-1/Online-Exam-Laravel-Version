@@ -2,12 +2,36 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $('#examManagement').show();
+            $('#examList').css({'background-color':'pink', 'border-radius':'5px'});
+        });
+    </script>
+@endsection
 @section('content')
     //TODO: also change all buttons in this page to pink
     <div class="container" style="background-image:url({{url('/images/myimage.jpg')}})">
         @csrf
         <div class="card">
-            <div class="card-header">Exam list</div>
+            <div class="card-header">
+                Exam list
+                @if (\Session::has('success'))
+                    <div class="">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                @endif
+                @if (\Session::has('error'))
+                <div class="">
+                    <ul>
+                        <li>{!! \Session::get('error') !!}</li>
+                    </ul>
+                </div>
+            @endif
+            </div>
                 <div class="card-body">
                     <div class="row justify-content-end px-5 mb-3">
                         <a href="{{route('create.exam')}}"class="btn create-button mx-2">Create New Exam</a>
@@ -45,12 +69,4 @@
             </div>
         </div>
     </div>
-    @section('script')
-        <script>
-            $(document).ready(function(){
-                $('#examManagement').show();
-                $('#examList').css({'background-color':'pink', 'border-radius':'5px'});
-            });
-        </script>
-    @endsection
 @endsection

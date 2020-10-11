@@ -20,6 +20,13 @@
                 <div class="card">
                     <div class="card-header">
                         Create New Exam
+                        @if (\Session::has('error'))
+                            <div class="">
+                                <ul>
+                                    <li>{!! \Session::get('error') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{route('exam.store')}}">
@@ -51,7 +58,12 @@
                                     <div class="form-group col">
                                         <label for="">Duration</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="duration">
+                                            <select name="duration" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="15">15</option>
+                                                <option value="45">45</option>
+                                                <option value="90">90</option>
+                                            </select>
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Minutes</div>
                                             </div>

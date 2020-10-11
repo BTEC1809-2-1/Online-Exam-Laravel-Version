@@ -2,39 +2,49 @@
 namespace App\Services\Exam;
 
 use App\Repositories\ExamRepository;
-use App\Exam;
+use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 
 class ExamService {
-  protected $examRepository;
+    protected $examRepository;
+    protected $questionRepository;
 
-  public function __construct(ExamRepository $examRepository){
-    $this->examRepository = $examRepository;
-  }
 
-  public function getExamList(){
-    return $this->examRepository->getAllExam();
-  }
+    public function __construct(ExamRepository $examRepository, QuestionRepository $questionRepository)
+    {
+        $this->examRepository = $examRepository;
+        $this->questionRepository = $questionRepository;
+    }
 
-  public function getUpcomingExam(){
-    return $this->examRepository->getUpcomingExam();
-  }
+    public function getExamList(){
+        return $this->examRepository->getAllExam();
+    }
 
-  public function getExamDetail($id){
-    return $this->examRepository->getExam($id);
-  }
+    public function getUpcomingExam(){
+        return $this->examRepository->getUpcomingExam();
+    }
 
-  public function storageExam(Request $request){
-    $exam = new Exam;
-    $exam->id = $request->input('id');
-    $exam->semester = $request->input('semester');
-    $exam->classroom = $request->input('classroom');
-    $exam->start_at = $request->input('start_at');
-    $exam->status = $request->input('status');
-    $exam->duration = $request->input('duration');
-    $exam->created_by = Auth::user()->name;
-    $exam->save();
-  }
+    public function getExamDetail($id){
+        return $this->examRepository->getExam($id);
+    }
+
+    public function getExamQuestions($examID)
+    {
+        return $this->questionRepository->getQuestionsByExam($examID);
+    }
+
+    public function createNewExam(Request $request)
+    {
+        try
+        {
+            $examID = 'EXAM'.$request->subject.$request->semester.date('Ymdi');
+            $this->examRepository->createExam($request, $examID);
+            $this->questionRepository->addQuestionsToExam($request, $examID);
+        }catch(\Exception $e)
+        {
+            $this->examRepository->deleteExamById($examID);
+            return redirect()->route('get.exam.list')->with('error', 'Cannot create Exam (No Questions avaiable), please report to the administrator to fix this problem');
+        }
+    }
 }

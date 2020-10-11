@@ -21,18 +21,25 @@ Auth::routes(['register' => false]);
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect')->name('login.google');
 Route::get('/callback/{provider}', 'SocialController@callback');
 
-Route::get('/', function(){
-    if(Auth::check())
+Route::get('/', function()
     {
-        if(Auth::user()->role == config('app.role.admin'))
+        if(Auth::check())
         {
-            return redirect()->route('admin');
+            if(Auth::user()->role == config('app.role.admin'))
+            {
+                return redirect()->route('admin');
+            }
+            return redirect()->route('student');
         }
-        return redirect()->route('student');
+        return redirect()->route('login');
     }
-    return redirect()->route('login');
-});
-Route::get('logout', function(){Auth::logout(); return redirect('/');});
+);
+Route::get('logout', function()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+);
 
 
 Route::group(['middleware' => 'admin'], function () {

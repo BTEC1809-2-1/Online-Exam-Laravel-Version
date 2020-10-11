@@ -2,7 +2,18 @@
 @section('style')
 	<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 @endsection
-
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#updateButton').hide();
+            $('#editButton').on('click', function(){
+                $(this).hide();
+                $('#updateButton').toggle();
+                $('input[type=text]').prop('readonly', false);
+            });
+        });
+    </script>
+@endsection
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">
@@ -61,7 +72,7 @@
                                             </thead>
                                             <tbody >
                                                 <?php $i = 0;?>
-                                                @foreach ($questions as $question)
+                                                @foreach ($exam_questions as $question)
                                                     <tr>
                                                         <td><?php echo $i;?></td>
                                                         <td>{{$question}}</td>
@@ -88,16 +99,5 @@
 			</div>
 		</div>
     </div>
-    @section('script')
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('#updateButton').hide();
-                $('#editButton').on('click', function(){
-                    $(this).hide();
-                    $('#updateButton').toggle();
-                    $('input[type=text]').prop('readonly', false);
-                });
-            });
-        </script>
-    @endsection
+
  @endsection
