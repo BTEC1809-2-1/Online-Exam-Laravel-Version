@@ -24,6 +24,18 @@ class QuestionRepository extends BaseRepository {
         return $query;
     }
 
+    public function saveQuestion(Request $request, $questionID)
+    {
+        $question = new Question();
+        $question->id = $questionID;
+        $question->question = $request->question;
+        $question->type = $request->questionType;
+        $question->subject = $request->subject;
+        $question->created_by = Auth::user()->name;
+        $question->updated_by = Auth::user()->name;
+        $question->save();
+    }
+
     public function getAllQuestion()
     {
         $listExam = DB::table('questions')->paginate(5);
@@ -40,7 +52,6 @@ class QuestionRepository extends BaseRepository {
     public function getQuestionDetail($id)
     {
         $query = $this->query()->addSelect('created_at', 'created_by', 'updated_at', 'updated_by');
-
         return $query->findOrFail($id);
     }
 
@@ -84,4 +95,9 @@ class QuestionRepository extends BaseRepository {
         DB::table('exam_questions')->insert($question_set);
     }
 
+    public function deleteByID($questionID)
+    {
+        $question = Question::find($questionID);
+        $question->delete();
+    }
 }

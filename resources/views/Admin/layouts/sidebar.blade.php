@@ -34,7 +34,7 @@
             </li>
             <hr>
             <li class="text-center logout">
-                <a href="{{route('logout')}}">Logout</a>
+                <a class="logout w-100" href="{{route('logout')}}">Logout</a>
             </li>
         </ul>
     </nav>

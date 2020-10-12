@@ -78,7 +78,7 @@ Create New Question
                 });
             });
             // Component using in answer block
-            function singleChoiceOfFour() {
+            function multipleChoiceOfFour() {
                 $("#answer-block").empty();
 
                 $("#answer-block").append(`
@@ -118,7 +118,7 @@ Create New Question
                 `);
             }
 
-            function multipleChoiceOfFour() {
+            function singleChoiceOfFour() {
                 $("#answer-block").empty();
                 $("#answer-block").append(`
                     <div class="form-group">
@@ -134,7 +134,7 @@ Create New Question
                     <label for"firstAnswer">Second Answer</label>
                     <input type="text" class="form-control" name="answer[2]">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_correct"  value="1">
+                        <input class="form-check-input" type="radio" name="is_correct"  value="2">
                         <label class="form-check-label" > is correct </label>
                     </div>
                     </div>
@@ -142,7 +142,7 @@ Create New Question
                         <label for"firstAnswer">Third Answer</label>
                         <input type="text" class="form-control" name="answer[3]">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_correct"  value="1">
+                            <input class="form-check-input" type="radio" name="is_correct"  value="3">
                             <label class="form-check-label" > is correct </label>
                         </div>
                     </div>
@@ -150,7 +150,7 @@ Create New Question
                         <label for"firstAnswer">Fourth Answer</label>
                         <input type="text" class="form-control" name="answer[4]">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_correct"  value="1">
+                            <input class="form-check-input" type="radio" name="is_correct"  value="4">
                             <label class="form-check-label" > is correct </label>
                         </div>
                     </div>
@@ -173,7 +173,7 @@ Create New Question
                     <label for"firstAnswer">Second Answer</label>
                     <input type="text" class="form-control" name="answer[2]">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_correct"  value="1">
+                        <input class="form-check-input" type="radio" name="is_correct"  value="2">
                         <label class="form-check-label" > is correct </label>
                     </div>
                 `);

@@ -34,6 +34,7 @@ Route::get('/', function()
         return redirect()->route('login');
     }
 );
+
 Route::get('logout', function()
     {
         Auth::logout();
@@ -46,7 +47,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', 'AdminController@index')->name('admin');
 
     Route::get('/Question/Create', 'Question\QuestionController@create')->name('create.question');
-    Route::post('/Question/Store', 'Question\QuestionController@store')->name('question.store');
+    Route::post('/Question/Create', 'Question\QuestionController@store')->name('question.store');
     Route::get('/Question/Delete/{id}', 'Question\QuestionController@delete')->name('question.delete');
     Route::get('/Question/Detail/{id}', 'Question\QuestionController@getQuestionDetail')->name('get.question.detail');
     Route::get('/Question/List', 'Question\QuestionController@getQuestionList')->name('get.question.list');

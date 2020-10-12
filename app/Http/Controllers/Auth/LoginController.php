@@ -30,10 +30,12 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ( Auth::user()->role == config('app.role.admin') ) {
+        if ( Auth::user()->role == config('app.role.admin') )
+        {
             return redirect()->route('admin');
         }
-        if ( Auth::user()->role == config('app.role.student') ) {
+        if ( Auth::user()->role == config('app.role.student') )
+        {
             return redirect()->route('student');
         }
     }
