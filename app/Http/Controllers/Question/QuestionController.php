@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Question;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Question\QuestionService;
+use App\Http\Requests\questionRequest;
 
 class QuestionController extends Controller
 {
@@ -44,11 +45,12 @@ class QuestionController extends Controller
             ->with(compact('question', 'answers'));
     }
 
-    public function store(Request $request){
-        if($this->questionService->createQuestion($request))
-        {
-            return redirect()->route('get.question.list')->with('success', 'The question has been succsesfully add to the system');
-        }
-        return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
+    public function store(questionRequest $request){
+        // if($this->questionService->createQuestion($request))
+        // {
+        //     return redirect()->route('get.question.list')->with('success', 'The question has been succsesfully add to the system');
+        // }
+        // return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
+
     }
 }
