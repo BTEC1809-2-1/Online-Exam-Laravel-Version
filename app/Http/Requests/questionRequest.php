@@ -25,9 +25,9 @@ class questionRequest extends FormRequest
     {
         return [
             //
-            'question'=>'Required|max:255',
-            'questionType'=>'Required',
-            'subject'=>'Required',
+            'question'=>'bail|Required|max:255',
+            'questionType'=>'bail|Required',
+            'subject'=>'bail|Required',
         ];
     }
     public function messages()

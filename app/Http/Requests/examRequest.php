@@ -25,12 +25,12 @@ class examRequest extends FormRequest
     {
         return [
             //
-            'subject'=>'Required',
-            'semester'=>'Required',
-            'classroom'=>'Required',
-            'duration'=>'Required',
-            'date'=>'Required',
-            'startTime'=>'Required',
+            'subject'=>'bail|Required',
+            'semester'=>'bail|Required',
+            'classroom'=>'bail|Required',
+            'duration'=>'bail|Required',
+            'date'=>'bail|Required',
+            'startTime'=>'bail|Required',
         ];
     }
     public function messages()
