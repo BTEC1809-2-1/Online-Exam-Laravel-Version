@@ -59,7 +59,9 @@ Question Detail
                                 </div>
                             </div>
                             <div class="form-row">
-                                <?php $counter = 1;?>
+                                @php
+                                    $counter = 1;
+                                @endphp
                                 @foreach ($answers as $aIndex=>$answer)
                                 <div class="col-md-10">
                                     <div class="form-group">

@@ -58,7 +58,7 @@ Question List
                     <div class="card-body">
                         <div class="row justify-content-end mb-3">
                             <a href="{{route('create.question')}}">
-                                <button type="button" class="btn question-create-button mx-5">Create New question</button>
+                                <button type="button" class="btn detail-button mx-5">Create New question</button>
                             </a>
                         </div>
                         <table class="table">
