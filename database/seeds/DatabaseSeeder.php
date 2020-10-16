@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,11 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
-               // $this->call(UsersTableSeeder::class);
-       // Role comes before User seeder here.
-        $this->call(RoleTableSeeder::class);
-   	 // User seeder will use the roles above created.
-        $this->call(UserTableSeeder::class);
+        DB::table('users')->insert([
+            'id' => 'ADM1',
+            'name' => 'Admin1',
+            'email' => 'admin1@gmail.com',
+            'password' => Hash::make('admin@123'),
+            'role' => '2',
+        ]);
+
     }
 }
