@@ -16,7 +16,10 @@
       <div class="col-md-8">
         <div class="card">
             <div class="card-header text-center">
-                Exam Name
+                <div class="row">
+                    <div class="col-md-9 text-left pt-2">Exam Name</div>
+                    <div class="col-md-3"><a href="{{route('logout')}}" class="btn button-small btn-danger">Logout</a></div>
+                </div>
             </div>
             <div class="card-body px-5">
                 <div class="row">
@@ -24,7 +27,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroup-sizing-default">Student ID</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={{Auth::user()->name}} readonly>
                     </div>
                 </div>
                 <div class="row">
