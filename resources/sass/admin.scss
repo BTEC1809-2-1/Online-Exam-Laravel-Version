@@ -3,14 +3,14 @@
 .wrapper{
     display: flex;
     width: 100%;
-    align-items: stretch;
+    align-items: right;
     color: $white;
     .sidebar{
-        width: 15vw;
+        min-width: 280px;
         min-height: 100vh;
         .sidebar-header{
             width: 100%;
-            background: $custom-pink-dark;
+            background: $mau-hann-thich-body;
             padding: 1em 2em;
             h3 {
                 text-align: center;
@@ -26,37 +26,31 @@
             }
         }
         nav {
-            background: $custom-pink;
+            background: white;
             position: relative;
             ul{
                 padding: 1em;
             }
             a{
-                color: $white;
+                color: black;
                 font-size: 20px;
             }
-            .trademark{
-                background: $custom-pink-dark;
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                padding: 1em;
-                font-size: 18px;
-            }
+
         }
     }
     .content{
         width: 100%;
         .header{
-            min-height: 60px;
+            min-height: 100px;
             width: 100%;
-            background:  $custom-pink-lighter;
+            background:  white;
             text-align: center;
             .app-name {
+                margin-top: 0.5em;
                 display: inline-block;
                 width: 60%;
                 padding: 0.5em;
-                color: $white;
+                color: Black;
                 font-weight: bold;
                 font-size: 25px;
             }
@@ -70,12 +64,19 @@
         .card {
             margin-top: 1em;
             .card-header{
-                background:$custom-pink-dark;
+                background: $mau-hann-thich-cardheader;
                 color: $white;
+            }
+
+            .card-body {
+                color: $mau-hann-thich-body;
             }
         }
         a {
             color: white;
+            :hover {
+                text-decoration: none;
+            }
         }
     }
 }

@@ -42,21 +42,20 @@
                                     <th scope="col">Semester</th>
                                     <th scope="col">Class</th>
                                     <th scope="col">Start At</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col" class="text-center">Status</th>
                                     <th scope="col colspan-3" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($listExam ?? '' as $exam)
+                                @foreach($listExam as $exam)
                                 <tr>
                                     <th>{{$exam->id}}</th>
                                     <td>{{$exam->semester}}</td>
                                     <td>{{$exam->classroom}}</td>
                                     <td>{{$exam->start_at}}</td>
-                                    <td>{{$exam->status}}</td>
-                                    <td>
-                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}"><button type=button" class="btn btn-success">View detail</button></a>
-                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}"><button type=button" class="btn btn-danger">Delete</button></a>
+                                    <td class="text-center">{{$exam->status}}</td>
+                                    <td class="text-center">
+                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}" class="btn detail-button">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach

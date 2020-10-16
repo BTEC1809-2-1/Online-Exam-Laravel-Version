@@ -1,10 +1,11 @@
 @extends('Admin.layouts.admin')
+@section('pagename')
+Question Detail
+@endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection
-@section('script')
-    <script type="text/javascript" src="{{asset('js/toggleEditUpdate.js')}}"></script>
-@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -58,7 +59,9 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <?php $counter = 1;?>
+                                @php
+                                    $counter = 1;
+                                @endphp
                                 @foreach ($answers as $aIndex=>$answer)
                                 <div class="col-md-10">
                                     <div class="form-group">
@@ -79,10 +82,10 @@
                                 @endforeach
                             </div>
                             <div class="form-group">
-                                <button id="edit" class="btn btn-block question-edit">Edit</button>
+                                <button id="edit" class="btn btn-block detail-button">Edit</button>
                             </div>
                             <div class="form-group" id="update">
-                                <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn question-edit btn-block" role="button">Update</a>
+                                <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn detail-button btn-block" role="button">Update</a>
                             </div>
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
                                 Delete this question
@@ -124,4 +127,21 @@
             </div>
         </div>
     </div>
+    @section('script')
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(function(){
+                    $('#edit').one('click' ,function(e) {
+                        e.preventDefault();
+                        $(this).html() == "Edit" ? updateOn() : $('#form').submit();
+                    });
+                });
+                function updateOn() {
+                    $('#edit').parent().css('display','none');
+                    $('#update').show();
+                    $(":input").prop('readonly', false);
+                }
+            });
+        </script>
+    @endsection
 @endsection

@@ -1,18 +1,18 @@
 .wrapper {
   display: flex;
   width: 100%;
-  align-items: stretch;
+  align-items: right;
   color: #ffffff;
 }
 
 .wrapper .sidebar {
-  width: 15vw;
+  min-width: 280px;
   min-height: 100vh;
 }
 
 .wrapper .sidebar .sidebar-header {
   width: 100%;
-  background: #ff66b5;
+  background: #5bc4db;
   padding: 1em 2em;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .wrapper .sidebar nav {
-  background: #ff99bb;
+  background: white;
   position: relative;
 }
 
@@ -41,17 +41,8 @@
 }
 
 .wrapper .sidebar nav a {
-  color: #ffffff;
+  color: black;
   font-size: 20px;
-}
-
-.wrapper .sidebar nav .trademark {
-  background: #ff66b5;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 1em;
-  font-size: 18px;
 }
 
 .wrapper .content {
@@ -59,17 +50,18 @@
 }
 
 .wrapper .content .header {
-  min-height: 60px;
+  min-height: 100px;
   width: 100%;
-  background: #ffe6ee;
+  background: white;
   text-align: center;
 }
 
 .wrapper .content .header .app-name {
+  margin-top: 0.5em;
   display: inline-block;
   width: 60%;
   padding: 0.5em;
-  color: #ffffff;
+  color: Black;
   font-weight: bold;
   font-size: 25px;
 }
@@ -87,11 +79,19 @@
 }
 
 .wrapper .content .card .card-header {
-  background: #ff66b5;
+  background: #1480b6;
   color: #ffffff;
+}
+
+.wrapper .content .card .card-body {
+  color: #5bc4db;
 }
 
 .wrapper .content a {
   color: white;
+}
+
+.wrapper .content a :hover {
+  text-decoration: none;
 }
 

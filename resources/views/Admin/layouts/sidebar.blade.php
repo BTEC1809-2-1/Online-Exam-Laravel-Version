@@ -1,44 +1,67 @@
 <div class="sidebar">
     <nav class="sidebar">
+        <div class="btn-home">
+            <a href="{{route('admin')}}" class="bg-white"><img src="{{asset('image/bteclogo.png')}}" alt="" id="logo"></a>
+        </div>
         <ul class="list-unstyled components">
-            <div class="btn-home">
-                <a href="#">Home</a>
-            </div>
-            <hr>
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="active text-center">
+                <a href="#examManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     Exam management
                 </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="{{route('create.exam')}}">Create new Exam</a>
+                <ul class="collapse list-unstyled" id="examManagement">
+                    <li id="examCreate" class="text-center">
+                        <a href="{{route('create.exam')}}" class="nlink"  id="create-exam">Create new Exam</a>
                     </li>
-                    <li>
-                        <a href="{{route('get.exam.list')}}">List all exam</a>
+                    <li id="examList" class="text-center">
+                        <a href="{{route('get.exam.list')}}" class="nlink">List all exam</a>
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="text-center">
                 <hr>
                 <a href="#questionManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-copy"></i>
                     Question Management
                 </a>
                 <ul class="collapse list-unstyled" id="questionManagement">
-                    <li>
-                        <a href="{{route('create.question')}}">Create new question</a>
+                    <li id="questionCreate" class="text-center">
+                        <a href="{{route('create.question')}}" class="nlink">Create new question</a>
                     </li>
-                    <li>
-                        <a href="{{route('get.question.list')}}">List all question</a>
+                    <li id="questionList" class="text-center">
+                        <a href="{{route('get.question.list')}}" class="nlink">List all question</a>
                     </li>
                 </ul>
             </li>
             <hr>
-                <a href="{{route('logout')}}">Logout</a>
+            <li class="text-center logout">
+                <a class="logout w-100" href="{{route('logout')}}">Logout</a>
+            </li>
         </ul>
-        <div class="trademark mt-auto">
-            @Copyright BinhAn 2020
-        </div>
     </nav>
 </div>
+<style>
+    .btn-home {
+        max-width: 290px;
+        min-height: 100px;
+        background: white;
+    }
+    .logout {
+        background-color: none;
+    }
+    .logout:hover {
+        background-color: red;
+        border-radius: 15px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    #logo
+    {
+        max-width: 150px;
+    }
+    .nav-link
+    {
+        font-size: 16px;
+    }
+</style>
 

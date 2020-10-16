@@ -134,6 +134,7 @@ return [
     |
     */
 
+
     'providers' => [
 
         /*
@@ -174,6 +175,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //login gg
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -226,7 +229,19 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'PermissionServiceProvider' => Spatie\Permission\PermissionServiceProvider::class,
+        ],
 
+    'role' => [
+        'student' => '1',
+        'admin' => '2'
+    ],
+
+    'numberOfQuestionsPerExam' => [
+        'mc4' => '1',
+        'sc4' => '1',
+        'tf' => '2',
     ],
 
 ];

@@ -2,9 +2,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
-@section('script')
-    <script src="{{asset('js/hiddenCheckbox.js')}}"></script>
-@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -23,7 +21,7 @@
                         <div class="row px-3">
                             <h2><span class="badge badge-warning">Question content:</span> {{$question->question}}</h2>
                         </div>
-                        <form id="form" action="{{route('question.answer.store', $question->id)}}" method="POST">
+                            <form id="form" action="{{route('question.answer.store', $question->id)}}" method="POST">
                             @csrf
                             <input type="hidden" name="question_id" value="{{$question->id}}">
                             @if($question->type === 'Multiple choices of 4')
@@ -66,4 +64,13 @@
             </div>
         </div>
     </div>
+    @section('script')
+        <script>
+            $('#form').submit(function() {
+                if(document.getElementById("autoSizingCheck").checked) {
+                    document.getElementById('autoSizingCheck2').disabled = true;
+                }
+            });
+        </script>
+    @endsection
 @endsection
