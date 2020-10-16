@@ -15,10 +15,10 @@ class CreateQuestionSetTables extends Migration
     {
         Schema::create('question_set', function (Blueprint $table) {
             $table->string('id');
-            $table->string('questions');
+            $table->mediumText('questions');
+            $table->string('subject');
             $table->string('student_id');
             $table->timestamps();
-            $table->primary('id');
         });
     }
 

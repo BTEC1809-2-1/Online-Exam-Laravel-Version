@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Exam;
 
-use App\Exam;
 use App\Http\Controllers\Controller;
-use App\Question;
-use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\examRequest;
@@ -45,7 +42,11 @@ class ExamController extends Controller
 
     public function store(examRequest $request)
     {
-        // return $this->examService->createNewExam($request);
+        if($this->examService->createNewExam($request))
+        {
+            return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam');
+        }
+        return redirect()->route('get.exam.list')->with('error', 'Cannot create Exam (No Questions avaiable), please report to the administrator to fix this problem');
     }
 
 }

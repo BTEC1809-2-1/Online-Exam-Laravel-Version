@@ -71,7 +71,7 @@
                                                 <option selected></option>
                                                 <option value="15">15</option>
                                                 <option value="45">45</option>
-                                                <option value="90">90</option>
+                                                <option value="00:01:30">90</option>
                                             </select>
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Minutes</div>

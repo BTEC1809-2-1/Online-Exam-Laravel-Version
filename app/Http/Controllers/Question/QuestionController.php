@@ -46,11 +46,11 @@ class QuestionController extends Controller
     }
 
     public function store(questionRequest $request){
-        // if($this->questionService->createQuestion($request))
-        // {
-        //     return redirect()->route('get.question.list')->with('success', 'The question has been succsesfully add to the system');
-        // }
-        // return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
+        if($this->questionService->createQuestion($request))
+        {
+            return redirect()->route('get.question.list')->with('success', 'The question has been succsesfully add to the system');
+        }
+        return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
 
     }
 }

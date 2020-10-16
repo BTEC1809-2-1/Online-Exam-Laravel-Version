@@ -11,26 +11,25 @@
     </script>
 @endsection
 @section('content')
-    //TODO: also change all buttons in this page to pink
     <div class="container" style="background-image:url({{url('/images/myimage.jpg')}})">
         @csrf
         <div class="card">
             <div class="card-header">
                 Exam list
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <li>{!! \Session::get('error') !!}</li>
+                        </ul>
+                    </div>
+                @endif
                 @if (\Session::has('success'))
-                    <div class="">
+                    <div class="alert alert-success">
                         <ul>
                             <li>{!! \Session::get('success') !!}</li>
                         </ul>
                     </div>
                 @endif
-                @if (\Session::has('error'))
-                <div class="">
-                    <ul>
-                        <li>{!! \Session::get('error') !!}</li>
-                    </ul>
-                </div>
-            @endif
             </div>
                 <div class="card-body">
                     <div class="row justify-content-end px-5 mb-3">
