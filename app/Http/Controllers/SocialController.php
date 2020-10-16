@@ -8,6 +8,7 @@ use Socialite as Socialite;
 use App\User;
 use Laravel\Socialite\Facades\Socialite as FacadesSocialite;
 Use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class SocialController extends Controller
 {
@@ -26,13 +27,14 @@ class SocialController extends Controller
     function createUser($getInfo,$provider){
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
-            $user = User::create([
-                'role' => '1',
-                'name'     => $getInfo->name,
-                'email'    => $getInfo->email,
-                'provider' => $provider,
-                'provider_id' => $getInfo->id
-            ]);
+            $user = new User();
+            $user->id = 'STD'.strval(Carbon::now());
+            $user->role = '1';
+            $user->name = $getInfo->name;
+            $user->email = $getInfo->email;
+            $user->provider = $provider;
+            $user->provider_id = $getInfo->id;
+            $user->save();
         }
         return $user;
     }

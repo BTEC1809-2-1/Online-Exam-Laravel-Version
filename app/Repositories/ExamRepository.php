@@ -32,7 +32,7 @@ class ExamRepository extends BaseRepository {
         return $listExam;
     }
 
-    public function createExam(Request $request, $examID)
+    public function createExam($request, $examID)
     {
         $exam = new Exam();
         $exam->id = $examID;

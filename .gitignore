@@ -24,3 +24,5 @@ public/js/hiddenCheckbox.js
 .idea/workspace.xml
 composer.json
 composer.json
+
+docker-compose.yml

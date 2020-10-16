@@ -39,7 +39,6 @@ class QuestionService {
             return true;
         }catch(\Exception $e)
         {
-            dd($e);
             $this->deleteQuestionByID($questionID);
             return false;
         }
