@@ -8,6 +8,7 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\examRequest;
 
 
 class ExamController extends Controller
@@ -42,9 +43,9 @@ class ExamController extends Controller
         return view('Admin.pages.create_exam');
     }
 
-    public function store(Request $request)
+    public function store(examRequest $request)
     {
-        return $this->examService->createNewExam($request);
+        // return $this->examService->createNewExam($request);
     }
 
 }
