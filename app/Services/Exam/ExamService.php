@@ -5,21 +5,25 @@ use App\Repositories\ExamRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\StudentExamRepository;
 use App\Repositories\StudentRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ExamService {
+class ExamService
+{
     protected $examRepository;
     protected $questionRepository;
     protected $studentRepository;
     protected $studentExamRepository;
 
-    public function __construct(
+    public function __construct
+    (
         ExamRepository $examRepository,
         QuestionRepository $questionRepository,
         StudentRepository $studentRepository,
         StudentExamRepository $studentExamRepository
-        )
+    )
     {
         $this->examRepository = $examRepository;
         $this->questionRepository = $questionRepository;
@@ -29,18 +33,21 @@ class ExamService {
 
     public function getStudentExam($studentID)
     {
-        return $this->studentExamRepository->getExamByStudentID($studentID);
+       return $this->studentExamRepository->getExamByStudentID($studentID);
     }
 
-    public function getExamList(){
+    public function getExamList()
+    {
         return $this->examRepository->getAllExam();
     }
 
-    public function getUpcomingExam(){
+    public function getUpcomingExam()
+    {
         return $this->examRepository->getUpcomingExam();
     }
 
-    public function getExamDetail($id){
+    public function getExamDetail($id)
+    {
         return $this->examRepository->getExam($id);
     }
 
@@ -81,4 +88,30 @@ class ExamService {
             return false;
         }
     }
+
+    public function getExamStatus($id)
+    {
+            $exam = DB::table('exams')->select('start_at', 'duration')->where('id', $id)->first();
+            $hours = Carbon::parse($exam->duration)->format('H');
+            $minutes = Carbon::parse($exam->duration)->format('i');
+            $exam_expired_time = Carbon::parse($exam->start_at)->addDay(0)->addHour($hours)->addMinutes($minutes);
+            if( (strtotime(Carbon::now()) - strtotime($exam_expired_time)) > 1)
+            {
+                return null;
+            }
+            return (strtotime(Carbon::now()) - strtotime($exam_expired_time))/60;
+    }
+
+    public function checkExamStartTime($id)
+    {
+        $exam = DB::table('exams')->select('start_at')->where('id', $id)->first();
+        // dd(strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at)));
+        if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function getStudentUpcomingExam(){}
 }

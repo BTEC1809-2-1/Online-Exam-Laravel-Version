@@ -6,15 +6,15 @@ Create New Question
 	<link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection
 @section('content')
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -24,7 +24,7 @@ Create New Question
                     </div>
                     <div class="card-body">
                         <form action="{{route('question.store')}}" method="POST">
-                                @csrf
+                            @csrf
                             <div class="form-group">
                                 <label for="">Question</label>
                                 <input type="text" class="form-control" name="question">
@@ -64,12 +64,10 @@ Create New Question
             $(document).ready(function() {
                 $('#questionManagement').show();
                 $('#questionCreate').css({'background-color':'pink', 'border-radius':'5px'});
-
                 $("#questionType").change(function() {
                     var selectedValue = $(this)
                         .find(":selected")
                         .val();
-                    console.log(selectedValue);
                     switch (selectedValue) {
                         case "SC4":
                             singleChoiceOfFour();

@@ -10,6 +10,25 @@
         }
     </style>
 @endsection
+@section('script')
+    <script>
+      $(document).ready(function() {
+        var doUpdate = function() {
+          $('#countdown').each(function() {
+            var count = parseInt($(this).html());
+            if (count !== 0) {
+              $(this).html(count - 1);
+            }
+            else
+            {
+                $('#do-exam-button').attr('href', "{{route('do.exam.page', [$exam->id])}}")
+            }
+          });
+        };
+        setInterval(doUpdate, 60000);
+      });
+    </script>
+@endsection
 @section('content')
   <div class="container p-5">
     <div class="row justify-content-center">
@@ -44,10 +63,8 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Start Time</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{date('H:s:i', strtotime($exam->start_at))}}" readonly>
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{date('H:i:s', strtotime($exam->start_at))}}" readonly>
                         </div>
-                    </div>
-                    <div class="col">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Duration</span>
@@ -60,14 +77,27 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Count Down</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+                            <div type="text" class="form-control" id="countdown" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+                                @if(isset($status)) {{Carbon\Carbon::now()->diffInMinutes(Carbon\Carbon::parse($exam->start_at))}} @else 0 @endif
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Minutes</span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+                            </div>
+                            <input type="text" class="form-control" id="countdown" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="@if(isset($status)) Ready @else Test Done @endif" readonly>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <a href="{{route('do.exam.page')}}" class="btn btn-block create-button">Start</a>
-            </div>
+            @if (isset($status))
+                <div class="card-footer">
+                    <a class="btn btn-block create-button" id="do-exam-button">Start</a>
+                </div>
+            @endif
         </div>
       </div>
     </div>

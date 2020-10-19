@@ -62,6 +62,7 @@
                                     <div class="card-header px-5">
                                         <h4>Question</h4>
                                     </div>
+                                    {{-- @foreach($questions ?? '' as $question) --}}
                                     <div class="card-body px-5">
                                         <div class="row justify-content-around">
                                             <div class="col-8 border border-dark p-3">
@@ -77,6 +78,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{-- @endforeach --}}
                                 </div>
                             </div>
                         </div>

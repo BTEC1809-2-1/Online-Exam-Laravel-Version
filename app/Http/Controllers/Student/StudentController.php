@@ -21,12 +21,20 @@ class StudentController extends Controller
     public function showReadyPage()
     {
         $exam = $this->examService->getStudentExam(Auth::user()->id);
-        return view('Student.pages.ready', compact('exam'));
+        $status = $this->examService->getExamStatus($exam->id);
+        return view('Student.pages.ready', compact('exam', 'status'));
     }
 
-    public function showDoExamPage()
+    public function showDoExamPage($id)
     {
-        return view('Student.pages.do-exam');
+        // dd($this->examService->checkExamStartTime($id));
+        if($this->examService->checkExamStartTime($id))
+        {
+            $exam = $this->examService->getStudentUpcomingExam($id);
+            return view('Student.pages.do-exam')->with(compact('exam'));
+        }
+        return redirect()->route('student');
+
     }
 
     public function submitExam(Request $request)

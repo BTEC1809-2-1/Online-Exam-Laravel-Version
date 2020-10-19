@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Validator,Redirect,Response,File;
-use Socialite as Socialite;
 use App\User;
 use Laravel\Socialite\Facades\Socialite as FacadesSocialite;
 Use Illuminate\Support\Facades\Auth;

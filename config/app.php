@@ -244,4 +244,11 @@ return [
         'tf' => '2',
     ],
 
+    'exam_status' => [
+        'Ready'=> '1',
+        'On-going' => '2',
+        'Done' => '3',
+        'Cancelled' => '4'
+    ],
+
 ];

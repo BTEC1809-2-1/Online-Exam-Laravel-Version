@@ -267,13 +267,13 @@
 				<a href="{{ route('login.google', 'google') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
 			</div>
 			<span>or use account if you are lecturer</span>
-            <input id="email" type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus/>
+            <input id="email" type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus/>
             @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-            <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password" />
+            <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password" />
             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

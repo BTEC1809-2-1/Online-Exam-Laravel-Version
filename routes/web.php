@@ -62,8 +62,8 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 Route::get('/student', 'Student\StudentController@showReadyPage')->name('student');
-Route::get('Do-Exam', 'Student\StudentController@showDoExamPage')->name('do.exam.page');
-Route::post('Do-exam','Student\StudentController@submitExam')->name('submit.exam');
+Route::get('/Do-Exam/{id}', 'Student\StudentController@showDoExamPage')->name('do.exam.page');
+Route::post('/Do-Exam','Student\StudentController@submitExam')->name('submit.exam');
 
 
 
