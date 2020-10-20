@@ -14,11 +14,11 @@ class CreateStudentExamTable extends Migration
     public function up()
     {
         Schema::create('student_exams', function (Blueprint $table) {
-            $table->string('id');
-            $table->string('student_id');
-            $table->string('exam_id');
-            $table->string('question_set_id');
-            $table->string('student_answers_id');
+            $table->string('id', 255);
+            $table->string('student_id', 255);
+            $table->string('exam_id', 255);
+            $table->string('question_set_id', 255);
+            $table->string('student_answers_id', 255);
             $table->string('point')->nullable();
             $table->timestamp('created_at');
             $table->string('created_by');

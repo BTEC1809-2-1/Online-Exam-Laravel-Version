@@ -14,11 +14,12 @@ class CreateQuestionSetTables extends Migration
     public function up()
     {
         Schema::create('question_set', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id', 255);
             $table->mediumText('questions');
             $table->string('subject');
             $table->string('student_id');
             $table->timestamps();
+            $table->primary('id');
         });
     }
 

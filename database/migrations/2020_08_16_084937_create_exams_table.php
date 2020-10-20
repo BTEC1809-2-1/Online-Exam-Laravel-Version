@@ -14,7 +14,7 @@ class CreateExamsTable extends Migration
     public function up()
     {
         Schema::create('exams', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id', 255);
             $table->string('subject');
             $table->string('semester');
             $table->string('classroom');
@@ -25,6 +25,7 @@ class CreateExamsTable extends Migration
             $table->string('created_by');
             $table->timestamp('updated_at',0);
             $table->string('updated_by');
+            $table->primary('id');
         });
     }
 

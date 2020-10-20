@@ -15,9 +15,9 @@ class CreateStudentAnswersTable extends Migration
     {
         Schema::create('student_answers', function (Blueprint $table) {
             $table->string('id');
-            $table->string('question_id');
-            $table->string('student_id');
-            $table->tinyInteger('student_answer');
+            $table->string('question_id', 255);
+            $table->string('student_id', 255);
+            $table->mediumText('student_answer');
             $table->string('is_correct');
             $table->timestamps();
             $table->primary(['id', 'question_id', 'student_id']);
