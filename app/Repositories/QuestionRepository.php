@@ -116,6 +116,15 @@ class QuestionRepository extends BaseRepository {
         DB::table('question_set')
             ->insert($data);
     }
+
+    public function getExamQuestionsAndAnswers($questionID)
+    {
+        return DB::table('questions')
+        ->where('id', $questionID)
+        ->join('answers', 'question_id', '=', $questionID)
+        ->select('answer', 'is_correct')
+        ->get();
+    }
 }
 
 

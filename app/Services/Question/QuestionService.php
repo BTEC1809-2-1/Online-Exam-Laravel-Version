@@ -1,20 +1,32 @@
 <?php
-
 namespace App\Services\Question;
 
 use App\Repositories\AnswerRepository;
 use App\Repositories\QuestionRepository;
+use App\Repositories\QuestionSetRepository;
+use App\Repositories\ExamQuestionRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class QuestionService {
 
     protected $questionRepository;
     protected $answerRepository;
+    protected $examQuestionRepository;
+    protected $questionSetRepository;
 
-    public function __construct(QuestionRepository $questionRepository, AnswerRepository $answerRepository)
+    public function __construct
+    (
+        QuestionRepository $questionRepository, 
+        AnswerRepository $answerRepository,
+        ExamQuestionRepository $examQuestionRepository,
+        QuestionSetRepository $questionSetRepository,
+    )
     {
         $this->questionRepository = $questionRepository;
         $this->answerRepository = $answerRepository;
+        $this->examQuestionRepository = $examQuestionRepository;
+        $this->questionSetRepository =$questionSetRepository;
     }
 
     public function createQuestion(Request $request)
@@ -39,6 +51,7 @@ class QuestionService {
             return true;
         }catch(\Exception $e)
         {
+            Log::error($e);
             $this->deleteQuestionByID($questionID);
             return false;
         }
@@ -64,10 +77,35 @@ class QuestionService {
     {
         return $this->questionRepository->getQuestionDetail($id);
     }
+
     public function deleteQuestionByID($questionID)
     {
-        $this->answerRepository->deleteAllAnswerByQuestionID($questionID);
-        $this->questionRepository->deleteByID($questionID);
+        try
+        {
+            $this->answerRepository->deleteAllAnswerByQuestionID($questionID);
+            $this->questionRepository->deleteByID($questionID);
+        }catch(\Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
+    public function getExamQuestions($examID)
+    {
+        try
+        {
+            $questions = [];
+            $question_set =  $this->questionSetRepository->getQuestionSetByExam($examID);
+            foreach($question_set as $question)
+            {
+                $questions[] = $this->questionRepository->getExamQuestionsAndAnswers($examID);
+            }
+            return $questions;
+
+        }catch(\Exception $e)
+        {
+            Log::error($e);
+        }
     }
 }
 

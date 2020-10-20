@@ -248,7 +248,7 @@ return [
         'Ready'=> '1',
         'On-going' => '2',
         'Done' => '3',
-        'Cancelled' => '4'
+        'Cancelled' => '4',
     ],
 
 ];
