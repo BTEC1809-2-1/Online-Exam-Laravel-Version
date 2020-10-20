@@ -16,7 +16,7 @@ class StudentController extends Controller
 
     public function __construct
     (
-        ExamService $examService,  
+        ExamService $examService,
         QuestionService $questionService
     )
     {
@@ -27,8 +27,8 @@ class StudentController extends Controller
     public function showReadyPage()
     {
         if($this->examService->getStudentExam(Auth::user()->id) !== null)
-        {   
-            $exam = $this->examService->getStudentExam(Auth::user()->id)[1];
+        {
+            $exam = $this->examService->getStudentExam(Auth::user()->id);
             $id = $exam->id;
             $subject = $exam->subject;
             $start_at = date('H:i:s', strtotime($exam->start_at));
@@ -45,8 +45,9 @@ class StudentController extends Controller
         // if($this->examService->checkExamStartTime($id))
         // {
             $exam = $this->examService->getStudentExam($id);
-            $questions = $this->questionService->getExamQuestions($exam->id);
-            return view('Student.pages.do-exam')->with(compact('exam'));
+            $questions = $this->questionService->getExamQuestions($exam->id, $id);
+            dd($questions);
+            return view('Student.pages.do-exam')->with(compact('exam', 'questions'));
         // }
         // return redirect()->route('student');
     }

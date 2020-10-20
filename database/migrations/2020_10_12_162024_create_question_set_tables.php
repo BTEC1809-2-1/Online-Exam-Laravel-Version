@@ -17,7 +17,7 @@ class CreateQuestionSetTables extends Migration
             $table->string('id', 255);
             $table->mediumText('questions');
             $table->string('subject');
-            $table->string('student_id');
+            $table->mediumText('student_id')->nullable();
             $table->timestamps();
             $table->primary('id');
         });
