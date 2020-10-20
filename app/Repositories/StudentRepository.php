@@ -7,10 +7,11 @@ class StudentRepository
 {
     public function getRandomUserByClass($class)
     {
-        return User::where('role', '1')
-                ->where('class', $class)
-                ->get()
-                ->random(1);
+        $student = User::where('role', '1')
+        ->where('class', $class)
+        ->inRandomOrder()->limit(5)
+        ->get();
+        return $student ?: (object)[];
     }
     public function getAllUserByClass($class)
     {

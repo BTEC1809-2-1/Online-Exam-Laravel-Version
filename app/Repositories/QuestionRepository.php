@@ -79,9 +79,8 @@ class QuestionRepository extends BaseRepository {
         $question_set  = DB::table('questions')->select('id', 'question', 'type')
             ->where('subject', $request->subject)
             ->where('type', $type)
-            ->get()
-            ->random(2)
-            ->first();
+            ->inRandomOrder()->limit(10)
+            ->get();
         return $question_set;
     }
 
@@ -91,10 +90,10 @@ class QuestionRepository extends BaseRepository {
         $question->delete();
     }
 
-    public function addQuestionToQuestionExam($examID, $questions)
+    public function addQuestionToQuestionExam($id, $examID, $questions)
     {
         $data = [
-            'id' => 'EQ'.'IT',
+            'id' => $id,
             'exam_id' => $examID,
             'question_id' => json_encode($questions),
             'created_by' => Auth::user()->name,
@@ -125,6 +124,13 @@ class QuestionRepository extends BaseRepository {
         ->select('answer', 'is_correct')
         ->get();
     }
+
+    public function deleteExamQuestionByID($id)
+    {
+        DB::table('exam_questions')->where('id', $id)
+        ->delete();
+    }
+
 }
 
 

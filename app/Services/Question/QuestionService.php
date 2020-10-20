@@ -20,7 +20,7 @@ class QuestionService {
         QuestionRepository $questionRepository, 
         AnswerRepository $answerRepository,
         ExamQuestionRepository $examQuestionRepository,
-        QuestionSetRepository $questionSetRepository,
+        QuestionSetRepository $questionSetRepository
     )
     {
         $this->questionRepository = $questionRepository;

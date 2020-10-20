@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ExamService
 {
@@ -67,15 +68,16 @@ class ExamService
             $question[] = $this->questionRepository->createQuestionsToExam($request, 'SC4');
             $question[] = $this->questionRepository->createQuestionsToExam($request, 'TF');
             $exam_question = json_encode($question);
-            $this->questionRepository->addQuestionToQuestionExam($examID, $exam_question);
+            $exam_question_id = 'EQ'.$request->subject.Str::random(10);
+            $this->questionRepository->addQuestionToQuestionExam($exam_question_id, $examID, $exam_question);
             $class = $request->classroom;
             for($i = 1; $i <= 4; $i++)
             {
-                $studentID = $this->studentRepository->getRandomUserByClass($class)->first()->id;
                 $question_set = [];
-                $question_set[]  = collect($question)->where('type', 'MC4')->random(1);
-                $question_set[]  = collect($question)->where('type', 'SC4')->random(1);
-                $question_set[]  = collect($question)->where('type', 'TF')->random(1);
+                $studentID = $this->studentRepository->getRandomUserByClass($class)->first()->id;
+                $question_set[]  = collect($question[0])->random(3);
+                $question_set[]  = collect($question[1])->random(3);
+                $question_set[]  = collect($question[2])->random(3);
                 $question_set  = json_encode($question_set);
                 $this->studentExamRepository->createStudentExam($studentID, $examID, $examID.$i);
                 $this->questionRepository->createQuestionSet($examID.$i, $question_set, $studentID, $request->subject);
@@ -84,6 +86,7 @@ class ExamService
         }catch(\Exception $e)
         {
             Log::error($e);
+            $this->questionRepository->deleteExamQuestionById($exam_question_id);
             $this->examRepository->deleteExamById($examID);
             return false;
         }
