@@ -10,10 +10,11 @@ class StudentExamRepository
 {
     public function getExamByStudentID($studentID)
     {
-        $exam = DB::table('student_exams')
-        ->where('student_id', $studentID)
-        ->join('exams','exams.id','=','student_exams.exam_id');
-       return $exam->exists() ? $exam->get() : null;
+        
+       return DB::table('student_exams')
+       ->where('student_id', $studentID)
+       ->join('exams','exams.id','=','student_exams.exam_id')
+       ->get();
     }
 
     public function createStudentExam($studentID, $examID, $question_set_id)

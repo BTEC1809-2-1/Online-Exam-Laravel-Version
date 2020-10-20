@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Services\Question\QuestionService;
 use App\Services\Exam\ExamService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,13 +26,14 @@ class StudentController extends Controller
 
     public function showReadyPage()
     {
-        if($exam = $this->examService->getStudentExam(Auth::user()->id) !== null)
-        {
+        if($this->examService->getStudentExam(Auth::user()->id) !== null)
+        {   
+            $exam = $this->examService->getStudentExam(Auth::user()->id)[1];
             $id = $exam->id;
             $subject = $exam->subject;
             $start_at = date('H:i:s', strtotime($exam->start_at));
             $duration =$exam->duration;
-            $countdown = Carbon\Carbon::now()->diffInMinutes(Carbon\Carbon::parse($exam->start_at));
+            $countdown = Carbon::now()->diffInMinutes(Carbon::parse($exam->start_at));
             $status = $this->examService->getExamStatus($exam->id);
             return view('Student.pages.ready', compact('exam', 'id' ,'status', 'start_at', 'duration', 'countdown', 'subject'));
         }
@@ -40,13 +42,13 @@ class StudentController extends Controller
 
     public function showDoExamPage($id)
     {
-        if($this->examService->checkExamStartTime($id))
-        {
-            $exam = $this->examService->getStudentUpcomingExam($id);
-            $questions = $this->questionService->getExamQuestions();
+        // if($this->examService->checkExamStartTime($id))
+        // {
+            $exam = $this->examService->getStudentExam($id);
+            $questions = $this->questionService->getExamQuestions($exam->id);
             return view('Student.pages.do-exam')->with(compact('exam'));
-        }
-        return redirect()->route('student');
+        // }
+        // return redirect()->route('student');
     }
 
     public function submitExam(Request $request)

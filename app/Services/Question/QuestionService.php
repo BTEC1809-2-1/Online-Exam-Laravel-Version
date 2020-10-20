@@ -90,18 +90,17 @@ class QuestionService {
         }
     }
 
-    public function getExamQuestions($examID)
+    public function getExamQuestions($examID, $studentID)
     {
         try
         {
             $questions = [];
-            $question_set =  $this->questionSetRepository->getQuestionSetByExam($examID);
+            $question_set =  $this->questionSetRepository->getQuestionSetByExam($examID, $studentID);
             foreach($question_set as $question)
             {
                 $questions[] = $this->questionRepository->getExamQuestionsAndAnswers($examID);
             }
             return $questions;
-
         }catch(\Exception $e)
         {
             Log::error($e);
