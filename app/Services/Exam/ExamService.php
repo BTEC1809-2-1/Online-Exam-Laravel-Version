@@ -91,27 +91,37 @@ class ExamService
 
     public function getExamStatus($id)
     {
+        try
+        {
             $exam = DB::table('exams')->select('start_at', 'duration')->where('id', $id)->first();
             $hours = Carbon::parse($exam->duration)->format('H');
             $minutes = Carbon::parse($exam->duration)->format('i');
             $exam_expired_time = Carbon::parse($exam->start_at)->addDay(0)->addHour($hours)->addMinutes($minutes);
             if( (strtotime(Carbon::now()) - strtotime($exam_expired_time)) > 1)
             {
-                return null;
+                return 3;
             }
-            return (strtotime(Carbon::now()) - strtotime($exam_expired_time))/60;
+            return 1;
+        }catch(\Exception $e)
+        {
+            return false;
+            Log::error($e);
+        }
     }
 
     public function checkExamStartTime($id)
     {
-        $exam = DB::table('exams')->select('start_at')->where('id', $id)->first();
-        // dd(strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at)));
-        if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
+        try
         {
-            return true;
+            $exam = DB::table('exams')->select('start_at')->where('id', $id)->first();
+            if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
+            {
+                return true;
+            }
+        }catch(\Exception $e)
+        {
+            return false;
+            Log::error($e);
         }
-        return false;
     }
-
-    public function getStudentUpcomingExam(){}
 }
