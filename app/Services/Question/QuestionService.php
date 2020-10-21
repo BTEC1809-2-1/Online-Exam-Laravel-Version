@@ -17,7 +17,7 @@ class QuestionService {
 
     public function __construct
     (
-        QuestionRepository $questionRepository, 
+        QuestionRepository $questionRepository,
         AnswerRepository $answerRepository,
         ExamQuestionRepository $examQuestionRepository,
         QuestionSetRepository $questionSetRepository
@@ -98,7 +98,7 @@ class QuestionService {
             $question_set =  $this->questionSetRepository->getQuestionSetByExam($examID, $studentID);
             foreach($question_set as $question)
             {
-                $questions[] = $this->questionRepository->getExamQuestionsAndAnswers($examID);
+                $questions[] = $this->questionRepository->getQuestionsAndAnswers($examID);
             }
             return $questions;
         }catch(\Exception $e)

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class StudentExamRepository
 {
     protected $table;
-    
+
     public function __construct()
     {
         $this->table = DB::table('student_exams');

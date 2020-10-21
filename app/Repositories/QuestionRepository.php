@@ -53,9 +53,9 @@ class QuestionRepository extends BaseRepository {
     public function getQuestionDetail($id)
     {
         $query = $this->query()
-                ->addSelect('created_at', 
-                            'created_by', 
-                            'updated_at', 
+                ->addSelect('created_at',
+                            'created_by',
+                            'updated_at',
                             'updated_by');
         return $query->findOrFail($id);
     }
@@ -113,10 +113,19 @@ class QuestionRepository extends BaseRepository {
     public function getQuestionsAndAnswers($questionID)
     {
         return DB::table('questions')
-        ->where('id', $questionID)
-        ->join('answers', 'question_id', '=', $questionID)
-        ->select('answer', 'is_correct')
-        ->get();
+            ->join('answers', function($join)
+                    {
+                        $join->on
+                        (
+                            'questions.id',
+                                '=',
+                            'answers.question_id'
+                        );
+                    })
+            ->select('questions.id', 'questions.question',
+                        'answers.answer', 'answers.is_correct')
+            ->where('questions.id', $questionID)
+            ->get();
     }
 
     public function deleteExamQuestionByID($id)
@@ -127,5 +136,3 @@ class QuestionRepository extends BaseRepository {
 
 }
 
-
-DB::table('questions')->where('id', $questionID)->join('answers', 'question_id', '=', $questionID)->select('answer', 'is_correct')->get();
