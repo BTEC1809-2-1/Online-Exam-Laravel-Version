@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class QuestionRepository extends BaseRepository {
-  public function model()
+    public function model()
     {
         return Question::class;
     }
@@ -44,29 +44,34 @@ class QuestionRepository extends BaseRepository {
     }
 
     public function getRecentlyAddedQuestion(){
-
-        $listExam = DB::table('questions')->limit(3)->get();
+        $listExam = DB::table('questions')
+                        ->limit(3)
+                        ->get();
         return $listExam;
-
     }
 
     public function getQuestionDetail($id)
     {
-        $query = $this->query()->addSelect('created_at', 'created_by', 'updated_at', 'updated_by');
+        $query = $this->query()
+                ->addSelect('created_at', 
+                            'created_by', 
+                            'updated_at', 
+                            'updated_by');
         return $query->findOrFail($id);
     }
 
     public function getQuestionsByExam($examID)
     {
-        $question_ids = DB::table('exam_questions')->select('question_id')
-            ->where('exam_id', $examID)
-            ->get();
+        $question_ids = DB::table('exam_questions')
+                            ->select('question_id')
+                            ->where('exam_id', $examID)
+                            ->get();
         $questions = [];
             foreach($question_ids as $qIndex=>$question_id){
                 $question =  DB::table('questions')
-                    ->select('question')
-                    ->where('id', $question_id->question_id)
-                    ->get();
+                                ->select('question')
+                                ->where('id', $question_id->question_id)
+                                ->get();
                 $questions += [
                     $qIndex => $question[0]->question
             ];
@@ -76,11 +81,12 @@ class QuestionRepository extends BaseRepository {
     public function createQuestionsToExam($request, $type)
     {
         $question_set = [];
-        $question_set  = DB::table('questions')->select('id', 'question', 'type')
-            ->where('subject', $request->subject)
-            ->where('type', $type)
-            ->inRandomOrder()->limit(10)
-            ->get();
+        $question_set  = DB::table('questions')
+                            ->select('id', 'question', 'type')
+                            ->where('subject', $request->subject)
+                            ->where('type', $type)
+                            ->inRandomOrder()->limit(10)
+                            ->get();
         return $question_set;
     }
 
@@ -104,19 +110,7 @@ class QuestionRepository extends BaseRepository {
         DB::table('exam_questions')->insert($data);
     }
 
-    public function createQuestionSet($setID, $question_set, $studentID, $subject)
-    {
-        $data = [
-            'id' => $setID,
-            'questions' => $question_set,
-            'student_id' => $studentID,
-            'subject' => $subject,
-        ];
-        DB::table('question_set')
-            ->insert($data);
-    }
-
-    public function getExamQuestionsAndAnswers($questionID)
+    public function getQuestionsAndAnswers($questionID)
     {
         return DB::table('questions')
         ->where('id', $questionID)
@@ -134,3 +128,4 @@ class QuestionRepository extends BaseRepository {
 }
 
 
+DB::table('questions')->where('id', $questionID)->join('answers', 'question_id', '=', $questionID)->select('answer', 'is_correct')->get();

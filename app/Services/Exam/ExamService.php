@@ -3,15 +3,14 @@ namespace App\Services\Exam;
 
 use App\Repositories\ExamRepository;
 use App\Repositories\QuestionRepository;
+use App\Repositories\QuestionSetRepository;
 use App\Repositories\StudentExamRepository;
 use App\Repositories\StudentRepository;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-
 use function GuzzleHttp\json_decode;
 
 class ExamService
@@ -20,24 +19,28 @@ class ExamService
     protected $questionRepository;
     protected $studentRepository;
     protected $studentExamRepository;
+    protected $questionSetRepository;
 
     public function __construct
     (
         ExamRepository $examRepository,
         QuestionRepository $questionRepository,
         StudentRepository $studentRepository,
-        StudentExamRepository $studentExamRepository
+        StudentExamRepository $studentExamRepository,
+        QuestionSetRepository $questionSetRepository
     )
     {
         $this->examRepository = $examRepository;
         $this->questionRepository = $questionRepository;
         $this->studentRepository = $studentRepository;
         $this->studentExamRepository = $studentExamRepository;
+        $this->questionSetRepository = $questionSetRepository;
     }
 
     public function getStudentExam($studentID)
     {
-       return $this->studentExamRepository->getExamByStudentID($studentID);
+       return $this->studentExamRepository
+                    ->getExamByStudentID($studentID);
     }
 
     public function getExamList()
@@ -57,24 +60,40 @@ class ExamService
 
     public function getExamQuestions($examID)
     {
-        return $this->questionRepository->getQuestionsByExam($examID);
+        return $this->questionRepository
+                        ->getQuestionsByExam($examID);
     }
 
     public function createNewExam(Request $request)
     {
         try
         {
-            $examID = 'EXAM'.$request->subject.$request->semester.date('Ymdi');
+            $examID = 'EXAM'.$request->subject.
+                        $request->semester.
+                            date('Ymdi');
             $class = $request->classroom;
             $subject = $request->subject;
             $studentID = null;
-            if ($this->studentRepository->getRandomUserByClass($class) !== null) {
-                $studentID = $this->studentRepository->getRandomUserByClass($class)->id;
+            if(
+                $this->studentRepository
+                        ->getRandomUserByClass($class) !== null
+            ) 
+            {
+                $studentID = $this->studentRepository
+                                    ->getRandomUserByClass($class)->id;
             };
             $this->examRepository->createExam($request, $examID);
             $questions = $this->addQuestionToExam($request, $examID);
-            $this->createQuestionSetFromExamQuestions($examID, $questions, 4, $studentID, $subject);
-            $this->studentExamRepository->addStudentToExam($studentID, $examID, $question_set_id);
+            $number_of_set_required = 4;
+            $this->createQuestionSetFromExamQuestions
+            (
+                $examID, 
+                $questions, 
+                $number_of_set_required, 
+                $studentID, 
+                $subject
+            );
+            $this->addStudentToExam($examID, $class, $studentID);
             return true;
         }catch(\Exception $e)
         {
@@ -90,51 +109,116 @@ class ExamService
         {
             $exam_question_id = 'EQ'.$request->subject.Str::random(10);
             $question = [];
-            $question[] = $this->questionRepository->createQuestionsToExam($request, 'MC4');
-            $question[] = $this->questionRepository->createQuestionsToExam($request, 'SC4');
-            $question[] = $this->questionRepository->createQuestionsToExam($request, 'TF');
+            $question[] = $this->questionRepository
+                                ->createQuestionsToExam($request, 'MC4');
+            $question[] = $this->questionRepository
+                                ->createQuestionsToExam($request, 'SC4');
+            $question[] = $this->questionRepository
+                                ->createQuestionsToExam($request, 'TF');
             $exam_question = json_encode($question);
-            $this->questionRepository->addQuestionToQuestionExam($exam_question_id, $examID, $exam_question);
+            $this->questionRepository
+                    ->addQuestionToQuestionExam(
+                        $exam_question_id, 
+                        $examID, 
+                        $exam_question
+            );
             return $question;
         }catch(\Exception $e)
         {
-            $this->questionRepository->deleteExamQuestionById($exam_question_id);
+            $this->questionRepository
+                    ->deleteExamQuestionById($exam_question_id);
             Log::error($e);
         }
     }
 
-    function createQuestionSetFromExamQuestions($examID, $question, $numberOfSets, $studentID, $subject)
+    function createQuestionSetFromExamQuestions(
+        $examID, 
+        $question, 
+        $numberOfSets, 
+        $studentID, 
+        $subject
+    )
     {
         try {
             $question_set = [];
             for($i = 1; $i <= $numberOfSets; $i++)
             {
+            /**
+             * After received a question choosen for the exam as
+             * a collection, the questions are separated by type as
+             *  =>  0: SC4; 
+             *  =>  1: TF; 
+             *  =>  2: MC4;
+             * To generate different question sets for the exam,
+             * We random three question (demo only) and add them
+             * to the set.
+             */
                 $setID = $examID.$i;
                 $question_set[]  = collect($question[0])->random(3);
                 $question_set[]  = collect($question[1])->random(3);
                 $question_set[]  = collect($question[2])->random(3);
                 $question_set  = json_encode($question_set);
-                $this->questionRepository->createQuestionSet($setID, $question_set, $studentID, $subject);
+                $this->questionSetRepository
+                        ->createQuestionSet(
+                            $setID, 
+                            $question_set, 
+                            $studentID, 
+                            $subject
+                );
             }
         } catch (\Exception $e) {
             Log::error($e);
         }
     }
 
-    function addStudentToExam($examID, $studentID)
+    function addStudentToExam($examID, $class, $studentID)
     {
-
+        try {
+            $studentsInClass = $this->studentRepository
+                                        ->getAllStudentByClass($class);
+            $studentID = [];
+            foreach($studentsInClass as $student)
+            {
+                $studentID[] = $student->id;
+            }
+            $question_sets = $this->questionSetRepository
+                                    ->getQuestionSetByExam($examID);
+            foreach($question_sets as $question_set)
+            {
+                $student_in_this_set = json_encode(
+                    collect($question_set[0])->random(2)
+                );
+                $question_set->update([
+                    'student_id', $student_in_this_set
+                ]);
+                $this->studentExamRepository
+                        ->addStudentToExam(
+                            $studentID, 
+                            $examID, 
+                            $question_set->id
+                );
+            }
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
     }
 
     public function getExamStatus($id)
     {
         try
         {
-            $exam = DB::table('exams')->select('start_at', 'duration')->where('id', $id)->first();
+            $exam = DB::table('exams')
+                        ->select('start_at', 'duration')
+                        ->where('id', $id)
+                        ->first();
             $hours = Carbon::parse($exam->duration)->format('H');
             $minutes = Carbon::parse($exam->duration)->format('i');
-            $exam_expired_time = Carbon::parse($exam->start_at)->addDay(0)->addHour($hours)->addMinutes($minutes);
-            if( (strtotime(Carbon::now()) - strtotime($exam_expired_time)) > 1)
+            $exam_expired_time = Carbon::parse($exam->start_at)
+                                        ->addDay(0)
+                                        ->addHour($hours)
+                                        ->addMinutes($minutes);
+            if( (strtotime(Carbon::now()) 
+                    - strtotime($exam_expired_time)) > 1)
             {
                 return 3;
             }
@@ -150,15 +234,39 @@ class ExamService
     {
         try
         {
-            $exam = DB::table('exams')->select('start_at')->where('id', $id)->first();
-            if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
+            $exam = DB::table('exams')
+                    ->select('start_at')
+                    ->where('id', $id)
+                    ->first();
+            if( (strtotime(Carbon::now()) 
+                    - strtotime(Carbon::parse($exam->start_at))) > 1)
             {
                 return true;
             }
         }catch(\Exception $e)
-        {
-            return false;
+        {   
             Log::error($e);
+            return false;
+        }
+    }
+
+    public function getStudentExamQuestions($examID, $studentID)
+    {
+        try {
+            $student_questions = [];
+            $question_set_id = $this->studentExamRepository
+                                        ->getStudentQuestionSet($examID, $studentID);
+            $questions = $this->questionSetRepository
+                                    ->getQuestionsBySetId($question_set_id);
+            $questions = json_decode($questions);
+            foreach($questions as $question)
+            {
+                $student_questions[] = $this->questionRepository->getQuestionsAndAnswers($question->id);
+            }
+            return $student_questions;
+        } catch (\Exception $e) {
+           Log::error($e);
+           return null;     
         }
     }
 }

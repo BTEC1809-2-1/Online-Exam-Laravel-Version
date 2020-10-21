@@ -6,12 +6,40 @@ use Illuminate\Support\Facades\DB;
  
 class QuestionSetRepository 
 {
-    public function getQuestionSetByExam($examID, $student_id)
+    public function getQuestionSetByExam($examID)
     {
-        return DB::table('question_set')
-        ->select('questions')
-        ->where('id', $examID."%")
-        ->where('student_id', $student_id)
-        ->get();
+        if(DB::table('question_set')
+            ->where('id', $examID."%")
+            ->exists()
+        )
+        return  
+        DB::table('question_set')
+            ->where('id', $examID."%")
+            ->get();
+    }
+
+    public function getQuestionsBySetId($id)
+    {
+        if(DB::table('question_set')
+            ->where('id', $id)
+            ->exists()
+        )
+        return
+        DB::table('question_set')
+            ->select('questions')
+            ->where('id', $id)
+            ->get();
+    }
+
+    public function createQuestionSet($setID, $question_set, $studentID, $subject)
+    {
+        $data = [
+            'id' => $setID,
+            'questions' => $question_set,
+            'student_id' => $studentID,
+            'subject' => $subject,
+        ];
+        DB::table('question_set')
+            ->insert($data);
     }
 }

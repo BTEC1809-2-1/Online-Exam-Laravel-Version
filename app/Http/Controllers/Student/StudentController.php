@@ -45,7 +45,7 @@ class StudentController extends Controller
         // if($this->examService->checkExamStartTime($id))
         // {
             $exam = $this->examService->getStudentExam($id);
-            $questions = $this->questionService->getExamQuestions($exam->id, $id);
+            $questions = $this->examService->getStudentExamQuestions($exam->id, $id);
             dd($questions);
             return view('Student.pages.do-exam')->with(compact('exam', 'questions'));
         // }

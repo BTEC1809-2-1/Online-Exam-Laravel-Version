@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class StudentExamRepository
 {
+    protected $table;
+    
+    public function __construct()
+    {
+        $this->table = DB::table('student_exams');
+    }
+
     public function getExamByStudentID($studentID)
     {
        if
@@ -38,5 +45,21 @@ class StudentExamRepository
         ];
         DB::table('student_exams')
             ->insert($data);
+    }
+
+    public function getStudentQuestionSet($examID, $studentID)
+    {
+        if($this->table
+            ->where('exam_id', $examID)
+            ->where('student_id', $studentID)
+            ->exists())
+        {
+            return $this->table
+                        ->select('question_set_id')
+                        ->where('exam_id', $examID)
+                        ->where('student_id', $studentID)
+                        ->get();
+        }
+        return null;
     }
 }
