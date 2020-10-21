@@ -40,7 +40,7 @@ class QuestionSeeder extends Seeder
             DB::table('answers')
             ->insert([
                 'id' => 'A'.$question_id.sprintf("%06d", $i),
-                'question_id' => $question_id.sprintf("%06d", $i),
+                'question_id' => $question_id,
                 'answer' => json_encode($scAnswers),
                 'is_correct' => random_int(1, 4),
                 'created_at' => now(),
@@ -78,7 +78,7 @@ class QuestionSeeder extends Seeder
             DB::table('answers')
             ->insert([
                 'id' => 'A'.$question_id.sprintf("%06d", $i),
-                'question_id' => $question_id.sprintf("%06d", $i),
+                'question_id' => $question_id,
                 'answer' => json_encode($tfAnswers),
                 'is_correct' => random_int(1, 2),
                 'created_at' => now(),
@@ -118,11 +118,11 @@ class QuestionSeeder extends Seeder
                     'content' => random_int(1, 2),
                 ];
             }
-            
+
             DB::table('answers')
             ->insert([
                 'id' => 'A'.$question_id.sprintf("%06d", $i),
-                'question_id' => $question_id.sprintf("%06d", $i),
+                'question_id' => $question_id,
                 'answer' => json_encode($mcAnswers),
                 'is_correct' => json_encode($mcIsCorrect),
                 'created_at' => now(),
