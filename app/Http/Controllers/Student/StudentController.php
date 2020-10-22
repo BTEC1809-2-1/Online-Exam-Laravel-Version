@@ -46,7 +46,7 @@ class StudentController extends Controller
         // {
             $exam = $this->examService->getStudentExam(Auth::user()->id);
             $questions = $this->examService->getStudentExamQuestions($exam->id, Auth::user()->id);
-            dd($questions);
+            // dd($questions);
             return view('Student.pages.do-exam')->with(compact('exam', 'questions'));
         // }
         // return redirect()->route('student');
@@ -54,6 +54,15 @@ class StudentController extends Controller
 
     public function submitExam(Request $request)
     {
-
+        $request = $request->except('_token');
+        $answers = [];
+        foreach($request as $index=>$answer)
+        {
+            $answers[] = [
+                'index' => substr($index, -1),
+                'answer' => $answer,
+            ];
+        }
+        // dd(json_encode($answers));
     }
 }

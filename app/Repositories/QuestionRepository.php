@@ -112,20 +112,11 @@ class QuestionRepository extends BaseRepository {
 
     public function getQuestionsAndAnswers($questionID)
     {
-        return DB::table('questions')
-            ->join('answers', function($join)
-                    {
-                        $join->on
-                        (
-                            'questions.id',
-                                '=',
-                            'answers.question_id'
-                        );
-                    })
-            ->select('questions.id', 'questions.question',
-                        'answers.answer', 'answers.is_correct')
-            ->where('questions.id', $questionID)
-            ->get();
+        return DB::table("questions")
+                ->join("answers", "questions.id", "=", "answers.question_id")
+                ->select("questions.*", "answers.answer")
+                ->where('questions.id', $questionID)
+                ->get();
     }
 
     public function deleteExamQuestionByID($id)

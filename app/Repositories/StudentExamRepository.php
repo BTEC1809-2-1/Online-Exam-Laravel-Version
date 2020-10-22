@@ -26,7 +26,7 @@ class StudentExamRepository
         {
             return DB::table('student_exams')
             ->join('exams','exams.id','=','student_exams.exam_id')
-            ->select('exams.id', 'exams.start_at')
+            ->select('exams.id', 'exams.start_at', 'exams.subject', 'exams.duration')
             ->where('student_id', $studentID)
             ->first();
         }

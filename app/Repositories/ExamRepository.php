@@ -67,4 +67,6 @@ class ExamRepository extends BaseRepository {
             ->addSelect('duration', 'created_at', 'created_by', 'updated_at', 'updated_by');
         return $query->findOrFail($id);
     }
+
+   
 }

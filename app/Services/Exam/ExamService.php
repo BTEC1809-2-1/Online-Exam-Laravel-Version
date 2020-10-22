@@ -297,9 +297,21 @@ class ExamService
             $question_in_exam = [];
             foreach($questions as $question)
             {
-                $question = json_decode($question->questions);
-                $question_in_exam[] = json_decode($this->questionRepository
-                                        ->getQuestionsAndAnswers($question->id));
+                $questionID = $question->id;
+                $question_in_exam[] = [
+                   'id' => $this->questionRepository
+                                ->getQuestionsAndAnswers($questionID)
+                                ->first()
+                                ->id,
+                    'question' =>  $this->questionRepository
+                                        ->getQuestionsAndAnswers($questionID)
+                                        ->first()
+                                        ->question,
+                    'answers' => json_decode($this->questionRepository
+                                ->getQuestionsAndAnswers($questionID)
+                                ->first()
+                                ->answer)
+                ];
             }
             return $question_in_exam;
         } catch (\Exception $e) {
