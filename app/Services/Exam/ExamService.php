@@ -288,16 +288,20 @@ class ExamService
         try {
             $question_set_id = $this->studentExamRepository
                                         ->getStudentQuestionSet($examID, $studentID);
+            $question_set_id = $question_set_id->question_set_id;
             $questions = $this->questionSetRepository
                                     ->getQuestionsBySetId($question_set_id);
             $questions = json_decode($questions);
-            dd($questions);
+            $questions = $questions[0]->questions;
+            $questions = json_decode($questions);
+            $question_in_exam = [];
             foreach($questions as $question)
             {
-                $question->answer = json_decode($this->questionRepository
+                $question = json_decode($question->questions);
+                $question_in_exam[] = json_decode($this->questionRepository
                                         ->getQuestionsAndAnswers($question->id));
             }
-            return $questions;
+            return $question_in_exam;
         } catch (\Exception $e) {
            Log::error($e);
            return null;

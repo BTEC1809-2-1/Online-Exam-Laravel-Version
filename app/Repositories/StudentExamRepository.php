@@ -25,8 +25,9 @@ class StudentExamRepository
         )
         {
             return DB::table('student_exams')
-            ->where('student_id', $studentID)
             ->join('exams','exams.id','=','student_exams.exam_id')
+            ->select('exams.id', 'exams.start_at')
+            ->where('student_id', $studentID)
             ->first();
         }
        return null;
@@ -58,8 +59,7 @@ class StudentExamRepository
                         ->select('question_set_id')
                         ->where('exam_id', $examID)
                         ->where('student_id', $studentID)
-                        ->get();
+                        ->first();
         }
-        return null;
     }
 }
