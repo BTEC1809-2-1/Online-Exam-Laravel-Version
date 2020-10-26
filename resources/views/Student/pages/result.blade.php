@@ -31,7 +31,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Student ID</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={{Auth::user()->id}} readonly>
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={{$studentID}} readonly>
                         </div>
                     </div>
                     <div class="row">

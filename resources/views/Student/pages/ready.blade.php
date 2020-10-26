@@ -88,8 +88,8 @@
                             <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
                             </div>
-                            <input type="text" class="form-control" id="countdown" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
-                            value="@if (isset($status) and $status != '3') @php array_search($status ?? '', config('app.exam_status')) @endphp @else You have no up-coming exam @endif" readonly>
+                            <input type="text" class="form-control" id="countdown" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                            value="@if (isset($status) and $status != '3'){{config('app.exam_status.'.$status)}} @else You have no up-coming exam @endif" readonly>
                         </div>
                     </div>
                 </div>

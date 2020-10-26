@@ -251,4 +251,8 @@ return [
         '4' => 'Cancelled',
     ],
 
+    'student_exam_status' => [
+        '1' => 'Not Complete',
+        '2' => 'Test Done'
+    ],
 ];

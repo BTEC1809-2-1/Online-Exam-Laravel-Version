@@ -78,11 +78,8 @@ class ExamService
             $number_of_set_required = 4;
             $this->createQuestionSetFromExamQuestions
             (
-                $examID,
-                $class,
-                $questions,
-                $number_of_set_required,
-                $subject
+                $examID, $class, $questions,
+                $number_of_set_required, $subject
             );
             $studentInClass = $this->studentRepository->getAllStudentByClass($class);
             $studentID = [];
@@ -203,7 +200,8 @@ class ExamService
     function addStudentToExam($examID, $class, $studentIDs)
     {
         try {
-            $examQuestionSets = $this->questionSetRepository->getQuestionSetByExam($examID);
+            $examQuestionSets = $this->questionSetRepository
+                                        ->getQuestionSetByExam($examID);
             $examQuestionSets = json_decode(json_encode($examQuestionSets));
             $examSets = [];
             foreach($examQuestionSets as $question_set)
@@ -355,7 +353,8 @@ class ExamService
     {
         $score = 0;
         $correct_answers = 0;
-        $answers = $this->studentExamRepository->getStudentExamAnswers($studentID, $examID);
+        $answers = $this->studentExamRepository
+                            ->getStudentExamAnswers($studentID, $examID);
         $answers = json_decode($answers->student_answers);
         $total = count((array)$answers);
         foreach($answers as $index=>$answer)
@@ -366,6 +365,11 @@ class ExamService
                 $correct_answers++;
             }
         }
+        $this->studentExamRepository
+                ->updateStudentScore($studentID, $examID, $score);
+        $status = 2;
+        $this->studentExamRepository
+                ->updateStudentExamStatus($studentID, $examID, $status);
         $result = [
             'score' => $score,
             'correct_answers' => $correct_answers,
@@ -381,4 +385,5 @@ class ExamService
         $correct_answer = $correct_answer->is_correct;
         return $answer == $correct_answer;
     }
+
 }
