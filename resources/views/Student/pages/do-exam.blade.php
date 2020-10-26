@@ -35,7 +35,7 @@
                                             <div class="input-group-prepend">
                                               <span class="input-group-text" id="inputGroup-sizing-default">Exam ID</span>
                                             </div>
-                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$exam->id}}" readonly>
+                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="exam_id" value="{{$exam->id}}" readonly>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -71,12 +71,13 @@
                                         </div>
                                         @foreach($questions ?? '' as $qIndex=>$question)
                                         <div class="card-body px-5">
-                                            <span class="question-content">{{$question['question']}}</span>
+                                            <input type="hidden" name="question_id_{{$qIndex + 1}}" value="{{$question['id']}}">
+                                            <span class="question-content" >{{$question['question']}}</span>
                                             <div class="row justify-content-around">
                                                 <div class="col-md-11 p-1">
                                                     <ul>
                                                         @foreach ($question['answers'] as $aIndex=>$answer)
-                                                            <li><input type="radio" name="answer{{$qIndex+1}}" value="{{$aIndex + 1}}">{{$answer->content}}</li>
+                                                            <li><input type="radio" name="answer_{{$qIndex + 1}}" value="{{$aIndex + 1}}">{{$answer->content}}</li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
