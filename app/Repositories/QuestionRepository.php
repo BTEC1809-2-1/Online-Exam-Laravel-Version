@@ -125,5 +125,15 @@ class QuestionRepository extends BaseRepository {
         ->delete();
     }
 
+    public function getQuestionCorrectAnswer($questionID)
+    {
+        return DB::table("questions")
+                ->join("answers", "questions.id", "=", "answers.question_id")
+                ->select("answers.is_correct")
+                ->where('questions.id', $questionID)
+                ->first();
+
+    }
+
 }
 
