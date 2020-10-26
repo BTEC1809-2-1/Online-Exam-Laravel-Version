@@ -77,4 +77,19 @@ class StudentExamRepository
                         ->update(['student_answers' => $answers]);
         }
     }   
+
+    public function getStudentExamAnswers($studentID, $examID)
+    {
+        if($this->table
+        ->where('exam_id', $examID)
+        ->where('student_id', $studentID)
+        ->exists())
+        {
+            return $this->table
+                        ->select('student_answers')
+                        ->where('exam_id', $examID)
+                        ->where('student_id', $studentID)
+                        ->first();
+        }
+    }
 }

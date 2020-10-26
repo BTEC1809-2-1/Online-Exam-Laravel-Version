@@ -320,7 +320,7 @@ class ExamService
         }
     }
 
-    public function SaveStudentAnswer($request, $studentID)
+    public function SaveStudentAnswer($request, $studentID, $examID)
     {
         $requests = $request->except('_token');
         $answers = [];
@@ -344,11 +344,21 @@ class ExamService
             ];
         }
         $answers = json_encode($answers);
-        $examID = $requests['exam_id'];
         if($this->studentExamRepository->updateStudentAnswer($studentID, $examID, $answers))
         {
             return true;
         }
         return false;
+    }
+
+    public function scoreCalculate($studentID, $examID)
+    {
+        $score = 0;
+        $answers = $this->studentExamRepository->getStudentExamAnswers($studentID, $examID);
+        foreach($answers as $index=>$answer)
+        {
+            
+        }
+        return $score;
     }
 }

@@ -46,7 +46,6 @@ class StudentController extends Controller
         // {
             $exam = $this->examService->getStudentExam(Auth::user()->id);
             $questions = $this->examService->getStudentExamQuestions($exam->id, Auth::user()->id);
-            // dd($questions);
             return view('Student.pages.do-exam')->with(compact('exam', 'questions'));
         // }
         // return redirect()->route('student');
@@ -54,7 +53,9 @@ class StudentController extends Controller
 
     public function submitExam(Request $request)
     {
-        if($this->examService->SaveStudentAnswer($request, Auth::user()->id))
+        $examID = $request->exam_id;
+
+        if($this->examService->SaveStudentAnswer($request, Auth::user()->id, $examID))
         {
             $result = '';
             return view('Student.pages.result', compact('result'));
