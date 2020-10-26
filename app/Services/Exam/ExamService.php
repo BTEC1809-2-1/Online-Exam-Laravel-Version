@@ -319,4 +319,36 @@ class ExamService
            return null;
         }
     }
+
+    public function SaveStudentAnswer($request, $studentID)
+    {
+        $requests = $request->except('_token');
+        $answers = [];
+        $qId=''; $aId ='';
+        for($i = 1; $i <= count($requests, 1) / 2; $i++)
+        {
+            foreach($requests as $index=>$request)
+            {
+                if((substr($index, -1) == $i) and (strpos($index, 'question') !== false))
+                {
+                    $qId = $request;
+                }
+                if((substr($index, -1) == $i) and (strpos($index, 'answer') !== false))
+                {
+                    $aId = $request;
+                }
+            }
+            $answers[$i] = [
+                'question_id' => $qId,
+                'answer' => $aId,
+            ];
+        }
+        $answers = json_encode($answers);
+        $examID = $requests['exam_id'];
+        if($this->studentExamRepository->updateStudentAnswer($studentID, $examID, $answers))
+        {
+            return true;
+        }
+        return false;
+    }
 }

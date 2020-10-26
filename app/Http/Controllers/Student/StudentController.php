@@ -54,15 +54,17 @@ class StudentController extends Controller
 
     public function submitExam(Request $request)
     {
-        $request = $request->except('_token');
-        $answers = [];
-        foreach($request as $index=>$answer)
+        if($this->examService->SaveStudentAnswer($request, Auth::user()->id))
         {
-            $answers[] = [
-                'index' => substr($index, -1),
-                'answer' => $answer,
-            ];
+            $result = '';
+            return view('Student.pages.result', compact('result'));
         }
-        // dd(json_encode($answers));
+        $errorMessage = "Your exam has not been recorded! Please contact the administator to fix this problem before to late";
+        return view('Student.pages.result', compact('errorMessage'));
+    }
+
+    public function testResultView()
+    {
+        return view('Student.pages.result');
     }
 }

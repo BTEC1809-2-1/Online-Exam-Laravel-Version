@@ -20,15 +20,15 @@ class StudentExamRepository
        if
         (
            DB::table('student_exams')
-            ->where('student_id', $studentID)
-            ->exists()
+                ->where('student_id', $studentID)
+                ->exists()
         )
         {
             return DB::table('student_exams')
-            ->join('exams','exams.id','=','student_exams.exam_id')
-            ->select('exams.id', 'exams.start_at', 'exams.subject', 'exams.duration')
-            ->where('student_id', $studentID)
-            ->first();
+                        ->join('exams','exams.id','=','student_exams.exam_id')
+                        ->select('exams.id', 'exams.start_at', 'exams.subject', 'exams.duration')
+                        ->where('student_id', $studentID)
+                        ->first();
         }
        return null;
     }
@@ -51,9 +51,9 @@ class StudentExamRepository
     public function getStudentQuestionSet($examID, $studentID)
     {
         if($this->table
-            ->where('exam_id', $examID)
-            ->where('student_id', $studentID)
-            ->exists())
+                ->where('exam_id', $examID)
+                ->where('student_id', $studentID)
+                ->exists())
         {
             return $this->table
                         ->select('question_set_id')
@@ -62,4 +62,19 @@ class StudentExamRepository
                         ->first();
         }
     }
+    
+    public function updateStudentAnswer($studentID, $examID, $answers)
+    {
+        if($this->table
+                ->where('exam_id', $examID)
+                ->where('student_id', $studentID)
+                ->exists())
+        {
+            return $this->table
+                        ->select('question_set_id')
+                        ->where('exam_id', $examID)
+                        ->where('student_id', $studentID)
+                        ->update(['student_answers' => $answers]);
+        }
+    }   
 }

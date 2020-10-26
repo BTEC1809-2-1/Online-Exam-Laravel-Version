@@ -39,6 +39,8 @@ class QuestionSetRepository
             'questions' => $question_set,
             'student_id' => $studentID,
             'subject' => $subject,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('question_set')
             ->insert($data);
