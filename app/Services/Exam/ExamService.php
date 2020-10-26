@@ -354,11 +354,31 @@ class ExamService
     public function scoreCalculate($studentID, $examID)
     {
         $score = 0;
+        $correct_answers = 0;
         $answers = $this->studentExamRepository->getStudentExamAnswers($studentID, $examID);
+        $answers = json_decode($answers->student_answers);
+        $total = count((array)$answers);
         foreach($answers as $index=>$answer)
         {
-            
+            if($this->is_correct($answer->answer, $answer->question_id))
+            {
+                $score+=15;
+                $correct_answers++;
+            }
         }
-        return $score;
+        $result = [
+            'score' => $score,
+            'correct_answers' => $correct_answers,
+            'wrong_answers' => $total - $correct_answers,
+        ];
+        return $result;
+    }
+
+    function is_correct($answer, $questionID)
+    {
+        $questionID =
+        $correct_answer = $this->questionRepository->getQuestionCorrectAnswer($questionID);
+        $correct_answer = $correct_answer->is_correct;
+        return $answer == $correct_answer;
     }
 }

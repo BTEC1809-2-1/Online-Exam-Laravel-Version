@@ -54,18 +54,19 @@ class StudentController extends Controller
     public function submitExam(Request $request)
     {
         $examID = $request->exam_id;
-
         if($this->examService->SaveStudentAnswer($request, Auth::user()->id, $examID))
         {
-            $result = '';
-            return view('Student.pages.result', compact('result'));
+            $result = $this->examService->scoreCalculate(Auth::user()->id, $examID);
+            return view('Student.pages.result', compact('result', $examID));
         }
-        $errorMessage = "Your exam has not been recorded! Please contact the administator to fix this problem before to late";
+        $errorMessage = "Your exam has not been recorded! Please contact the administator to fix this problem before it is too late";
         return view('Student.pages.result', compact('errorMessage'));
     }
 
     public function testResultView()
     {
-        return view('Student.pages.result');
+        $examID = 'EXAMITSPR20201022003659';
+        $result = $this->examService->scoreCalculate(Auth::user()->id, $examID);
+        return view('Student.pages.result', compact('result', 'examID'));
     }
 }
