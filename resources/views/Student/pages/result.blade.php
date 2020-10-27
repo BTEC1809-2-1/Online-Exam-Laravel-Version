@@ -12,7 +12,7 @@
 @endsection
 @section('script')
     <script>
-    
+
     </script>
 @endsection
 @section('content')
@@ -31,15 +31,15 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Student ID</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={{Auth::user()->id}} readonly>
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={{$studentID}} readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Subject</span>
+                                <span class="input-group-text" id="inputGroup-sizing-default">Exam ID</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$subject ?? ''}}" readonly>
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$examID}}" readonly>
                         </div>
                     </div>
                     <div class="row">
@@ -48,7 +48,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Correct answer</span>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$subject ?? ''}}" readonly>
+                                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$result['correct_answers']}}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6 p-0 pl-md-1">
@@ -56,7 +56,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Wrong answer</span>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$subject ?? ''}}" readonly>
+                                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$result['wrong_answers']}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Score</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$subject ?? ''}}" readonly>
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{$result['score']}}" readonly>
                         </div>
                     </div>
                 </div>

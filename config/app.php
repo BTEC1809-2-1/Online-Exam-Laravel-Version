@@ -245,10 +245,14 @@ return [
     ],
 
     'exam_status' => [
-        'Ready'=> '1',
-        'On-going' => '2',
-        'Done' => '3',
-        'Cancelled' => '4',
+        '1'=> 'Ready',
+        '2' => 'On-going',
+        '3' => 'Done',
+        '4' => 'Cancelled',
     ],
 
+    'student_exam_status' => [
+        '1' => 'Not Complete',
+        '2' => 'Test Done'
+    ],
 ];

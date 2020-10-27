@@ -53,7 +53,7 @@
                                 <td>{{$exam->semester}}</td>
                                 <td>{{$exam->classroom}}</td>
                                 <td>{{$exam->start_at}}</td>
-                                <td class="text-center">{{$exam->status}}</td>
+                                <td class="text-center">{{config('app.exam_status.'.$exam->status)}}</td>
                                 <td class="text-center">
                                     <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
                                 </td>

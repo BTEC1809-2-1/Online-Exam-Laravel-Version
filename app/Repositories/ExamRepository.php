@@ -41,7 +41,7 @@ class ExamRepository extends BaseRepository {
         $exam->start_at = date($request->date.' '.$request->startTime);
         $exam->classroom = $request->classroom;
         $exam->subject = $request->subject;
-        $exam->status = 0;
+        $exam->status = 1;
         $exam->created_by = Auth::user()->id;
         $exam->updated_by = Auth::user()->id;
         $exam->save();
@@ -67,6 +67,4 @@ class ExamRepository extends BaseRepository {
             ->addSelect('duration', 'created_at', 'created_by', 'updated_at', 'updated_by');
         return $query->findOrFail($id);
     }
-
-   
 }

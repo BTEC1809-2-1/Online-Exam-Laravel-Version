@@ -28,6 +28,8 @@ class StudentExamRepository
                         ->join('exams','exams.id','=','student_exams.exam_id')
                         ->select('exams.id', 'exams.start_at', 'exams.subject', 'exams.duration')
                         ->where('student_id', $studentID)
+                        ->where('student_exams.status', '1')
+                        ->orderBy('exams.start_at', 'asc')
                         ->first();
         }
        return null;
@@ -62,7 +64,7 @@ class StudentExamRepository
                         ->first();
         }
     }
-    
+
     public function updateStudentAnswer($studentID, $examID, $answers)
     {
         if($this->table
@@ -76,7 +78,37 @@ class StudentExamRepository
                         ->where('student_id', $studentID)
                         ->update(['student_answers' => $answers]);
         }
-    }   
+    }
+
+    public function updateStudentScore($studentID, $examID, $score)
+    {
+        if($this->table
+                ->where('exam_id', $examID)
+                ->where('student_id', $studentID)
+                ->exists())
+        {
+            return $this->table
+                        ->select('question_set_id')
+                        ->where('exam_id', $examID)
+                        ->where('student_id', $studentID)
+                        ->update(['point' => $score]);
+        }
+    }
+
+    public function updateStudentExamStatus($studentID, $examID, $status)
+    {
+        if($this->table
+                ->where('exam_id', $examID)
+                ->where('student_id', $studentID)
+                ->exists())
+        {
+            return $this->table
+                        ->select('question_set_id')
+                        ->where('exam_id', $examID)
+                        ->where('student_id', $studentID)
+                        ->update(['status' => $status]);
+        }
+    }
 
     public function getStudentExamAnswers($studentID, $examID)
     {
