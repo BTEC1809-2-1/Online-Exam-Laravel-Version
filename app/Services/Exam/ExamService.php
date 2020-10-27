@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use function GuzzleHttp\json_decode;
 
+/**
+ * @Descriptions:
+ * - This class responsible for processing
+ * action that related to the exam object
+ * (Not the student's exam, but rather the
+ * exam itself)
+ * - If you need to create logic function 
+ * on exam's data processing, do it here, 
+ * otherwise, read other classes's specification
+ * for each requirement (e.g: DB interact, 
+ * routing...)
+ * @Author: Le Viet Binh An
+ */
 class ExamService
 {
     protected $examRepository;
@@ -21,6 +34,10 @@ class ExamService
     protected $studentExamRepository;
     protected $questionSetRepository;
 
+    /**
+     * Constructing the service class by
+     * calling required repository classes
+     */
     public function __construct
     (
         ExamRepository $examRepository,
@@ -37,6 +54,16 @@ class ExamService
         $this->questionSetRepository = $questionSetRepository;
     }
 
+    /**
+     * @param string $studentID
+     * 
+     * @return a collection contains: [
+     *      examID, 
+     *      subject, 
+     *      start_at, 
+     *      duration
+     *  ] OR return null
+     */
     public function getStudentExam($studentID)
     {
        return $this->studentExamRepository
@@ -64,6 +91,22 @@ class ExamService
                         ->getQuestionsByExam($examID);
     }
 
+    /**
+     * @param Request $request
+     * Get the create exam's POST request,
+     * First: Generate the exam's ID based on the subject, semester
+     * and current dateTime. All exam start with "EXAM" keyword 
+     * => format: EXAM<subject><semester><dateTime>
+     * Later: if the exam is created successfully,
+     * involke the following functions: 
+     *  -> addQuestionToExam()
+     *  -> addQuestionToExam()
+     *  -> 
+     * 
+     * @return [type]
+     * 
+     * @throw \Exception error
+     */
     public function createNewExam(Request $request)
     {
         try
@@ -236,13 +279,22 @@ class ExamService
         }
     }
 
-    public function getExamStatus($id)
+    /**
+     * @param string $ExamID
+     * 
+     * @return $this->exam->status 
+     *  1 => ready,
+     *  2 => on-going
+     *  3 => test-done,
+     *  4 => completed
+     */
+    public function getExamStatus($ExamID)
     {
         try
         {
             $exam = DB::table('exams')
                         ->select('start_at', 'duration')
-                        ->where('id', $id)
+                        ->where('id', $ExamID)
                         ->first();
             $hours = Carbon::parse($exam->duration)->format('H');
             $minutes = Carbon::parse($exam->duration)->format('i');
