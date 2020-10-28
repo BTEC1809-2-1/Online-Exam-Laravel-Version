@@ -19,12 +19,12 @@ use function GuzzleHttp\json_decode;
  * action that related to the exam object
  * (Not the student's exam, but rather the
  * exam itself)
- * - If you need to create logic function 
- * on exam's data processing, do it here, 
+ * - If you need to create logic function
+ * on exam's data processing, do it here,
  * otherwise, read other classes's specification
- * for each requirement (e.g: DB interact, 
+ * for each requirement (e.g: DB interact,
  * routing...)
- * 
+ *
  * @Author: Le Viet Binh An
  */
 class ExamService
@@ -57,11 +57,11 @@ class ExamService
 
     /**
      * @param string $studentID
-     * 
+     *
      * @return a collection contains: [
-     *      examID, 
-     *      subject, 
-     *      start_at, 
+     *      examID,
+     *      subject,
+     *      start_at,
      *      duration
      *  ] OR return null
      */
@@ -89,7 +89,7 @@ class ExamService
 
     /**
      * @param string $examID
-     * 
+     *
      * @return collection [
      *  'semester',
      *  'classroom'
@@ -105,7 +105,7 @@ class ExamService
 
     /**
      * @param string $examID
-     * 
+     *
      * @return [type]
      */
     //TODO: trace back this function follow, this function maybe not used
@@ -116,11 +116,11 @@ class ExamService
 
     /**
      * @param  $request Request
-     * 
+     *
      * -> create new exam for a class
-     * 
+     *
      * @return createdStatus == true or false;
-     * 
+     *
      * @throw \Exception error AND delete $this->exam
      */
     public function createNewExam(Request $request)
@@ -129,7 +129,7 @@ class ExamService
       {
         /**
          * -> Generate the exam's ID based on the subject, semester
-         * and current dateTime. All exam start with "EXAM" keyword 
+         * and current dateTime. All exam start with "EXAM" keyword
          * => format: EXAM<subject><semester><dateTime>
          */
         $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
@@ -166,30 +166,30 @@ class ExamService
     /**
      * @param httpRequest $request
      * @param string $examID
-     * 
+     *
      * ->Add the questions used in the exam as json string format
-     * 
+     *
      * @return collection $question
-     * 
+     *
      * @thow \Exception error
      */
-    //TODO: the number of each question type get is hard coded to 3, should have a funtion to handle the number of question the tutor want to get
+    //FIXME: the number of each question type get is hard coded to 3, should have a funtion to handle the number of question the tutor want to get
     function addQuestionToExam($request, $examID)
     {
       try
       {
         /**
-         * -> Generate the exam_question's ID based on the subject, 
-         * "EQ" keyword and a random string with 10 character; 
+         * -> Generate the exam_question's ID based on the subject,
+         * "EQ" keyword and a random string with 10 character;
          * => format: EQ<subject><string>
          */
         $exam_question_id = 'EQ'.$request->subject.Str::random(10);
         $question = [];
         /**
          * -> Random a number of questions for each type
-         * add the questions to $question array, 
-         * encode the array to json_string and 
-         * save to database       
+         * add the questions to $question array,
+         * encode the array to json_string and
+         * save to database
         */
         $question[] = $this->questionRepository->createQuestionsToExam($request, 'MC4');
         $question[] = $this->questionRepository->createQuestionsToExam($request, 'SC4');
@@ -219,10 +219,10 @@ class ExamService
      * @param string $question
      * @param string $numberOfSets
      * @param string $subject
-     * 
+     *
      */
-    //TODO: Optimze this function,
-    //TODO: Remove try-catch function without breaking workflow, the exam creation is not break even when there is 
+    //OPTIMIZE: Optimze this function,
+    //TODO: Remove try-catch function without breaking workflow, the exam creation is not break even when there is
     function createQuestionSetFromExamQuestions($examID, $class, $question, $numberOfSets, $subject)
     {
       try {
@@ -235,7 +235,7 @@ class ExamService
         $studentID = ['1' => '', '2' => '', '3' => '', '4' => '']; //Generate 4 empty studentID instance for inserting, if there is no instance avaiable, studentID set to ''
         for($index = 1; $index <= 4; $index++)
         {
-          if(count($studentInSet) > 2)
+          if(count($studentInSet) > 2) //TODO: currently, there are 2-student-only hard coded into this function, this should be update in future release
           {
             $randomKeys = array_rand($studentInSet, 2);
             $studentID[$index] = [
@@ -253,20 +253,21 @@ class ExamService
             unset($studentInSet[array_search($removeValue, $studentInSet)]);
           }
         }
+        /**
+         * After received a question choosen for the exam as
+         * a collection, the questions are separated by type as
+         *  =>  0: SC4;
+         *  =>  1: TF;
+         *  =>  2: MC4;
+         * To generate different question sets for the exam,
+         * We random three question (demo only) and add them
+         * to the set.
+        */
         $question_set = [];
         for($i = 1; $i <= $numberOfSets; $i++)
         {
           $setID = $examID.$i;
-          /**
-           * After received a question choosen for the exam as
-           * a collection, the questions are separated by type as
-           *  =>  0: SC4;
-           *  =>  1: TF;
-           *  =>  2: MC4;
-           * To generate different question sets for the exam,
-           * We random three question (demo only) and add them
-           * to the set.
-           */
+
           $question_set  = collect($question[0])->random(3);
           $question_set  = collect($question[1])->random(3);
           $question_set  = collect($question[2])->random(3);
@@ -288,10 +289,10 @@ class ExamService
      * @param string $examID
      * @param string $class
      * @param array $studentIDs
-     * 
+     *
      * -> Assign student to a question set then add that student to the exam
      */
-    //FIXME: bug: there will be one student that cannot be assign to any question set
+    //FIXME: BUG: there will be one student that cannot be assign to any question set
     function addStudentToExam($examID, $class, $studentIDs)
     {
       try {
@@ -330,11 +331,11 @@ class ExamService
 
     /**
      * @param string $ExamID
-     * 
+     *
      * -> Compare the expired and current timestamp to
      * decide whether the exam has completed or not
-     * 
-     * @return $this->exam->status 
+     *
+     * @return $this->exam->status
      *  1 => ready,
      *  2 => on-going
      *  3 => test-done,
@@ -369,7 +370,7 @@ class ExamService
 
     /**
      * @param mixed $id
-     * 
+     *
      * @return $this->exam's status
      *  true => the exam has start
      *  false => ???
@@ -399,7 +400,7 @@ class ExamService
     /**
      * @param mixed $examID
      * @param mixed $studentID
-     * 
+     *
      * @return [type]
      */
     public function getStudentExamQuestions($examID, $studentID)
@@ -439,12 +440,11 @@ class ExamService
         return null;
       }
     }
-
     /**
      * @param mixed $request
      * @param mixed $studentID
      * @param mixed $examID
-     * 
+     *
      * @return [type]
      */
     public function SaveStudentAnswer($request, $studentID, $examID)
@@ -481,11 +481,11 @@ class ExamService
     /**
      * @param string $studentID
      * @param string $examID
-     * 
+     *
      * -> Calculate student's score and update student_exam's status
-     * 
+     *
      * @return [
-     *     'exam's score', 
+     *     'exam's score',
      *     'number_of_correct_answers',
      *     'number_of_wrong_answers'
      * ]
@@ -495,14 +495,14 @@ class ExamService
       $score = 0;
       $correct_answers = 0;
       $answers = $this->studentExamRepository->getStudentExamAnswers($studentID, $examID); //Receiving the encoded answers string from DB
-      $answers = json_decode($answers->student_answers); //Decode the answers string to PHP object and re-asign it to $answers 
+      $answers = json_decode($answers->student_answers); //Decode the answers string to PHP object and re-asign it to $answers
       $total = count((array)$answers);
       /**
        * Traverse through answers array
        * Check if the answer is correct
        * If true, add score based on answer's type
        */
-      //TODO: update add score logic, define the amount of score to add by question type
+      //OPTIMIZE: update add score logic, define the amount of score to add by question type
       foreach($answers as $index=>$answer)
       {
         if($this->is_correct($answer->answer, $answer->question_id))
@@ -527,7 +527,7 @@ class ExamService
     /**
      * @param tinyInt $answer
      * @param string $questionID
-     * 
+     *
      * @return True if the answers == DB('answers.is_correct') or else False
      */
     function is_correct($answer, $questionID)
