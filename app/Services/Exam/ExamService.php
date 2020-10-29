@@ -106,12 +106,15 @@ class ExamService
     /**
      * @param string $examID
      *
+     * -> Return questions's information in Exam Detail page
+     *
      * @return [type]
-     */
-    //TODO: trace back this function follow, this function maybe not used
+    */
     public function getExamQuestions($examID)
     {
-      return $this->questionRepository->getQuestionsByExam($examID);
+        $questions = $this->questionRepository->getQuestionsByExam($examID);
+        $questions = json_decode($questions);
+        return $questions;
     }
 
     /**

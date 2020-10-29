@@ -62,20 +62,12 @@ class QuestionRepository extends BaseRepository {
 
     public function getQuestionsByExam($examID)
     {
-        $question_ids = DB::table('exam_questions')
-                            ->select('question_id')
-                            ->where('exam_id', $examID)
-                            ->get();
-        $questions = [];
-            foreach($question_ids as $qIndex=>$question_id){
-                $question =  DB::table('questions')
-                                ->select('question')
-                                ->where('id', $question_id->question_id)
-                                ->get();
-                $questions += [
-                    $qIndex => $question[0]->question
-            ];
-        }
+        return DB::table('exam_questions')
+                ->select('question_id')
+                ->where('exam_id', $examID)
+                ->first()
+                ->question_id;
+
     }
 
     public function createQuestionsToExam($request, $type)
@@ -101,7 +93,7 @@ class QuestionRepository extends BaseRepository {
         $data = [
             'id' => $id,
             'exam_id' => $examID,
-            'question_id' => json_encode($questions),
+            'question_id' => $questions,
             'created_by' => Auth::user()->name,
             'created_at' => now(),
             'updated_by' => Auth::user()->name,

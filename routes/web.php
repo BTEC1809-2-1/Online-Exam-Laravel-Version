@@ -15,12 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Un-authenticated route
+ */
 
 Auth::routes(['register' => false]);
-
+//Route for socialite login
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect')->name('login.google');
 Route::get('/callback/{provider}', 'SocialController@callback');
-
+//TODO: move those function to a controller
 Route::get('/', function()
     {
         if(Auth::check())
@@ -42,10 +45,12 @@ Route::get('logout', function()
     }
 );
 
-
+/**
+ * Route for admin role
+ */
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', 'AdminController@index')->name('admin');
-
+    //Question route group
     Route::get('/Question/Create', 'Question\QuestionController@create')->name('create.question');
     Route::post('/Question/Create', 'Question\QuestionController@store')->name('question.store');
     Route::get('/Question/Delete/{id}', 'Question\QuestionController@delete')->name('question.delete');
@@ -54,17 +59,20 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/Question/{id}/Answer', 'Question\QuestionController@addAnswer')->name('question.add.answer');
     Route::post('/Question/{qid}/Answer/Store', 'Question\QuestionController@storeAnswer')->name('question.answer.store');
     Route::get('/Question/Update/{id}','Question\QuestionController@getQuestionList')->name('question.update');
-
+    //Exam route group
     Route::get('/Exam/Create', 'Exam\ExamController@create')->name('create.exam');
     Route::post('/Exam/Create', 'Exam\ExamController@store')->name('exam.store');
     Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
+    Route::get('/Exam/Detail/{id}/remove/{question}', 'Exam\ExamController@getExamDetail')->name('exam.question.remove');
     Route::get('/Exam/List', 'Exam\ExamController@getExamList')->name('get.exam.list');
 });
-
+/**
+ * Route for student rol
+ */
 Route::get('/student', 'Student\StudentController@showReadyPage')->name('student');
 Route::get('/Do-Exam/{id}', 'Student\StudentController@showDoExamPage')->name('do.exam.page');
 Route::post('/Do-Exam','Student\StudentController@submitExam')->name('submit.exam');
-// Route::get('Result', 'Student\StudentController@testResultView')->name('exam.resutl');
+//NOTE: this is a test route, it should be remove when deploy Route::get('Result', 'Student\StudentController@testResultView')->name('exam.resutl');
 
 
 
