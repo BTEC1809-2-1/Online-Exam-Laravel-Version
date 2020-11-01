@@ -1,12 +1,25 @@
 <?php
 namespace App\Services\Question;
 
+/**
+ * @author Le Viet Binh An
+ */
 use App\Repositories\AnswerRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\QuestionSetRepository;
 use App\Repositories\ExamQuestionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
+/*
+|--------------------------------------------------------------------------
+| Question services
+|--------------------------------------------------------------------------
+|
+| This is the class contains logic function to processing data and
+| operations related to question
+|
+*/
 
 class QuestionService {
 
@@ -29,6 +42,12 @@ class QuestionService {
         $this->questionSetRepository =$questionSetRepository;
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return [type]
+     */
+    //OPTIMIZE: This function need to be optimized
     public function createQuestion(Request $request)
     {
         $date =  date('Ymd')+date('Hsi');
@@ -57,39 +76,68 @@ class QuestionService {
         }
     }
 
+    /**
+     * @param mixed $questionID
+     *
+     * @return collection question_answers
+     */
     public function getQuestionAnswers($questionID)
     {
         $answers = $this->answerRepository->getAnswers($questionID);
         return $answers;
     }
 
+    /**
+     * @return [type]
+     */
     public function getQuestionList()
     {
         return $this->questionRepository->getAllQuestion();
     }
 
+    /**
+     * @return [type]
+     */
     public function getRecentlyAddedQuestion()
     {
         return $this->questionRepository->getRecentlyAddedQuestion();
     }
 
+    /**
+     * @param mixed $id
+     *
+     * @return view('Admin.pages.question_detail')
+     */
     public function getQuestionDetail($id)
     {
         return $this->questionRepository->getQuestionDetail($id);
     }
 
+    /**
+     * @param mixed $questionID
+     *
+     * @return [type]
+     */
     public function deleteQuestionByID($questionID)
     {
         try
         {
             $this->answerRepository->deleteAllAnswerByQuestionID($questionID);
             $this->questionRepository->deleteByID($questionID);
+            return true;
         }catch(\Exception $e)
         {
+            return false;
             Log::error($e);
         }
     }
 
+    /**
+     * @param mixed $examID
+     * @param mixed $studentID
+     *
+     * @return [type]
+     */
     public function getExamQuestions($examID, $studentID)
     {
         try
