@@ -1,4 +1,6 @@
 <?php
+/** @author: Le Viet Binh An*/
+
 namespace App\Services\Exam;
 
 use App\Repositories\ExamRepository;
@@ -11,21 +13,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+
 use function GuzzleHttp\json_decode;
 
 /**
- * @Descriptions:
- * - This class responsible for processing
+ * This class responsible for processing
  * action that related to the exam object
  * (Not the student's exam, but rather the
  * exam itself)
- * - If you need to create logic function
- * on exam's data processing, do it here,
- * otherwise, read other classes's specification
- * for each requirement (e.g: DB interact,
- * routing...)
  *
- * @Author: Le Viet Binh An
  */
 class ExamService
 {
@@ -538,5 +534,21 @@ class ExamService
       $correct_answer = $this->questionRepository->getQuestionCorrectAnswer($questionID);
       $correct_answer = $correct_answer->is_correct;
       return $answer == $correct_answer;
+    }
+
+    /**
+     * @param string $examID
+     *
+     * @return delete exam status
+     */
+    public function deleteExamByID($examID)
+    {
+         try {
+            $this->examRepository->deleteByID($examID);
+            return true;
+         } catch (\Exception $e) {
+            return false;
+            Log::error($e);
+         }
     }
 }

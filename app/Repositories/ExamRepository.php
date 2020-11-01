@@ -3,12 +3,11 @@
 namespace App\Repositories;
 
 use App\Exam;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ExamRepository extends BaseRepository {
-  public function model()
+    public function model()
     {
         return Exam::class;
     }
@@ -47,9 +46,9 @@ class ExamRepository extends BaseRepository {
         $exam->save();
     }
 
-    public function deleteExamById($id)
+    public function deleteById($examID)
     {
-        return Exam::where('id', $id)->delete();
+        return Exam::where('id', $examID)->delete();
     }
 
     public function getUpcomingExam()
