@@ -88,8 +88,8 @@ class AnswerRepository extends BaseRepository {
         return  Answer::where('question_id', $questionID)->get();
     }
 
-    public function deleteAllAnswerByQuestionID($question_id)
+    public function deleteAllAnswerByQuestionID($questionID)
     {
-        Answer::where('question_id', '=', $question_id)->delete();
+        Answer::where('question_id', $questionID)->delete();
     }
 }
