@@ -64,8 +64,9 @@ Route::group(['middleware' => 'admin'], function ()
     Route::post('/Exam/Create', 'Exam\ExamController@store')->name('exam.store');
 
     Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
-    /**TODO: create this function*/ Route::get('/Exam/Detail/{id}', 'Exam\ExamController@delete')->name('exam.delete');
-    Route::get('/Exam/Detail/{id}/remove/{question}', 'Exam\ExamController@getExamDetail')->name('exam.question.remove');
+    Route::get('/Exam/Detail/{id}/Remove', 'Exam\ExamController@delete')->name('exam.delete');
+    /**TODO: create this function*/
+     Route::get('/Exam/Detail/{id}/remove/{question}', 'Exam\ExamController@deleteQuestion')->name('exam.question.remove');
 
     Route::get('/Exam/List', 'Exam\ExamController@getExamList')->name('get.exam.list');
 });

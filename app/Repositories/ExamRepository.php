@@ -46,7 +46,7 @@ class ExamRepository extends BaseRepository {
         $exam->save();
     }
 
-    public function deleteById($examID)
+    public function deleteExamById($examID)
     {
         return Exam::where('id', $examID)->delete();
     }

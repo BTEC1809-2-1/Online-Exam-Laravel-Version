@@ -89,7 +89,7 @@ class ExamController extends Controller
      */
     public function delete($examID)
     {
-        if($this->examService->deleteExamByID($examID))
+        if($this->examService->deleteExamDataByID($examID))
         {
             return redirect()->route('get.exam.list')->with('success', 'You has successfully deleted the exam');
         }

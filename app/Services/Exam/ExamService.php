@@ -3,6 +3,7 @@
 
 namespace App\Services\Exam;
 
+use App\Repositories\ExamQuestionRepository;
 use App\Repositories\ExamRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\QuestionSetRepository;
@@ -30,6 +31,7 @@ class ExamService
     protected $studentRepository;
     protected $studentExamRepository;
     protected $questionSetRepository;
+    protected $examQuestionRepository;
 
     /**
      * Constructing the service class by
@@ -41,7 +43,8 @@ class ExamService
         QuestionRepository $questionRepository,
         StudentRepository $studentRepository,
         StudentExamRepository $studentExamRepository,
-        QuestionSetRepository $questionSetRepository
+        QuestionSetRepository $questionSetRepository,
+        ExamQuestionRepository $examQuestionRepository
     )
     {
         $this->examRepository = $examRepository;
@@ -49,6 +52,7 @@ class ExamService
         $this->studentRepository = $studentRepository;
         $this->studentExamRepository = $studentExamRepository;
         $this->questionSetRepository = $questionSetRepository;
+        $this->examQuestionRepository = $examQuestionRepository;
     }
 
     /**
@@ -157,7 +161,7 @@ class ExamService
       }catch(\Exception $e)
       {
         Log::error($e);
-        $this->examRepository->deleteExamById($examID);
+        $this->examRepository->deleteExamByID($examID);
         return false;
       }
     }
@@ -539,16 +543,28 @@ class ExamService
     /**
      * @param string $examID
      *
+     * This function delete all exam's related data,
+     * which mean it will cause an error if you trying to
+     * delete data from related table when the exam failed to
+     * created
+     *
      * @return delete exam status
      */
-    public function deleteExamByID($examID)
+    public function deleteExamDataByID($examID)
     {
-         try {
-            $this->examRepository->deleteByID($examID);
+        try {
+            /** Delete exam questiosn */
+            $this->examQuestionRepository->deleteExamQuestionByExamID($examID);
+            /** Delete exam question sets */
+            $this->questionSetRepository->deleteQuestionSetsByExamID($examID);
+            /** Delete student's exam */
+            $this->studentExamRepository->deleteStudentExamByExamID($examID);
+            /** Delete the exam itself */
+            $this->examRepository->deleteExamByID($examID);
             return true;
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
             return false;
             Log::error($e);
-         }
+        }
     }
 }

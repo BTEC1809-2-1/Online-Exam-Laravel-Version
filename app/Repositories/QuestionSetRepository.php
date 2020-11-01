@@ -45,4 +45,11 @@ class QuestionSetRepository
         DB::table('question_set')
             ->insert($data);
     }
+
+    public function deleteQuestionSetsByExamID($examID)
+    {
+        DB::table('question_set')
+            ->where('id', 'like', $examID.'%')
+            ->delete();
+    }
 }

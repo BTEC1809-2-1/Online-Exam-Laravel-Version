@@ -124,4 +124,9 @@ class StudentExamRepository
                         ->first();
         }
     }
+
+    public function deleteStudentExamByExamID($examID)
+    {
+        $this->table->where('exam_id', $examID)->delete();
+    }
 }
