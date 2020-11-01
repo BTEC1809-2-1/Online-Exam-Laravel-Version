@@ -27,7 +27,7 @@ Create New Question
                             @csrf
                             <div class="form-group">
                                 <label for="">Question</label>
-                                <input type="text" class="form-control" name="question">
+                                <textarea rows="7" cols="50" type="text" class="form-control" name="question"></textarea>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -87,38 +87,37 @@ Create New Question
             // Component using in answer block
             function multipleChoiceOfFour() {
                 $("#answer-block").empty();
-
                 $("#answer-block").append(`
                     <div class="form-group">
                     <label for"firstAnswer">First Answer</label>
-                    <input type="text" class="form-control" name="answer[1]">
+                    <textarea rows="3" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_correct[1]"  value="1">
+                        <input class="form-check-input" type="checkbox" name="is_correct1"  value="1">
                         <label class="form-check-label" > is correct </label>
                     </div>
                     </div>
 
                     <div class="form-group">
                     <label for"firstAnswer">Second Answer</label>
-                    <input type="text" class="form-control" name="answer[2]">
+                    <textarea rows="3" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_correct[2]"  value="1">
+                        <input class="form-check-input" type="checkbox" name="is_correct2"  value="2">
                         <label class="form-check-label" > is correct </label>
                     </div>
                     </div>
                     <div class="form-group">
                         <label for"firstAnswer">Third Answer</label>
-                        <input type="text" class="form-control" name="answer[3]">
+                        <textarea rows="3" cols="50" type="text" class="form-control" name="answer[3]"></textarea>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_correct[3]"  value="1">
+                            <input class="form-check-input" type="checkbox" name="is_correct3"  value="3">
                             <label class="form-check-label" > is correct </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for"firstAnswer">Fourth Answer</label>
-                        <input type="text" class="form-control" name="answer[4]">
+                        <textarea rows="3" cols="50" type="text" class="form-control" name="answer[4]"></textarea>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_correct[4]"  value="1">
+                            <input class="form-check-input" type="checkbox" name="is_correct4"  value="4">
                             <label class="form-check-label" > is correct </label>
                         </div>
                     </div>
@@ -130,34 +129,34 @@ Create New Question
                 $("#answer-block").append(`
                     <div class="form-group">
                     <label for"firstAnswer">First Answer</label>
-                    <input type="text" class="form-control" name="answer[1]">
+                    <textarea rows="3" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_correct"  value="1">
+                        <input class="form-check-input" type="radio" name="is_correct" value="1">
                         <label class="form-check-label" > is correct </label>
                     </div>
                     </div>
 
                     <div class="form-group">
                     <label for"firstAnswer">Second Answer</label>
-                    <input type="text" class="form-control" name="answer[2]">
+                    <textarea rows="3" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_correct"  value="2">
+                        <input class="form-check-input" type="radio" name="is_correct" value="2">
                         <label class="form-check-label" > is correct </label>
                     </div>
                     </div>
                     <div class="form-group">
                         <label for"firstAnswer">Third Answer</label>
-                        <input type="text" class="form-control" name="answer[3]">
+                        <textarea rows="3" cols="50" type="text" class="form-control" name="answer[3]"></textarea>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_correct"  value="3">
+                            <input class="form-check-input" type="radio" name="is_correct" value="3">
                             <label class="form-check-label" > is correct </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for"firstAnswer">Fourth Answer</label>
-                        <input type="text" class="form-control" name="answer[4]">
+                        <textarea rows="3" cols="50" type="text" class="form-control" name="answer[4]"></textarea>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_correct"  value="4">
+                            <input class="form-check-input" type="radio" name="is_correct" value="4">
                             <label class="form-check-label" > is correct </label>
                         </div>
                     </div>
@@ -169,7 +168,7 @@ Create New Question
                 $("#answer-block").append(`
                     <div class="form-group">
                     <label for"firstAnswer">First Answer</label>
-                    <input type="text" class="form-control" name="answer[1]">
+                    <textarea rows="3" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="is_correct" value="1">
                         <label class="form-check-label" > is correct </label>
@@ -178,7 +177,7 @@ Create New Question
 
                     <div class="form-group">
                     <label for"firstAnswer">Second Answer</label>
-                    <input type="text" class="form-control" name="answer[2]">
+                    <textarea rows="3" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="is_correct"  value="2">
                         <label class="form-check-label" > is correct </label>

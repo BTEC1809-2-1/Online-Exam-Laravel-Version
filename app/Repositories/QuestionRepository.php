@@ -39,7 +39,9 @@ class QuestionRepository extends BaseRepository {
 
     public function getAllQuestion()
     {
-        $listExam = DB::table('questions')->paginate(5);
+        $listExam = DB::table('questions')
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(5);
         return $listExam;
     }
 

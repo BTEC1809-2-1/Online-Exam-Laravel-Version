@@ -79,8 +79,7 @@ Question List
                                     <td class="text-center">{{$question->type}}</td>
                                     <td class="text-center">{{$question->subject}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-block detail-button" href="{{route('get.question.detail',
-                                                    ['id' => $question->id])}}">
+                                        <a class="btn btn-block detail-button" href="{{route('get.question.detail', ['id' => $question->id])}}">
                                             View detail
                                         </a>
                                     </td>

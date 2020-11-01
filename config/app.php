@@ -251,6 +251,11 @@ return [
         '4' => 'Cancelled',
     ],
 
+    'question_status' => [
+        '1' => 'New',
+        '2' => 'Old'
+    ],
+
     'student_exam_status' => [
         '1' => 'Not Complete',
         '2' => 'Test Done'
