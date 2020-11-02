@@ -137,8 +137,14 @@ class ExamService
         $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
         $class = $request->classroom;
         $subject = $request->subject;
+        /** Call to create new row in exam table */
+        //TODO: When deploying, all table relationship must be recreated again
         $this->examRepository->createExam($request, $examID);
+        /** Assign questions to this exam */
+        //TODO: create funtion to set the number of question used in the exam a as well as question hardeness ratio
         $questions = $this->addQuestionToExam($request, $examID);
+        /** Create questions set from questions assigned to this exam */
+        //NOTE: The number of set is currently hard-coded as 4, so the create logic is not work with other number, this should be fixed
         $number_of_set_required = 4;
         $this->createQuestionSetFromExamQuestions
         (
@@ -148,6 +154,7 @@ class ExamService
           $number_of_set_required,
           $subject
         );
+        /** Assign students to questions set, if possible, each set will have the equal student number */
         //TODO: refractor this code block, this should be in addStudentToExam()
         $studentInClass = $this->studentRepository->getAllStudentByClass($class);
         $studentID = [];
@@ -156,6 +163,7 @@ class ExamService
           $studentID[] = $student->id;
         }
         $this->addStudentToExam($examID, $class, $studentID);
+        /** Return Create exam status */
         return true;
       }catch(\Exception $e)
       {
@@ -255,16 +263,7 @@ class ExamService
             unset($studentInSet[array_search($removeValue, $studentInSet)]);
           }
         }
-        /**
-         * After received a question choosen for the exam as
-         * a collection, the questions are separated by type as
-         *  =>  0: SC4;
-         *  =>  1: TF;
-         *  =>  2: MC4;
-         * To generate different question sets for the exam,
-         * We random three question (demo only) and add them
-         * to the set.
-        */
+        /** */        
         $question_set = [];
         for($i = 1; $i <= $numberOfSets; $i++)
         {
@@ -334,14 +333,10 @@ class ExamService
     /**
      * @param string $ExamID
      *
-     * -> Compare the expired and current timestamp to
+     * Compare the expired and current timestamp to
      * decide whether the exam has completed or not
      *
      * @return $this->exam->status
-     *  1 => ready,
-     *  2 => on-going
-     *  3 => test-done,
-     *  4 => completed
      */
     //TODO: there is no function to decide if the exam is on-going
     public function getExamStatus($ExamID)
@@ -374,8 +369,6 @@ class ExamService
      * @param mixed $id
      *
      * @return $this->exam's status
-     *  true => the exam has start
-     *  false => ???
      */
     //TODO: Refractor this function, move query to repository classes
     //TODO: trace this function flow, this could be an ambious function, the is a possibility this function is unused in deploy

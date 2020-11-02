@@ -6,26 +6,26 @@
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 @endsection
 @section('script')
-<script>
-    $(document).ready(function(){
-        $('#examManagement').show();
-        $('#examCreate').css({'background-color': 'pink', 'border-radius':'5px'});
-    });
-</script>
+    <script>
+        $(document).ready(function(){
+            $('#examManagement').show();
+            $('#examCreate').css({'background-color': 'pink', 'border-radius':'5px'});
+        });
+    </script>
 @endsection
 @section('content')
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         Create New Exam
@@ -40,64 +40,174 @@
                     <div class="card-body">
                         <form method="POST" action="{{route('exam.store')}}">
                             @csrf
-                                <div class="form-group">
-                                    <label for="">Subject</label>
-                                    <select name="subject" id="" class="form-control">
-                                        <option selected></option>
-                                        <option value="IT">Mon thay Linh day</option>
-                                        <option value="BM">Mon co Em</option>
-                                        <option value="DS">Mon gi day?</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Semester</label>
-                                    <select name="semester" id="" class="form-control">
-                                        <option selected></option>
-                                        <option value="SPR">Spring</option>
-                                        <option value="SUM">Summer</option>
-                                        <option value="AUT"> Mùa có em</option>
-                                        <option value="WIN">Winnter</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Asign lecture</label>
-                                    <select name="lecture" id="" class="form-control">
-                                        <option selected></option>
-                                        <option value="Admin1">Amin 1</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Classroom</label>
-                                    <select name="classroom" id="" class="form-control">
-                                        <option selected></option>
-                                        <option value="BHAF">BHAF</option>
-                                    </select>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col">
-                                        <label for="">Duration</label>
-                                        <div class="input-group">
-                                            <select name="duration" id="" class="form-control">
-                                                <option selected></option>
-                                                <option value="00:15:00">15</option>
-                                                <option value="00:45:00">45</option>
-                                                <option value="01:30:00">90</option>
-                                            </select>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Minutes</div>
-                                            </div>
+                            <div class="bg-light">
+                                <div class="row pl-md-4 pt-2">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h3>Exam information</h3>
                                         </div>
                                     </div>
-                                    <div class="form-group col">
-                                        <label for="">Start Date</label>
-                                        <input type="date" class="form-control" name="date">
+                                </div>
+                                {{-- 1 --}}
+                                <div class="row pl-md-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Semester</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT">Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="form-group col">
-                                        <label for="">Start Time</label>
-                                        <input type="time" class="form-control" name="startTime">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Subject</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            <button type="submit" class="btn create-button btn-block">Create Exam</button>
+                                {{-- 2 --}}
+                                <div class="row pl-md-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Class</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Asign lecture</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- 3 --}}
+                                <div class="row pl-md-4">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Duration</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Date</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Start time</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- 4 --}}
+                                <div class="row pl-md-4">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Number of sets</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Questions per set</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Point ratio</label>
+                                            <select name="semester" id="" class="form-control">
+                                                <option selected></option>
+                                                <option value="SPR">Spring</option>
+                                                <option value="SUM">Summer</option>
+                                                <option value="AUT"> Mùa có em</option>
+                                                <option value="WIN">Winnter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- 5 --}} 
+                            </div>
+                            <div class="bg-light mt-3">
+                                <div class="row pl-md-4 pt-2">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h3>Exam extra student(s)</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pl-md-4">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Search for student">
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- 6 --}}
+                                <div class="row pl-md-4">
+                                    <div class="student-list">
+    
+                                    </div>
+                                </div>
+                            </div>
+                             {{-- 7 --}}
+                            <div class="row pl-md-4 mt-4">
+                                <button type="submit" class="btn create-button btn-block">Create Exam</button>
+                            </div>
                         </form>
                     </div>
                 </div>
