@@ -18,6 +18,7 @@ class CreateExamsTable extends Migration
             $table->string('subject');
             $table->string('semester');
             $table->string('classroom');
+            $table->string('lecture');
             $table->dateTime('start_at',0);
             $table->time('duration');
             $table->string('status');

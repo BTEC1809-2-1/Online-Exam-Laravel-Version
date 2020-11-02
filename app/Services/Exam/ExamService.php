@@ -67,8 +67,7 @@ class ExamService
      */
     public function getStudentExam($studentID)
     {
-       return $this->studentExamRepository
-                    ->getExamByStudentID($studentID);
+       return $this->studentExamRepository->getExamByStudentID($studentID);
     }
 
     /**
@@ -444,9 +443,9 @@ class ExamService
       }
     }
     /**
-     * @param mixed $request
-     * @param mixed $studentID
-     * @param mixed $examID
+     * @param object $request
+     * @param string $studentID
+     * @param string $examID
      *
      * @return [type]
      */

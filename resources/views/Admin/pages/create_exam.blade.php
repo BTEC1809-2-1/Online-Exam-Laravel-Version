@@ -60,8 +60,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Asign lecture</label>
+                                    <select name="lecture" id="" class="form-control">
+                                        <option selected></option>
+                                        <option value="Admin1">Amin 1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="">Classroom</label>
-                                    <input type="text" class="form-control" name="classroom">
+                                    <select name="classroom" id="" class="form-control">
+                                        <option selected></option>
+                                        <option value="BHAF">BHAF</option>
+                                    </select>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
