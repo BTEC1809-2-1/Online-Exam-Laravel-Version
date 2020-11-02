@@ -26,8 +26,7 @@ class ExamRepository extends BaseRepository {
 
     public function getAllExam()
     {
-        $listExam = DB::table('exams')
-                    ->paginate(6);
+        $listExam = DB::table('exams')->paginate(6);
         return $listExam;
     }
 
@@ -38,6 +37,7 @@ class ExamRepository extends BaseRepository {
         $exam->semester = $request->semester;
         $exam->duration = $request->duration;
         $exam->start_at = date($request->date.' '.$request->startTime);
+        $exam->lecture = $request->lecture;
         $exam->classroom = $request->classroom;
         $exam->subject = $request->subject;
         $exam->status = 1;
