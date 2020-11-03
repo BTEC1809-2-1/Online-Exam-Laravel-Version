@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Exam\ExamService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\examRequest;
+use Illuminate\Http\Request;
 
 //TODO: change description
 /*
@@ -64,7 +65,8 @@ class ExamController extends Controller
     /**
      * @return [type]
      */
-    public function create(){
+    public function create()
+    {
         return view('Admin.pages.create_exam');
     }
 
@@ -75,8 +77,7 @@ class ExamController extends Controller
      */
     public function store(examRequest $request)
     {
-        if($this->examService->createNewExam($request))
-        {
+        if ($this->examService->createNewExam($request)) {
             return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam');
         }
         return redirect()->route('get.exam.list')->with('error', 'Cannot create Exam (No Questions avaiable), please report to the administrator to fix this problem');
@@ -89,10 +90,28 @@ class ExamController extends Controller
      */
     public function delete($examID)
     {
-        if($this->examService->deleteExamDataByID($examID))
-        {
+        if ($this->examService->deleteExamDataByID($examID)) {
             return redirect()->route('get.exam.list')->with('success', 'You has successfully deleted the exam');
         }
         return redirect()->route('get.exam.list')->with('error', 'Some errors had occured, you has not delete the exam, please contact the administrator to fix this problem');
+    }
+
+    public function searchStudent(Request $request)
+    {
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = DB::table('users')
+                ->where('role', '1')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
+            $output = '<ul style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
+               <li><span style="color: black;" href="data/' . $row->id . '">' .'Name: ' .$row->name .' ID: '.$row->id. '</span></li>
+               ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
     }
 }
