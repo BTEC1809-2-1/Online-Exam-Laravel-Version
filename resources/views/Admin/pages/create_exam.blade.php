@@ -4,6 +4,12 @@
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
+    <style>
+        .form-content
+        {
+            background:#ebfdff;
+        }
+    </style>
 @endsection
 @section('script')
     <script>
@@ -40,7 +46,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{route('exam.store')}}">
                             @csrf
-                            <div class="bg-light">
+                            <div class="form-content">
                                 <div class="row pl-md-4 pt-2">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -180,9 +186,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- 5 --}} 
+                                {{-- 5 --}}
                             </div>
-                            <div class="bg-light mt-3">
+                            <div class="form-content mt-3">
                                 <div class="row pl-md-4 pt-2">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -200,7 +206,7 @@
                                 {{-- 6 --}}
                                 <div class="row pl-md-4">
                                     <div class="student-list">
-    
+
                                     </div>
                                 </div>
                             </div>

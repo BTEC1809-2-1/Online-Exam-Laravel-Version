@@ -21,26 +21,22 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    public function index()
-    {
-        return view('auth.login');
-    }
-
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-     protected function authenticated()
+    protected function authenticated()
     {
-        if ( Auth::user()->role == config('app.role.admin') )
+        if(Auth::check())
         {
-            return redirect()->route('admin');
+             if ( Auth::user()->role == config('app.role.admin') )
+            {
+                return redirect()->route('admin');
+            }
+            return redirect('/student');
         }
-        if ( Auth::user()->role == config('app.role.student') )
-        {
-            return redirect()->route('student');
-        }
+        return 403;
     }
 
     /**
