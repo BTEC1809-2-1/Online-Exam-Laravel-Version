@@ -7,8 +7,8 @@
     <style>
         .form-content
         {
-            background:#5bc4db;
-            border-radius: 20px;    
+            background:#cede;
+            border-radius: 20px;
         }
         .form-group
         {
@@ -23,9 +23,9 @@
             color: black;
             padding-left: 10px;
         }
-        .resultList 
+        .resultList
         {
-            overflow-y: scroll;
+            overflow-y: hidden;
             max-height: 100px;
             width: 100%;
         }
@@ -33,7 +33,7 @@
         {
             color: black;
         }
-        input 
+        input
         {
             padding: 4px;
         }
@@ -41,12 +41,12 @@
         {
             font-weight: bold;
         }
-        .extra-student 
+        .extra-student
         {
             margin-top: 10px;
             margin-left: 1em;
             padding-left: 10px;
-            background:#5bc4db;
+            background:#cede;
             border-radius: 10px;
             max-width: 95%;
         }
@@ -68,37 +68,37 @@
             $('#examCreate').css({'background-color': 'pink', 'border-radius':'5px'});
 
             $('#search').keyup(function()
-            { 
-                var query = $(this).val(); 
+            {
+                var query = $(this).val();
                 console.log(query);
-                if(query != '') 
+                if(query != '')
                 {
-                    var _token = $('input[name="_token"]').val(); 
+                    var _token = $('input[name="_token"]').val();
                     $.ajax({
-                        url:"{{ route('student.search') }}", 
-                        method:"POST", 
+                        url:"{{ route('student.search') }}",
+                        method:"POST",
                         data:
                         {
                             query:query, _token:_token
                         },
                         success:function(data)
-                        { 
+                        {
                             $('#resultList').fadeIn();
-                            $('#resultList').css({'background-color':'white'});  
-                            $('#resultList').html(data); 
+                            $('#resultList').css({'background-color':'white'});
+                            $('#resultList').html(data);
                         }
                     });
                 } else
                 {
-                    $('#resultList').fadeOut();  
+                    $('#resultList').fadeOut();
                 }
             });
             var i = 1;
-            $(document).on('click', 'li', function(){  
-                $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');  
-                $('#resultList').hide();  
+            $(document).on('click', 'li', function(){
+                $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');
+                $('#resultList').hide();
                 i++;
-            });  
+            });
         });
     </script>
 @endsection
@@ -134,6 +134,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <h3>Exam information</h3>
+                                            Fill this form information to automatically create an exam.
                                             <hr>
                                         </div>
                                     </div>
@@ -228,7 +229,7 @@
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
-                                                <option value="4">4</option> 
+                                                <option value="4">4</option>
                                             </select>
                                         </div>
                                     </div>
@@ -249,11 +250,9 @@
                                             <label for="">Point ratio</label>
                                             <select name="point_ratio" id="" class="form-control">
                                                 <option selected></option>
-                                                <option value="1">Easy: 40% - Medium: 40% - Hard: 20%</option>
-                                                <option value="2">Easy: 50% - Medium: 40% - Hard: 10%</option>
-                                                <option value="3">Easy: 50% - Medium: 30% - Hard: 20%</option>
-                                                <option value="4">Easy: 60% - Medium: 30% - Hard: 10%</option>
-                                                <option value="5">Easy: 70% - Medium: 30% - Hard: 0%</option>
+                                                <option value="1"><strong>Normal Exam: </strong>Easy 40% - Medium: 40% - Hard: 20%</option>
+                                                <option value="2"><strong>Mid-term Exam: </strong> Easy: 50% - Medium: 40% - Hard: 10%</option>
+                                                <option value="3"><strong>Final Exam: </strong> Easy: 50% - Medium: 30% - Hard: 20%</option>
                                             </select>
                                         </div>
                                     </div>
@@ -265,6 +264,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <h3>Exam extra student(s)</h3>
+                                            Use this form to add student(s) that not in the selected class, if you do not want to add any extra student, leave it empty.
                                             <hr>
                                         </div>
                                     </div>
@@ -281,7 +281,7 @@
                                 <div class="row pl-md-4 pb-md-4">
                                     <div class="col-md-12">
                                         <div class="student-list p-2" id="studentList">
-
+                                            <input type="hidden" name="extra_student" id="extra_student" value="">
                                         </div>
                                     </div>
                                 </div>

@@ -75,8 +75,9 @@ class ExamController extends Controller
      *
      * @return [type]
      */
-    public function store(examRequest $request)
+    public function store(Request $request)
     {
+        dd($request);
         if ($this->examService->createNewExam($request)) {
             return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam');
         }
@@ -98,20 +99,6 @@ class ExamController extends Controller
 
     public function searchStudent(Request $request)
     {
-        if ($request->get('query')) {
-            $query = $request->get('query');
-            $data = DB::table('users')
-                ->where('role', '1')
-                ->where('name', 'LIKE', "%{$query}%")
-                ->get();
-            $output = '<ul style="display:block; position:relative">';
-            foreach ($data as $row) {
-                $output .= '
-               <li><span style="color: black;" href="data/' . $row->id . '">' .'Name: ' .$row->name .' ID: '.$row->id. '</span></li>
-               ';
-            }
-            $output .= '</ul>';
-            echo $output;
-        }
+       return $this->examService->ajaxSearchForStudent($request);
     }
 }

@@ -263,7 +263,7 @@ class ExamService
             unset($studentInSet[array_search($removeValue, $studentInSet)]);
           }
         }
-        /** */        
+        /** */
         $question_set = [];
         for($i = 1; $i <= $numberOfSets; $i++)
         {
@@ -557,6 +557,25 @@ class ExamService
         } catch (\Exception $e) {
             return false;
             Log::error($e);
+        }
+    }
+
+    public function ajaxSearchForStudent($request)
+    {
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = DB::table('users')
+                ->where('role', '1')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
+            $output = '<ul style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
+               <li><span style="color: black;" href="data/' . $row->id . '">' .'Name: ' .$row->name .' ID: '.$row->id. '</span></li>
+               ';
+            }
+            $output .= '</ul>';
+            echo $output;
         }
     }
 }
