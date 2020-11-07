@@ -15,7 +15,7 @@
                 background-image: url("{{url('image/everglowtn.jpg')}}");
                 background-repeat: no-repeat;
                 background-size: cover;
-                color: white;
+                color: black;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -51,7 +51,7 @@
             }
 
             .links > a {
-                color: white;
+                color: black;
                 padding: 0 25px;
                 font-size: 25px;
                 font-weight: 600;
@@ -73,17 +73,13 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Tau Hai Cuc Manh
+                    YTHNTD
                 </div>
 
                 <div class="links">
