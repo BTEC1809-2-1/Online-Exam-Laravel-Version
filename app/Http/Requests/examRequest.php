@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class examRequest extends FormRequest
+class ExamRequest extends FormRequest
 {
-/**
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -25,23 +25,16 @@ class examRequest extends FormRequest
     {
         return [
             //
-            'subject'=>'bail| Required',
-            'semester'=>'bail| Required',
-            'classroom'=>'bail| Required',
-            'duration'=>'bail| Required',
-            'date'=>'bail| Required',
-            'startTime'=>'bail| Required',
-        ];
-    }
-    public function messages()
-    {
-        return [
-            'subject.required' => __('Bạn chưa chọn subject'),
-            'semester.required' => __('Bạn chưa chọn semester'),
-            'classroom.required' => __('Bạn chưa nhập tên lớp'),
-            'duration.required'=> __('Bạn chưa chọn thời gian'),
-            'date.required'=> __('Bạn chưa chọn ngày kiểm tra'),
-            'startTime.required'=> __('Bạn chưa chọn thời gian bắt đầu'),
+            'semester'=> 'bail|required',
+            'subject'=> 'bail|required',
+            'class'=> 'bail|required',
+            'lecture'=> 'bail|required',
+            'duration'=> 'bail|required',
+            'date'=> 'bail|required',
+            'startTime'=> 'bail|required',
+            'number_of_set'=> 'bail|required',
+            'question_per_set'=> 'bail|required',
+            'point_ratio'=> 'bail|required',
         ];
     }
 }

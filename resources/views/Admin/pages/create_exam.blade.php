@@ -8,7 +8,7 @@
         .form-content
         {
             background:#5bc4db;
-            border-radius: 20px;    
+            border-radius: 20px;
         }
         .form-group
         {
@@ -23,7 +23,7 @@
             color: black;
             padding-left: 10px;
         }
-        .resultList 
+        .resultList
         {
             overflow-y: scroll;
             max-height: 100px;
@@ -33,7 +33,7 @@
         {
             color: black;
         }
-        input 
+        input
         {
             padding: 4px;
         }
@@ -41,7 +41,7 @@
         {
             font-weight: bold;
         }
-        .extra-student 
+        .extra-student
         {
             margin-top: 10px;
             margin-left: 1em;
@@ -68,50 +68,41 @@
             $('#examCreate').css({'background-color': 'pink', 'border-radius':'5px'});
 
             $('#search').keyup(function()
-            { 
-                var query = $(this).val(); 
+            {
+                var query = $(this).val();
                 console.log(query);
-                if(query != '') 
+                if(query != '')
                 {
-                    var _token = $('input[name="_token"]').val(); 
+                    var _token = $('input[name="_token"]').val();
                     $.ajax({
-                        url:"{{ route('student.search') }}", 
-                        method:"POST", 
+                        url:"{{ route('student.search') }}",
+                        method:"POST",
                         data:
                         {
                             query:query, _token:_token
                         },
                         success:function(data)
-                        { 
+                        {
                             $('#resultList').fadeIn();
-                            $('#resultList').css({'background-color':'white'});  
-                            $('#resultList').html(data); 
+                            $('#resultList').css({'background-color':'white'});
+                            $('#resultList').html(data);
                         }
                     });
                 } else
                 {
-                    $('#resultList').fadeOut();  
+                    $('#resultList').fadeOut();
                 }
             });
             var i = 1;
-            $(document).on('click', 'li', function(){  
-                $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');  
-                $('#resultList').hide();  
+            $(document).on('click', 'li', function(){
+                $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');
+                $('#resultList').hide();
                 i++;
-            });  
+            });
         });
     </script>
 @endsection
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -151,11 +142,14 @@
                                                 <option value="WIN">Winnter</option>
                                             </select>
                                         </div>
+                                        @error('semester')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Subject</label>
-                                            <select name="semester" id="" class="form-control">
+                                            <select name="subject" id="" class="form-control">
                                                 <option selected></option>
                                                 <option value="IT">information Technology</option>
                                                 <option value="BM">Bussiness Management</option>
@@ -163,6 +157,9 @@
                                                 <option value="EN">English</option>
                                             </select>
                                         </div>
+                                        @error('subject')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 {{-- 2 --}}
@@ -170,7 +167,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Class</label>
-                                            <select name="semester" id="" class="form-control">
+                                            <select name="class" id="" class="form-control">
                                                 <option selected></option>
                                                 <option value="BHAF1809-2.1">BHAF1809-2.1</option>
                                                 <option value="BHAF1809-2.2">BHAF1809-2.2</option>
@@ -178,6 +175,9 @@
                                                 <option value="BHAF1909-1.2">BHAF1909-1.2</option>
                                             </select>
                                         </div>
+                                        @error('class')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -190,6 +190,9 @@
                                                 <option value="Truong Cong Doan">Truong Cong Doan</option>
                                             </select>
                                         </div>
+                                        @error('lecture')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 {{-- 3 --}}
@@ -197,25 +200,34 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Duration</label>
-                                            <select name="semester" id="" class="form-control">
+                                            <select name="duration" id="" class="form-control">
                                                 <option selected></option>
                                                 <option value="00:15:00">15 minutes</option>
                                                 <option value="00:45:00">45 minutes</option>
                                                 <option value="01:30:00">90 minutes</option>
                                             </select>
                                         </div>
+                                        @error('duration')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Start Date</label>
                                             <input type="date" class="form-control" name="date">
                                         </div>
+                                        @error('date')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Start Time</label>
                                             <input type="time" class="form-control" name="startTime">
                                         </div>
+                                        @error('startTime')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 {{-- 4 --}}
@@ -228,9 +240,12 @@
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
-                                                <option value="4">4</option> 
+                                                <option value="4">4</option>
                                             </select>
                                         </div>
+                                        @error('munber_of_sets')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -243,6 +258,9 @@
                                                 <option value="WIN">Winnter</option>
                                             </select>
                                         </div>
+                                        @error('question_per_set')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -256,6 +274,9 @@
                                                 <option value="5">Easy: 70% - Medium: 30% - Hard: 0%</option>
                                             </select>
                                         </div>
+                                        @error('point_ratio')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

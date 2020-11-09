@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Exam;
 use App\Http\Controllers\Controller;
 use App\Services\Exam\ExamService;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\examRequest;
+use App\Http\Requests\ExamRequest;
 use Illuminate\Http\Request;
 
 //TODO: change description
@@ -75,8 +75,9 @@ class ExamController extends Controller
      *
      * @return [type]
      */
-    public function store(examRequest $request)
+    public function store(ExamRequest $request)
     {
+        $validated = $request->validated();
         if ($this->examService->createNewExam($request)) {
             return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam');
         }
