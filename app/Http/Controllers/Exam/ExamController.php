@@ -77,7 +77,6 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         if ($this->examService->createNewExam($request)) {
             return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam');
         }

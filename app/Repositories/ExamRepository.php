@@ -40,7 +40,8 @@ class ExamRepository extends BaseRepository {
         $exam->lecture = $request->lecture;
         $exam->classroom = $request->classroom;
         $exam->subject = $request->subject;
-        $exam->status = 1;
+        $exam->exam_type = $request->exam_type;
+        $exam->status = config('app.exam_status.Ready');
         $exam->created_by = Auth::user()->id;
         $exam->updated_by = Auth::user()->id;
         $exam->save();

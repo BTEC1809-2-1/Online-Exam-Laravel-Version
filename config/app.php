@@ -235,20 +235,20 @@ return [
 
     'role' => [
         'student' => '1',
-        'admin' => '2'
+        'admin'   => '2'
     ],
 
     'numberOfQuestionsPerExam' => [
         'mc4' => '1',
         'sc4' => '1',
-        'tf' => '2',
+        'tf'  => '2',
     ],
 
     'exam_status' => [
-        '1'=> 'Ready',
-        '2' => 'On-going',
-        '3' => 'Done',
-        '4' => 'Cancelled',
+        'Ready'     => '1',
+        'On-going'  => '2',
+        'Done'      => '3',
+        'Cancelled' => '4',
     ],
 
     'question_status' => [
@@ -260,4 +260,10 @@ return [
         '1' => 'Not Complete',
         '2' => 'Test Done'
     ],
+
+    'exam_type' => [
+        'Normal'   => '1',
+        'Mid-term' => '2',
+        'Final'    => '3'
+    ]
 ];

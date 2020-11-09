@@ -125,7 +125,7 @@ class ExamService
      *
      * @throw \Exception error AND delete $this->exam
      */
-    public function createNewExam(Request $request)
+    public function createNewExam($request)
     {
       try
       {
@@ -145,7 +145,7 @@ class ExamService
         $questions = $this->addQuestionToExam($request, $examID);
         /** Create questions set from questions assigned to this exam */
         //NOTE: The number of set is currently hard-coded as 4, so the create logic is not work with other number, this should be fixed
-        $number_of_set_required = 4;
+        $number_of_set_required = $request->questio;
         $this->createQuestionSetFromExamQuestions
         (
           $examID,
