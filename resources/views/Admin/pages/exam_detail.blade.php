@@ -40,9 +40,12 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="row justify-content-between px-3">
-							<span class="my-auto">
-								Exam Detail
-							</span>
+							<div class="col">
+                                <a href="{{ route('admin') }} class="btn general-use-button"">Return to dashboard</a>
+                            </div>
+                            <div class="col">
+                                <a href="{{ route('create.exam') }} class="btn general-use-button"">Create another exam</a>
+                            </div>
 						</div>
 					</div>
 					<div class="card-body">
@@ -71,7 +74,7 @@
                                     </div>
                                     <div class="form-group">
 										<label for="">Status</label>
-										<input type="text" class="form-control" value="{{config('app.exam_status.'.$exam->status)}}" readonly>
+										<input type="text" class="form-control" value="{{array_search($exam->status, config('app.exam_status'))}}" readonly>
 									</div>
 								</div>
 								<div class="col exam-question" style="max-height: 500px;
@@ -90,20 +93,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody >
-                                                <?php $i = 0;?>
-                                                @foreach ($exam_questions as $questions)
-                                                    @foreach ($questions as $question)
-                                                        <tr>
-                                                            <td><?php echo $i;?></td>
-                                                            <td>{{$question->question}}</td>
-                                                            <td class="text-right">
-                                                                <a class="btn detail-button" href="{{ route('get.question.detail', ['id' => $question->id]) }}">Detail</a>
-                                                                <button type="button" class="btn create-button" onclick="showRemoveQuestionAlert('{{  $question->id}}','{{ $question->question }}' )">Remove</button>
-                                                            </td>
-                                                        </tr>
-                                                        <?php $i++;?>
+                                                @if ($exam_questions!==null)
+                                                    <?php $i = 0;?>
+                                                    @foreach ($exam_questions as $questions)
+                                                        @foreach ($questions as $question)
+                                                            <tr>
+                                                                <td><?php echo $i;?></td>
+                                                                <td>{{$question->question}}</td>
+                                                                <td class="text-right">
+                                                                    <a class="btn detail-button" href="{{ route('get.question.detail', ['id' => $question->id]) }}">Detail</a>
+                                                                    <button type="button" class="btn create-button" onclick="showRemoveQuestionAlert('{{  $question->id}}','{{ $question->question }}' )">Remove</button>
+                                                                </td>
+                                                            </tr>
+                                                            <?php $i++;?>
+                                                        @endforeach
                                                     @endforeach
-                                                @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

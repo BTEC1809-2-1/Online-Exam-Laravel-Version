@@ -112,8 +112,11 @@ class ExamService
     public function getExamQuestions($examID)
     {
         $questions = $this->questionRepository->getQuestionsByExam($examID);
-        $questions = json_decode($questions);
-        return $questions;
+        if(isset($questions))
+        {
+            return json_decode($questions);
+        }
+        return null;
     }
 
     /**
@@ -135,28 +138,26 @@ class ExamService
          * => format: EXAM<subject><semester><dateTime>
          */
         $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
-        $class = $request->classroom;
-        $subject = $request->subject;
         /** Call to create new row in exam table */
         //TODO: When deploying, all table relationship must be recreated again
         $this->examRepository->createExam($request, $examID);
         /** Assign questions to this exam */
         //TODO: create funtion to set the number of question used in the exam a as well as question hardeness ratio
-        $questions = $this->addQuestionToExam($request, $examID);
+        $questions_in_exam = $this->addQuestionToExam($request, $examID);
         /** Create questions set from questions assigned to this exam */
         //NOTE: The number of set is currently hard-coded as 4, so the create logic is not work with other number, this should be fixed
         $number_of_set_required = $request->questio;
         $this->createQuestionSetFromExamQuestions
         (
           $examID,
-          $class,
-          $questions,
+          $request->classroom,
+          $questions_in_exam,
           $number_of_set_required,
-          $subject
+          $request->subject
         );
         /** Assign students to questions set, if possible, each set will have the equal student number */
         //TODO: refractor this code block, this should be in addStudentToExam()
-        $studentInClass = $this->studentRepository->getAllStudentByClass($class);
+        $studentInClass = $this->studentRepository->getAllStudentByClass($request->classroom);
         $studentID = [];
         foreach($studentInClass as $student)
         {

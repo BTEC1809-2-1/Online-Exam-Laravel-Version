@@ -7,6 +7,17 @@
         $(document).ready(function(){
             $('#examManagement').show();
             $('#examList').css({'background-color':'pink', 'border-radius':'5px'});
+            $('td').each(function(){
+                if( $(this).text()=="Ready"){
+                $(this).css('color', 'blue');
+                }
+                if( $(this).text()=="On-going"){
+                    $(this).css('color', 'green');
+                }
+                if( $(this).text()=="Ended"){
+                    $(this).css('color', 'red');
+                }
+            });
         });
     </script>
 @endsection
@@ -39,6 +50,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Subject</th>
                                 <th scope="col">Semester</th>
                                 <th scope="col">Class</th>
                                 <th scope="col">Start At</th>
@@ -50,10 +62,11 @@
                             @foreach($listExam as $exam)
                             <tr>
                                 <th>{{$exam->id}}</th>
-                                <td>{{$exam->semester}}</td>
+                                <td>{{array_search($exam->subject, config('app.subject'))}}</td>
+                                <td>{{array_search($exam->semester, config('app.semester'))}}</td>
                                 <td>{{$exam->classroom}}</td>
                                 <td>{{$exam->start_at}}</td>
-                                <td class="text-center">{{config('app.exam_status.'.$exam->status)}}</td>
+                                <td class="text-center exam-status">{{ array_search($exam->status, config('app.exam_status'))}}</td>
                                 <td class="text-center">
                                     <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
                                 </td>

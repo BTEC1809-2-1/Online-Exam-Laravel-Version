@@ -68,7 +68,7 @@ class QuestionRepository extends BaseRepository {
                 ->select('question_id')
                 ->where('exam_id', $examID)
                 ->first()
-                ->question_id;
+                ->question_id ?? null;
 
     }
 

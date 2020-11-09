@@ -247,7 +247,7 @@ return [
     'exam_status' => [
         'Ready'     => '1',
         'On-going'  => '2',
-        'Done'      => '3',
+        'Ended'      => '3',
         'Cancelled' => '4',
     ],
 
@@ -265,5 +265,19 @@ return [
         'Normal'   => '1',
         'Mid-term' => '2',
         'Final'    => '3'
+    ],
+
+    'subject' => [
+        'Bussiness Management' => 'BM',
+        'Information Technology' => 'IT',
+        'Graphic Design' => 'DS'
+    ],
+
+    'semester' => [
+        'Spring' => 'SPR',
+        'Summer' => 'SUM',
+        'Autumn' => 'AUT',
+        'Winter' => 'WIN'
     ]
+
 ];
