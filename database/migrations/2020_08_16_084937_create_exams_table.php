@@ -17,8 +17,10 @@ class CreateExamsTable extends Migration
             $table->string('id', 255);
             $table->string('subject');
             $table->string('semester');
+            $table->tinyInteger('exam_type');
             $table->string('classroom');
             $table->string('lecture');
+            $table->mediumText('questions_in_exam')->nullable();
             $table->dateTime('start_at',0);
             $table->time('duration');
             $table->string('status');
