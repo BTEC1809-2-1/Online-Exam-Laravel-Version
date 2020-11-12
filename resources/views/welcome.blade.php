@@ -47,7 +47,7 @@
             }
 
             .title {
-                font-size: 100px;
+                font-size: 40px;
             }
 
             .links > a {
@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    YTHNTD
+                    Tính năng đăng ký đã bị khóa, vui lòng nạp thẻ lần đầu để  mở khóa!
                 </div>
 
                 <div class="links">

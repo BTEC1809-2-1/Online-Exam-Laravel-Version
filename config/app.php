@@ -278,6 +278,11 @@ return [
         'Summer' => 'SUM',
         'Autumn' => 'AUT',
         'Winter' => 'WIN'
-    ]
+    ],
+    'question_level_of_difficult' => [
+        'normal' => '1',
+        'medium' => '2',
+        'hard' => '3'
+    ],
 
 ];
