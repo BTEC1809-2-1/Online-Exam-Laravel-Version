@@ -48,7 +48,7 @@ class QuestionService {
      * @return [type]
      */
     //OPTIMIZE: This function need to be optimized
-    public function createQuestion(Request $request)
+    public function createQuestion($request)
     {
         $date =  date('Ymd')+date('Hsi');
         $questionID = 'Q'.$request->subject.$request->questionType.$date;

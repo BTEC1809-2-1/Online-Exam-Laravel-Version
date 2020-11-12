@@ -25,13 +25,14 @@ class QuestionRepository extends BaseRepository {
         return $query;
     }
 
-    public function saveQuestion(Request $request, $questionID)
+    public function saveQuestion($request, $questionID)
     {
         $question = new Question();
         $question->id = $questionID;
         $question->question = $request->question;
         $question->type = $request->questionType;
         $question->subject = $request->subject;
+        $question->level_of_difficult = $request->difficulity;
         $question->created_by = Auth::user()->name;
         $question->updated_by = Auth::user()->name;
         $question->save();
@@ -69,39 +70,24 @@ class QuestionRepository extends BaseRepository {
                 ->where('exam_id', $examID)
                 ->first()
                 ->question_id ?? null;
-
     }
 
-    public function createQuestionsToExam($request, $type)
+    public function addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, $level_of_difficult, $number_of_questions)
     {
-        $question_set = [];
-        $question_set  = DB::table('questions')
+        $question_in_exam = [];
+        $question_in_exam  = DB::table('questions')
                             ->select('id', 'question', 'type')
-                            ->where('subject', $request->subject)
-                            ->where('type', $type)
-                            ->inRandomOrder()->limit(10)
+                            ->where('subject', $subject)
+                            ->where('level_of_difficult', $level_of_difficult)
+                            ->inRandomOrder()->limit($number_of_questions)
                             ->get();
-        return $question_set;
+        return $question_in_exam;
     }
 
     public function deleteByID($questionID)
     {
         $question = Question::find($questionID);
         $question->delete();
-    }
-
-    public function addQuestionToQuestionExam($id, $examID, $questions)
-    {
-        $data = [
-            'id' => $id,
-            'exam_id' => $examID,
-            'question_id' => $questions,
-            'created_by' => Auth::user()->name,
-            'created_at' => now(),
-            'updated_by' => Auth::user()->name,
-            'updated_at' => now(),
-        ];
-        DB::table('exam_questions')->insert($data);
     }
 
     public function getQuestionsAndAnswers($questionID)

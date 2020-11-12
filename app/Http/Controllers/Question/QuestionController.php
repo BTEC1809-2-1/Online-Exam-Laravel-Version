@@ -86,7 +86,7 @@ class QuestionController extends Controller
      *
      * @return view question list with status message
      */
-    public function store(questionRequest $request){
+    public function store(Request $request){
         if($this->questionService->createQuestion($request))
         {
             return redirect()->route('get.question.list')->with('success', 'The question has been succsesfully add to the system');
