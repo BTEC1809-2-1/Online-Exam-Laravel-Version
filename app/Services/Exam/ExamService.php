@@ -125,18 +125,9 @@ class ExamService
         /** Insert new exam to database*/
         $this->examRepository->createExam($request, $examID, $questions_in_exam);
         /** Create questions set from questions assigned to this exam */
-        //NOTE: The number of set is currently hard-coded as 4, so the create logic is not work with other number, this should be fixed
-        $this->createQuestionSetFromExamQuestions($examID,$request->classroom,$questions_in_exam,
-                                                    $request->question_per_set,$request->subject);
-        /** Assign students to questions set, if possible, each set will have the equal student number */
-        //TODO: refractor this code block, this should be in addStudentToExam()
-        $studentInClass = $this->studentRepository->getAllStudentByClass($request->classroom);
-        $studentID = [];
-        foreach($studentInClass as $student)
-        {
-          $studentID[] = $student->id;
-        }
-        $this->addStudentToExam($examID, $request->classroom, $studentID);
+        $this->createQuestionSetFromExamQuestions($examID,$request->classroom,$questions_in_exam,$request->question_per_set,$request->subject);
+        $students_in_exam = $this->getStudentInExam($examID);
+        $this->addStudentToExam($examID, $students_in_exam);
         /** Return Create exam status */
         return true;
       }catch(\Exception $e)
@@ -290,48 +281,44 @@ class ExamService
         }
     }
 
+    protected function getExamStudent($examID)
+    {
+        $student_in_this_exam = $this->examRepository->getStudentsInExam($examID);
+        $student_in_this_exam = json_decode($student_in_this_exam);
+        return $student_in_this_exam;
+    }
+
     /**
      * @param string $examID
-     * @param string $class
      * @param array $studentIDs
      *
-     * -> Assign student to a question set then add that student to the exam
+     * Add student to exam
      */
-    //FIXME: BUG: there will be one student that cannot be assign to any question set
-    function addStudentToExam($examID, $class, $studentIDs)
+    protected function addStudentToExam($examID, $student_list, $examQuestionSets)
     {
       try {
-        $examQuestionSets = $this->questionSetRepository->getQuestionSetByExam($examID);
-        $examQuestionSets = json_decode(json_encode($examQuestionSets));
-        $examSets = [];
-        foreach($examQuestionSets as $question_set)
+        foreach($student_list as $student)
         {
-          $examSets[] = [
-            'id' =>  $question_set->id,
-            'student_id' => $question_set->student_id
-          ];
+            $student_question_set_id  = $this->assignStudentToQuestionSet($examQuestionSets);
+            $this->studentExamRepository->addStudentToStudentExam($student->id, $examID, $student_question_set_id);
         }
-        foreach($studentIDs as $studentID)
-        {
-          $question_set_id = '';
-          foreach($examSets as $set)
-          {
-            if(in_array($studentID, json_decode($set['student_id'])) !== false)
-            {
-              $question_set_id = $set['id'];
-              break;
-            }
-          }
-          $this->studentExamRepository
-                ->addStudentToExam(
-                  $studentID,
-                  $examID,
-                  $question_set_id
-          );
-        }
+
       } catch (\Exception $e) {
           Log::error($e);
       }
+    }
+
+    protected function assignStudentToQuestionSet($examQuestionSets)
+    {
+        try {
+            $question_set_id = "";
+            $question_set_key = array_rand($examQuestionSets, 1);
+            $question_set_id = $examQuestionSets[$question_set_key]['id'];
+            return $question_set_id;
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+
     }
 
     /**
@@ -372,12 +359,8 @@ class ExamService
     {
       try
       {
-        $exam = DB::table('exams')
-                ->select('start_at')
-                ->where('id', $examID)
-                ->first();
-        if( (strtotime(Carbon::now())
-                - strtotime(Carbon::parse($exam->start_at))) > 1)
+        $exam = DB::table('exams')->select('start_at')->where('id', $examID)->first();
+        if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
         {
             return true;
         }

@@ -68,4 +68,14 @@ class ExamRepository extends BaseRepository {
             ->addSelect('duration', 'created_at', 'created_by', 'updated_at', 'updated_by');
         return $query->findOrFail($id);
     }
+
+    public function getStudentsInExam($examID)
+    {
+        $exam = DB::table('exams')->where('id', $examID);
+        if($exam->exists())
+        {
+            return $exam->select('student_in_exam')->get();
+        }
+        return null;
+    }
 }

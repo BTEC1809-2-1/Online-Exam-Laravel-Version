@@ -8,14 +8,12 @@ class QuestionSetRepository
 {
     public function getQuestionSetByExam($examID)
     {
-        if(DB::table('question_set')
-            ->where('id', 'like', $examID."%")
-            ->exists()
-        )
-        return
-            DB::table('question_set')
-                ->where('id', 'like', $examID."%")
-                ->get();
+        $questionSet = DB::table('question_set')->where('id', 'like', $examID."%");
+        if($questionSet->exists())
+        {
+            return $questionSet->get();
+        }
+        return null;
     }
 
     public function getQuestionsBySetId($id)
@@ -48,8 +46,6 @@ class QuestionSetRepository
 
     public function deleteQuestionSetsByExamID($examID)
     {
-        DB::table('question_set')
-            ->where('id', 'like', $examID.'%')
-            ->delete();
+        DB::table('question_set')->where('id', 'like', $examID.'%')->delete();
     }
 }
