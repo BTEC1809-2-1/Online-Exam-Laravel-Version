@@ -24,8 +24,6 @@ class StudentRepository
 
     public function getAllStudentByClass($class)
     {
-        return User::where('role', '1')
-            ->where('class', $class)
-            ->get();
+        return User::where('role', '1')->where('class', $class)->get();
     }
 }

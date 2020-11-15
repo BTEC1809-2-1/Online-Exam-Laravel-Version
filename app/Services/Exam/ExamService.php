@@ -115,20 +115,16 @@ class ExamService
     {
       try
       {
-        /**
-         * Generate the exam's ID based on the subject, semester and current dateTime. All exam start with "EXAM" keyword
-         * => format: EXAM<subject><semester><dateTime>
-         */
+         //Generate the exam's ID based on the subject, semester and current dateTime. All exam start with "EXAM" keyword, format: EXAM<subject><semester><dateTime>
         $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
-        /** Assign questions to this exam */
         $questions_in_exam = $this->createExamQuestions($request->subject, $request->question_per_set, $request->exam_type);
-        /** Insert new exam to database*/
-        $this->examRepository->createExam($request, $examID, $questions_in_exam);
-        /** Create questions set from questions assigned to this exam */
+        $student_in_request_class = $this->getListOfStudentInClass($request->classroom);
+        $custom_added_student = [];
+        $students_in_exam = array_merge($student_in_request_class, $custom_added_student);
+        $this->examRepository->createExam($request, $examID, $questions_in_exam, json_encode($students_in_exam));
         $this->createQuestionSetFromExamQuestions($examID,$request->classroom,$questions_in_exam,$request->question_per_set,$request->subject);
-        $students_in_exam = $this->getStudentInExam($examID);
-        $this->addStudentToExam($examID, $students_in_exam);
-        /** Return Create exam status */
+        $examQuestionSets = [];
+        $this->addStudentToExam($examID, $students_in_exam, $examQuestionSets);
         return true;
       }catch(\Exception $e)
       {
@@ -136,6 +132,17 @@ class ExamService
         $this->examRepository->deleteExamByID($examID);
         return false;
       }
+    }
+
+    protected function getListOfStudentInClass($class)
+    {
+        $studentList = $this->studentRepository->getAllStudentByClass($class);
+        $student_in_class_id = [];
+        foreach($studentList as $student)
+        {
+            array_push($student_in_class_id, ($student->id));
+        }
+        return $student_in_class_id;
     }
 
     /**
@@ -148,60 +155,60 @@ class ExamService
         switch ($number_of_questions_per_set)
         {
             case '10':
-                $this->generateRandomQuestionsByDifficulty($subject, 7, 3, 0);
+               return $this->generateRandomQuestionsByDifficulty($subject, 7, 3, 0);
             break;
             case '12':
-                $this->generateRandomQuestionsByDifficulty($subject, 7, 4, 1);
+                return $this->generateRandomQuestionsByDifficulty($subject, 7, 4, 1);
             break;
             case '15':
-                $this->generateRandomQuestionsByDifficulty($subject, 9, 3, 2);
+                return $this->generateRandomQuestionsByDifficulty($subject, 9, 3, 2);
             break;
             case '30':
                 if($exam_type == config('app.exam_type.Normal'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 15, 11, 4);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 15, 11, 4);
                 }
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 15, 10, 5);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 15, 10, 5);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 15, 9, 6);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 15, 9, 6);
                 }
             break;
             case '45':
                 if($exam_type == config('app.exam_type.Normal'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 25, 15, 5);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 25, 15, 5);
                 }
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 20, 20, 5);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 20, 20, 5);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 20, 15, 10);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 20, 15, 10);
                 }
             break;
             case '60':
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 30, 20, 10);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 20, 10);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 30, 15, 15);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 15, 15);
                 }
             break;
             case '90':
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 45, 30, 15);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 45, 30, 15);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
-                    $this->generateRandomQuestionsByDifficulty($subject, 45, 25, 20);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 45, 25, 20);
                 }
             break;
         }
@@ -213,9 +220,6 @@ class ExamService
     protected function generateRandomQuestionsByDifficulty($subject, $number_of_normal_questions, $number_of_medium_questions, $number_of_hard_questions)
     {
       $question = [];
-      /**
-       * -> Random a number of questions for each type add the questions to $question array, encode the array to json_string and save to database
-      */
       $question[] = $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.normal'), $number_of_normal_questions);
       $question[] = $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.medium'), $number_of_medium_questions);
       $question[] = $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.hard'), $number_of_hard_questions);
@@ -291,7 +295,6 @@ class ExamService
     /**
      * @param string $examID
      * @param array $studentIDs
-     *
      * Add student to exam
      */
     protected function addStudentToExam($examID, $student_list, $examQuestionSets)
@@ -323,8 +326,6 @@ class ExamService
 
     /**
      * @param string $ExamID
-     * Compare the expired and current timestamp to
-     * decide whether the exam has completed or not
      * @return $this->exam->status
      */
     //TODO: there is no function to decide if the exam is on-going
@@ -353,22 +354,20 @@ class ExamService
      *
      * @return $this->exam's status
      */
-    //TODO: Refractor this function, move query to repository classes
-    //TODO: trace this function flow, this could be an ambious function, the is a possibility this function is unused in deploy
     public function checkExamStartTime($examID)
     {
-      try
-      {
-        $exam = DB::table('exams')->select('start_at')->where('id', $examID)->first();
-        if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
+        try
         {
-            return true;
+            $exam = $this->examRepository->getExam($examID);
+            if( (strtotime(Carbon::now()) - strtotime(Carbon::parse($exam->start_at))) > 1)
+            {
+                return true;
+            }
+        }catch(\Exception $e)
+        {
+            Log::error($e);
+            return false;
         }
-      }catch(\Exception $e)
-      {
-          Log::error($e);
-          return false;
-      }
     }
 
     /**
@@ -380,32 +379,20 @@ class ExamService
     public function getStudentExamQuestions($examID, $studentID)
     {
       try {
-        $question_set_id = $this->studentExamRepository
-                                    ->getStudentQuestionSet($examID, $studentID);
+        $question_set_id = $this->studentExamRepository->getStudentQuestionSet($examID, $studentID);
         $question_set_id = $question_set_id->question_set_id;
-        $questions = $this->questionSetRepository
-                                ->getQuestionsBySetId($question_set_id);
+        $questions = $this->questionSetRepository->getQuestionsBySetId($question_set_id);
         $questions = json_decode($questions);
         $questions = $questions[0]->questions;
         $questions = json_decode($questions);
         $question_in_exam = [];
-        //TODO: optimize this foreach, any query should be in repository classes
         foreach($questions as $question)
         {
           $questionID = $question->id;
           $question_in_exam[] = [
-            'id' => $this->questionRepository
-                        ->getQuestionsAndAnswers($questionID)
-                        ->first()
-                        ->id,
-            'question' =>  $this->questionRepository
-                                ->getQuestionsAndAnswers($questionID)
-                                ->first()
-                                ->question,
-            'answers' => json_decode($this->questionRepository
-                        ->getQuestionsAndAnswers($questionID)
-                        ->first()
-                        ->answer)
+            'id' => $this->questionRepository->getQuestionsAndAnswers($questionID)->first()->id,
+            'question' =>  $this->questionRepository->getQuestionsAndAnswers($questionID)->first()->question,
+            'answers' => json_decode($this->questionRepository->getQuestionsAndAnswers($questionID)->first()->answer)
             ];
           }
           return $question_in_exam;
@@ -514,23 +501,14 @@ class ExamService
     /**
      * @param string $examID
      *
-     * This function delete all exam's related data,
-     * which mean it will cause an error if you trying to
-     * delete data from related table when the exam failed to
-     * created
-     *
      * @return delete exam status
      */
     public function deleteExamDataByID($examID)
     {
         try {
-            /** Delete exam questiosn */
             $this->examQuestionRepository->deleteExamQuestionByExamID($examID);
-            /** Delete exam question sets */
             $this->questionSetRepository->deleteQuestionSetsByExamID($examID);
-            /** Delete student's exam */
             $this->studentExamRepository->deleteStudentExamByExamID($examID);
-            /** Delete the exam itself */
             $this->examRepository->deleteExamByID($examID);
             return true;
         } catch (\Exception $e) {
@@ -543,10 +521,7 @@ class ExamService
     {
         if ($request->get('query')) {
             $query = $request->get('query');
-            $data = DB::table('users')
-                ->where('role', '1')
-                ->where('name', 'LIKE', "%{$query}%")
-                ->get();
+            $data = DB::table('users')->where('role', '1')->where('name', 'LIKE', "%{$query}%")->get();
             $output = '<ul style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output .= '

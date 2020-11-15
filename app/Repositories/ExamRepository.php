@@ -30,7 +30,7 @@ class ExamRepository extends BaseRepository {
         return $listExam;
     }
 
-    public function createExam($request, $examID, $questions_in_exam)
+    public function createExam($request, $examID, $questions_in_exam, $students_in_exam)
     {
         $exam = new Exam();
         $exam->id = $examID;
@@ -41,7 +41,8 @@ class ExamRepository extends BaseRepository {
         $exam->classroom = $request->classroom;
         $exam->subject = $request->subject;
         $exam->exam_type = $request->exam_type;
-        $exam->question_in_exam = $questions_in_exam;
+        $exam->questions_in_exam = $questions_in_exam;
+        $exam->student_in_exam = $students_in_exam;
         $exam->status = config('app.exam_status.Ready');
         $exam->created_by = Auth::user()->id;
         $exam->updated_by = Auth::user()->id;
@@ -64,8 +65,7 @@ class ExamRepository extends BaseRepository {
 
     public function getExam($id)
     {
-        $query = $this->query()
-            ->addSelect('duration', 'created_at', 'created_by', 'updated_at', 'updated_by');
+        $query = $this->query()->addSelect('duration', 'created_at', 'created_by', 'updated_at', 'updated_by');
         return $query->findOrFail($id);
     }
 
