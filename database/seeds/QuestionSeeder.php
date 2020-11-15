@@ -17,13 +17,14 @@ class QuestionSeeder extends Seeder
             $subjectList = array('IT', 'BM', 'DS');
             $subject = array_rand($subjectList, 1);
             $subject = $subjectList[$subject];
-            $question_id = 'Q'.$subject.sprintf("%06d", random_int(1, 10000));
+            $question_id = 'Q'.$subject."SC4".sprintf("%06d", random_int(1, 10000));
             DB::table('questions')
             ->insert([
                 'id' => $question_id,
                 'question' => 'Question '.sprintf("%06d", $i),
                 'subject' => $subject,
                 'type' => 'SC4',
+                'level_of_difficult' => random_int(1, 3),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'created_by' => 'Admin 1',
@@ -55,13 +56,14 @@ class QuestionSeeder extends Seeder
             $subjectList = array('IT', 'BM', 'DS');
             $subject = array_rand($subjectList, 1);
             $subject = $subjectList[$subject];
-            $question_id = 'Q'.$subject.sprintf("%06d", random_int(1, 10000));
+            $question_id = 'Q'.$subject."TF".sprintf("%06d", random_int(1, 10000));
             DB::table('questions')
             ->insert([
                 'id' => $question_id,
                 'question' => 'Question '.sprintf("%06d", $i),
                 'subject' => $subject,
                 'type' => 'TF',
+                'level_of_difficult' => random_int(1, 3),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'created_by' => 'Admin 1',
@@ -93,13 +95,14 @@ class QuestionSeeder extends Seeder
             $subjectList = array('IT', 'BM', 'DS');
             $subject = array_rand($subjectList, 1);
             $subject = $subjectList[$subject];
-            $question_id = 'Q'.$subject.sprintf("%06d", random_int(1, 10000));
+            $question_id = 'Q'.$subject."MC4".sprintf("%06d", random_int(1, 10000));
             DB::table('questions')
             ->insert([
                 'id' => $question_id,
                 'question' => 'Question '.sprintf("%06d", $i),
                 'subject' => $subject,
                 'type' => 'MC4',
+                'level_of_difficult' => random_int(1, 3),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'created_by' => 'Admin 1',
