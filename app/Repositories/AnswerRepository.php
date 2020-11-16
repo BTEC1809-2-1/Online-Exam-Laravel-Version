@@ -85,7 +85,7 @@ class AnswerRepository extends BaseRepository {
 
     public function getAnswers($questionID)
     {
-        return  Answer::where('question_id', $questionID)->get();
+        return  Answer::where('question_id', $questionID)->first();
     }
 
     public function deleteAllAnswerByQuestionID($questionID)

@@ -72,11 +72,15 @@ class QuestionController extends Controller
      * @return view question detail
      */
     public function getQuestionDetail($questionID){
-        /** Get the question's detail */
         $question = $this->questionService->getQuestionDetail($questionID);
-        /** Get this->questions's answers collection */
         $answers = $this->questionService->getQuestionAnswers($questionID);
-        return view('Admin.pages.question_detail')->with(compact('question', 'answers'));
+        $is_correct = $answers->is_correct;
+        if($question->type == 'MC4')
+        {
+            $is_correct = json_decode($is_correct);
+        }
+        $answers = json_decode($answers->answer);
+        return view('Admin.pages.question_detail')->with(compact('question', 'answers', 'is_correct'));
     }
 
     /**
@@ -87,9 +91,13 @@ class QuestionController extends Controller
      * @return view question list with status message
      */
     public function store(Request $request){
-        if($this->questionService->createQuestion($request))
+        $date =  date('Ymd')+date('Hsi');
+        $questionID = 'Q'.$request->subject.$request->questionType.$date;
+        if($this->questionService->createQuestion($request, $questionID, $date))
         {
-            return redirect()->route('get.question.list')->with('success', 'The question has been succsesfully add to the system');
+            return redirect()->route('get.question.list')
+                    ->with('success', 'The question has been succsesfully add to the system')
+                    ->with('qID', $questionID);
         }
         return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
 

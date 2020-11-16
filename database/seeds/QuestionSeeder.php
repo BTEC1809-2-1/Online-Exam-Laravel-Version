@@ -109,6 +109,7 @@ class QuestionSeeder extends Seeder
                 'updated_by' => 'Admin 1'
             ]);
             $mcAnswers = [];
+            $value = ['', 1];
             $mcIsCorrect = [];
             for($j = 1; $j <= 4; $j++)
             {
@@ -116,10 +117,7 @@ class QuestionSeeder extends Seeder
                     'index' => $j,
                     'content' => 'Answer '.$i.'-'.$j,
                 ];
-                $mcIsCorrect[] = [
-                    'index' => $j,
-                    'content' => random_int(1, 2),
-                ];
+                $mcIsCorrect[] = $value[array_rand($value, 1)];
             }
 
             DB::table('answers')

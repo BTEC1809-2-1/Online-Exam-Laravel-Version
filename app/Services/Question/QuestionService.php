@@ -48,10 +48,8 @@ class QuestionService {
      * @return [type]
      */
     //OPTIMIZE: This function need to be optimized
-    public function createQuestion($request)
+    public function createQuestion($request, $questionID, $date)
     {
-        $date =  date('Ymd')+date('Hsi');
-        $questionID = 'Q'.$request->subject.$request->questionType.$date;
         try
         {
             $this->questionRepository->saveQuestion($request, $questionID);
