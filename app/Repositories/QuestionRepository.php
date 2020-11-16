@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class QuestionRepository extends BaseRepository {
-  public function model()
+    public function model()
     {
         return Question::class;
     }
@@ -25,13 +25,14 @@ class QuestionRepository extends BaseRepository {
         return $query;
     }
 
-    public function saveQuestion(Request $request, $questionID)
+    public function saveQuestion($request, $questionID)
     {
         $question = new Question();
         $question->id = $questionID;
         $question->question = $request->question;
         $question->type = $request->questionType;
         $question->subject = $request->subject;
+        $question->level_of_difficult = $request->difficulity;
         $question->created_by = Auth::user()->name;
         $question->updated_by = Auth::user()->name;
         $question->save();
@@ -39,77 +40,48 @@ class QuestionRepository extends BaseRepository {
 
     public function getAllQuestion()
     {
-        $listExam = DB::table('questions')->paginate(5);
+        $listExam = DB::table('questions')
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(5);
         return $listExam;
     }
 
     public function getRecentlyAddedQuestion(){
-
-        $listExam = DB::table('questions')->limit(3)->get();
+        $listExam = DB::table('questions')
+                        ->limit(3)
+                        ->get();
         return $listExam;
-
     }
 
     public function getQuestionDetail($id)
     {
-        $query = $this->query()->addSelect('created_at', 'created_by', 'updated_at', 'updated_by');
+        $query = $this->query()
+                ->addSelect('created_at',
+                            'created_by',
+                            'updated_at',
+                            'updated_by');
         return $query->findOrFail($id);
     }
 
     public function getQuestionsByExam($examID)
     {
-        $question_ids = DB::table('exam_questions')->select('question_id')
-            ->where('exam_id', $examID)
-            ->get();
-        $questions = [];
-            foreach($question_ids as $qIndex=>$question_id){
-                $question =  DB::table('questions')
-                    ->select('question')
-                    ->where('id', $question_id->question_id)
-                    ->get();
-                $questions += [
-                    $qIndex => $question[0]->question
-            ];
-        }
+        return DB::table('exam_questions')
+                ->select('question_id')
+                ->where('exam_id', $examID)
+                ->first()
+                ->question_id ?? null;
     }
 
-    public function createMultipleChoicesQuestionsToExam($request, $examID)
+    public function addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, $level_of_difficult, $number_of_questions)
     {
-        $question_set = [];
-        $question_set  = DB::table('questions')->select('id')
-            ->where('subject', $request->subject)
-            ->where('type', 'MC4')
-            ->get()
-            ->random(1)
-            ->first()
-            ->id;
-        return $question_set;
-    }
-
-    public function createSingleChoiceQuestionsToExam($request, $examID)
-    {
-        $question_set = [];
-        $question_set= DB::table('questions')->select('id')
-            ->where('subject',$request->subject)
-            ->where('type', 'SC4')
-            ->get()
-            ->random(1)
-            ->first()
-            ->id;
-        return $question_set;
-    }
-
-    public function createTrueFalseQuestionsToExam($request, $examID)
-    {
-        $question_set = [];
-        $question_set = DB::table('questions')->select('id')
-            ->where('subject',$request->subject)
-            ->where('type', 'TF')
-            ->get()
-            ->random(1)
-            ->first()
-            ->id;
-        return $question_set;
+        $question_in_exam = [];
+        $question_in_exam  = DB::table('questions')
+                            ->select('id', 'question', 'type')
+                            ->where('subject', $subject)
+                            ->where('level_of_difficult', $level_of_difficult)
+                            ->inRandomOrder()->limit($number_of_questions)
+                            ->get();
+        return $question_in_exam;
     }
 
     public function deleteByID($questionID)
@@ -118,46 +90,30 @@ class QuestionRepository extends BaseRepository {
         $question->delete();
     }
 
-    public function addQuestionToQuestionExam($examID, $questions)
+    public function getQuestionsAndAnswers($questionID)
     {
-        $data = [
-            'id' => 'EQ'.'IT',
-            'exam_id' => $examID,
-            'question_id' => json_encode($questions),
-            'created_by' => Auth::user()->name,
-            'created_at' => now(),
-            'updated_by' => Auth::user()->name,
-            'updated_at' => now(),
-        ];
-        DB::table('exam_questions')->insert($data);
+        return DB::table("questions")
+                ->join("answers", "questions.id", "=", "answers.question_id")
+                ->select("questions.*", "answers.answer")
+                ->where('questions.id', $questionID)
+                ->get();
     }
 
-    public function getRandomMultipleChoicesQuestion($examID, $numberOfQuestion)
+    public function deleteExamQuestionByID($id)
     {
-        DB::table('exam_questions')
-            ->where('exam_id', $examID)
-            ->where('question_id', '%MC4%')
-            ->get()
-            ->random($numberOfQuestion);
+        DB::table('exam_questions')->where('id', $id)
+        ->delete();
     }
 
-    public function getRandomSingleChoicesQuestion($examID, $numberOfQuestion)
+    public function getQuestionCorrectAnswer($questionID)
     {
-        DB::table('exam_questions')
-        ->where('exam_id', $examID)
-        ->where('question_id', '%SC4%')
-        ->get()
-        ->random($numberOfQuestion);
+        return DB::table("questions")
+                ->join("answers", "questions.id", "=", "answers.question_id")
+                ->select("answers.is_correct")
+                ->where('questions.id', $questionID)
+                ->first();
+
     }
 
-    public function getRandomTrueFalseQuestion($examID, $numberOfQuestion)
-    {
-        DB::table('exam_questions')
-        ->where('exam_id', $examID)
-        ->where('question_id', '%TF%')
-        ->get()
-        ->random($numberOfQuestion);
-    }
 }
-
 

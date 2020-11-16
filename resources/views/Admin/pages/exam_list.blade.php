@@ -7,30 +7,40 @@
         $(document).ready(function(){
             $('#examManagement').show();
             $('#examList').css({'background-color':'pink', 'border-radius':'5px'});
+            $('td').each(function(){
+                if( $(this).text()=="Ready"){
+                $(this).css('color', 'blue');
+                }
+                if( $(this).text()=="On-going"){
+                    $(this).css('color', 'green');
+                }
+                if( $(this).text()=="Ended"){
+                    $(this).css('color', 'red');
+                }
+            });
         });
     </script>
 @endsection
 @section('content')
-    //TODO: also change all buttons in this page to pink
     <div class="container" style="background-image:url({{url('/images/myimage.jpg')}})">
         @csrf
         <div class="card">
             <div class="card-header">
                 Exam list
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <li>{!! \Session::get('error') !!}</li>
+                        </ul>
+                    </div>
+                @endif
                 @if (\Session::has('success'))
-                    <div class="">
+                    <div class="alert alert-success">
                         <ul>
                             <li>{!! \Session::get('success') !!}</li>
                         </ul>
                     </div>
                 @endif
-                @if (\Session::has('error'))
-                <div class="">
-                    <ul>
-                        <li>{!! \Session::get('error') !!}</li>
-                    </ul>
-                </div>
-            @endif
             </div>
                 <div class="card-body">
                     <div class="row justify-content-end px-5 mb-3">
@@ -40,6 +50,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Subject</th>
                                 <th scope="col">Semester</th>
                                 <th scope="col">Class</th>
                                 <th scope="col">Start At</th>
@@ -51,10 +62,11 @@
                             @foreach($listExam as $exam)
                             <tr>
                                 <th>{{$exam->id}}</th>
-                                <td>{{$exam->semester}}</td>
+                                <td>{{array_search($exam->subject, config('app.subject'))}}</td>
+                                <td>{{array_search($exam->semester, config('app.semester'))}}</td>
                                 <td>{{$exam->classroom}}</td>
                                 <td>{{$exam->start_at}}</td>
-                                <td class="text-center">{{$exam->status}}</td>
+                                <td class="text-center exam-status">{{ array_search($exam->status, config('app.exam_status'))}}</td>
                                 <td class="text-center">
                                     <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
                                 </td>

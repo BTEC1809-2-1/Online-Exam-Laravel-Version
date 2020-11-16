@@ -1,16 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-//gg login
-use Socialite;
-use _Auth;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Traits\HasRoles;
 
 
 class LoginController extends Controller
@@ -28,22 +21,23 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected function authenticated(Request $request, $user)
-    {
-        if ( Auth::user()->role == config('app.role.admin') )
-        {
-            return redirect()->route('admin');
-        }
-        if ( Auth::user()->role == config('app.role.student') )
-        {
-            return redirect()->route('student');
-        }
-    }
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
+    protected function authenticated()
+    {
+        if(Auth::check())
+        {
+             if ( Auth::user()->role == config('app.role.admin') )
+            {
+                return redirect()->route('admin');
+            }
+            return redirect('/student');
+        }
+        return 403;
+    }
 
     /**
      * Create a new controller instance.
@@ -53,5 +47,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Custom logout function to use as button
+     *
+     * @return view(''auth.login);
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

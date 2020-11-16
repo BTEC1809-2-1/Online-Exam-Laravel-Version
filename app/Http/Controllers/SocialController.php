@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Validator,Redirect,Response,File;
-use Socialite as Socialite;
 use App\User;
 use Laravel\Socialite\Facades\Socialite as FacadesSocialite;
 Use Illuminate\Support\Facades\Auth;
@@ -22,13 +19,13 @@ class SocialController extends Controller
         $getInfo = FacadesSocialite::driver($provider)->user();
         $user = $this->createUser($getInfo,$provider);
         Auth::login($user);
-        return redirect()->to('student');
+        return redirect()->route('student');
     }
     function createUser($getInfo,$provider){
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = new User();
-            $user->id = 'STD'.strval(Carbon::now());
+            $user->id = 'STD'.Carbon::now()->format('Ymdhsi');
             $user->role = '1';
             $user->name = $getInfo->name;
             $user->email = $getInfo->email;

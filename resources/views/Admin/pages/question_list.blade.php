@@ -73,18 +73,31 @@ Question List
                             </thead>
                             <tbody>
                                 @foreach($listQuestion as $question)
-                                <tr>
-                                    <th>{{$question->id}}</th>
-                                    <td>{{$question->question}}</td>
-                                    <td class="text-center">{{$question->type}}</td>
-                                    <td class="text-center">{{$question->subject}}</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-block detail-button" href="{{route('get.question.detail',
-                                                    ['id' => $question->id])}}">
-                                            View detail
-                                        </a>
-                                    </td>
-                                </tr>
+                                    @if (\Session::has('qID') and ($question->id ==  \Session::get('qID')))
+                                    <tr style="background: #DCF1DC">
+                                        <th>{{$question->id}}</th>
+                                        <td>{{$question->question}}</td>
+                                        <td class="text-center">{{$question->type}}</td>
+                                        <td class="text-center">{{$question->subject}}</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-block detail-button" href="{{route('get.question.detail', ['id' => $question->id])}}">
+                                                View detail
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @else
+                                        <tr>
+                                            <th>{{$question->id}}</th>
+                                            <td>{{$question->question}}</td>
+                                            <td class="text-center">{{$question->type}}</td>
+                                            <td class="text-center">{{$question->subject}}</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-block detail-button" href="{{route('get.question.detail', ['id' => $question->id])}}">
+                                                    View detail
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

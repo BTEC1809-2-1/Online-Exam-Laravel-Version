@@ -59,24 +59,30 @@ Question Detail
                                 </div>
                             </div>
                             <div class="form-row">
-                                @php
-                                    $counter = 1;
-                                @endphp
-                                @foreach ($answers as $aIndex=>$answer)
+                                @foreach ($answers as $answer)
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="">Answer <?php echo $counter; $counter++?></label>
-                                        <input type="text" class="form-control" value="{{$answer->answer}}" readonly>
+                                        <label for="">Answer {{ $answer->index }}</label>
+                                        <input type="text" class="form-control" value="{{$answer->content}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="">Is correct</label>
-                                        @if ($answer->is_correct > 0)
-                                            <input type="text" class="form-control" value="Correct" readonly>
+                                        @if ($question->type == 'TF' or $question->type === 'SC4')
+                                            @if ($answer->index == $is_correct)
+                                                <input type="text" class="form-control" value="Correct" readonly>
+                                            @else
+                                                <input type="text" class="form-control" value="Not correct" readonly>
+                                            @endif
                                         @else
-                                            <input type="text" class="form-control" value="Not correct" readonly>
+                                            @if (($is_correct[$answer->index - 1] !== ''))
+                                                <input type="text" class="form-control" value="Correct" readonly>
+                                            @else
+                                                <input type="text" class="form-control" value="Not correct" readonly>
+                                            @endif
                                         @endif
+
                                     </div>
                                 </div>
                                 @endforeach

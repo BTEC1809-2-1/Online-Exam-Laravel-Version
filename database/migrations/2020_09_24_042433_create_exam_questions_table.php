@@ -14,9 +14,9 @@ class CreateExamQuestionsTable extends Migration
     public function up()
     {
         Schema::create('exam_questions', function (Blueprint $table) {
-            $table->string('id', 20)->primary();
-            $table->string('exam_id')->length('20');
-            $table->string('question_id')->length('20');
+            $table->string('id', 255)->primary();
+            $table->string('exam_id')->length('255');
+            $table->mediumText('question_id');
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();

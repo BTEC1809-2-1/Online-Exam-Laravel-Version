@@ -4,7 +4,6 @@
 /storage/*.key
 /vendor
 .env
-.env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -26,3 +25,6 @@ composer.json
 composer.json
 
 docker-compose.yml
+
+.vscode/
+TODO
