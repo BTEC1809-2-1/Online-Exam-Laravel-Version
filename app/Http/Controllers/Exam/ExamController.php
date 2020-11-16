@@ -40,7 +40,7 @@ class ExamController extends Controller
     public function getExamDetail($examID)
     {
         $exam = $this->examService->getExamDetail($examID);
-        $exam_questions = $this->examService->getExamQuestions($examID);
+        $exam_questions = json_decode($exam->questions_in_exam);
         return view('Admin.pages.exam_detail', compact('exam', 'exam_questions'));
     }
 
@@ -77,8 +77,10 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->examService->createNewExam($request)) {
-            return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam');
+        $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
+        if ($this->examService->createNewExam($request, $examID)) {
+            return redirect()->route('get.exam.list')->with('success', 'You has successfully created the exam')
+            ->with('exam_id', $examID);
         }
         return redirect()->route('get.exam.list')->with('error', 'Cannot create Exam (No Questions avaiable), please report to the administrator to fix this problem');
     }

@@ -41,10 +41,10 @@
 					<div class="card-header">
 						<div class="row justify-content-between px-3">
 							<div class="col">
-                                <a href="{{ route('admin') }} class="btn general-use-button"">Return to dashboard</a>
+                                <a href="{{ route('admin') }}" class="btn general-use-button"">Return to dashboard</a>
                             </div>
                             <div class="col">
-                                <a href="{{ route('create.exam') }} class="btn general-use-button"">Create another exam</a>
+                                <a href="{{ route('create.exam') }}" class="btn general-use-button"">Create another exam</a>
                             </div>
 						</div>
 					</div>
@@ -55,6 +55,10 @@
 									<div class="form-group">
 										<label for="">Exam ID</label>
 									<input type="text" class="form-control" value="{{$exam->id}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+										<label for="">Lecture</label>
+									    <input type="text" class="form-control" value="{{$exam->lecture}}" readonly>
 									</div>
 									<div class="form-group">
 										<label for="">Semester</label>
@@ -94,19 +98,17 @@
                                             </thead>
                                             <tbody >
                                                 @if ($exam_questions!==null)
-                                                    <?php $i = 0;?>
-                                                    @foreach ($exam_questions as $questions)
-                                                        @foreach ($questions as $question)
-                                                            <tr>
-                                                                <td><?php echo $i;?></td>
-                                                                <td>{{$question->question}}</td>
-                                                                <td class="text-right">
-                                                                    <a class="btn detail-button" href="{{ route('get.question.detail', ['id' => $question->id]) }}">Detail</a>
-                                                                    <button type="button" class="btn create-button" onclick="showRemoveQuestionAlert('{{  $question->id}}','{{ $question->question }}' )">Remove</button>
-                                                                </td>
-                                                            </tr>
-                                                            <?php $i++;?>
-                                                        @endforeach
+                                                    <?php $i = 1;?>
+                                                    @foreach ($exam_questions as $question)
+                                                        <tr>
+                                                            <td><?php echo $i;?></td>
+                                                            <td>{{$question->question}}</td>
+                                                            <td class="text-right">
+                                                                <a class="btn detail-button" href="{{ route('get.question.detail', ['id' => $question->id]) }}">Detail</a>
+                                                                <button type="button" class="btn create-button" onclick="showRemoveQuestionAlert('{{  $question->id}}','{{ $question->question }}' )">Remove</button>
+                                                            </td>
+                                                        </tr>
+                                                        <?php $i++;?>
                                                     @endforeach
                                                 @endif
                                             </tbody>

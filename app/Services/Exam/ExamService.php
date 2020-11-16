@@ -111,7 +111,7 @@ class ExamService
      * @return createdStatus == true or false;
      * @throw \Exception error AND delete $this->exam
      */
-    public function createNewExam($request)
+    public function createNewExam($request, $examID)
     {
       try
       {
@@ -218,11 +218,11 @@ class ExamService
      */
     protected function generateRandomQuestionsByDifficulty($subject, $number_of_normal_questions, $number_of_medium_questions, $number_of_hard_questions)
     {
-      $question = [];
-      $question[] = $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.normal'), $number_of_normal_questions);
-      $question[] = $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.medium'), $number_of_medium_questions);
-      $question[] = $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.hard'), $number_of_hard_questions);
-      return json_encode($question);
+      $questions = [];
+      $questions = array_merge($questions, $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.normal'), $number_of_normal_questions));
+      $questions = array_merge($questions, $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.medium'), $number_of_medium_questions));
+      $questions = array_merge($questions, $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.hard'), $number_of_hard_questions));
+      return json_encode($questions);
     }
 
     /*
@@ -317,7 +317,10 @@ class ExamService
         for($i = 0; $i < $numberOfSets; $i++)
         {
             $setID = $examID.$i;
+            foreach($questions as $question)
+            {
 
+            }
             $this->questionSetRepository->createQuestionSet($setID, $questions, $subject);
         }
     }
@@ -358,7 +361,6 @@ class ExamService
         } catch (\Exception $e) {
             Log::error($e);
         }
-
     }
 
     /**

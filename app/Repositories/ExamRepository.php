@@ -65,7 +65,7 @@ class ExamRepository extends BaseRepository {
 
     public function getExam($id)
     {
-        $query = $this->query()->addSelect('duration', 'created_at', 'created_by', 'updated_at', 'updated_by');
+        $query = $this->query()->addSelect('duration', 'lecture','questions_in_exam', 'created_at', 'created_by', 'updated_at', 'updated_by');
         return $query->findOrFail($id);
     }
 
