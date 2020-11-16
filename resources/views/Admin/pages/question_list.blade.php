@@ -74,7 +74,7 @@ Question List
                             <tbody>
                                 @foreach($listQuestion as $question)
                                     @if (\Session::has('qID') and ($question->id ==  \Session::get('qID')))
-                                    <tr style="background: #DCF1DC">
+                                    <tr style="background: #DCF1DC; border-radius">
                                         <th>{{$question->id}}</th>
                                         <td>{{$question->question}}</td>
                                         <td class="text-center">{{$question->type}}</td>

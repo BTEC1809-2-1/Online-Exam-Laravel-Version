@@ -30,18 +30,16 @@ class QuestionSetRepository
     }
 
 
-    public function createQuestionSet($setID, $question_set, $studentID, $subject)
+    public function createQuestionSet($setID, $question_set, $subject)
     {
         $data = [
             'id' => $setID,
             'questions' => $question_set,
-            'student_id' => $studentID,
             'subject' => $subject,
             'created_at' => now(),
             'updated_at' => now(),
         ];
-        DB::table('question_set')
-            ->insert($data);
+        DB::table('question_set')->insert($data);
     }
 
     public function deleteQuestionSetsByExamID($examID)
