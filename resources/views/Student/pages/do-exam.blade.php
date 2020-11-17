@@ -82,6 +82,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            <hr>
                                         </div>
                                         @endforeach
                                     </div>

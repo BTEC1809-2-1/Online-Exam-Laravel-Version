@@ -375,19 +375,19 @@ class ExamService
      * @param array $studentIDs
      * Add student to exam
      */
-    protected function addStudentToExam($examID, $student_list)
+    protected function addStudentToExam($examID, $studentID_list)
     {
         $setsID = $this->getExamQuestionSetsID($examID);
-      try {
-        foreach($student_list as $student)
-        {
-            $student_question_set_id  = $this->assignStudentToQuestionSet($setsID);
-            $this->studentExamRepository->addStudentToStudentExam($student->id, $examID, $student_question_set_id);
-        }
+        try {
+            foreach($studentID_list as $studentID)
+            {
+                $student_question_set_id  = $this->assignStudentToQuestionSet($setsID);
+                $this->studentExamRepository->addStudentToStudentExam($studentID, $examID, $student_question_set_id);
+            }
 
-      } catch (\Exception $e) {
-          Log::error($e);
-      }
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
     }
 
     protected function getExamQuestionSetsID($examID)
@@ -398,7 +398,7 @@ class ExamService
             $examQuestionSets = $this->questionSetRepository->getQuestionSetByExam($examID);
             foreach($examQuestionSets as $set)
             {
-                array_push($setID, $set->id);
+                array_push($setsID, $set->id);
             }
             return $setsID;
         }
@@ -414,7 +414,7 @@ class ExamService
         try {
             $question_set_id = "";
             $question_set_key = array_rand($setsID, 1);
-            $question_set_id = $$setsID[$question_set_key]['id'];
+            $question_set_id = $setsID[$question_set_key];
             return $question_set_id;
         } catch (\Exception $e) {
             Log::error($e);
