@@ -253,30 +253,30 @@ class ExamService
                     {
                         if($exam_type == config('app.exam_type.Normal'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 15, 10, 5);
                         }
                         if($exam_type == config('app.exam_type.Mid-term'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 15, 9, 6);
                         }
                         if($exam_type == config('app.exam_type.Final'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 15, 8, 7);
                         }
                     }
                     if($number_of_questions_per_set == 45)
                     {
                         if($exam_type == config('app.exam_type.Normal'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 25, 15, 5);
                         }
                         if($exam_type == config('app.exam_type.Mid-term'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 20, 15, 10);
                         }
                         if($exam_type == config('app.exam_type.Final'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 20, 13, 12);
                         }
                     }
                 break;
@@ -296,11 +296,11 @@ class ExamService
                     {
                         if($exam_type == config('app.exam_type.Mid-term'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 45, 30, 15);
                         }
                         if($exam_type == config('app.exam_type.Final'))
                         {
-                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                            $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 45, 25, 20);
                         }
                     }
                 break;
@@ -335,11 +335,31 @@ class ExamService
 
             }
             $normalQuestionsIndexes = array_rand($normalQuestions, $normal);
-            foreach ($normalQuestionsIndexes as $index) {
-               array_push($question_in_set, $normalQuestions[$index]);
+            $mediumQuestionsIndexes = array_rand($mediumQuestions, $medium);
+            if($hard != 0)
+            {
+                $hardQuestionsIndexes = array_rand($hardQuestions, $hard);
             }
-
-            $this->questionSetRepository->createQuestionSet($setID, $questions, $subject);
+            try
+            {
+                foreach ($normalQuestionsIndexes as $n_index) {
+                    array_push($question_in_set, $normalQuestions[$n_index]);
+                }
+                foreach ($mediumQuestionsIndexes as $m_index) {
+                    array_push($question_in_set, $mediumQuestions[$m_index]);
+                }
+                foreach ($hardQuestionsIndexes as $h_index) {
+                   array_push($question_in_set, $hardQuestions[$h_index]);
+                }
+            }catch(\Exception $e)
+            {
+                if($hard != 0)
+                {
+                    array_push($question_in_set, $hardQuestions[$hardQuestionsIndexes]);
+                }
+                Log::error($e);
+            }
+            $this->questionSetRepository->createQuestionSet($setID, json_encode($question_in_set), $subject);
         }
     }
 
@@ -373,12 +393,20 @@ class ExamService
     protected function getExamQuestionSetsID($examID)
     {
         $setsID = [];
-        $examQuestionSets = $this->questionSetRepository->getQuestionSetByExam($examID);
-        foreach($examQuestionSets as $set)
+        try
         {
-            array_push($setID, $set->id);
+            $examQuestionSets = $this->questionSetRepository->getQuestionSetByExam($examID);
+            foreach($examQuestionSets as $set)
+            {
+                array_push($setID, $set->id);
+            }
+            return $setsID;
         }
-        return $setsID;
+        catch(\Exception $e)
+        {
+            Log::error($e);
+            return $setsID;
+        }
     }
 
     protected function assignStudentToQuestionSet($setsID)

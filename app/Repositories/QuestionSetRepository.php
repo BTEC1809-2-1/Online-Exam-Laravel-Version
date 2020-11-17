@@ -11,7 +11,7 @@ class QuestionSetRepository
         $questionSet = DB::table('question_set')->where('id', 'like', $examID."%");
         if($questionSet->exists())
         {
-            return $questionSet->get();
+            return $questionSet->get()->toArray();
         }
         return null;
     }
