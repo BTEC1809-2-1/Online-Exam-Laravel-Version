@@ -238,12 +238,6 @@ return [
         'admin'   => '2'
     ],
 
-    'numberOfQuestionsPerExam' => [
-        'mc4' => '1',
-        'sc4' => '1',
-        'tf'  => '2',
-    ],
-
     'exam_status' => [
         'Ready'     => '1',
         'On-going'  => '2',

@@ -116,14 +116,13 @@ class ExamService
       try
       {
          //Generate the exam's ID based on the subject, semester and current dateTime. All exam start with "EXAM" keyword, format: EXAM<subject><semester><dateTime>
-        $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
         $questions_in_exam = $this->createExamQuestions($request->subject, $request->question_per_set, $request->exam_type);
         $student_in_request_class = $this->getListOfStudentInClass($request->classroom);
         $custom_added_student = [];
         $students_in_exam = array_merge($student_in_request_class, $custom_added_student);
-        $this->examRepository->createExam($request, $examID, $questions_in_exam, json_encode($students_in_exam));
-        $examQuestionSets =  $this->createExamQuestionSets($examID, $questions_in_exam, $request->duration, $request->number_of_set, $request->question_per_set, $request->exam_type, $request->subject);
-        $this->addStudentToExam($examID, $students_in_exam, $examQuestionSets);
+        $this->examRepository->createExam($request, $examID, json_encode($questions_in_exam), json_encode($students_in_exam));
+        $this->createExamQuestionSets($examID, $questions_in_exam, $request->duration, $request->number_of_set, $request->question_per_set, $request->exam_type, $request->subject);
+        $this->addStudentToExam($examID, $students_in_exam);
         return true;
       }catch(\Exception $e)
       {
@@ -154,60 +153,60 @@ class ExamService
         switch ($number_of_questions_per_set)
         {
             case '10':
-               return $this->generateRandomQuestionsByDifficulty($subject, 7, 3, 0);
+               return $this->generateRandomQuestionsByDifficulty($subject, 10, 6, 0);
             break;
             case '12':
-                return $this->generateRandomQuestionsByDifficulty($subject, 7, 4, 1);
+                return $this->generateRandomQuestionsByDifficulty($subject, 10, 8, 4);
             break;
             case '15':
-                return $this->generateRandomQuestionsByDifficulty($subject, 9, 3, 2);
+                return $this->generateRandomQuestionsByDifficulty($subject, 12, 6, 6);
             break;
             case '30':
                 if($exam_type == config('app.exam_type.Normal'))
                 {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 15, 11, 4);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 20, 15, 10);
                 }
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 15, 10, 5);
-                }
-                if($exam_type == config('app.exam_type.Final'))
-                {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 15, 9, 6);
-                }
-            break;
-            case '45':
-                if($exam_type == config('app.exam_type.Normal'))
-                {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 25, 15, 5);
-                }
-                if($exam_type == config('app.exam_type.Mid-term'))
-                {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 20, 20, 5);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 20, 15, 10);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
                     return $this->generateRandomQuestionsByDifficulty($subject, 20, 15, 10);
                 }
             break;
-            case '60':
+            case '45':
+                if($exam_type == config('app.exam_type.Normal'))
+                {
+                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 25, 15);
+                }
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 20, 10);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 25, 15);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 15, 15);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 30, 25, 15);
+                }
+            break;
+            case '60':
+                if($exam_type == config('app.exam_type.Mid-term'))
+                {
+                    return $this->generateRandomQuestionsByDifficulty($subject, 40, 25, 20);
+                }
+                if($exam_type == config('app.exam_type.Final'))
+                {
+                    return $this->generateRandomQuestionsByDifficulty($subject, 40, 20, 20);
                 }
             break;
             case '90':
                 if($exam_type == config('app.exam_type.Mid-term'))
                 {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 45, 30, 15);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 60, 40, 25);
                 }
                 if($exam_type == config('app.exam_type.Final'))
                 {
-                    return $this->generateRandomQuestionsByDifficulty($subject, 45, 25, 20);
+                    return $this->generateRandomQuestionsByDifficulty($subject, 60, 40, 25);
                 }
             break;
         }
@@ -222,7 +221,7 @@ class ExamService
       $questions = array_merge($questions, $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.normal'), $number_of_normal_questions));
       $questions = array_merge($questions, $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.medium'), $number_of_medium_questions));
       $questions = array_merge($questions, $this->questionRepository->addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, config('app.question_level_of_difficult.hard'), $number_of_hard_questions));
-      return json_encode($questions);
+      return $questions;
     }
 
     /*
@@ -231,22 +230,22 @@ class ExamService
      */
     function createExamQuestionSets($examID, $questions_in_exam, $duration, $number_of_set, $number_of_questions_per_set, $exam_type, $subject)
     {
-        $questions = json_decode($questions_in_exam);
+        $questions = $questions_in_exam;
         try {
             switch($duration)
             {
                 case "00:15:00":
                     if($number_of_questions_per_set == 10)
                     {
-                        $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                        $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 7, 3, 0);
                     }
                     if($number_of_questions_per_set == 12)
                     {
-                        $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                        $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 7, 4, 1);
                     }
                     if($number_of_questions_per_set == 15)
                     {
-                        $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 0, 0, 0);
+                        $this->createQuestionSetFromGivenQuestions($examID, $questions, $number_of_set, $subject, 9, 4, 2);
                     }
                 break;
                 case '00:45:00':
@@ -317,10 +316,29 @@ class ExamService
         for($i = 0; $i < $numberOfSets; $i++)
         {
             $setID = $examID.$i;
+            $question_in_set = [];
+            $normalQuestions = []; $mediumQuestions = []; $hardQuestions = [];
             foreach($questions as $question)
             {
+                if($question->level_of_difficult == config('app.question_level_of_difficult.normal'))
+                {
+                    array_push($normalQuestions, $question);
+                }
+                if($question->level_of_difficult == config('app.question_level_of_difficult.medium'))
+                {
+                    array_push($mediumQuestions, $question);
+                }
+                if($question->level_of_difficult == config('app.question_level_of_difficult.hard'))
+                {
+                    array_push($hardQuestions, $question);
+                }
 
             }
+            $normalQuestionsIndexes = array_rand($normalQuestions, $normal);
+            foreach ($normalQuestionsIndexes as $index) {
+               array_push($question_in_set, $normalQuestions[$index]);
+            }
+
             $this->questionSetRepository->createQuestionSet($setID, $questions, $subject);
         }
     }
@@ -337,12 +355,13 @@ class ExamService
      * @param array $studentIDs
      * Add student to exam
      */
-    protected function addStudentToExam($examID, $student_list, $examQuestionSets)
+    protected function addStudentToExam($examID, $student_list)
     {
+        $setsID = $this->getExamQuestionSetsID($examID);
       try {
         foreach($student_list as $student)
         {
-            $student_question_set_id  = $this->assignStudentToQuestionSet($examQuestionSets);
+            $student_question_set_id  = $this->assignStudentToQuestionSet($setsID);
             $this->studentExamRepository->addStudentToStudentExam($student->id, $examID, $student_question_set_id);
         }
 
@@ -351,12 +370,23 @@ class ExamService
       }
     }
 
-    protected function assignStudentToQuestionSet($examQuestionSets)
+    protected function getExamQuestionSetsID($examID)
+    {
+        $setsID = [];
+        $examQuestionSets = $this->questionSetRepository->getQuestionSetByExam($examID);
+        foreach($examQuestionSets as $set)
+        {
+            array_push($setID, $set->id);
+        }
+        return $setsID;
+    }
+
+    protected function assignStudentToQuestionSet($setsID)
     {
         try {
             $question_set_id = "";
-            $question_set_key = array_rand($examQuestionSets, 1);
-            $question_set_id = $examQuestionSets[$question_set_key]['id'];
+            $question_set_key = array_rand($setsID, 1);
+            $question_set_id = $$setsID[$question_set_key]['id'];
             return $question_set_id;
         } catch (\Exception $e) {
             Log::error($e);
