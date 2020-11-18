@@ -30,7 +30,7 @@ Route::get('/auth/redirect/{provider}', 'SocialController@redirect')->name('logi
 Route::get('/callback/{provider}', 'SocialController@callback');
 
 // Route for basic login
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn() => view('welcome3'));
 Route::get('logout','Auth\LoginController@logout');
 
 
