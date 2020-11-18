@@ -111,12 +111,12 @@
         }
 
         .photo {
-            height: 50%;
+            height: 100%;
             width: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-image: url("https://cdn.pixabay.com/photo/2017/07/10/08/27/fruit-2489367__340.png");
+            background-image: url("https://fptbtec.edu.vn/wp-content/themes/btec/images/banner-hoc-bong_2010_mobile.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: 50% 50%;
