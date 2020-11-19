@@ -26,4 +26,9 @@ class StudentRepository
     {
         return User::where('role', '1')->where('class', $class)->get();
     }
+
+    public function getStudent($id)
+    {
+        return User::where('role', '1')->where('email', $id)->first();
+    }
 }

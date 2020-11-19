@@ -115,11 +115,20 @@ class ExamService
     {
       try
       {
-         //Generate the exam's ID based on the subject, semester and current dateTime. All exam start with "EXAM" keyword, format: EXAM<subject><semester><dateTime>
         $questions_in_exam = $this->createExamQuestions($request->subject, $request->question_per_set, $request->exam_type);
         $student_in_request_class = $this->getListOfStudentInClass($request->classroom);
-        $custom_added_student = [];
-        $students_in_exam = array_merge($student_in_request_class, $custom_added_student);
+        $custom_added_student = $request->extra_student;
+        $custom_added_student = explode(',', $custom_added_student);
+        $extra_student = [];
+        foreach($custom_added_student as $student_id)
+        {
+            array_push($extra_student, [
+                'id' => $student_id,
+                'class' => $this->studentRepository->getStudent($student_id)->class,
+                'name' => $this->studentRepository->getStudent($student_id)->name,
+            ]);
+        }
+        $students_in_exam = array_merge($student_in_request_class, $extra_student);
         $this->examRepository->createExam($request, $examID, json_encode($questions_in_exam), json_encode($students_in_exam));
         $this->createExamQuestionSets($examID, $questions_in_exam, $request->duration, $request->number_of_set, $request->question_per_set, $request->exam_type, $request->subject);
         $this->addStudentToExam($examID, $students_in_exam);
@@ -138,7 +147,10 @@ class ExamService
         $student_in_class_id = [];
         foreach($studentList as $student)
         {
-            array_push($student_in_class_id, ($student->id));
+            array_push($student_in_class_id, [
+                'id' => $student->email,
+                'class' => $student->class,
+                'name' => $student->name]);
         }
         return $student_in_class_id;
     }
@@ -375,14 +387,14 @@ class ExamService
      * @param array $studentIDs
      * Add student to exam
      */
-    protected function addStudentToExam($examID, $studentID_list)
+    protected function addStudentToExam($examID, $student_list)
     {
         $setsID = $this->getExamQuestionSetsID($examID);
         try {
-            foreach($studentID_list as $studentID)
+            foreach($student_list as $student)
             {
                 $student_question_set_id  = $this->assignStudentToQuestionSet($setsID);
-                $this->studentExamRepository->addStudentToStudentExam($studentID, $examID, $student_question_set_id);
+                $this->studentExamRepository->addStudentToStudentExam($student['id'], $examID, $student_question_set_id);
             }
 
         } catch (\Exception $e) {
@@ -618,15 +630,41 @@ class ExamService
     {
         if ($request->get('query')) {
             $query = $request->get('query');
-            $data = DB::table('users')->where('role', '1')->where('name', 'LIKE', "%{$query}%")->get();
+            $data = DB::table('users')->where('role', '1')->where('class', '<>',$request->get('classroom') )->where('name', 'LIKE', "%{$query}%")->get();
             $output = '<ul style="display:block; position:relative">';
+            $i = 0;
             foreach ($data as $row) {
                 $output .= '
-               <li><span style="color: black;" href="data/' . $row->id . '">' .'Name: ' .$row->name .' ID: '.$row->id. '</span></li>
+               <li><input style="color: black;" type="hidden" class="extra-id" value="'.$row->email.'"></input><input style="color: black;" type="hidden" class="extra-name" value="'.$row->name.'"></input>' .'Name: ' .$row->name .' | ID: '.$row->email. '</li>
                ';
+               $i++;
             }
             $output .= '</ul>';
             echo $output;
         }
+    }
+
+    public function getQuestionSets($examID)
+    {
+        return $this->questionSetRepository->getExamQuestionSets($examID);
+    }
+
+    public function removeStudentFromExam($examID, $student_id)
+    {
+        $exam_student = json_decode($this->getExamDetail($examID)->student_in_exam);
+        foreach($exam_student as $index=>$student)
+        {
+            if($student->id == $student_id)
+            {
+                unset($exam_student[$index]);
+            }
+        }
+        $this->examRepository->updateExamStudentList($examID, json_encode($exam_student));
+        return $this->studentExamRepository->removeStudentFromExam($examID, $student_id);
+    }
+
+    public function update($request, $examID)
+    {
+        return $this->examRepository->updateExam($request, $examID);
     }
 }

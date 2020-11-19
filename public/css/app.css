@@ -10905,8 +10905,8 @@ a.text-dark:focus {
 }
 
 .general-use-button {
-  background: #ff66b5;
-  color: #ffffff;
+  background: white;
+  color: #000000;
   font-weight: bolder;
 }
 
