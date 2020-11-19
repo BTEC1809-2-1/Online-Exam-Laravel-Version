@@ -41,7 +41,32 @@ class ExamController extends Controller
     {
         $exam = $this->examService->getExamDetail($examID);
         $exam_questions = json_decode($exam->questions_in_exam);
-        return view('Admin.pages.exam_detail', compact('exam', 'exam_questions'));
+        $student_in_exam = json_decode($exam->student_in_exam);
+        return view('Admin.pages.exam_detail', compact('exam', 'exam_questions', 'student_in_exam'));
+    }
+
+    public function getExamQuestionSet($examID)
+    {
+        $exam_question_sets = $this->examService->getQuestionSets($examID);
+        $number_of_sets_created = count($exam_question_sets);
+        $number_of_questions_per_set = count(json_decode($exam_question_sets->first()->questions));
+        $normal = 0; $medium = 0; $hard = 0;
+        foreach(json_decode($exam_question_sets->first()->questions) as $question)
+        {
+            if($question->level_of_difficult == config('app.question_level_of_difficult.normal'))
+            {
+                $normal++;
+            }
+            if($question->level_of_difficult == config('app.question_level_of_difficult.medium'))
+            {
+                $medium++;
+            }
+            if($question->level_of_difficult == config('app.question_level_of_difficult.hard'))
+            {
+                $hard++;
+            }
+        }
+        return view('Admin.pages.exam_question_sets', compact('number_of_sets_created', 'number_of_questions_per_set', 'exam_question_sets', 'normal', 'medium', 'hard'));
     }
 
     /**
@@ -102,4 +127,28 @@ class ExamController extends Controller
     {
        return $this->examService->ajaxSearchForStudent($request);
     }
+
+    public function removeStudentFromExam($examID, $studentID)
+    {
+        if($this->examService->removeStudentFromExam($examID, $studentID))
+        {
+
+            return view('Admin.pages.exam_detail', ['id' => $examID])
+                    ->with('sucess', 'You have remove student '.$studentID.' from this exam!');
+        }
+        return view('Admin.pages.exam_detail', ['id' => $examID])
+                    ->with('error', 'Error, not thing has changed');
+    }
+
+    public function update(Request $request, $examID)
+    {
+        if($this->examService->update($request, $examID))
+        {
+            return redirect()->route('get.exam.detail', ['id' => $examID])
+                    ->with('sucess', 'The exam has been updated');
+        }
+        return redirect()->route('get.exam.detail',['id' => $examID])
+                    ->with('error', 'Error, not thing has changed');
+    }
+
 }

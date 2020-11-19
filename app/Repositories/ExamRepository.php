@@ -65,7 +65,7 @@ class ExamRepository extends BaseRepository {
 
     public function getExam($id)
     {
-        $query = $this->query()->addSelect('duration', 'lecture','questions_in_exam', 'created_at', 'created_by', 'updated_at', 'updated_by');
+        $query = $this->query()->addSelect('duration', 'student_in_exam', 'lecture','questions_in_exam', 'created_at', 'created_by', 'updated_at', 'updated_by');
         return $query->findOrFail($id);
     }
 
@@ -77,5 +77,20 @@ class ExamRepository extends BaseRepository {
             return $exam->select('student_in_exam')->get();
         }
         return null;
+    }
+
+    public function updateExamStudentList($examID, $student_list)
+    {
+        return Exam::where('id', $examID)
+                ->update(['student_in_exam' => $student_list]);
+    }
+
+    public function updateExam($request, $examID)
+    {
+        return Exam::where('id', $examID)->update([
+            'lecture' => $request->lecture,
+            'start_at' => date($request->date.' '.$request->startTime),
+            'status' => $request->status,
+        ]);
     }
 }
