@@ -241,7 +241,7 @@ return [
     'exam_status' => [
         'Ready'     => '1',
         'On-going'  => '2',
-        'Ended'      => '3',
+        'Ended'     => '3',
         'Cancelled' => '4',
     ],
 
@@ -278,5 +278,11 @@ return [
         'medium' => '2',
         'hard' => '3'
     ],
+
+    'question_type' => [
+        'Multiple Choice 4' => 'MC4',
+        'Single Choice 4' => 'SC4',
+        'True False' => 'TF'
+    ]
 
 ];
