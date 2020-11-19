@@ -56,7 +56,8 @@ class QuestionRepository extends BaseRepository {
     public function getQuestionDetail($id)
     {
         $query = $this->query()
-                ->addSelect('created_at',
+                ->addSelect('level_of_difficult',
+                            'created_at',
                             'created_by',
                             'updated_at',
                             'updated_by');
