@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Thich mot ban gai BTEC</title>
+        <title>BTEC online exam</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -70,7 +70,11 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        @if ( Auth::user()->role == config('app.role.admin'))
+                            <a href="{{ url('/admin') }}">Home</a>
+                        @else
+                            <a href="{{ url('/student') }}">Home</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
                     @endauth
