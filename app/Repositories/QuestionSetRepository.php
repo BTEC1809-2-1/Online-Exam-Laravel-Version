@@ -29,6 +29,10 @@ class QuestionSetRepository
                 ->get();
     }
 
+    public function getExamQuestionSets($examID)
+    {
+        return DB::table('question_set')->where('id', 'like', $examID.'%')->get();
+    }
 
     public function createQuestionSet($setID, $question_set, $subject)
     {
