@@ -9,7 +9,7 @@ Question Detail
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="row justify-content-between px-4">
@@ -26,17 +26,18 @@ Question Detail
                                         <label for="">Question ID</label>
                                     <input type="text" class="form-control" value="{{$question->id}}" readonly>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Question</label>
-                                        <input type="text" class="form-control"  value="{{$question->question}}" readonly>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="">Type</label>
-                                        <input type="text" class="form-control"  value="{{$question->type}}" readonly>
+                                        <input type="text" class="form-control"  value="{{array_search($question->type, config('app.question_type'))}}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Subject</label>
-                                        <input type="text" class="form-control" value="{{$question->subject}}" readonly>
+                                        <input type="text" class="form-control" value="{{array_search($question->subject, config('app.subject'))}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Level Of Difficult</label>
+                                        <input type="text" class="form-control editable" value="{{array_search($question->level_of_difficult,  config('app.question_level_of_difficult')) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -59,30 +60,39 @@ Question Detail
                                 </div>
                             </div>
                             <div class="form-row">
-                                @foreach ($answers as $answer)
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <label for="">Answer {{ $answer->index }}</label>
-                                        <input type="text" class="form-control" value="{{$answer->content}}" readonly>
-                                    </div>
+                                <div class="form-group col-md-12">
+                                    <label for="">Question</label>
+                                    {{-- <input type="text" class="form-control"  value="{{$question->question}}" readonly> --}}
+                                    <textarea rows="10" cols="50" type="text" class="form-control editable" name="question" readonly>{{$question->question}}</textarea>
                                 </div>
-                                <div class="col-md-2">
+                                @foreach ($answers as $answer)
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="">Is correct</label>
-                                        @if ($question->type == 'TF' or $question->type === 'SC4')
-                                            @if ($answer->index == $is_correct)
-                                                <input type="text" class="form-control" value="Correct" readonly>
-                                            @else
-                                                <input type="text" class="form-control" value="Not correct" readonly>
-                                            @endif
-                                        @else
-                                            @if (($is_correct[$answer->index - 1] !== ''))
-                                                <input type="text" class="form-control" value="Correct" readonly>
-                                            @else
-                                                <input type="text" class="form-control" value="Not correct" readonly>
-                                            @endif
-                                        @endif
-
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label for="">Answer {{ $answer->index }}</label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group row">
+                                                    {{-- <label for="">Is correct</label> --}}
+                                                    @if ($question->type == 'TF' or $question->type === 'SC4')
+                                                        @if ($answer->index == $is_correct)
+                                                            <input type="text" class="form-control" value="Correct" readonly>
+                                                        @else
+                                                            <input type="text" class="form-control" value="Not correct" readonly>
+                                                        @endif
+                                                    @else
+                                                        @if (($is_correct[$answer->index - 1] !== ''))
+                                                            <input type="text" class="form-control" value="Correct" readonly>
+                                                        @else
+                                                            <input type="text" class="form-control" value="Not correct" readonly>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <input type="text" class="form-control" value="{{$answer->content}}" readonly> --}}
+                                        <textarea rows="10" cols="50" type="text" class="form-control editable" name="question" readonly>{{$answer->content}}</textarea>
                                     </div>
                                 </div>
                                 @endforeach
@@ -145,7 +155,7 @@ Question Detail
                 function updateOn() {
                     $('#edit').parent().css('display','none');
                     $('#update').show();
-                    $(":input").prop('readonly', false);
+                    $(".editable").prop('readonly', false);
                 }
             });
         </script>
