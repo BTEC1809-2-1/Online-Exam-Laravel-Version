@@ -156,8 +156,8 @@
                                                             <td>{{$student->id}}</td>
                                                             <td>{{$student->class}}</td>
                                                             <td>{{$student->name}}</td>
-                                                            <td class="text-center">
-                                                                <a class="btn detail-button" href="">Detail</a>
+                                                            <td class="text-left">
+                                                                {{-- <a class="btn detail-button" href="">Detail</a> --}}
                                                                 <a href="{{ route('exam.remove.student', [$exam->id, $student->id]) }}" class="btn create-button">Remove</a>
                                                             </td>
                                                         </tr>

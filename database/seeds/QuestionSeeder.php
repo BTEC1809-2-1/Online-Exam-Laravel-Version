@@ -109,7 +109,7 @@ class QuestionSeeder extends Seeder
                 'updated_by' => 'Admin 1'
             ]);
             $mcAnswers = [];
-            $value = ['', 1];
+            $value = ['0', '1'];
             $mcIsCorrect = [];
             for($j = 1; $j <= 4; $j++)
             {

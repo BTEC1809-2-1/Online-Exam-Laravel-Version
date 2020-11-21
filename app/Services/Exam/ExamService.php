@@ -78,6 +78,7 @@ class ExamService
      */
     public function getUpcomingExam()
     {
+        // dd(count($this->getStudentExamQuestions('EXAMITSPR20201119070236', 'anlbbhaf180212@fpt.edu.vn')));
         return $this->examRepository->getUpcomingExam();
     }
 
@@ -120,14 +121,18 @@ class ExamService
         $custom_added_student = $request->extra_student;
         $custom_added_student = explode(',', $custom_added_student);
         $extra_student = [];
-        foreach($custom_added_student as $student_id)
+        if(!empty($extra_student))
         {
-            array_push($extra_student, [
-                'id' => $student_id,
-                'class' => $this->studentRepository->getStudent($student_id)->class,
-                'name' => $this->studentRepository->getStudent($student_id)->name,
-            ]);
-        }
+            foreach($custom_added_student as $student_id)
+            {
+                array_push($extra_student, [
+                    'id' => $student_id,
+                    'class' => $this->studentRepository->getStudent($student_id)->class,
+                    'name' => $this->studentRepository->getStudent($student_id)->name,
+                ]);
+            }
+        };
+
         $students_in_exam = array_merge($student_in_request_class, $extra_student);
         $this->examRepository->createExam($request, $examID, json_encode($questions_in_exam), json_encode($students_in_exam));
         $this->createExamQuestionSets($examID, $questions_in_exam, $request->duration, $request->number_of_set, $request->question_per_set, $request->exam_type, $request->subject);
@@ -328,6 +333,7 @@ class ExamService
         for($i = 0; $i < $numberOfSets; $i++)
         {
             $setID = $examID.$i;
+
             $question_in_set = [];
             $normalQuestions = []; $mediumQuestions = []; $hardQuestions = [];
             foreach($questions as $question)
@@ -566,7 +572,7 @@ class ExamService
       $correct_answers = 0;
       $answers = $this->studentExamRepository->getStudentExamAnswers($studentID, $examID); //Receiving the encoded answers string from DB
       $answers = json_decode($answers->student_answers); //Decode the answers string to PHP object and re-asign it to $answers
-      $total = count((array)$answers);
+      $total = count($this->getStudentExamQuestions($examID, $studentID));
       /**
        * Traverse through answers array
        * Check if the answer is correct
@@ -577,7 +583,7 @@ class ExamService
       {
         if($this->is_correct($answer->answer, $answer->question_id))
         {
-          $score+=15;
+          $score+=100/$total;
           $correct_answers++;
         }
       }

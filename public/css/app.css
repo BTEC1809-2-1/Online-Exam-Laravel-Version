@@ -5260,7 +5260,7 @@ input[type=button].btn-block {
 
 .page-item.active .page-link {
   z-index: 3;
-  color: #ffffff;
+  color: #000000;
   background-color: #3490dc;
   border-color: #3490dc;
 }
@@ -10906,7 +10906,7 @@ a.text-dark:focus {
 
 .general-use-button {
   background: white;
-  color: #000000;
+  color: black;
   font-weight: bolder;
 }
 
@@ -10928,5 +10928,9 @@ a.text-dark:focus {
 .delete-button {
   background: #8A2BE2;
   color: white;
+}
+
+.page-link {
+  color: black;
 }
 

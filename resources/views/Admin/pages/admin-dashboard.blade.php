@@ -74,7 +74,7 @@
                                     <td>{{$exam->start_at}}</td>
                                     <td class="text-center exam-status">{{ array_search($exam->status, config('app.exam_status'))}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}" class="btn detail-button">Detail</a>
+                                        <a href="{{route('get.exam.detail', ['id' => $exam->id])}}" style="text-white" class="btn detail-button">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach

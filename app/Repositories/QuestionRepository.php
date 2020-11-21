@@ -109,5 +109,13 @@ class QuestionRepository extends BaseRepository {
 
     }
 
+    public function updateDetail($request, $questionID)
+    {
+        return Question::where('id', $questionID)->update([
+            'question' => $request->question,
+            'level_of_difficult' => $request->level_of_difficult
+        ]);
+    }
+
 }
 

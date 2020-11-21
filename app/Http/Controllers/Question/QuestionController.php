@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Question;
 
+use App\Answer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Question\QuestionService;
@@ -101,5 +102,14 @@ class QuestionController extends Controller
         }
         return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
 
+    }
+
+    public function updateQuestionDetail(Request $request, $questionID)
+    {
+        if($this->questionService->updateQuestionDetail($request, $questionID))
+        {
+            return redirect()->route('get.question.detail', ['id' => $questionID]);
+        }
+        return redirect()->route('get.question.detail', ['id' => $questionID]);
     }
 }

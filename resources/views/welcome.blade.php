@@ -73,7 +73,7 @@
                         @if ( Auth::user()->role == config('app.role.admin'))
                             <a href="{{ url('/admin') }}">Home</a>
                         @else
-                            <a href="{{ url('/student') }}">Home</a>
+                            <a href="{{ url('/logout') }}">Logout</a>
                         @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
@@ -84,6 +84,12 @@
             <div class="content">
                 <div class="title m-b-md">
                     Tính năng đăng ký đã bị khóa, vui lòng nạp thẻ lần đầu để  mở khóa!
+                    <br>
+                    @if (Auth::check())
+                        @if (!(Auth::user()->role == config('app.role.admin')))
+                            Bro chưa có bài kiểm tra đâu, về đi.
+                        @endif
+                    @endif
                 </div>
 
                 <div class="links">

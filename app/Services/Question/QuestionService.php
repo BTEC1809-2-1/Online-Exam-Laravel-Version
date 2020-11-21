@@ -154,5 +154,12 @@ class QuestionService {
             Log::error($e);
         }
     }
+
+    public function updateQuestionDetail($request, $questionID)
+    {
+        $this->answerRepository->updateDetail($request, $questionID);
+        return $this->questionRepository->updateDetail($request, $questionID);
+
+    }
 }
 

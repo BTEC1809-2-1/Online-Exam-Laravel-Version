@@ -92,4 +92,26 @@ class AnswerRepository extends BaseRepository {
     {
         Answer::where('question_id', $questionID)->delete();
     }
+
+    public function updateDetail($request, $questionID)
+    {
+        foreach($request->answer as $index=>$answer)
+        {
+            $answers[] = [
+                'index' => $index,
+                'content' => $answer
+            ];
+        }
+        if(is_array($request->is_correct))
+        {
+            $is_correct =  json_encode($request->is_correct);
+        }else {
+            $is_correct =  $request->is_correct;
+        }
+
+        Answer::where('question_id', $questionID)->update([
+            'answer' => json_encode($answers),
+            'is_correct' => $is_correct
+        ]);
+    }
 }

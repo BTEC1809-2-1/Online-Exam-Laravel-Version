@@ -66,7 +66,7 @@ Question List
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Question</th>
-                                    <th scope="col" class="text-center">Type</th>
+                                    {{-- <th scope="col" class="text-center">Type</th> --}}
                                     <th scope="col" class="text-center">Subject</th>
                                     <th scope="col colspan-3" class="text-center">Action</th>
                                 </tr>
@@ -77,10 +77,10 @@ Question List
                                     <tr style="background: #DCF1DC; border-radius">
                                         <th>{{$question->id}}</th>
                                         <td>{{$question->question}}</td>
-                                        <td class="text-center">{{$question->type}}</td>
-                                        <td class="text-center">{{$question->subject}}</td>
+                                        {{-- <td class="text-center">{{$question->type}}</td> --}}
+                                        <td class="text-center">{{array_search($question->subject, config('app.subject'))}}</td>
                                         <td class="text-center">
-                                            <a class="btn btn-block detail-button" href="{{route('get.question.detail', ['id' => $question->id])}}">
+                                            <a class="btn btn-block detail-button" style="color:white;" href="{{route('get.question.detail', ['id' => $question->id])}}">
                                                 View detail
                                             </a>
                                         </td>
@@ -89,10 +89,10 @@ Question List
                                         <tr>
                                             <th>{{$question->id}}</th>
                                             <td>{{$question->question}}</td>
-                                            <td class="text-center">{{$question->type}}</td>
-                                            <td class="text-center">{{$question->subject}}</td>
+                                            {{-- <td class="text-center">{{$question->type}}</td> --}}
+                                            <td class="text-center">{{array_search($question->subject, config('app.subject'))}}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-block detail-button" href="{{route('get.question.detail', ['id' => $question->id])}}">
+                                                <a class="btn btn-block detail-button" style="color:white;" href="{{route('get.question.detail', ['id' => $question->id])}}">
                                                     View detail
                                                 </a>
                                             </td>
