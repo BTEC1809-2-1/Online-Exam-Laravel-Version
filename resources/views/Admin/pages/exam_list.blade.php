@@ -60,17 +60,31 @@
                         </thead>
                         <tbody>
                             @foreach($listExam as $exam)
-                            <tr>
-                                <th>{{$exam->id}}</th>
-                                <td>{{array_search($exam->subject, config('app.subject'))}}</td>
-                                <td>{{array_search($exam->semester, config('app.semester'))}}</td>
-                                <td>{{$exam->classroom}}</td>
-                                <td>{{$exam->start_at}}</td>
-                                <td class="text-center exam-status">{{ array_search($exam->status, config('app.exam_status'))}}</td>
-                                <td class="text-center">
-                                    <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
-                                </td>
-                            </tr>
+                                @if (\Session::has('success') and ($exam->id == \Session::get('exam_id') ))
+                                    <tr style="background: #DCF1DC">
+                                        <th>{{$exam->id}}</th>
+                                        <td>{{array_search($exam->subject, config('app.subject'))}}</td>
+                                        <td>{{array_search($exam->semester, config('app.semester'))}}</td>
+                                        <td>{{$exam->classroom}}</td>
+                                        <td>{{$exam->start_at}}</td>
+                                        <td class="text-center exam-status">{{ array_search($exam->status, config('app.exam_status'))}}</td>
+                                        <td class="text-center">
+                                            <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th>{{$exam->id}}</th>
+                                        <td>{{array_search($exam->subject, config('app.subject'))}}</td>
+                                        <td>{{array_search($exam->semester, config('app.semester'))}}</td>
+                                        <td>{{$exam->classroom}}</td>
+                                        <td>{{$exam->start_at}}</td>
+                                        <td class="text-center exam-status">{{ array_search($exam->status, config('app.exam_status'))}}</td>
+                                        <td class="text-center">
+                                            <a href="Detail/{{$exam->id}}" class="btn detail-button">View detail</a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

@@ -7,12 +7,12 @@
     <style>
         .form-content
         {
-            background:#cede;
+            background:#1480B6;
             border-radius: 20px;
         }
         .form-group
         {
-            color: black;
+            color: white;
         }
         .student-list
         {
@@ -46,9 +46,10 @@
             margin-top: 10px;
             margin-left: 1em;
             padding-left: 10px;
-            background:#cede;
+            background:#1480B6;
             border-radius: 10px;
             max-width: 95%;
+            color: white;
         }
         .remove-btn
         {
@@ -69,16 +70,16 @@
             $('#search').keyup(function()
             {
                 var query = $(this).val();
-                console.log(query);
                 if(query != '')
                 {
                     var _token = $('input[name="_token"]').val();
+                    let classroom = $('#classroom').find(":selected").text();
                     $.ajax({
                         url:"{{ route('student.search') }}",
                         method:"POST",
                         data:
                         {
-                            query:query, _token:_token
+                            query:query, _token:_token, classroom: classroom
                         },
                         success:function(data)
                         {
@@ -93,10 +94,17 @@
                 }
             });
             var i = 1;
+            var extraStudent = [];
             $(document).on('click', 'li', function(){
                 $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');
+                // extraStudent.push([{
+                //     "id" : $(this).children('.extra-id').val(),
+                //     "name" : $(this).children('.extra-name').val(),
+                // }]);
+                extraStudent.push($(this).children('.extra-id').val());
                 $('#resultList').hide();
                 i++;
+                $('#search').val(null);
             });
             $('#duration').on('change', function(){
                 if(this.value!=null) {
@@ -132,6 +140,11 @@
                     }
                 }
             });
+            $('#createExam').on('click', function(){
+                extraStudent = extraStudent;
+                $('#create').append(`<input type="hidden" name="extra_student" value="`+extraStudent+`">`);
+                $('#create').submit();
+            });
         });
     </script>
 @endsection
@@ -160,7 +173,7 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('exam.store')}}">
+                        <form method="POST" action="{{route('exam.store')}}" id="create">
                             @csrf
                             <div class="form-content">
                                 <div class="row pl-md-4 pt-2">
@@ -204,7 +217,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Class *</label>
-                                            <select name="classroom" id="" class="form-control">
+                                            <select name="classroom" id="classroom" class="form-control">
                                                 <option selected></option>
                                                 <option value="BHAF1809-2.1">BHAF1809-2.1</option>
                                                 <option value="BHAF1809-2.2">BHAF1809-2.2</option>
@@ -318,7 +331,7 @@
                             </div>
                              {{-- 7 --}}
                             <div class="row pl-md-4 mt-4">
-                                <button type="submit" class="btn create-button btn-block">Create Exam</button>
+                                <button type="button" id="createExam" class="btn create-button btn-block">Create Exam</button>
                             </div>
                         </form>
                     </div>

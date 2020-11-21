@@ -238,16 +238,10 @@ return [
         'admin'   => '2'
     ],
 
-    'numberOfQuestionsPerExam' => [
-        'mc4' => '1',
-        'sc4' => '1',
-        'tf'  => '2',
-    ],
-
     'exam_status' => [
         'Ready'     => '1',
         'On-going'  => '2',
-        'Ended'      => '3',
+        'Ended'     => '3',
         'Cancelled' => '4',
     ],
 
@@ -284,5 +278,11 @@ return [
         'medium' => '2',
         'hard' => '3'
     ],
+
+    'question_type' => [
+        'Multiple Choice 4' => 'MC4',
+        'Single Choice 4' => 'SC4',
+        'True False' => 'TF'
+    ]
 
 ];

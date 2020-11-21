@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/Question/Create', 'Question\QuestionController@store')->name('question.store');
         Route::get('/Question/Detail/{id}', 'Question\QuestionController@getQuestionDetail')->name('get.question.detail');
         Route::get('/Question/Delete/{id}', 'Question\QuestionController@delete')->name('question.delete');
-        Route::post('/Question/Detail/{id}','Question\QuestionController@getQuestionList')->name('question.update');
+        Route::post('/Question/Detail/{id}','Question\QuestionController@updateQuestionDetail')->name('question.update');
         Route::get('/Question/List', 'Question\QuestionController@getQuestionList')->name('get.question.list');
         /** Exam route group */
         Route::get('/Exam/Create', 'Exam\ExamController@create')->name('create.exam');
@@ -62,7 +62,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/findStudent', 'Exam\ExamController@searchStudent')->name('student.search');
         /** */
         Route::get('/Exam/Detail/{id}', 'Exam\ExamController@getExamDetail')->name('get.exam.detail');
+        Route::post('/Exam/Detail/{id}', 'Exam\ExamController@update')->name('update.exam.detail');
+        Route::get('/Exam/{id}/QuestionSets', 'Exam\ExamController@getExamQuestionSet')->name('get.Exam.QuestionSets');
         Route::get('/Exam/Detail/{id}/Remove', 'Exam\ExamController@delete')->name('exam.delete');
+        Route::get('/Exam/Detail/{examID}RemoveStudent/{studentID}', 'Exam\ExamController@removeStudentFromExam')->name('exam.remove.student');
         /**TODO: create this function*/
         Route::get('/Exam/Detail/{id}/remove/{question}', 'Exam\ExamController@deleteQuestion')->name('exam.question.remove');
         Route::get('/Exam/List', 'Exam\ExamController@getExamList')->name('get.exam.list');

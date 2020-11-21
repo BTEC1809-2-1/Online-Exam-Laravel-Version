@@ -120,8 +120,8 @@ class StudentExamRepository
         }
     }
 
-    public function deleteStudentExamByExamID($examID)
+    public function removeStudentFromExam($examID, $student_id)
     {
-        $this->table->where('exam_id', $examID)->delete();
+        return $this->table->where('student_id', $student_id)->where('exam_id', $examID)->delete();
     }
 }

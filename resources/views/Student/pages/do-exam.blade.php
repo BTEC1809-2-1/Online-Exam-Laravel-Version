@@ -20,6 +20,18 @@
         }
     </style>
 @endsection
+@section('script')
+    <script>
+         $(document).ready(function() {
+        var doUpdate = function() {
+          $('#countdown').each(function() {
+            var count = parseInt($(this).html());
+          });
+        };
+        setInterval(doUpdate, 60000);
+      });
+    </script>
+@endsection
 @section('content')
     <div class="container">
         <div class="row mt-5">
@@ -29,7 +41,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row justify-content-center pt-3">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="row p-2">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -41,13 +53,13 @@
                                     <div class="row p-2">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                              <span class="input-group-text" id="inputGroup-sizing-default">Time Remaining</span>
+                                              <span class="input-group-text" id="inputGroup-sizing-default " readonly>Time Remaining</span>
                                             </div>
-                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                            <input type="text" id="countdown" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <div class="row p-2">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -72,6 +84,9 @@
                                         @foreach($questions ?? '' as $qIndex=>$question)
                                         <div class="card-body px-5">
                                             <input type="hidden" name="question_id_{{$qIndex + 1}}" value="{{$question['id']}}">
+                                            <div class="row">
+                                                <h4>{{$question['id']}}</h4>
+                                            </div>
                                             <span class="question-content" >{{$question['question']}}</span>
                                             <div class="row justify-content-around">
                                                 <div class="col-md-11 p-1">
@@ -82,6 +97,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            <hr >
                                         </div>
                                         @endforeach
                                     </div>

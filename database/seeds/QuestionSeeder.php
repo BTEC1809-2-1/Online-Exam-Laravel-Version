@@ -21,7 +21,7 @@ class QuestionSeeder extends Seeder
             DB::table('questions')
             ->insert([
                 'id' => $question_id,
-                'question' => 'Question '.sprintf("%06d", $i),
+                'question' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'subject' => $subject,
                 'type' => 'SC4',
                 'level_of_difficult' => random_int(1, 3),
@@ -60,7 +60,7 @@ class QuestionSeeder extends Seeder
             DB::table('questions')
             ->insert([
                 'id' => $question_id,
-                'question' => 'Question '.sprintf("%06d", $i),
+                'question' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'subject' => $subject,
                 'type' => 'TF',
                 'level_of_difficult' => random_int(1, 3),
@@ -99,7 +99,7 @@ class QuestionSeeder extends Seeder
             DB::table('questions')
             ->insert([
                 'id' => $question_id,
-                'question' => 'Question '.sprintf("%06d", $i),
+                'question' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'subject' => $subject,
                 'type' => 'MC4',
                 'level_of_difficult' => random_int(1, 3),
@@ -109,7 +109,7 @@ class QuestionSeeder extends Seeder
                 'updated_by' => 'Admin 1'
             ]);
             $mcAnswers = [];
-            $value = ['', 1];
+            $value = ['0', '1'];
             $mcIsCorrect = [];
             for($j = 1; $j <= 4; $j++)
             {

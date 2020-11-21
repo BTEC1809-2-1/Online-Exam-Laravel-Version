@@ -96,7 +96,7 @@
             </div>
             @if (isset($status) and $status != '3')
                 <div class="card-footer">
-                    <a class="btn btn-block create-button" id="do-exam-button">Start</a>
+                    <a  href="{{route('do.exam.page', [$id ?? ''])}}" class="btn btn-block create-button" id="do-exam-button">Start</a>
                 </div>
             @endif
         </div>

@@ -56,7 +56,8 @@ class QuestionRepository extends BaseRepository {
     public function getQuestionDetail($id)
     {
         $query = $this->query()
-                ->addSelect('created_at',
+                ->addSelect('level_of_difficult',
+                            'created_at',
                             'created_by',
                             'updated_at',
                             'updated_by');
@@ -74,14 +75,7 @@ class QuestionRepository extends BaseRepository {
 
     public function addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, $level_of_difficult, $number_of_questions)
     {
-        $question_in_exam = [];
-        $question_in_exam  = DB::table('questions')
-                            ->select('id', 'question', 'type')
-                            ->where('subject', $subject)
-                            ->where('level_of_difficult', $level_of_difficult)
-                            ->inRandomOrder()->limit($number_of_questions)
-                            ->get();
-        return $question_in_exam;
+        return DB::table('questions')->select('id', 'question', 'type', 'level_of_difficult')->where('subject', $subject)->where('level_of_difficult', $level_of_difficult)->inRandomOrder()->limit($number_of_questions)->get()->toArray();
     }
 
     public function deleteByID($questionID)
@@ -113,6 +107,14 @@ class QuestionRepository extends BaseRepository {
                 ->where('questions.id', $questionID)
                 ->first();
 
+    }
+
+    public function updateDetail($request, $questionID)
+    {
+        return Question::where('id', $questionID)->update([
+            'question' => $request->question,
+            'level_of_difficult' => $request->level_of_difficult
+        ]);
     }
 
 }
