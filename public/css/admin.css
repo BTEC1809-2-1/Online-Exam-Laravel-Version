@@ -76,22 +76,28 @@
 
 .wrapper .content .card {
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .wrapper .content .card .card-header {
+  font-size: 18px;
   background: #1480b6;
   color: #ffffff;
 }
 
 .wrapper .content .card .card-body {
-  color: #5bc4db;
-}
-
-.wrapper .content a {
   color: black;
 }
 
-.wrapper .content a :hover {
+.wrapper .content a:not(.page-link) {
+  color: white;
+}
+
+.wrapper .content a:not(.page-link) :hover {
   text-decoration: none;
+}
+
+.wrapper .question-list {
+  margin-bottom: 1em;
 }
 

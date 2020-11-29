@@ -19,6 +19,9 @@
         });
     </script>
 @endsection
+@section('pagename')
+    Dashboard
+@endsection
 @section('content')
     @csrf
     <div class="content">
@@ -26,21 +29,156 @@
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Dashboard') }}
+                        {{ __('Database statistic') }}
 
                     </div>
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                        Currently logged in as <b>{{ Auth::user()->name }}</b>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4><b>Exams status</b></h4>
+                                <div>
+                                    <span class="dashboard-exam-status mr-md-5">Total up-comming exam:</span>
+                                    <span class="dashboard-exam-status ml-md-5 mr-md-5">Total on-going exam:</span>
+                                    <span class="dashboard-exam-status ml-md-5 mr-md-5">Total completed exam:</span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <span class="question-type mr-md-5">Total questions in the database:</span>
+                                    <span class="question-type ml-md-5 mr-md-5">Information Technology questions</span>
+                                    <span class="question-type ml-md-5 mr-md-5">Bussiness Management questions</span>
+                                    <span class="question-type ml-md-5 mr-md-5">Graphic Design questions</span>
+                                    <span class="question-type ml-md-5 mr-md-5">English questions</span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <h4><b>Number of questions by subjects and types:</b></h4>
+                                    <div class="row">
+                                        <div class="col border-left border-right">
+                                            <h5><b>Information Technology</b></h5>
+                                            <div>
+                                                <b>True False: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard: <b>0</b></span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Mutilple Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Single Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="col border-left border-right">
+                                            <h5><b>Bussiness Management</b></h5>
+                                            <div>
+                                                <b>True False: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard: <b>0</b></span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Mutilple Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Single Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="col border-left border-right">
+                                            <h5><b>Graphic Design</b></h5>
+                                            <div>
+                                                <b>True False: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard: <b>0</b></span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Mutilple Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Single Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="col border-left border-right">
+                                            <h5><b>English</b></h5>
+                                            <div>
+                                                <b>True False: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard: <b>0</b></span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Mutilple Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <b>Single Choice 4: </b>
+                                                <div>
+                                                    <span class="">Normal:</span>
+                                                    <span class="ml-md-2">Medium:</span>
+                                                    <span class="ml-md-2">Hard:</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        @endif
-                        @if(session()->has('error'))
-                            <div class="alert alert-danger">
-                                {{ session()->get('error') }}
-                            </div>
-                        @endif
-                        Welcome home <b>{{ Auth::user()->name }}</b>
+                        </div>
                     </div>
                 </div>
                 <div class="card">

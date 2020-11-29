@@ -14,9 +14,9 @@ Question List
 </script>
 @endsection
 @section('content')
-    <div class="container" style="background-image:url({{url('/images/myimage.jpg')}})">
+    <div class="container" style="background-image:url({{url('/images/myimage.jpg')}}); margin: 1em 2em">
         @csrf
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="width: 80vw">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -51,7 +51,7 @@ Question List
 
                     </div>
                 </div>
-                <div class="card">
+                <div class="card question-list">
                     <div class="card-header">
                         Question list
                     </div>

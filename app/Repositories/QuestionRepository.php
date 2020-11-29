@@ -42,7 +42,7 @@ class QuestionRepository extends BaseRepository {
     {
         $listExam = DB::table('questions')
                         ->orderBy('created_at', 'desc')
-                        ->paginate(5);
+                        ->paginate(3);
         return $listExam;
     }
 

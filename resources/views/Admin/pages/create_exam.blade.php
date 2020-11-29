@@ -7,12 +7,12 @@
     <style>
         .form-content
         {
-            background:#1480B6;
+            background:##FCFCFC;
             border-radius: 20px;
         }
         .form-group
         {
-            color: white;
+            color: black;
         }
         .student-list
         {
@@ -59,6 +59,10 @@
             width: 100px;
             border-radius: 15px;
         }
+        .separator {
+            background: black;
+            height: 2px;
+        }
     </style>
 @endsection
 @section('script')
@@ -95,12 +99,8 @@
             });
             var i = 1;
             var extraStudent = [];
-            $(document).on('click', 'li', function(){
+            $(document).on('click', '.student-id', function(){
                 $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');
-                // extraStudent.push([{
-                //     "id" : $(this).children('.extra-id').val(),
-                //     "name" : $(this).children('.extra-name').val(),
-                // }]);
                 extraStudent.push($(this).children('.extra-id').val());
                 $('#resultList').hide();
                 i++;
@@ -181,7 +181,7 @@
                                         <div class="form-group">
                                             <h3>Exam information</h3>
                                             Fill this form information to automatically create an exam.
-                                            <hr>
+                                            <hr class="separator">
                                         </div>
                                     </div>
                                 </div>
@@ -305,10 +305,10 @@
                             <div class="form-content mt-3">
                                 <div class="row pl-md-4 pt-2">
                                     <div class="col-md-12">
+                                    <hr class="separator">
                                         <div class="form-group">
                                             <h3>Exam extra student(s)</h3>
                                             Use this form to add student(s) that not in the selected class, if you do not want to add any extra student, leave it empty.
-                                            <hr>
                                         </div>
                                     </div>
                                 </div>
@@ -321,9 +321,9 @@
                                     </div>
                                 </div>
                                 {{-- 6 --}}
-                                <div class="row pl-md-4 pb-md-4">
+                                <div class="row pl-md-4">
                                     <div class="col-md-12">
-                                        <div class="student-list p-2" id="studentList">
+                                        <div class="student-list p-2 border border-darken-1" id="studentList">
                                             <input type="hidden" name="extra_student" id="extra_student" value="">
                                         </div>
                                     </div>
@@ -331,6 +331,7 @@
                             </div>
                              {{-- 7 --}}
                             <div class="row pl-md-4 mt-4">
+                                <div class="col-md-12"><hr class="separator"></div>
                                 <button type="button" id="createExam" class="btn create-button btn-block">Create Exam</button>
                             </div>
                         </form>
