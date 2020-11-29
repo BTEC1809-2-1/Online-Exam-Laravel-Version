@@ -40,5 +40,28 @@
         </div>
     </div>
     @yield('script')
+    <script>
+        $(document).ready(()=>{
+            let toggleExamManagementClicked = false; let toggleQuestionManagementClicked = false;
+            $('#toggleExamManagement').on('click', function(){
+                toggleExamManagementClicked  = !toggleExamManagementClicked;
+                if(toggleExamManagementClicked){
+                    $(this).css({'background-color':'#f58742','border-radius':'15px'});
+                } else {
+                    $(this).css({'background-color':'white','border-radius':'15px'});
+                }
+
+            });
+            $('#toggleQuestionManagement').on('click', function(){
+                toggleQuestionManagementClicked  = !toggleQuestionManagementClicked;
+                if(toggleQuestionManagementClicked){
+                    $(this).css({'background-color':'#f58742','border-radius':'15px'});
+                } else {
+                    $(this).css({'background-color':'white','border-radius':'15px'});
+                }
+
+            });
+        });
+    </script>
 </body>
 </html>

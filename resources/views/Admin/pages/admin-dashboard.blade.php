@@ -44,6 +44,7 @@
                                     <span class="dashboard-exam-status ml-md-5 mr-md-5">Total completed exam:</span>
                                 </div>
                                 <hr>
+                                <h4><b>Questions Statistic</b></h4>
                                 <div>
                                     <span class="question-type mr-md-5">Total questions in the database:</span>
                                     <span class="question-type ml-md-5 mr-md-5">Information Technology questions</span>
@@ -55,7 +56,7 @@
                                 <div>
                                     <h4><b>Number of questions by subjects and types:</b></h4>
                                     <div class="row">
-                                        <div class="col border-left border-right">
+                                        <div class="col border-right">
                                             <h5><b>Information Technology</b></h5>
                                             <div>
                                                 <b>True False: </b>
@@ -145,7 +146,7 @@
                                                 <hr>
                                             </div>
                                         </div>
-                                        <div class="col border-left border-right">
+                                        <div class="col border-left">
                                             <h5><b>English</b></h5>
                                             <div>
                                                 <b>True False: </b>
