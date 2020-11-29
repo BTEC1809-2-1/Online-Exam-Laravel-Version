@@ -641,7 +641,7 @@ class ExamService
             $i = 0;
             foreach ($data as $row) {
                 $output .= '
-               <li><input style="color: black;" type="hidden" class="extra-id" value="'.$row->email.'"></input><input style="color: black;" type="hidden" class="extra-name" value="'.$row->name.'"></input>' .'Name: ' .$row->name .' | ID: '.$row->email. '</li>
+               <li class="student-id"><input style="color: black;" type="hidden" class="extra-id" value="'.$row->email.'"></input><input style="color: black;" type="hidden" class="extra-name" value="'.$row->name.'"></input>' .'Name: ' .$row->name .' | ID: '.$row->email. '</li>
                ';
                $i++;
             }
