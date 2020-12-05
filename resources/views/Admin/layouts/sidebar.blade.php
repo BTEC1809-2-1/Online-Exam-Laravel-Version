@@ -9,30 +9,41 @@
                     Exam management
                 </a>
                 <ul class="collapse list-unstyled" id="examManagement">
-                    <li id="examCreate" class="text-center navigate-link">
-                        <a href="{{route('create.exam')}}" class="nlink"  id="create-exam">Create new Exam</a>
-                    </li>
-                    <li id="examList" class="text-center navigate-link">
-                        <a href="{{route('get.exam.list')}}" class="nlink">List all exam</a>
-                    </li>
-                    <li id="examList" class="text-center navigate-link">
-                        <a href="{{route('get.exam.list')}}" class="nlink">View Student Result</a>
-                    </li>
+                    <a href="{{route('create.exam')}}" class="nlink"  id="create-exam">
+                        <li id="examCreate" class="text-center navigate-link">
+                            Create new Exam
+                        </li>
+                    </a>
+                    <a href="{{route('get.exam.list')}}" class="nlink">
+                        <li id="examList" class="text-center navigate-link">
+                            List all exam
+                        </li>
+                    </a>
+                    <a href="{{route('get.exam.list')}}" class="nlink">
+                        <li id="examList" class="text-center navigate-link">
+                            View Student Result
+                        </li>
+                    </a>
                 </ul>
             </li>
             <li class="text-center">
                 <hr>
-                <a href="#questionManagement" id="toggleQuestionManagement" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle navigate-header" style="padding: 0.1em 0.3em">
+                <a href="#questionManagement" id="toggleQuestionManagement" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle navigate-header" style="padding: 0.1em 0.3em">
                     <i class="fas fa-copy"></i>
                     Question Management
                 </a>
                 <ul class="collapse list-unstyled" id="questionManagement">
-                    <li id="questionCreate" class="text-center navigate-link">
-                        <a href="{{route('create.question')}}" class="nlink">Create new question</a>
-                    </li>
-                    <li id="questionList" class="text-center navigate-link">
-                        <a href="{{route('get.question.list')}}" class="nlink">List all question</a>
-                    </li>
+                    <a href="{{route('create.question')}}" class="nlink">
+                        <li id="questionCreate" class="text-center navigate-link">
+                            Create new question
+                        </li>
+                    </a>
+                    <a href="{{route('get.question.list')}}" class="nlink">
+                        <li id="questionList" class="text-center navigate-link">
+                            List all question
+                        </li>
+                    </a>
                 </ul>
             </li>
             <hr>

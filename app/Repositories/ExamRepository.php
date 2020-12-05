@@ -63,6 +63,21 @@ class ExamRepository extends BaseRepository {
         return $listExam;
     }
 
+    public function countUpcomingExam()
+    {
+        return $this->model->where('status', config('app.exam_status.Ready'))->count();
+    }
+
+    public function countOnGoingExam()
+    {
+        return $this->model->where('status', config('app.exam_status.On-going'))->count();
+    }
+
+    public function countCompletedExam()
+    {
+        return $this->model->where('status', config('app.exam_status.Ended'))->count();
+    }
+
     public function getExam($id)
     {
         $query = $this->query()->addSelect('duration', 'student_in_exam', 'lecture','questions_in_exam', 'created_at', 'created_by', 'updated_at', 'updated_by');

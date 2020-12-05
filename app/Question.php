@@ -26,7 +26,7 @@ class Question extends Model
     */
 
     protected $fillable = [
-       'id', 'question', 'stype','subject'
+       'id', 'question', 'type','subject'
     ];
 
    /**

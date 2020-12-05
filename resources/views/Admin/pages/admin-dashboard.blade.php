@@ -1,6 +1,11 @@
 @extends('Admin.layouts.admin')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+    </style>
 @endsection
 @section('script')
     <script>
@@ -24,8 +29,8 @@
 @endsection
 @section('content')
     @csrf
-    <div class="content">
-        <div class="row justify-content-center w-100">
+    <div class="admin-content-body">
+        <div class="row justify-content-center w-100 m-0">
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">
@@ -39,143 +44,41 @@
                             <div class="col-md-12">
                                 <h4><b>Exams status</b></h4>
                                 <div>
-                                    <span class="dashboard-exam-status mr-md-5">Total up-comming exam:</span>
-                                    <span class="dashboard-exam-status ml-md-5 mr-md-5">Total on-going exam:</span>
-                                    <span class="dashboard-exam-status ml-md-5 mr-md-5">Total completed exam:</span>
+                                    <span class="dashboard-exam-status mr-md-5">Total up-comming exam: <b>{{ $examStatistic['total_up_coming_exam'] }}</b></span>
+                                    <span class="dashboard-exam-status ml-md-5 mr-md-5">Total on-going exam: <b>{{ $examStatistic['total_on_going_exam'] }}</b></span>
+                                    <span class="dashboard-exam-status ml-md-5 mr-md-5">Total completed exam: <b>{{ $examStatistic['total_completed_exam'] }}</b></span>
                                 </div>
                                 <hr>
                                 <h4><b>Questions Statistic</b></h4>
                                 <div>
-                                    <span class="question-type mr-md-5">Total questions in the database:</span>
-                                    <span class="question-type ml-md-5 mr-md-5">Information Technology questions</span>
-                                    <span class="question-type ml-md-5 mr-md-5">Bussiness Management questions</span>
-                                    <span class="question-type ml-md-5 mr-md-5">Graphic Design questions</span>
-                                    <span class="question-type ml-md-5 mr-md-5">English questions</span>
+                                    <span class="question-type mr-md-4">Total questions in the database: <b>{{ $questionStatistic['total']['All Type'] }}</b></span>
+                                    <span class="question-type ml-md-4 mr-md-4">Total Information Technology questions: <b>{{ $questionStatistic['total']['IT'] }}</b></span>
+                                    <span class="question-type ml-md-4 mr-md-4">Total Bussiness Management questions: <b>{{ $questionStatistic['total']['BM'] }}</b></span>
+                                    <span class="question-type ml-md-4 mr-md-4">Total Graphic Design questions: <b>{{ $questionStatistic['total']['GD'] }}</b></span>
+                                    {{-- <span class="question-type ml-md-4 mr-md-4">Total English questions: <b>{{ $questionStatistic['detail']['EN']['total'] }}</b></span> --}}
                                 </div>
                                 <hr>
                                 <div>
                                     <h4><b>Number of questions by subjects and types:</b></h4>
                                     <div class="row">
-                                        <div class="col border-right">
-                                            <h5><b>Information Technology</b></h5>
-                                            <div>
-                                                <b>True False: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard: <b>0</b></span>
-                                                </div>
-                                                <hr>
+                                            <?php $loopIndex = count($questionStatistic['detail']) ?>
+                                        @foreach ($questionStatistic['detail'] as $subject=>$statisticDetail)
+                                            <div class="col <?php if($loopIndex > 1) {?> border-right <?php }; ?>">
+                                                <h5><b>{{ array_search($subject, config('app.subject'))}}</b></h5>
+                                                @foreach ($statisticDetail as $questionTypeKey=>$detail)
+                                                    <div>
+                                                        <b>{{ $questionTypeKey }}: {{ $detail['total'] }} </b>
+                                                        <div>
+                                                            <span class="">Normal: <b>{{ $detail['normal'] }}</b></span>
+                                                            <span class="ml-md-2">Medium: <b>{{ $detail['medium'] }}</b></span>
+                                                            <span class="ml-md-2">Hard: <b>{{ $detail['hard'] }}</b><b></b></span>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                            <div>
-                                                <b>Mutilple Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Single Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                        <div class="col border-left border-right">
-                                            <h5><b>Bussiness Management</b></h5>
-                                            <div>
-                                                <b>True False: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard: <b>0</b></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Mutilple Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Single Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                        <div class="col border-left border-right">
-                                            <h5><b>Graphic Design</b></h5>
-                                            <div>
-                                                <b>True False: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard: <b>0</b></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Mutilple Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Single Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                        <div class="col border-left">
-                                            <h5><b>English</b></h5>
-                                            <div>
-                                                <b>True False: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard: <b>0</b></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Mutilple Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <b>Single Choice 4: </b>
-                                                <div>
-                                                    <span class="">Normal:</span>
-                                                    <span class="ml-md-2">Medium:</span>
-                                                    <span class="ml-md-2">Hard:</span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                        </div>
+                                            <?php $loopIndex--; ?>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +89,7 @@
                     <div class="card-header">
                         Up-coming exams
                     </div>
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                         <div class="row justify-content-end mb-3 px-5">
                             <a href="Exam/Create"><button type="button" class="btn btn-primary mx-2">Create New Exam</button></a>
                             <a href="Exam/List"><button type="button" class="btn btn-primary mx-2">View All Exams</button></a>

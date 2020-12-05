@@ -3,11 +3,8 @@
 namespace App\Repositories;
 
 use App\Question;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-
 class QuestionRepository extends BaseRepository {
     public function model()
     {
@@ -53,14 +50,38 @@ class QuestionRepository extends BaseRepository {
         return $listExam;
     }
 
+    public function countAllQuestionInDatabase()
+    {
+        return $this->model->count();
+    }
+
+    public function countNumberOfQuestionBySubjectAndLevelOfDifficultAndType($subject, $type, $level_of_difficult)
+    {
+        return $this->model->where('subject', $subject)
+                ->where('type', $type)
+                ->where('level_of_difficult', $level_of_difficult)
+                ->count();
+    }
+
+    public function countNumberOfQuestionBySubjectAndType($subject, $type)
+    {
+        return $this->model->where('subject', $subject)->where('type', $type)->count();
+    }
+
+    public function countNumberOfQuestionBySubject($subject)
+    {
+        return $this->model->where('subject', $subject)->count();
+    }
+
     public function getQuestionDetail($id)
     {
         $query = $this->query()
-                ->addSelect('level_of_difficult',
-                            'created_at',
-                            'created_by',
-                            'updated_at',
-                            'updated_by');
+                    ->addSelect('level_of_difficult',
+                                'created_at',
+                                'created_by',
+                                'updated_at',
+                                'updated_by'
+                    );
         return $query->findOrFail($id);
     }
 
@@ -75,7 +96,13 @@ class QuestionRepository extends BaseRepository {
 
     public function addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, $level_of_difficult, $number_of_questions)
     {
-        return DB::table('questions')->select('id', 'question', 'type', 'level_of_difficult')->where('subject', $subject)->where('level_of_difficult', $level_of_difficult)->inRandomOrder()->limit($number_of_questions)->get()->toArray();
+        return DB::table('questions')->select('id', 'question', 'type', 'level_of_difficult')
+                    ->where('subject', $subject)
+                    ->where('level_of_difficult', $level_of_difficult)
+                    ->inRandomOrder()
+                    ->limit($number_of_questions)
+                    ->get()
+                    ->toArray();
     }
 
     public function deleteByID($questionID)
@@ -106,7 +133,6 @@ class QuestionRepository extends BaseRepository {
                 ->select("answers.is_correct")
                 ->where('questions.id', $questionID)
                 ->first();
-
     }
 
     public function updateDetail($request, $questionID)
