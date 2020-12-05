@@ -125,7 +125,7 @@ class ExamController extends Controller
 
     public function searchStudent(Request $request)
     {
-       return $this->examService->ajaxSearchForStudent($request);
+        return $this->examService->ajaxSearchForStudent($request);
     }
 
     public function removeStudentFromExam($examID, $studentID)

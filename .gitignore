@@ -25,6 +25,8 @@ composer.json
 composer.json
 
 docker-compose.yml
+Dockerfile
+logs
 
 .vscode/
 TODO

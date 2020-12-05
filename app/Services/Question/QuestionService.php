@@ -161,5 +161,213 @@ class QuestionService {
         return $this->questionRepository->updateDetail($request, $questionID);
 
     }
+    public function getDatabaseStatistic()
+    {
+        return [
+            'total'=> [
+                'All Type' => $this->questionRepository->countAllQuestionInDatabase(),
+                'IT' => $this->questionRepository->countNumberOfQuestionBySubject('IT'),
+                'BM' => $this->questionRepository->countNumberOfQuestionBySubject('BM'),
+                'GD' => $this->questionRepository->countNumberOfQuestionBySubject('GD'),
+            ],
+            'detail' => [
+                'IT' => [
+                    'True False' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('IT', 'TF'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'TF',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'TF',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'TF',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                    'Multiple Choices Of 4' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('IT', 'MC4'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                    'Single Choice Of 4' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('IT', 'SC4'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'IT',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                ],
+                'BM' => [
+                    'True False' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('BM', 'TF'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'TF',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'TF',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'TF',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                    'Multiple Choices Of 4' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('BM', 'MC4'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                    'Single Choice Of 4' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('BM', 'SC4'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'BM',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                ],
+                'GD' => [
+                    'True False' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('GD', 'TF'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'TF',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'TF',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'TF',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                    'Multiple Choices Of 4' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('GD', 'MC4'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'MC4',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                    'Single Choice Of 4' => [
+                        'total' => $this->questionRepository->countNumberOfQuestionBySubjectAndType('GD', 'SC4'),
+                        'normal' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.normal')
+                                            ),
+                        'medium' => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.medium')
+                                            ),
+                        'hard'   => $this->questionRepository
+                                            ->countNumberOfQuestionBySubjectAndLevelOfDifficultAndType(
+                                                'GD',
+                                                'SC4',
+                                                config('app.question_level_of_difficult.hard')
+                                            ),
+                    ],
+                ],
+            ],
+        ];
+    }
 }
 

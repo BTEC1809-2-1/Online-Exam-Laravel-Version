@@ -264,7 +264,7 @@ return [
     'subject' => [
         'Bussiness Management' => 'BM',
         'Information Technology' => 'IT',
-        'Graphic Design' => 'DS'
+        'Graphic Design' => 'GD'
     ],
 
     'semester' => [

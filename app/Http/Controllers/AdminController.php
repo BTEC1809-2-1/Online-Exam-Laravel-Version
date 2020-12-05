@@ -16,8 +16,11 @@ class AdminController extends Controller
         $this->questionService = $questionService;
     }
 
-    public function index(){
+    public function index()
+    {
         $listExam = $this->examService->getUpcomingExam();
-        return view('Admin.pages.admin-dashboard', compact('listExam'));
+        $questionStatistic = $this->questionService->getDatabaseStatistic();
+        $examStatistic = $this->examService->getDatabaseStatistic();
+        return view('Admin.pages.admin-dashboard', compact('listExam', 'questionStatistic', 'examStatistic'));
     }
 }
