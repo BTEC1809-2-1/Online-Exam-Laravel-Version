@@ -39,16 +39,10 @@ class QuestionRepository extends BaseRepository {
     {
         $listExam = DB::table('questions')
                         ->orderBy('created_at', 'desc')
-                        ->paginate(3);
+                        ->paginate(8);
         return $listExam;
     }
 
-    public function getRecentlyAddedQuestion(){
-        $listExam = DB::table('questions')
-                        ->limit(3)
-                        ->get();
-        return $listExam;
-    }
 
     public function countAllQuestionInDatabase()
     {
