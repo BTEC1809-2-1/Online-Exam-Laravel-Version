@@ -14,7 +14,7 @@ class QuestionSeeder extends Seeder
     {
         for($i = 1; $i <= 30; $i++)
         {
-            $subjectList = array('IT', 'BM', 'DS');
+            $subjectList = array('IT', 'BM', 'GD');
             $subject = array_rand($subjectList, 1);
             $subject = $subjectList[$subject];
             $question_id = 'Q'.$subject."SC4".sprintf("%06d", random_int(1, 10000));
@@ -53,7 +53,7 @@ class QuestionSeeder extends Seeder
 
         for($i = 31; $i <= 60; $i++)
         {
-            $subjectList = array('IT', 'BM', 'DS');
+            $subjectList = array('IT', 'BM', 'GD');
             $subject = array_rand($subjectList, 1);
             $subject = $subjectList[$subject];
             $question_id = 'Q'.$subject."TF".sprintf("%06d", random_int(1, 10000));
@@ -92,7 +92,7 @@ class QuestionSeeder extends Seeder
 
         for($i = 61; $i <= 90; $i++)
         {
-            $subjectList = array('IT', 'BM', 'DS');
+            $subjectList = array('IT', 'BM', 'GD');
             $subject = array_rand($subjectList, 1);
             $subject = $subjectList[$subject];
             $question_id = 'Q'.$subject."MC4".sprintf("%06d", random_int(1, 10000));
