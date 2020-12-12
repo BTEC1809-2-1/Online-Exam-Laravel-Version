@@ -16,11 +16,14 @@ class CreateAnswersTable extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->string('id', 255);
             $table->string('question_id');
-            $table->string('answer');
+            $table->mediumText('answer');
             $table->string('is_correct', 200);
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();
+        });
+        Schema::table('answers', function (Blueprint $table) {
+            $table->foreign('question_id')->references('id')->on('questions');
         });
     }
 
