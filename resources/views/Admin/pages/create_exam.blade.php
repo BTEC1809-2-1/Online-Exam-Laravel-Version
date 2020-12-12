@@ -20,6 +20,7 @@
         .student-list
         {
             min-height: 150px;
+            max-height: 200px;
             background-color: white;
             border-radius: 10px;
             overflow-y: scroll;
@@ -49,18 +50,23 @@
             margin-top: 10px;
             margin-left: 1em;
             padding-left: 10px;
-            background:#1480B6;
+            background:#5fb649;
             border-radius: 10px;
             max-width: 95%;
+        }
+        .student-name {
+            padding-top: 10px;
             color: white;
+            font-size: 16px;
+            font-weight: bold;
         }
         .remove-btn
         {
-            background: red;
+            background: #f06f2b;
             color: white;
-            height:  30px;
-            width: 100px;
-            border-radius: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
         }
         .separator {
             background: black;
@@ -103,7 +109,13 @@
             var i = 1;
             var extraStudent = [];
             $(document).on('click', '.student-id', function(){
-                $('#studentList').append('<div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">'+ $(this).text() + '<button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>'+'</div>');
+                $('#studentList').append(`
+                    <div class="row extra-student justify-content-between my-1 py-1" id="student'+ i +'">
+                        <span class="student-name">
+                            ` + $(this).text() + `
+                        </span>
+                        <button type="button" class="btn my-1 mr-3 remove-btn" onclick="$(this).parent().remove();">Remove</button>
+                     </div>`);
                 extraStudent.push($(this).children('.extra-id').val());
                 $('#resultList').hide();
                 i++;
@@ -328,11 +340,11 @@
                                     <div class="row pl-md-4">
                                         <div class="col-md-12">
                                             <div class="student-list p-2 border border-darken-1" id="studentList">
-                                                <input type="hidden" name="extra_student" id="extra_student" value="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="extra_student" id="extra_student" value="">
                                 <div class="row pl-md-4 mt-4">
                                     <div class="col-md-12"><hr class="separator"></div>
                                     <button type="button" id="createExam" class="btn create-button btn-block">Create Exam</button>
