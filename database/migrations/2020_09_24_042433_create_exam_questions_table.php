@@ -21,6 +21,9 @@ class CreateExamQuestionsTable extends Migration
             $table->string('updated_by');
             $table->timestamps();
         });
+        Schema::table('exam_questions', function (Blueprint $table) {
+            $table->foreign('exam_id')->references('id')->on('exams');
+        });
     }
 
     /**

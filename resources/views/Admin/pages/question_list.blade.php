@@ -4,6 +4,12 @@ Question List
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
+    <style>
+        .question-search-bar {
+            min-width: 250px;
+            max-width: 500px;
+        }
+    </style>
 @endsection
 @section('script')
 <script>
@@ -14,59 +20,64 @@ Question List
 </script>
 @endsection
 @section('content')
-    <div class="container" style="background-image:url({{url('/images/myimage.jpg')}}); margin: 1em 2em">
+    <div class="admin-content-body">
         @csrf
-        <div class="row justify-content-center" style="width: 80vw">
+        <div class="row justify-content-center w-100 m-0">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        {{ __('Dashboard') }}
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <li>{!! \Session::get('error') !!}</li>
+                        </ul>
                     </div>
-                    <div class="card-body">
-                        @if (\Session::has('error'))
-                            <div class="alert alert-danger" role="alert">
-                                <ul>
-                                    <li>{!! \Session::get('error') !!}</li>
-                                </ul>
-                            </div>
-                        @endif
-                        @if (\Session::has('success'))
-                            <div class="alert alert-success">
-                                <ul>
-                                    <li>{!! \Session::get('success') !!}</li>
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="row text-center justify-content-between">
-                            <b class="my-auto ml-md-5"> <span style="color: black">Login as </span> {{ Auth::user()->name }}</b>
-                            <nav class="navbar navbar-light justify-content-between">
-                                <form class="form-inline">
-                                    @csrf
-                                    <input class="form-control mr-sm-2 w-80" type="search" placeholder="Search" aria-label="Search" id="search">
-                                    <button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
-                                    <div class="questionList"></div>
-                                </form>
-                            </nav>
-                        </div>
-
+                @endif
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
                     </div>
-                </div>
+                @endif
                 <div class="card question-list">
                     <div class="card-header">
-                        Question list
+                        <a href="" class="btn create-button mx-2">Back to Dashboard</a>
+                        <a href="" class="btn create-button mx-2">Create new Question</a>
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-end mb-3">
-                            <a href="{{route('create.question')}}">
-                                <button type="button" class="btn detail-button mx-5">Create New question</button>
-                            </a>
+                            <div class="col-md-8">
+                                <form class="form">
+                                    @csrf
+                                    <div class="row justify-content-end">
+                                        <input class="form-control mr-1 question-search-bar" type="search" placeholder="Search" aria-label="Search" id="search">
+                                        <button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
+                                        <div class="questionList"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <select name="question_sort_by_subject" class="custom-select">
+                                    <option selected> Sort By Subject</option>
+                                    <option value="IT">Information Technology</option>
+                                    <option value="BM">Business Management</option>
+                                    <option value="GD">Graphic Design</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <select name="question_sort_by_type" class="custom-select">
+                                    <option selected> Sort By Type</option>
+                                    <option value="TF">True False</option>
+                                    <option value="MC4">Multiple Choices Of 4</option>
+                                    <option value="SC4">Single Choice Of 4</option>
+                                </select>
+                            </div>
                         </div>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Question</th>
-                                    {{-- <th scope="col" class="text-center">Type</th> --}}
+                                    <th scope="col" class="text-center">Level of difficult</th>
                                     <th scope="col" class="text-center">Subject</th>
                                     <th scope="col colspan-3" class="text-center">Action</th>
                                 </tr>
@@ -76,9 +87,9 @@ Question List
                                     @if (\Session::has('qID') and ($question->id ==  \Session::get('qID')))
                                     <tr style="background: #DCF1DC; border-radius">
                                         <th>{{$question->id}}</th>
-                                        <td>{{$question->question}}</td>
-                                        {{-- <td class="text-center">{{$question->type}}</td> --}}
-                                        <td class="text-center">{{array_search($question->subject, config('app.subject'))}}</td>
+                                        <td>{{substr($question->question, 0, 120)}}...</td>
+                                        <td class="text-center">{{array_search($question->level_of_difficult, config('app.question_level_of_difficult'))}}</td>
+                                        <td class="text-center">{{$question->subject}}</td>
                                         <td class="text-center">
                                             <a class="btn btn-block detail-button" style="color:white;" href="{{route('get.question.detail', ['id' => $question->id])}}">
                                                 View detail
@@ -88,9 +99,9 @@ Question List
                                     @else
                                         <tr>
                                             <th>{{$question->id}}</th>
-                                            <td>{{$question->question}}</td>
-                                            {{-- <td class="text-center">{{$question->type}}</td> --}}
-                                            <td class="text-center">{{array_search($question->subject, config('app.subject'))}}</td>
+                                            <td>{{substr($question->question, 0, 150)}}...</td>
+                                            <td class="text-center">{{array_search($question->level_of_difficult, config('app.question_level_of_difficult'))}}</td>
+                                            <td class="text-center">{{$question->type}}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-block detail-button" style="color:white;" href="{{route('get.question.detail', ['id' => $question->id])}}">
                                                     View detail
