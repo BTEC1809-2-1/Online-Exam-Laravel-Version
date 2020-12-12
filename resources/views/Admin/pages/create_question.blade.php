@@ -14,6 +14,181 @@ Create New Question
         }
     </style>
 @endsection
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#questionManagement').show();
+            $('#questionCreate').css ({
+                'background-color':'#5eb44b',
+                'border-radius':'5px',
+                'color':'white'});
+            $("#questionType").change(function() {
+                var selectedValue = $(this)
+                    .find(":selected")
+                    .val();
+                switch (selectedValue) {
+                    case "SC4":
+                        singleChoiceOfFour();
+                        allDifficultLevelQuestion();
+                    break;
+                    case "MC4":
+                        multipleChoiceOfFour();
+                        allDifficultLevelQuestion();
+                    break;
+                    case "TF":
+                        trueFalse();
+                        normalAndMediumQuestion();
+                    break;
+                    default:
+                        $("#answer-block").empty();
+                    break;
+                }
+            });
+        });
+        // Component using in answer block
+        function multipleChoiceOfFour() {
+            $("#answer-block").empty();
+            $("#answer-block").append(`
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">First Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">Second Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">Third Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[3]"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">Fourth Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[4]"></textarea>
+                </div>
+                <div class="form-group">
+                    <h3>Choose correct answers</h3>
+                    <div class="form-check ml-4">
+                        <input id="first-answers" class="form-check-input" type="checkbox" name="is_correct1"  value="1">
+                        <label for="first-answers" class="form-check-label" >First answer</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input id="second-answers" class="form-check-input" type="checkbox" name="is_correct2"  value="2">
+                        <label for="second-answers" class="form-check-label" >Second answer/label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input id="third-answers" class="form-check-input" type="checkbox" name="is_correct3"  value="3">
+                        <label for="third-answers" class="form-check-label" >Third answer</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input id="fourth-answers" class="form-check-input" type="checkbox" name="is_correct4"  value="4">
+                        <label for="fourth-answers" class="form-check-label" >Forth answer</label>
+                    </div>
+                </div>
+            `);
+        }
+        function singleChoiceOfFour() {
+            $("#answer-block").empty();
+            $("#answer-block").append(`
+
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">First Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">Second Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">Third Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[3]"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">Fourth Answer</label>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[4]"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <h3>Choose correct answer</h3>
+                    <div class="form-check ml-4">
+                        <input id="first-answer" class="form-check-input" type="radio" name="is_correct" value="1">
+                        <label for="first-answer" class="form-check-label" >First answer</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input id="second-answer" class="form-check-input" type="radio" name="is_correct" value="2">
+                        <label for="second-answer" class="form-check-label" >Second answer</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input id="third-answer" class="form-check-input" type="radio" name="is_correct" value="3">
+                        <label for="third-answer" class="form-check-label" >Third answer</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input id="fourth-answer" class="form-check-input" type="radio" name="is_correct" value="3">
+                        <label for="fourth-answer" class="form-check-label" >Fourth answer</label>
+                    </div>
+                </div>
+            `);
+        }
+        function trueFalse(){
+            $("#answer-block").empty();
+            $("#answer-block").append(`
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"firstAnswer">First Answer</label>
+                        <div class="form-check ml-4">
+                            <input class="form-check-input" type="radio" id="is-correct1" name="is_correct" value="1">
+                            <label for="is-correct1" class="form-check-label" > Is Correct</label>
+                        </div>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="question-label">
+                        <label for"secondAnswer">Second Answer</label>
+                        <div class="form-check ml-4">
+                            <input class="form-check-input" type="radio" id="is-correct2" name="is_correct" value="2">
+                            <label for="is-correct2" class="form-check-label" > Is Correct</label>
+                        </div>
+                    </div>
+                    <textarea rows="10" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
+                </div>
+            `);
+        }
+        function allDifficultLevelQuestion(){
+            $('#difficult').empty();
+            $('#difficult').append(`
+                <option value="{{ config('app.question_level_of_difficult.normal') }}">Normal</option>
+                <option value="{{ config('app.question_level_of_difficult.medium') }}">Medium</option>
+                <option value="{{ config('app.question_level_of_difficult.hard') }}">Hard</option>
+            `);
+        }
+        function normalAndMediumQuestion(){
+            $('#difficult').empty();
+            $('#difficult').append(`
+                <option value="{{ config('app.question_level_of_difficult.normal') }}">Normal</option>
+                <option value="{{ config('app.question_level_of_difficult.medium') }}">Medium</option>
+            `);
+        }
+    </script>
+@endsection
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -74,165 +249,4 @@ Create New Question
             </div>
         </div>
     </div>
-    @section('script')
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#questionManagement').show();
-                $('#questionCreate').css({'background-color':'pink', 'border-radius':'5px'});
-                $("#questionType").change(function() {
-                    var selectedValue = $(this)
-                        .find(":selected")
-                        .val();
-                    switch (selectedValue) {
-                        case "SC4":
-                            singleChoiceOfFour();
-                            allDifficultLevelQuestion();
-                        break;
-                        case "MC4":
-                            multipleChoiceOfFour();
-                            allDifficultLevelQuestion();
-                        break;
-                        case "TF":
-                            trueFalse();
-                            normalAndMediumQuestion();
-                        break;
-                        default:
-                            $("#answer-block").empty();
-                        break;
-                    }
-                });
-            });
-            // Component using in answer block
-            function multipleChoiceOfFour() {
-                $("#answer-block").empty();
-                $("#answer-block").append(`
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">First Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="first-answers" class="form-check-input" type="checkbox" name="is_correct1"  value="1">
-                                <label for="first-answers" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">Second Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="second-answers" class="form-check-input" type="checkbox" name="is_correct2"  value="2">
-                                <label for="second-answers" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">Third Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="third-answers" class="form-check-input" type="checkbox" name="is_correct3"  value="3">
-                                <label for="third-answers" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[3]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">Fourth Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="fourth-answers" class="form-check-input" type="checkbox" name="is_correct4"  value="4">
-                                <label for="fourth-answers" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[4]"></textarea>
-                    </div>
-                `);
-            }
-            function singleChoiceOfFour() {
-                $("#answer-block").empty();
-                $("#answer-block").append(`
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">First Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="first-answer" class="form-check-input" type="radio" name="is_correct" value="1">
-                                <label for="first-answer" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">Second Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="second-answer" class="form-check-input" type="radio" name="is_correct" value="2">
-                                <label for="second-answer" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">Third Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="third-answer" class="form-check-input" type="radio" name="is_correct" value="3">
-                                <label for="third-answer" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[3]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">First Answer</label>
-                            <div class="form-check ml-4">
-                                <input id="fourth-answer" class="form-check-input" type="radio" name="is_correct" value="4">
-                                <label for="fourth-answer" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[4]"></textarea>
-                    </div>
-                `);
-            }
-            function trueFalse(){
-                $("#answer-block").empty();
-                $("#answer-block").append(`
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"firstAnswer">First Answer</label>
-                            <div class="form-check ml-4">
-                                <input class="form-check-input" type="radio" id="is-correct1" name="is_correct" value="1">
-                                <label for="is-correct1" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[1]"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="question-label">
-                            <label for"secondAnswer">Second Answer</label>
-                            <div class="form-check ml-4">
-                                <input class="form-check-input" type="radio" id="is-correct2" name="is_correct" value="2">
-                                <label for="is-correct2" class="form-check-label" > Is Correct</label>
-                            </div>
-                        </div>
-                        <textarea rows="10" cols="50" type="text" class="form-control" name="answer[2]"></textarea>
-                    </div>
-                `);
-            }
-            function allDifficultLevelQuestion(){
-                $('#difficult').empty();
-                $('#difficult').append(`
-                    <option value="{{ config('app.question_level_of_difficult.normal') }}">Normal</option>
-                    <option value="{{ config('app.question_level_of_difficult.medium') }}">Medium</option>
-                    <option value="{{ config('app.question_level_of_difficult.hard') }}">Hard</option>
-                `);
-            }
-            function normalAndMediumQuestion(){
-                $('#difficult').empty();
-                $('#difficult').append(`
-                    <option value="{{ config('app.question_level_of_difficult.normal') }}">Normal</option>
-                    <option value="{{ config('app.question_level_of_difficult.medium') }}">Medium</option>
-                `);
-            }
-        </script>
-    @endsection
 @endsection

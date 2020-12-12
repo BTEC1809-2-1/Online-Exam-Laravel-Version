@@ -79,7 +79,10 @@
         $(document).ready(function()
         {
             $('#examManagement').show();
-            $('#examCreate').css({'background-color': 'pink', 'border-radius':'5px'});
+            $('#examCreate').css ({
+                'background-color': '#5eb44b',
+                'border-radius':'5px',
+                'color':'white'});
             $('#search').keyup(function()
             {
                 var query = $(this).val();
