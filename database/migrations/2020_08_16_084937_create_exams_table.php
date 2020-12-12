@@ -21,6 +21,7 @@ class CreateExamsTable extends Migration
             $table->string('classroom');
             $table->string('lecture');
             $table->mediumText('questions_in_exam')->nullable();
+            $table->mediumText('students_in_exam')->nullable();
             $table->dateTime('start_at',0);
             $table->time('duration');
             $table->string('status');

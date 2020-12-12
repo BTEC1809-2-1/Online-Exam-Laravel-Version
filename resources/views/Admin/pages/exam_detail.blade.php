@@ -150,19 +150,21 @@
                                             </thead>
                                             <tbody >
                                                     <?php $i = 1;?>
-                                                    @foreach ($student_in_exam as $student)
-                                                        <tr>
-                                                            <td><?php echo $i;?></td>
-                                                            <td>{{$student->id}}</td>
-                                                            <td>{{$student->class}}</td>
-                                                            <td>{{$student->name}}</td>
-                                                            <td class="text-left">
-                                                                {{-- <a class="btn detail-button" href="">Detail</a> --}}
-                                                                <a href="{{ route('exam.remove.student', [$exam->id, $student->id]) }}" class="btn create-button">Remove</a>
-                                                            </td>
-                                                        </tr>
-                                                        <?php $i++;?>
-                                                    @endforeach
+                                                    @if (isset($students_in_exam))
+                                                        @foreach ($students_in_exam as $student)
+                                                            <tr>
+                                                                <td><?php echo $i;?></td>
+                                                                <td>{{$student->id}}</td>
+                                                                <td>{{$student->class}}</td>
+                                                                <td>{{$student->name}}</td>
+                                                                <td class="text-left">
+                                                                    {{-- <a class="btn detail-button" href="">Detail</a> --}}
+                                                                    <a href="{{ route('exam.remove.student', [$exam->id, $student->id]) }}" class="btn create-button">Remove</a>
+                                                                </td>
+                                                            </tr>
+                                                            <?php $i++;?>
+                                                        @endforeach
+                                                    @endif
                                             </tbody>
                                         </table>
                                     </div>

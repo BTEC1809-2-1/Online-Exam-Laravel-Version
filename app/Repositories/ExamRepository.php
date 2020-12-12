@@ -26,7 +26,7 @@ class ExamRepository extends BaseRepository {
 
     public function getAllExam()
     {
-        $listExam = DB::table('exams')->paginate(6);
+        $listExam = DB::table('exams')->paginate(8);
         return $listExam;
     }
 
@@ -42,7 +42,7 @@ class ExamRepository extends BaseRepository {
         $exam->subject = $request->subject;
         $exam->exam_type = $request->exam_type;
         $exam->questions_in_exam = $questions_in_exam;
-        $exam->student_in_exam = $students_in_exam;
+        $exam->students_in_exam = $students_in_exam;
         $exam->status = config('app.exam_status.Ready');
         $exam->created_by = Auth::user()->id;
         $exam->updated_by = Auth::user()->id;
@@ -80,7 +80,15 @@ class ExamRepository extends BaseRepository {
 
     public function getExam($id)
     {
-        $query = $this->query()->addSelect('duration', 'student_in_exam', 'lecture','questions_in_exam', 'created_at', 'created_by', 'updated_at', 'updated_by');
+        $query = $this->query()->addSelect (
+            'duration',
+            'students_in_exam',
+            'lecture',
+            'questions_in_exam',
+            'created_at',
+            'created_by',
+            'updated_at',
+            'updated_by');
         return $query->findOrFail($id);
     }
 

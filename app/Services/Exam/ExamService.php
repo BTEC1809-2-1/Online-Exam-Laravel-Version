@@ -137,8 +137,19 @@ class ExamService
             };
 
             $students_in_exam = array_merge($student_in_request_class, $extra_student);
-            $this->examRepository->createExam($request, $examID, json_encode($questions_in_exam), json_encode($students_in_exam));
-            $this->createExamQuestionSets($examID, $questions_in_exam, $request->duration, $request->number_of_set, $request->question_per_set, $request->exam_type, $request->subject);
+            $this->examRepository->createExam(
+                $request,
+                $examID,
+                json_encode($questions_in_exam),
+                json_encode($students_in_exam));
+            $this->createExamQuestionSets(
+                $examID,
+                $questions_in_exam,
+                $request->duration,
+                $request->number_of_set,
+                $request->question_per_set,
+                $request->exam_type,
+                $request->subject);
             $this->addStudentToExam($examID, $students_in_exam);
             return true;
         } catch (\Exception $e) {
