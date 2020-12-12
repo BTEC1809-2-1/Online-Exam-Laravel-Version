@@ -41,8 +41,8 @@ class ExamController extends Controller
     {
         $exam = $this->examService->getExamDetail($examID);
         $exam_questions = json_decode($exam->questions_in_exam);
-        $student_in_exam = json_decode($exam->student_in_exam);
-        return view('Admin.pages.exam_detail', compact('exam', 'exam_questions', 'student_in_exam'));
+        $students_in_exam = json_decode($exam->student_in_exam);
+        return view('Admin.pages.exam_detail', compact('exam', 'exam_questions', 'students_in_exam'));
     }
 
     public function getExamQuestionSet($examID)

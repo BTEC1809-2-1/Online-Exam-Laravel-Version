@@ -5,10 +5,14 @@ Question List
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
     <style>
+        body {
+            overflow-y: hidden;
+        }
         .question-search-bar {
             min-width: 250px;
             max-width: 500px;
         }
+
     </style>
 @endsection
 @section('script')
