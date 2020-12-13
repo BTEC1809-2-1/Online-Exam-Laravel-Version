@@ -207,7 +207,7 @@
                                 <a class="btn detail-button mb-lg-3" style="width: 100%" href="{{ route('get.Exam.QuestionSets', ['id' => $exam->id]) }}">View Exam Question Sets</a>
                                 <button type="button" id="editButton" class="btn detail-button btn-block">Edit</button>
                                 <button type="submit" id="updateButton" class="btn detail-button btn-block mt-0">Update</button>
-								<button type="button" class="btn create-button btn-block">Delete this Exam</button>
+								<button type="button" class="btn create-button btn-block">Cancel this Exam</button>
 							</div>
 						</form>
 					</div>

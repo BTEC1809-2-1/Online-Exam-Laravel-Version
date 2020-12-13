@@ -19,7 +19,10 @@ Question List
 <script>
     $(document).ready(function(){
         $('#questionManagement').show();
-        $('#questionList').css({'background-color':'pink', 'border-radius':'5px'});
+        $('#questionList').css ({
+            'background-color':'#5eb44b',
+            'border-radius':'5px',
+            'color': 'white'});
     });
 </script>
 @endsection

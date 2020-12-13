@@ -266,7 +266,7 @@
 			<div class="social-container">
 				<a href="{{ route('login.google', 'google') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
 			</div>
-			<span>or use account if you are lecturer</span>
+			<span>or use your account if you are lecturer</span>
             <input id="email" type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus/>
             @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -280,7 +280,7 @@
                 </span>
             @enderror
             <a href="#">Forgot your password?</a>
-            <span class="mb-2">Quên mật khẩu thì tự đi mà nhớ lại, đây lười lắm, không làm cái đấy đâu</span>
+            <span class="mb-2">Remember, as an administator, your password is very important!</span>
 			<button type="submit" >Sign In</button>
 		</form>
 	</div>
@@ -288,7 +288,7 @@
 		<div class="overlay">
 			<div class="overlay-panel overlay-right">
 				<h1>Hello, BTEC Student</h1>
-				<p>Yeu hoa yeu ca mot vuon, yeu em yeu chi mot minh em thoi</p>
+				<p>Ypu better be ready for the exam student!</p>
 				<a href="https://www.facebook.com/an.lebinh.52" style="margin: 0;"><button class="ghost" id="signUp">Le Binh An </button></a>
 			</div>
 		</div>
