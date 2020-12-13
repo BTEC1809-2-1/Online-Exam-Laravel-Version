@@ -21,17 +21,23 @@ class ExamRepository extends BaseRepository {
             'start_at',
             'status'
         );
+
         return $query;
     }
 
     public function getAllExam()
     {
         $listExam = DB::table('exams')->paginate(8);
+
         return $listExam;
     }
 
-    public function createExam($request, $examID, $questions_in_exam, $students_in_exam)
-    {
+    public function createExam (
+        $request,
+        $examID,
+        $questions_in_exam,
+        $students_in_exam
+    ) {
         $exam = new Exam();
         $exam->id = $examID;
         $exam->semester = $request->semester;
@@ -60,22 +66,29 @@ class ExamRepository extends BaseRepository {
             ->limit(3)
             ->orderBy('start_at', 'DESC')
             ->get();
+
         return $listExam;
     }
 
     public function countUpcomingExam()
     {
-        return $this->model->where('status', config('app.exam_status.Ready'))->count();
+        return $this->model
+                    ->where('status', config('app.exam_status.Ready'))
+                    ->count();
     }
 
     public function countOnGoingExam()
     {
-        return $this->model->where('status', config('app.exam_status.On-going'))->count();
+        return $this->model
+                    ->where('status', config('app.exam_status.On-going'))
+                    ->count();
     }
 
     public function countCompletedExam()
     {
-        return $this->model->where('status', config('app.exam_status.Ended'))->count();
+        return $this->model
+                    ->where('status', config('app.exam_status.Ended'))
+                    ->count();
     }
 
     public function getExam($id)
@@ -89,23 +102,26 @@ class ExamRepository extends BaseRepository {
             'created_by',
             'updated_at',
             'updated_by');
+
         return $query->findOrFail($id);
     }
 
     public function getStudentsInExam($examID)
     {
         $exam = DB::table('exams')->where('id', $examID);
+
         if($exam->exists())
         {
             return $exam->select('student_in_exam')->get();
         }
+
         return null;
     }
 
     public function updateExamStudentList($examID, $student_list)
     {
         return Exam::where('id', $examID)
-                ->update(['student_in_exam' => $student_list]);
+                    ->update(['student_in_exam' => $student_list]);
     }
 
     public function updateExam($request, $examID)
