@@ -9,34 +9,41 @@ Question Detail
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="row justify-content-between px-4">
-                            <span class="my-auto">
-                                Question Detail
-                            </span>
+                            <div class="row justify-content-between px-3">
+                                <div class="col">
+                                    <a href="{{ route('get.question.list') }}" style="color: #000000"class="btn general-use-button"> < Return to question list</a>
+                                </div>
+                                <div class="col text-right">
+                                    <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button">Return to dashboard ></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="form">
+                        <form id="form" method="POST">
+                            @csrf
                             <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Question ID</label>
                                     <input type="text" class="form-control" value="{{$question->id}}" readonly>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Question</label>
-                                        <input type="text" class="form-control"  value="{{$question->question}}" readonly>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="">Type</label>
-                                        <input type="text" class="form-control"  value="{{$question->type}}" readonly>
+                                        <input type="text" class="form-control" id="type"  value="{{array_search($question->type, config('app.question_type'))}}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Subject</label>
-                                        <input type="text" class="form-control" value="{{$question->subject}}" readonly>
+                                        <input type="text" class="form-control" value="{{array_search($question->subject, config('app.subject'))}}" readonly>
+                                    </div>
+                                    <div class="form-group" id="difficult">
+                                        <label for="">Level Of Difficult</label>
+                                        <input type="text" class="form-control editable" name="level_of_difficult" value="{{array_search($question->level_of_difficult,  config('app.question_level_of_difficult')) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -59,24 +66,39 @@ Question Detail
                                 </div>
                             </div>
                             <div class="form-row">
-                                @php
-                                    $counter = 1;
-                                @endphp
-                                @foreach ($answers as $aIndex=>$answer)
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <label for="">Answer <?php echo $counter; $counter++?></label>
-                                        <input type="text" class="form-control" value="{{$answer->answer}}" readonly>
-                                    </div>
+                                <div class="form-group col-md-12">
+                                    <label for="">Question</label>
+                                    {{-- <input type="text" class="form-control"  value="{{$question->question}}" readonly> --}}
+                                    <textarea rows="10" cols="50" type="text" class="form-control editable" name="question" readonly>{{$question->question}}</textarea>
                                 </div>
-                                <div class="col-md-2">
+                                @foreach ($answers as $answer)
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="">Is correct</label>
-                                        @if ($answer->is_correct > 0)
-                                            <input type="text" class="form-control" value="Correct" readonly>
-                                        @else
-                                            <input type="text" class="form-control" value="Not correct" readonly>
-                                        @endif
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label for="">Answer {{ $answer->index }}</label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group row is_correct" id="{{ $answer->index }}">
+                                                    {{-- <label for="">Is correct</label> --}}
+                                                    @if ($question->type == 'TF' or $question->type === 'SC4')
+                                                        @if ($answer->index == $is_correct)
+                                                            <input type="text" class="form-control" value="Correct" readonly>
+                                                        @else
+                                                            <input type="text" class="form-control" value="Not correct" readonly>
+                                                        @endif
+                                                    @else
+                                                        @if (($is_correct[$answer->index - 1] !== 0))
+                                                            <input type="text" class="form-control" value="Correct" readonly>
+                                                        @else
+                                                            <input type="text" class="form-control" value="Not correct" readonly>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <input type="text" class="form-control" value="{{$answer->content}}" readonly> --}}
+                                        <textarea rows="10" cols="50" type="text" class="form-control editable" name="answer[{{ $answer->index }}]" readonly>{{ $answer->content}}</textarea>
                                     </div>
                                 </div>
                                 @endforeach
@@ -85,7 +107,9 @@ Question Detail
                                 <button id="edit" class="btn btn-block detail-button">Edit</button>
                             </div>
                             <div class="form-group" id="update">
-                                <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn detail-button btn-block" role="button">Update</a>
+                                {{-- <a href="#"  class="btn detail-button btn-block" role="button">Update</a> --}}
+                                {{-- <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn detail-button btn-block" role="button">Update</a> --}}
+                                <button type="button" class="btn detail-button btn-block" id="submitUpdate">Update</button>
                             </div>
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
                                 Delete this question
@@ -133,14 +157,60 @@ Question Detail
                 $(function(){
                     $('#edit').one('click' ,function(e) {
                         e.preventDefault();
-                        $(this).html() == "Edit" ? updateOn() : $('#form').submit();
+                        $(this).html() == "Edit" ? updateOn() : submitUpdate();
                     });
                 });
+                var is_correct = null;
                 function updateOn() {
                     $('#edit').parent().css('display','none');
                     $('#update').show();
-                    $(":input").prop('readonly', false);
+                    $('#difficult').append(`
+                        <select class="form-control" name="level_of_difficult" required>
+                            <option value="1">Normal</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Hard</option>
+                        </select> `);
+                    $('#difficult').children('input').remove();
+                    var question_type = $('#type').val();
+                    if(question_type == 'Single Choice 4' ?? question_type == 'True False'){
+                        is_correct = 0;
+                    }else {
+                        is_correct = [];
+                    }
+                    var old_select_index = 1;
+                    $('.is_correct').empty();
+                    $('.is_correct').each( function(index){
+                        $(this).append(`
+                            <select class="form-control" id="select_is_correct`+index+`" required>
+                                <option selected></option>
+                                <option value="0">Not Correct</option>
+                                <option value="1">Correct</option>
+                            </select>`);
+                        $('#select_is_correct'+index).on('change', function(){
+                            if(question_type == 'Single Choice 4' ?? question_type == 'True False'){
+                                if($(this).children('option:selected').val()== 1 ){
+                                    $('#select_is_correct'+old_select_index).val('0');
+                                    is_correct = ($(this).parent().attr('id'));
+                                }
+                            } else {
+                                is_correct.push("");
+                                if($(this).children('option:selected').val()== 1 ){
+                                    is_correct[index] = String($(this).parent().attr('id'));
+                                } else {
+                                    is_correct[index] = "0";
+                                }
+                            }
+                            old_select_index = index;
+                        });
+                    });
+                    console.log(is_correct);
+                    $(".editable").prop('readonly', false);
                 }
+                $('#submitUpdate').on('click', function(){
+                    console.log(is_correct);
+                    $('#form').append(`<input type="hidden" name="is_correct" value="`+is_correct+`">`);
+                    $('#form').submit();
+                })
             });
         </script>
     @endsection

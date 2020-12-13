@@ -25,23 +25,23 @@ class examRequest extends FormRequest
     {
         return [
             //
-            'subject'=>'bail|Required',
-            'semester'=>'bail|Required',
-            'classroom'=>'bail|Required',
-            'duration'=>'bail|Required',
-            'date'=>'bail|Required',
-            'startTime'=>'bail|Required',
+            'subject'=>'bail| Required',
+            'semester'=>'bail| Required',
+            'classroom'=>'bail| Required',
+            'duration'=>'bail| Required',
+            'date'=>'bail| Required',
+            'startTime'=>'bail| Required',
         ];
     }
     public function messages()
-{
-    return [
-        'subject.required' => __('Bạn chưa chọn subject'),
-        'semester.required' => __('Bạn chưa chọn semester'),
-        'classroom.required' => __('Bạn chưa nhập tên lớp'),
-        'duration.required'=> __('Bạn chưa chọn thời gian'),
-        'date.required'=> __('Bạn chưa chọn ngày kiểm tra'),
-        'startTime.required'=> __('Bạn chưa chọn thời gian bắt đầu'),
-    ];
-}
+    {
+        return [
+            'subject.required' => __('Bạn chưa chọn subject'),
+            'semester.required' => __('Bạn chưa chọn semester'),
+            'classroom.required' => __('Bạn chưa nhập tên lớp'),
+            'duration.required'=> __('Bạn chưa chọn thời gian'),
+            'date.required'=> __('Bạn chưa chọn ngày kiểm tra'),
+            'startTime.required'=> __('Bạn chưa chọn thời gian bắt đầu'),
+        ];
+    }
 }

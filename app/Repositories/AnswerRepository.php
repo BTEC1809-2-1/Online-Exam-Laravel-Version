@@ -26,70 +26,92 @@ class AnswerRepository extends BaseRepository {
         return $query;
     }
 
-    public function saveMultipleQuestionAnswers(Request $request, $questionID, $date)
+
+    //OPTIMIZE: optimize these two functions, they can be merged
+    public function saveMultipleQuestionAnswers($request, $questionID, $date)
     {
-        $data = [];
-        foreach($request->answer as $index=>$answer){
-            foreach($request->is_correct as $icIndex=>$ic)
-            {
-                if($icIndex==$index && $request->is_correct[$index]==1)
-                {
-                    $_is_correct = 1;
-                }
-                else{
-                    $_is_correct = 0;
-                }
-            };
-            $data += [
-                $index => [
-                    'id' => 'A'.$questionID.$date.$index,
-                    'question_id' => $questionID,
-                    'answer' => $request->answer[$index],
-                    'is_correct' => $_is_correct,
-                    'created_by' => Auth::user()->name,
-                    'created_at' => now(),
-                    'updated_by' => Auth::user()->name,
-                    'updated_at' => now(),
-                ]
+        $answers = [];
+        foreach($request->answer as $index=>$answer)
+        {
+            $answers[] = [
+                'index' => $index,
+                'content' => $answer
             ];
         }
+
+        $_is_correct = [
+            $request->is_correct1 ?? "",
+            $request->is_correct2 ?? "",
+            $request->is_correct3 ?? "",
+            $request->is_correct4 ?? "",
+        ];
+
+        $data = [
+
+            'id' => 'A'.$questionID.$date,
+            'question_id' => $questionID,
+            'answer' => json_encode($answers),
+            'is_correct' => json_encode($_is_correct),
+            'created_by' => Auth::user()->name,
+            'created_at' => now(),
+            'updated_by' => Auth::user()->name,
+            'updated_at' => now(),
+        ];
         Answer::insert($data);
     }
 
-    public function saveSingleChoiceOrTrueFalseQuestionAnswers(Request $request, $questionID, $date)
+    public function saveSingleChoiceOrTrueFalseQuestionAnswers($request, $questionID, $date)
     {
-        $data = [];
+        $answers = [];
         foreach($request->answer as $index=>$answer)
         {
-            $data += [
-                $index => [
-                    'id' => 'A'.$questionID.$date.$index,
-                    'question_id' => $questionID,
-                    'answer' => $request->answer[$index],
-                    'created_by' => Auth::user()->name,
-                    'created_at' => now(),
-                    'updated_by' => Auth::user()->name,
-                    'updated_at' => now(),
-                ]
+            $answers[] = [
+                'index' => $index,
+                'content' => $answer
             ];
-            if($index == $request->is_correct)
-            {
-                $data[$index]['is_correct'] = 1;
-            }else
-            {
-                $data[$index]['is_correct'] = 0;
-            }
         }
+        $data = [
+            'id' => 'A'.$questionID.$date,
+            'question_id' => $questionID,
+            'answer' => json_encode($answers),
+            'is_correct' => $request->is_correct,
+            'created_by' => Auth::user()->name,
+            'created_at' => now(),
+            'updated_by' => Auth::user()->name,
+            'updated_at' => now(),
+        ];
         Answer::insert($data);
     }
 
     public function getAnswers($questionID)
     {
-        return  Answer::where('question_id', $questionID)->get();
+        return  Answer::where('question_id', $questionID)->first();
     }
 
-    public function deleteAllAnswerByQuestionID($question_id)
+    public function deleteAllAnswerByQuestionID($questionID)
     {
-        Answer::where('question_id', '=', $question_id)->delete();
+        Answer::where('question_id', $questionID)->delete();
+    }
+
+    public function updateDetail($request, $questionID)
+    {
+        foreach($request->answer as $index=>$answer)
+        {
+            $answers[] = [
+                'index' => $index,
+                'content' => $answer
+            ];
+        }
+        if(is_array($request->is_correct))
+        {
+            $is_correct =  json_encode($request->is_correct);
+        }else {
+            $is_correct =  $request->is_correct;
+        }
+
+        Answer::where('question_id', $questionID)->update([
+            'answer' => json_encode($answers),
+            'is_correct' => $is_correct
+        ]);
     }
 }

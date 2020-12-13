@@ -235,13 +235,54 @@ return [
 
     'role' => [
         'student' => '1',
-        'admin' => '2'
+        'admin'   => '2'
     ],
 
-    'numberOfQuestionsPerExam' => [
-        'mc4' => '1',
-        'sc4' => '1',
-        'tf' => '2',
+    'exam_status' => [
+        'Ready'     => '1',
+        'On-going'  => '2',
+        'Ended'     => '3',
+        'Cancelled' => '4',
     ],
+
+    'question_status' => [
+        '1' => 'New',
+        '2' => 'Old'
+    ],
+
+    'student_exam_status' => [
+        '1' => 'Not Complete',
+        '2' => 'Test Done'
+    ],
+
+    'exam_type' => [
+        'Normal'   => '1',
+        'Mid-term' => '2',
+        'Final'    => '3'
+    ],
+
+    'subject' => [
+        'Bussiness Management' => 'BM',
+        'Information Technology' => 'IT',
+        'Graphic Design' => 'GD'
+    ],
+
+    'semester' => [
+        'Spring' => 'SPR',
+        'Summer' => 'SUM',
+        'Autumn' => 'AUT',
+        'Winter' => 'WIN'
+    ],
+    'question_level_of_difficult' => [
+        'normal' => '1',
+        'medium' => '2',
+        'hard' => '3'
+    ],
+
+    'question_type' => [
+        'Multiple Choice 4' => 'MC4',
+        'Single Choice 4' => 'SC4',
+        'True False' => 'TF'
+    ]
 
 ];

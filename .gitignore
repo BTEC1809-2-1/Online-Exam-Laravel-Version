@@ -3,7 +3,11 @@
 /public/storage
 /storage/*.key
 /vendor
+<<<<<<< HEAD
 .env.backup
+=======
+.env
+>>>>>>> master
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -25,3 +29,8 @@ composer.json
 composer.json
 
 docker-compose.yml
+Dockerfile
+logs
+
+.vscode/
+TODO

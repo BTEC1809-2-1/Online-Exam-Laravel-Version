@@ -14,10 +14,14 @@ class CreateExamsTable extends Migration
     public function up()
     {
         Schema::create('exams', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id', 255);
             $table->string('subject');
             $table->string('semester');
+            $table->tinyInteger('exam_type');
             $table->string('classroom');
+            $table->string('lecture');
+            $table->mediumText('questions_in_exam')->nullable();
+            $table->mediumText('students_in_exam')->nullable();
             $table->dateTime('start_at',0);
             $table->time('duration');
             $table->string('status');
@@ -25,6 +29,7 @@ class CreateExamsTable extends Migration
             $table->string('created_by');
             $table->timestamp('updated_at',0);
             $table->string('updated_by');
+            $table->primary('id');
         });
     }
 

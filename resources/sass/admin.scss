@@ -1,50 +1,61 @@
 @import 'variables';
 
-.wrapper{
+.wrapper {
     display: flex;
     width: 100%;
     align-items: right;
     color: $white;
-    .sidebar{
+
+    .sidebar {
         min-width: 280px;
         min-height: 100vh;
-        .sidebar-header{
+
+        .sidebar-header {
             width: 100%;
             background: $mau-hann-thich-body;
             padding: 1em 2em;
+
             h3 {
                 text-align: center;
                 font-weight: bold;
             }
         }
-        .btn-home{
+
+        .btn-home {
             text-align: center;
-            a{
+
+            a {
                 color: $white;
                 font-weight: bold;
                 font-size: 25px;
             }
         }
+
         nav {
             background: white;
             position: relative;
-            ul{
+
+            ul {
                 padding: 1em;
             }
-            a{
+
+            a {
                 color: black;
                 font-size: 20px;
             }
 
         }
     }
-    .content{
+
+    .content {
         width: 100%;
-        .header{
+        height: 100vh;
+        .header {
             min-height: 100px;
             width: 100%;
-            background:  white;
+            background: white;
             text-align: center;
+
             .app-name {
                 margin-top: 0.5em;
                 display: inline-block;
@@ -55,28 +66,44 @@
                 font-size: 25px;
             }
         }
-        .container{
+        .admin-content-body {
+            height: 90vh;
+            overflow-y: scroll;
+        }
+        .container {
             width: 100%;
-            .row{
+            .row {
                 width: 100%;
             }
         }
+
         .card {
             margin-top: 1em;
-            .card-header{
+            margin-bottom: 1em;
+
+            .card-header {
+                font-size: 18px;
                 background: $mau-hann-thich-cardheader;
                 color: $white;
             }
 
             .card-body {
-                color: $mau-hann-thich-body;
+                color: black;
             }
         }
-        a {
+
+        a:not(.page-link) {
             color: white;
+
             :hover {
                 text-decoration: none;
             }
         }
     }
+
+    .question-list {
+        margin-bottom: 1em;
+    }
 }
+
+

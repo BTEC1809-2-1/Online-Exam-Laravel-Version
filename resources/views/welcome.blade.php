@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Thich mot ban gai BTEC</title>
+        <title>BTEC online exam</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -15,7 +15,7 @@
                 background-image: url("{{url('image/everglowtn.jpg')}}");
                 background-repeat: no-repeat;
                 background-size: cover;
-                color: white;
+                color: black;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -47,11 +47,11 @@
             }
 
             .title {
-                font-size: 100px;
+                font-size: 40px;
             }
 
             .links > a {
-                color: white;
+                color: black;
                 padding: 0 25px;
                 font-size: 25px;
                 font-weight: 600;
@@ -66,24 +66,31 @@
         </style>
     </head>
     <body>
+        {{-- <?php dd(phpinfo())?> --}}
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        @if ( Auth::user()->role == config('app.role.admin'))
+                            <a href="{{ url('/admin') }}">Home</a>
+                        @else
+                            <a href="{{ url('/logout') }}">Logout</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Tau Hai Cuc Manh
+                    Tính năng đăng ký đã bị khóa, vui lòng nạp thẻ lần đầu để  mở khóa!
+                    <br>
+                    @if (Auth::check())
+                        @if (!(Auth::user()->role == config('app.role.admin')))
+                            Bro chưa có bài kiểm tra đâu, về đi.
+                        @endif
+                    @endif
                 </div>
 
                 <div class="links">

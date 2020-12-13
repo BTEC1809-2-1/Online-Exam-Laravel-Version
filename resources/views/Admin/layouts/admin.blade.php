@@ -10,6 +10,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -39,5 +40,28 @@
         </div>
     </div>
     @yield('script')
+    <script>
+        $(document).ready(()=>{
+            let toggleExamManagementClicked = false; let toggleQuestionManagementClicked = false;
+            $('#toggleExamManagement').on('click', function(){
+                toggleExamManagementClicked  = !toggleExamManagementClicked;
+                if(toggleExamManagementClicked){
+                    $(this).css({'background-color':'#f58742','border-radius':'15px'});
+                } else {
+                    $(this).css({'background-color':'white','border-radius':'15px'});
+                }
+
+            });
+            $('#toggleQuestionManagement').on('click', function(){
+                toggleQuestionManagementClicked  = !toggleQuestionManagementClicked;
+                if(toggleQuestionManagementClicked){
+                    $(this).css({'background-color':'#f58742','border-radius':'15px'});
+                } else {
+                    $(this).css({'background-color':'white','border-radius':'15px'});
+                }
+
+            });
+        });
+    </script>
 </body>
 </html>
