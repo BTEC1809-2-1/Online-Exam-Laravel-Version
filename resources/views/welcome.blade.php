@@ -66,7 +66,6 @@
         </style>
     </head>
     <body>
-        {{-- <?php dd(phpinfo())?> --}}
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -83,22 +82,25 @@
             @endif
 
             <div class="content">
+                <div class="logo" >
+                    <img src="{{ asset('/image/bteclogo.png') }}" alt="">
+                </div>
                 <div class="title m-b-md">
-                    Tính năng đăng ký đã bị khóa, vui lòng nạp thẻ lần đầu để  mở khóa!
+                    Welcome to the Online Exam site
                     <br>
                     @if (Auth::check())
                         @if (!(Auth::user()->role == config('app.role.admin')))
-                            Bro chưa có bài kiểm tra đâu, về đi.
+                            You are currently not having any exam.
                         @endif
                     @endif
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">BTEC CMS</a>
-                    <a href="https://laracasts.com">BTEC AP</a>
-                    <a href="https://laravel-news.com">BTEC Fanpage</a>
-                    <a href="https://blog.laravel.com">BTEC Confession</a>
-                    <a href="https://nova.laravel.com">BTEC Website</a>
+                    <a href="http://cms.btec.edu.vn/">BTEC CMS</a>
+                    <a href="http://ap.btec.edu.vn/">BTEC AP</a>
+                    <a href="https://www.facebook.com/fptbtec/">BTEC Fanpage</a>
+                    <a href="https://www.facebook.com/btec.fpt.edu.vn">BTEC Confession</a>
+                    <a href="https://btec.fpt.edu.vn/">BTEC Website</a>
                 </div>
             </div>
         </div>

@@ -136,6 +136,7 @@ class ExamController extends Controller
 
         if ($this->examService->createNewExam($request, $examID)) {
             return redirect()->route('get.exam.list')
+
                              ->with (
                                  'success',
                                  'You has successfully created the exam')
@@ -149,6 +150,7 @@ class ExamController extends Controller
                              'error',
                              'Cannot create Exam (No Questions avaiable),
                               please report to the administrator to fix this problem');
+
     }
 
     /**
