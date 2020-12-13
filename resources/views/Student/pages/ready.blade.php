@@ -36,7 +36,7 @@
         <div class="card">
             <div class="card-header text-center">
                 <div class="row">
-                    <div class="col-md-9 text-left pt-2">Các em ơi, nhớ lấy lời anh. Ngã ở đâu mình uống rượu ở đấy, không việc gì phải buồn!</div>
+                    <div class="col-md-9 text-left pt-2">If the "Do exam" button not appear when count-down come to zero, you should reload this page.</div>
                     <div class="col-md-3"><a href="{{route('logout')}}" class="btn button-small btn-danger">Logout</a></div>
                 </div>
             </div>

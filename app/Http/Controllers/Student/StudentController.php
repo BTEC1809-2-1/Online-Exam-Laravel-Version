@@ -26,7 +26,6 @@ class StudentController extends Controller
 
     public function showReadyPage()
     {
-        // dd($this->examService->getStudentExam(Auth::user()->email));
         if($this->examService->getStudentExam(Auth::user()->email) !== null)
         {
             $exam = $this->examService->getStudentExam(Auth::user()->email);
