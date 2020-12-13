@@ -17,7 +17,7 @@ class CreateStudentExamTable extends Migration
             $table->increments('id');
             $table->string('student_id', 255);
             $table->string('exam_id', 255);
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->string('question_set_id', 255);
             $table->mediumText('student_answers')->nullable();
             $table->string('point')->nullable();
