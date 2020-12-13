@@ -81,7 +81,7 @@ Create New Question
                     </div>
                     <div class="form-check ml-4">
                         <input id="second-answers" class="form-check-input" type="checkbox" name="is_correct2"  value="2">
-                        <label for="second-answers" class="form-check-label" >Second answer/label>
+                        <label for="second-answers" class="form-check-label" >Second answer</label>
                     </div>
                     <div class="form-check ml-4">
                         <input id="third-answers" class="form-check-input" type="checkbox" name="is_correct3"  value="3">
