@@ -27,7 +27,7 @@ Auth::routes(['login' => true,'register' => false]);
 Route::auth();
 //Route for socialite login
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect')->name('login.google');
-Route::get('/callback/{provider}', 'SocialController@callback');
+Route::get('/auth/callback/{provider}', 'SocialController@callback');
 
 // Route for basic login
 Route::get('/', fn() => view('welcome'));
