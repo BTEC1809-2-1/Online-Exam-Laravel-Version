@@ -213,7 +213,7 @@
                                                     <option selected></option>
                                                     <option value="SPR">Spring</option>
                                                     <option value="SUM">Summer</option>
-                                                    <option value="AUT">Mùa có em</option>
+                                                    <option value="AUT">Autumn</option>
                                                     <option value="WIN">Winnter</option>
                                                 </select>
                                             </div>
@@ -223,7 +223,7 @@
                                                 <label for="">Subject *</label>
                                                 <select name="subject" id="" class="form-control">
                                                     <option selected></option>
-                                                    <option value="IT">information Technology</option>
+                                                    <option value="IT">Information Technology</option>
                                                     <option value="BM">Bussiness Management</option>
                                                     <option value="DS">Designing</option>
                                                     <option value="EN">English</option>
