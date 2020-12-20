@@ -687,12 +687,10 @@ class ExamService
                                         ->getQuestionsAndAnswers($questionID)
                                         ->first()
                                         ->id,
-
+                    //TODO:refactor this code
                     'question' =>  $this->questionRepository
                                         ->getQuestionsAndAnswers($questionID)
-                                        ->first()
-                                        ->question,
-
+                                        ->first(),
                     'answers'  =>  json_decode(
                                     $this->questionRepository
                                         ->getQuestionsAndAnswers($questionID)
@@ -718,36 +716,35 @@ class ExamService
      */
     public function SaveStudentAnswer($request, $studentID, $examID)
     {
-        $requests = $request->except('_token');
+        // dd($request->answers);
         $answers = [];
         $qId = '';
         $aId = '';
 
-        for ($i = 1; $i <= count($requests, 1) / 2; $i++) {
-            foreach ($requests as $index => $request) {
-                if ((substr($index, -1) == $i) and
-                    (strpos($index, 'question') !== false)
-                ) {
-                    $qId = $request;
-                }
-                if ((substr($index, -1) == $i) and
-                    (strpos($index, 'answer') !== false)
-                ) {
-                    $aId = $request;
-                }
+        foreach ($request->questions as $questionIndex => $question) {
+
+            $qId = $request->questions[$questionIndex];
+
+            if (array_key_exists($questionIndex, $request->answers)) {
+                $aId = $request->answers[$questionIndex];
+            } else {
+                $aId = '';
             }
 
-            $answers[$i] = [
-                'question_id' => $qId,
+            $answers[$questionIndex] = [
+                'question' => $qId,
                 'answer' => $aId,
             ];
         }
 
+        // dd($answers);
         $answers = json_encode($answers);
-        if ($this->studentExamRepository->updateStudentAnswer(
-                                            $studentID,
-                                            $examID,
-                                            $answers)
+
+        if ($this->studentExamRepository
+                 ->updateStudentAnswer(
+                    $studentID,
+                    $examID,
+                    $answers)
         ) {
             return true;
         }
@@ -778,8 +775,8 @@ class ExamService
 
         $total = count($this->getStudentExamQuestions($examID, $studentID));
 
-        foreach ($answers as $index => $answer) {
-            if ($this->is_correct($answer->answer, $answer->question_id)) {
+        foreach ($answers as $answer) {
+            if ($this->is_correct($answer->answer, $answer->question)) {
                 $score += 100 / $total;
                 $correct_answers++;
             }
@@ -839,7 +836,11 @@ class ExamService
     {
         if ($request->get('query')) {
             $query = $request->get('query');
-            $data = DB::table('users')->where('role', '1')->where('class', '<>', $request->get('classroom'))->where('name', 'LIKE', "%{$query}%")->get();
+            $data = DB::table('users')
+                    ->where('role', '1')
+                    ->where('class', '<>', $request->get('classroom'))
+                    ->where('name', 'LIKE', "%{$query}%")
+                    ->get();
             $output = '<ul style="display:block; position:relative">';
             $i = 0;
             foreach ($data as $row) {
