@@ -63,8 +63,14 @@ class ExamController extends Controller
                                         ->questions));
         $normal = 0; $medium = 0; $hard = 0;
 
-        foreach(json_decode($exam_question_sets->first()->questions) as $question)
-        {
+        foreach (
+            json_decode (
+                $exam_question_sets
+                ->first()
+                ->questions)
+        as
+            $question) {
+
             if ( $question->level_of_difficult
                  ==
                  config('app.question_level_of_difficult.normal')
@@ -135,20 +141,22 @@ class ExamController extends Controller
         $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
 
         if ($this->examService->createNewExam($request, $examID)) {
-            return redirect()->route('get.exam.list')
-                             ->with (
-                                 'success',
-                                 'You has successfully created the exam')
-                             ->with (
-                                 'exam_id',
-                                 $examID);
+            return redirect()
+            ->route('get.exam.list')
+            ->with (
+                'success',
+                'You has successfully created the exam')
+            ->with (
+                'exam_id',
+                $examID);
         }
 
-        return redirect()->route('get.exam.list')
-                         ->with (
-                             'error',
-                             'Cannot create Exam (No Questions avaiable),
-                              please report to the administrator to fix this problem');
+        return redirect()
+        ->route('get.exam.list')
+        ->with (
+                'error',
+                'Cannot create Exam (No Questions avaiable),
+                please report to the administrator to fix this problem');
 
     }
 
