@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/Question/Delete/{id}', 'Question\QuestionController@delete')->name('question.delete');
         Route::post('/Question/Detail/{id}','Question\QuestionController@updateQuestionDetail')->name('question.update');
         Route::get('/Question/List', 'Question\QuestionController@getQuestionList')->name('get.question.list');
+        Route::post('/Questions','Question\AjaxSearchController@index');
         /** Exam route group */
         Route::get('/Exam/Create', 'Exam\ExamController@create')->name('create.exam');
         Route::post('/Exam/Create', 'Exam\ExamController@store')->name('exam.store');

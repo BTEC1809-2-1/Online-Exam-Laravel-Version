@@ -23,6 +23,32 @@ Question List
             'background-color':'#5eb44b',
             'border-radius':'5px',
             'color': 'white'});
+        $('#search').keyup(function()
+        {
+            var query = $(this).val();
+            if(query != '')
+            {
+                var _token = $('input[name="_token"]').val();
+                let classroom = $('#classroom').find(":selected").text();
+                $.ajax({
+                    url:"{{ route('student.search') }}",
+                    method:"POST",
+                    data:
+                    {
+                        query:query, _token:_token, classroom: classroom
+                    },
+                    success:function(data)
+                    {
+                        $('#resultList').fadeIn();
+                        $('#resultList').css({'background-color':'white'});
+                        $('#resultList').html(data);
+                    }
+                });
+            } else
+            {
+                $('#resultList').fadeOut();
+            }
+        });
     });
 </script>
 @endsection
