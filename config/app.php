@@ -284,5 +284,4 @@ return [
         'Single Choice 4' => 'SC4',
         'True False' => 'TF'
     ]
-
 ];

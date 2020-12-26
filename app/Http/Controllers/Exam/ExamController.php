@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Exam;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateExamRequest;
 use App\Services\Exam\ExamService;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\examRequest;
 use Illuminate\Http\Request;
 
 //TODO: change description
@@ -130,13 +130,12 @@ class ExamController extends Controller
      *
      * @return [type]
      */
-    public function store(Request $request)
+    public function store(CreateExamRequest $request)
     {
         $examID = 'EXAM'.$request->subject.$request->semester.date('YmdHis');
 
         if ($this->examService->createNewExam($request, $examID)) {
             return redirect()->route('get.exam.list')
-
                              ->with (
                                  'success',
                                  'You has successfully created the exam')

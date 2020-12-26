@@ -90,10 +90,10 @@
                         @endif
 						<div class="row justify-content-between px-3">
 							<div class="col">
-                                <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button"> < Return to dashboard</a>
+                                <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button">Return to dashboard</a>
                             </div>
                             <div class="col text-right">
-                                <a href="{{ route('create.exam') }}" style="color: #000000"class="btn general-use-button">Create another exam ></a>
+                                <a href="{{ route('create.exam') }}" style="color: #000000"class="btn general-use-button">Create another exam</a>
                             </div>
 						</div>
 					</div>

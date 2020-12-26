@@ -35,7 +35,16 @@ class StudentController extends Controller
             $duration =$exam->duration;
             $countdown = Carbon::now()->diffInMinutes(Carbon::parse($exam->start_at));
             $status = $this->examService->getExamStatus($exam->id);
-            return view('Student.pages.ready', compact('exam', 'id' ,'status', 'start_at', 'duration', 'countdown', 'subject'));
+
+            return view('Student.pages.ready',
+                         compact (
+                             'exam',
+                             'id',
+                             'status',
+                             'start_at',
+                             'duration',
+                             'countdown',
+                             'subject'));
         }
         return redirect('/');
     }
@@ -45,7 +54,10 @@ class StudentController extends Controller
         // if($this->examService->checkExamStartTime($id))
         // {
             $exam = $this->examService->getStudentExam(Auth::user()->email);
-            $questions = $this->examService->getStudentExamQuestions($exam->id, Auth::user()->email);
+            $questions = $this->examService->getStudentExamQuestions (
+                                                $exam->id,
+                                                Auth::user()->email);
+
             return view('Student.pages.do-exam')->with(compact('exam', 'questions'));
         // }
         // return redirect()->route('student');
@@ -61,7 +73,8 @@ class StudentController extends Controller
             Auth::logout();
             return view('Student.pages.result', compact('result', 'studentID', 'examID'));
         }
-        $errorMessage = "Your exam has not been recorded! Please contact the administator to fix this problem before it is too late";
+        $errorMessage = "Your exam has not been recorded! Please contact the
+                        administator to fix this problem before it is too late";
         return view('Student.pages.result', compact('errorMessage'));
     }
 }
