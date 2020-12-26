@@ -300,7 +300,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Start Time *</label>
-                                            <input type="time" class="@error('time') is-invalid @enderror form-control" name="startTime">
+                                            <input type="time" class="@error('time') is-invalid @enderror form-control" name="time">
                                             @error('time')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
