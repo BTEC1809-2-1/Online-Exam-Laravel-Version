@@ -30,7 +30,7 @@ class CreateExamRequest extends FormRequest
             'lecture'          => 'required',
             'duration'         => 'required|date_format:H:i:s',
             'date'             => 'required|date',
-            'time'             => 'required|date_format:H:i:s',
+            'time'             => 'required|date_format:H:i',
             'exam_type'        => 'required|numeric',
             'number_of_set'    => 'required',
             'question_per_set' => 'required',
