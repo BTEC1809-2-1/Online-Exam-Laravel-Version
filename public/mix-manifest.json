@@ -1,6 +1,8 @@
 {
+    "/js/ajaxSearch.js": "/js/ajaxSearch.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
-    "/css/question.css": "/css/question.css"
+    "/css/question.css": "/css/question.css",
+    "/js/sidebarDecorations.js": "/js/sidebarDecorations.js"
 }
