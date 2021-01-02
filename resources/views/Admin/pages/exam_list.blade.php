@@ -28,25 +28,25 @@
     <div class="admin-content-body">
         <div class="row justify-content-center w-100 m-0">
             <div class="col-md-11">
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <li>{!! \Session::get('error') !!}</li>
+                        </ul>
+                    </div>
+                @endif
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                @endif
                 @csrf
                 <div class="card">
                     <div class="card-header">
                         <a href="{{ route('admin') }}" class="btn create-button mx-2 back">Back to Dashboard</a>
                         <a href="{{ route('create.exam') }}" class="btn create-button mx-2 forward">Create new Exam</a>
-                        @if (\Session::has('error'))
-                            <div class="alert alert-danger" role="alert">
-                                <ul>
-                                    <li>{!! \Session::get('error') !!}</li>
-                                </ul>
-                            </div>
-                        @endif
-                        @if (\Session::has('success'))
-                            <div class="alert alert-success">
-                                <ul>
-                                    <li>{!! \Session::get('success') !!}</li>
-                                </ul>
-                            </div>
-                        @endif
                     </div>
                         <div class="card-body">
                             <div class="row justify-content-end px-5 mb-3">

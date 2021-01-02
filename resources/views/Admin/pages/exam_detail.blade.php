@@ -63,15 +63,15 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <li>{!! \Session::get('error') !!}</li>
+                        </ul>
+                    </div>
+                @endif
 				<div class="card">
 					<div class="card-header" id="header">
-                        @if (\Session::has('error'))
-                            <div class="alert alert-danger" role="alert">
-                                <ul>
-                                    <li>{!! \Session::get('error') !!}</li>
-                                </ul>
-                            </div>
-                        @endif
 						<div class="row justify-content-between px-3">
 							<div class="col">
                                 <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button back">Return to dashboard</a>
@@ -189,12 +189,31 @@
                                 <a class="btn detail-button mb-lg-3" style="width: 100%" href="{{ route('get.Exam.QuestionSets', ['id' => $exam->id]) }}">View Exam Question Sets</a>
                                 <button type="button" id="editButton" class="btn detail-button btn-block">Edit</button>
                                 <button type="submit" id="updateButton" class="btn detail-button btn-block mt-0">Update</button>
-								<button type="button" class="btn create-button btn-block">Cancel this Exam</button>
+								<button type="button" class="btn create-button btn-block" data-toggle="modal" data-target="#deleteExam">Cancel this Exam</button>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-		</div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="deleteExam" tabindex="-1" role="dialog" aria-labelledby="deleteExam" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete this Exam?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="form-group">
+                            <a href="{{route('exam.delete', ['id' => $exam->id])}}" class="btn delete-button btn-block" role="button">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
  @endsection

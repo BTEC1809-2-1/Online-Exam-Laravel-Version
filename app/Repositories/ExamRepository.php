@@ -27,7 +27,7 @@ class ExamRepository extends BaseRepository {
 
     public function getAllExam()
     {
-        $listExam = DB::table('exams')->paginate(8);
+        $listExam = Exam::paginate(8);
 
         return $listExam;
     }

@@ -51,9 +51,14 @@ class QuestionController extends Controller
     {
         if($this->questionService->deleteQuestionByID($questionID))
         {
-            return redirect()->route('get.question.list')->with('success', 'You have delete that question');
+            return redirect()
+                ->route('get.question.list')
+                ->with('success', 'You have delete that question');
         }
-        return redirect()->route('get.question.list')->with('error', 'Some error has occured, the question you choose has not been deleted!');
+
+        return redirect()
+            ->route('get.question.list')
+            ->with('error', 'Some error has occured, the question you choose has not been deleted!');
     }
 
     /**
