@@ -1,3 +1,7 @@
+.alert {
+  margin-top: 15px;
+}
+
 .card-header {
   display: flex;
   flex-direction: row;

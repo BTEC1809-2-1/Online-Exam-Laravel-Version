@@ -820,10 +820,8 @@ class ExamService
     public function deleteExamDataByID($examID)
     {
         try {
-            $this->examQuestionRepository->deleteExamQuestionByExamID($examID);
-            $this->questionSetRepository->deleteQuestionSetsByExamID($examID);
-            $this->studentExamRepository->deleteStudentsExamByExamID($examID);
             $this->examRepository->deleteExamByID($examID);
+
             return true;
         } catch (\Exception $e) {
             return false;

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Exam extends Model
@@ -15,6 +16,7 @@ class Exam extends Model
     protected $primaryKey = 'id';
     protected $keyType ='string';
 
+    use SoftDeletes;
     use Notifiable;
      /**
      * The attributes that are mass assignable.

@@ -110,7 +110,7 @@ Question Detail
                                 {{-- <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn detail-button btn-block" role="button">Update</a> --}}
                                 <button type="button" class="btn detail-button btn-block" id="submitUpdate">Update</button>
                             </div>
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#deleteQuestion">
+                            <button type="button" class="btn btn-primary btn-block" >
                                 Delete this question
                             </button>
                         </form>

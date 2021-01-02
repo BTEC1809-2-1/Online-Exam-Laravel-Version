@@ -14,7 +14,7 @@ class AddSoftDeleteToExams extends Migration
     public function up()
     {
         Schema::table('exams', function (Blueprint $table) {
-            //
+            $table->softDeletes();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSoftDeleteToExams extends Migration
     public function down()
     {
         Schema::table('exams', function (Blueprint $table) {
-            //
+            $table->dropSoftDeletes();
         });
     }
 }

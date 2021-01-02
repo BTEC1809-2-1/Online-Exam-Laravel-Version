@@ -116,9 +116,7 @@ class ExamController extends Controller
      */
     public function getExamList()
     {
-        $listExam = DB::table('exams')
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(6);
+        $listExam =  $this->examService->getExamList();
 
         return view('Admin.pages.exam_list', compact('listExam'));
     }
@@ -168,17 +166,19 @@ class ExamController extends Controller
     public function delete($examID)
     {
         if ($this->examService->deleteExamDataByID($examID)) {
-            return redirect()->route('get.exam.list')
-                             ->with (
-                                 'success',
-                                 'You has successfully deleted the exam');
+            return redirect()
+                ->route('get.exam.list')
+                ->with (
+                    'success',
+                    'You has successfully deleted the exam');
         }
 
-        return redirect()->route('get.exam.list')
-                         ->with (
-                             'error',
-                             'Some errors had occured, you has not delete the exam,
-                              please contact the administrator to fix this problem');
+        return redirect()
+            ->route('get.exam.list')
+            ->with (
+                'error',
+                'Some errors had occured, you has not delete the exam,
+                please contact the administrator to fix this problem');
     }
 
     public function searchStudent(Request $request)
