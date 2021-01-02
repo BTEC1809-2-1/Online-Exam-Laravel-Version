@@ -17,11 +17,7 @@ Create New Question
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#questionManagement').show();
-            $('#questionCreate').css ({
-                'background-color':'#5eb44b',
-                'border-radius':'5px',
-                'color':'white'});
+            
             $("#questionType").change(function() {
                 var selectedValue = $(this)
                     .find(":selected")

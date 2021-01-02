@@ -1,5 +1,32 @@
 @import 'variables';
-modal {color: black;}
+
+body {
+    overflow-y: hidden;
+}
+
+.question-search-bar {
+    min-width: 250px;
+}
+
+.questionList {
+    max-height: 500px;
+    overflow-y: scroll;
+    margin-top: 10px;
+    border: 1px solid black;
+    ul li {
+        text-decoration: none;
+        padding-top: 1em;
+        color: black;
+    }
+}
+.search-button {
+    width: 100%;
+}
+
+modal {
+    color: black;
+}
+
 #update{
     display: none;
 }
@@ -8,13 +35,33 @@ label{
     color: $black;
 }
 
-
 .answer-block{
     color: black;
 }
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .back {
+        background-color: $orange-dark;
+    }
+
+    .forward {
+        background-color: green;
+    }
+}
+
 .card-body{
     color: black;
 }
 .pagination {
     color: black;
+}
+
+@media screen and (min-width: 1500px) {
+    .questionList {
+        width: 98rem;
+    }
 }

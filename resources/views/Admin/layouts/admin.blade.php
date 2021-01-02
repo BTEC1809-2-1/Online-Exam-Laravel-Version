@@ -16,9 +16,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Styles -->
+    <!-- Global Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    {{-- Custom page style --}}
     @yield('style')
 </head>
 <body>
@@ -40,28 +41,6 @@
         </div>
     </div>
     @yield('script')
-    <script>
-        $(document).ready(()=>{
-            let toggleExamManagementClicked = false; let toggleQuestionManagementClicked = false;
-            $('#toggleExamManagement').on('click', function(){
-                toggleExamManagementClicked  = !toggleExamManagementClicked;
-                if(toggleExamManagementClicked){
-                    $(this).css({'background-color':'#f58742','border-radius':'15px'});
-                } else {
-                    $(this).css({'background-color':'white','border-radius':'15px'});
-                }
-
-            });
-            $('#toggleQuestionManagement').on('click', function(){
-                toggleQuestionManagementClicked  = !toggleQuestionManagementClicked;
-                if(toggleQuestionManagementClicked){
-                    $(this).css({'background-color':'#f58742','border-radius':'15px'});
-                } else {
-                    $(this).css({'background-color':'white','border-radius':'15px'});
-                }
-
-            });
-        });
-    </script>
+    <script src="{{ asset('js/sidebarDecorations.js') }}"></script>
 </body>
 </html>
