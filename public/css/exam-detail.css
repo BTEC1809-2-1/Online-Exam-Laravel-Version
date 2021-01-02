@@ -1,0 +1,21 @@
+.modal-title,
+.modal-body {
+  color: black;
+}
+
+.general-use-button {
+  color: #000000;
+}
+
+.card-header {
+  color: white;
+}
+
+.back {
+  background-color: #f58742;
+}
+
+.forward {
+  background-color: green;
+}
+

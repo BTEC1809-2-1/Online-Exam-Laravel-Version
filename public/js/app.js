@@ -49882,6 +49882,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/create-exam.scss":
+/*!*****************************************!*\
+  !*** ./resources/sass/create-exam.scss ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/exam-detail.scss":
+/*!*****************************************!*\
+  !*** ./resources/sass/exam-detail.scss ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/exam-list.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/exam-list.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/question.scss":
 /*!**************************************!*\
   !*** ./resources/sass/question.scss ***!
@@ -49894,16 +49927,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/question.scss ***!
-  \************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/question.scss ./resources/sass/exam-list.scss ./resources/sass/create-exam.scss ./resources/sass/exam-detail.scss ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/admin.scss */"./resources/sass/admin.scss");
-module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/question.scss */"./resources/sass/question.scss");
+__webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/question.scss */"./resources/sass/question.scss");
+__webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/exam-list.scss */"./resources/sass/exam-list.scss");
+__webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/create-exam.scss */"./resources/sass/create-exam.scss");
+module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/sass/exam-detail.scss */"./resources/sass/exam-detail.scss");
 
 
 /***/ })

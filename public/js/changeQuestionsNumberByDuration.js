@@ -81,59 +81,53 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/ajaxSearch.js":
-/*!************************************!*\
-  !*** ./resources/js/ajaxSearch.js ***!
-  \************************************/
+/***/ "./resources/js/changeQuestionsNumberByDuration.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/changeQuestionsNumberByDuration.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$("#search").keyup(function () {
-  var query = $(this).val();
+$('#duration').on('change', function () {
+  if (this.value != null) {
+    switch (this.value) {
+      case '00:15:00':
+        $('#question-per-set').empty();
+        $('#question-per-set').append("\n                    <option selected></option>\n                    <option value=\"10\">10 questions</option>\n                    <option value=\"12\">12 questions</option>\n                    <option value=\"15\">15 questions</option>\n                ");
+        break;
 
-  if (query != "") {
-    var _token = $('input[name="_token"]').val();
+      case '00:45:00':
+        $('#question-per-set').empty();
+        $('#question-per-set').append("\n                    <option selected></option>\n                    <option value=\"30\">30 questions</option>\n                    <option value=\"45\">45 questions</option>\n                ");
+        break;
 
-    $.ajax({
-      url: route,
-      method: "POST",
-      data: {
-        query: query,
-        _token: _token,
-        variable: variable
-      },
-      success: function success(data) {
-        console.log(data);
+      case '01:30:00':
+        $('#question-per-set').empty();
+        $('#question-per-set').append("\n                    <option selected></option>\n                    <option value=\"60\">60 questions</option>\n                    <option value=\"90\">90 questions</option>\n                ");
+        break;
 
-        if (data !== "") {
-          $("#resultList").fadeIn();
-          $("#resultList").css({
-            "background-color": "white"
-          });
-          $("#resultList").html(data);
-        }
-      }
-    });
-  } else {
-    $("#resultList").fadeOut();
+      default:
+        $('#question-per-set').empty();
+        break;
+    }
   }
 });
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/js/ajaxSearch.js ***!
-  \******************************************/
+/***/ 3:
+/*!***************************************************************!*\
+  !*** multi ./resources/js/changeQuestionsNumberByDuration.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/js/ajaxSearch.js */"./resources/js/ajaxSearch.js");
+module.exports = __webpack_require__(/*! /home/lebinhan/Workspace/Code/onlineexam/resources/js/changeQuestionsNumberByDuration.js */"./resources/js/changeQuestionsNumberByDuration.js");
 
 
 /***/ })

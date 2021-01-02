@@ -1,0 +1,20 @@
+@import 'variables';
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .back {
+        background-color: $orange-dark;
+    }
+
+    .forward {
+        background-color: green;
+    }
+}
+
+.exam-search-bar {
+    min-width: 250px;
+    max-width: 500px;
+}

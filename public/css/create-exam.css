@@ -1,0 +1,80 @@
+body {
+  overflow-y: hidden;
+}
+
+.form-content {
+  background: #FCFCFC;
+  border-radius: 20px;
+}
+
+.form-group {
+  color: black;
+}
+
+.student-list {
+  min-height: 150px;
+  max-height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  overflow-y: scroll;
+  color: black;
+  padding-left: 10px;
+}
+
+.resultList {
+  overflow-y: hidden;
+  max-height: 100px;
+  width: 100%;
+}
+
+li,
+a {
+  color: black;
+}
+
+input {
+  padding: 4px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.extra-student {
+  margin-top: 10px;
+  margin-left: 1em;
+  padding-left: 10px;
+  background: #5fb649;
+  border-radius: 10px;
+  max-width: 95%;
+}
+
+.student-name {
+  padding-top: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.remove-btn {
+  background: #f06f2b;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.separator {
+  background: black;
+  height: 2px;
+}
+
+.resultList {
+  display: none;
+  border: 1px solid black;
+  max-height: 150px;
+  overflow-y: auto;
+  border-radius: 0 0 5px 5px;
+  padding-top: 1px;
+}
+

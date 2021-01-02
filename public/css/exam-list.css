@@ -1,0 +1,19 @@
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-header .back {
+  background-color: #f58742;
+}
+
+.card-header .forward {
+  background-color: green;
+}
+
+.exam-search-bar {
+  min-width: 250px;
+  max-width: 500px;
+}
+
