@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Question extends Model
@@ -14,6 +15,7 @@ class Question extends Model
      */
     protected $primaryKey = 'id';
     protected $keyType ='string';
+    use SoftDeletes;
 
     public function answer(){
         return $this->hasMany('App\Answer');

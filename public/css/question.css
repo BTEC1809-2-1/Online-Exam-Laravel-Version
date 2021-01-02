@@ -1,5 +1,19 @@
 body {
-  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-header .back {
+  background-color: #f58742;
+}
+
+.card-header .forward {
+  background-color: green;
 }
 
 .question-search-bar {
@@ -23,7 +37,12 @@ body {
   width: 100%;
 }
 
-modal {
+.delete-button {
+  color: black;
+  background-color: #e3342f;
+}
+
+.modal {
   color: black;
 }
 

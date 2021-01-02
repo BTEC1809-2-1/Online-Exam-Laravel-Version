@@ -6,6 +6,7 @@ use App\Question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class QuestionRepository extends BaseRepository {
+
     public function model()
     {
         return Question::class;
@@ -38,8 +39,10 @@ class QuestionRepository extends BaseRepository {
     public function getAllQuestion()
     {
         $listExam = DB::table('questions')
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(8);
+            ->where('deleted_at', null)
+            ->orderBy('created_at', 'desc')
+            ->paginate(8);
+
         return $listExam;
     }
 
@@ -70,33 +73,36 @@ class QuestionRepository extends BaseRepository {
     public function getQuestionDetail($id)
     {
         $query = $this->query()
-                    ->addSelect('level_of_difficult',
-                                'created_at',
-                                'created_by',
-                                'updated_at',
-                                'updated_by'
-                    );
+            ->addSelect('level_of_difficult',
+                        'created_at',
+                        'created_by',
+                        'updated_at',
+                        'updated_by'
+            );
         return $query->findOrFail($id);
     }
 
     public function getQuestionsByExam($examID)
     {
         return DB::table('exam_questions')
-                ->select('question_id')
-                ->where('exam_id', $examID)
-                ->first()
-                ->question_id ?? null;
+            ->select('question_id')
+            ->where('exam_id', $examID)
+            ->first()
+            ->question_id ?? null;
     }
 
-    public function addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired($subject, $level_of_difficult, $number_of_questions)
-    {
+    public function addQuestionsToExamByDifficultyAndNumberOfQuestionsRequired (
+        $subject,
+        $level_of_difficult,
+        $number_of_questions
+    )   {
         return DB::table('questions')->select('id', 'question', 'type', 'level_of_difficult')
-                    ->where('subject', $subject)
-                    ->where('level_of_difficult', $level_of_difficult)
-                    ->inRandomOrder()
-                    ->limit($number_of_questions)
-                    ->get()
-                    ->toArray();
+            ->where('subject', $subject)
+            ->where('level_of_difficult', $level_of_difficult)
+            ->inRandomOrder()
+            ->limit($number_of_questions)
+            ->get()
+            ->toArray();
     }
 
     public function deleteByID($questionID)

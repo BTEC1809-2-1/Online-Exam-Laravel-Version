@@ -120,9 +120,6 @@ class QuestionService {
     {
         try
         {
-            /** Delete question answers*/
-            $this->answerRepository->deleteAllAnswerByQuestionID($questionID);
-            /** Delete the question itself */
             $this->questionRepository->deleteByID($questionID);
             return true;
         }catch(\Exception $e)

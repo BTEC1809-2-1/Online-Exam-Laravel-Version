@@ -13,6 +13,7 @@ class AjaxSearchController extends Controller
         if ($request->get('query')) {
             $query = $request->get('query');
             $data = DB::table('questions')
+                    ->where('deleted_at', null)
                     ->where('id','like', "%{$query}%")
                     ->orWhere('question', 'LIKE', "%{$query}%")
                     ->get();

@@ -5,7 +5,6 @@ Question Detail
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
 @endsection
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -15,10 +14,10 @@ Question Detail
                         <div class="row justify-content-between px-4">
                             <div class="row justify-content-between px-3">
                                 <div class="col">
-                                    <a href="{{ route('get.question.list') }}" style="color: #000000"class="btn general-use-button"> < Return to question list</a>
+                                    <a href="{{ route('get.question.list') }}" class="btn general-use-button back">Return to question list</a>
                                 </div>
                                 <div class="col text-right">
-                                    <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button">Return to dashboard ></a>
+                                    <a href="{{ route('admin') }}" class="btn general-use-button forward">Return to dashboard</a>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +110,7 @@ Question Detail
                                 {{-- <a href="{{route('question.update', ['id' => $question->id])}}"  class="btn detail-button btn-block" role="button">Update</a> --}}
                                 <button type="button" class="btn detail-button btn-block" id="submitUpdate">Update</button>
                             </div>
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#deleteQuestion">
                                 Delete this question
                             </button>
                         </form>
@@ -120,7 +119,7 @@ Question Detail
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="deleteQuestion" tabindex="-1" role="dialog" aria-labelledby="deleteQuestion" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -144,7 +143,7 @@ Question Detail
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <div class="form-group">
-                            <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn question-delete btn-block" role="button">Delete</a>
+                            <a href="{{route('question.delete', ['id' => $question->id])}}" class="btn delete-button btn-block" role="button">Delete</a>
                         </div>
                     </div>
                 </div>
