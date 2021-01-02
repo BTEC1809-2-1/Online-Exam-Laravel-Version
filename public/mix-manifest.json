@@ -4,5 +4,9 @@
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
     "/css/question.css": "/css/question.css",
+    "/css/exam-list.css": "/css/exam-list.css",
+    "/css/create-exam.css": "/css/create-exam.css",
+    "/css/exam-detail.css": "/css/exam-detail.css",
+    "/js/changeQuestionsNumberByDuration.js": "/js/changeQuestionsNumberByDuration.js",
     "/js/sidebarDecorations.js": "/js/sidebarDecorations.js"
 }

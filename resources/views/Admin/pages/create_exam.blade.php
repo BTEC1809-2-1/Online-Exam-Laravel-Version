@@ -3,107 +3,13 @@
     Create new exam
 @endsection
 @section('style')
-    <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
-    <style>
-        body {
-            overflow-y: hidden;
-        }
-        .form-content
-        {
-            background:##FCFCFC;
-            border-radius: 20px;
-        }
-        .form-group
-        {
-            color: black;
-        }
-        .student-list
-        {
-            min-height: 150px;
-            max-height: 200px;
-            background-color: white;
-            border-radius: 10px;
-            overflow-y: scroll;
-            color: black;
-            padding-left: 10px;
-        }
-        .resultList
-        {
-            overflow-y: hidden;
-            max-height: 100px;
-            width: 100%;
-        }
-        li, a
-        {
-            color: black;
-        }
-        input
-        {
-            padding: 4px;
-        }
-        label
-        {
-            font-weight: bold;
-        }
-        .extra-student
-        {
-            margin-top: 10px;
-            margin-left: 1em;
-            padding-left: 10px;
-            background:#5fb649;
-            border-radius: 10px;
-            max-width: 95%;
-        }
-        .student-name {
-            padding-top: 10px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .remove-btn
-        {
-            background: #f06f2b;
-            color: white;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .separator {
-            background: black;
-            height: 2px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/create-exam.css') }}">
 @endsection
 @section('script')
     <script>
-        $(document).ready(function()
-        {
-            $('#search').keyup(function()
-            {
-                var query = $(this).val();
-                if(query != '')
-                {
-                    var _token = $('input[name="_token"]').val();
-                    let classroom = $('#classroom').find(":selected").text();
-                    $.ajax({
-                        url:"{{ route('student.search') }}",
-                        method:"POST",
-                        data:
-                        {
-                            query:query, _token:_token, classroom: classroom
-                        },
-                        success:function(data)
-                        {
-                            $('#resultList').fadeIn();
-                            $('#resultList').css({'background-color':'white'});
-                            $('#resultList').html(data);
-                        }
-                    });
-                } else
-                {
-                    $('#resultList').fadeOut();
-                }
-            });
+        var route = "{{ route('student.search') }}";
+        var variable = $('#classroom').find(":selected").text();
+        $(document).ready(function() {
             var i = 1;
             var extraStudent = [];
             $(document).on('click', '.student-id', function(){
@@ -119,40 +25,7 @@
                 i++;
                 $('#search').val(null);
             });
-            $('#duration').on('change', function(){
-                if(this.value!=null) {
-                    switch (this.value) {
-                        case '00:15:00':
-                            $('#question-per-set').empty();
-                            $('#question-per-set').append(`
-                                <option selected></option>
-                                <option value="10">10 questions</option>
-                                <option value="12">12 questions</option>
-                                <option value="15">15 questions</option>
-                            `);
-                            break;
-                        case '00:45:00':
-                            $('#question-per-set').empty();
-                            $('#question-per-set').append(`
-                                <option selected></option>
-                                <option value="30">30 questions</option>
-                                <option value="45">45 questions</option>
-                            `);
-                            break;
-                        case '01:30:00':
-                            $('#question-per-set').empty();
-                            $('#question-per-set').append(`
-                                <option selected></option>
-                                <option value="60">60 questions</option>
-                                <option value="90">90 questions</option>
-                            `);
-                            break;
-                        default:
-                            $('#question-per-set').empty();
-                            break;
-                    }
-                }
-            });
+
             $('#createExam').on('click', function(){
                 extraStudent = extraStudent;
                 $('#create').append(`<input type="hidden" name="extra_student" value="`+extraStudent+`">`);
@@ -160,6 +33,8 @@
             });
         });
     </script>
+    <script src="{{ asset('/js/ajaxSearch.js') }}"></script>
+    <script src="{{ asset('/js/changeQuestionsNumberByDuration.js') }}"></script>
 @endsection
 @section('content')
     <div class="admin-content-body">
@@ -167,7 +42,7 @@
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">
-                        Note: Fields with * mark are required, the others can be leave empty
+                        Note: Fields with * mark are required, the others can be empty
                         @if (\Session::has('error'))
                             <div class="">
                                 <ul>
@@ -362,7 +237,7 @@
                                     <hr class="separator">
                                         <div class="form-group">
                                             <h3>Exam extra student(s)</h3>
-                                            Use this form to add student(s) that not in the selected class, if you do not want to add any extra student, leave it empty.
+                                            Add extra students that not in the selected class. (If any)
                                         </div>
                                     </div>
                                 </div>

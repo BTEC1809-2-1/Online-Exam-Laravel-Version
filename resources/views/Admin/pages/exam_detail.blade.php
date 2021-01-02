@@ -4,14 +4,7 @@
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <style>
-        .modal-title, .modal-body {
-            color: black;
-        }
-        .general-use-button{
-            color: #000000;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/exam-detail.css') }}">
 @endsection
 @section('script')
     <script type="text/javascript">
@@ -64,15 +57,6 @@
             });
 
         });
-        // function showRemoveQuestionAlert(id, question)
-        // {
-        //     $('#modalContent').empty();
-        //     $('#remove').attr("href", "#");
-        //     $('#modalContent').append("Question: " + question);
-        //     var link = "{{ route('exam.question.remove', ['id' =>"$exam->id", 'question' =>'id']) }}"
-        //     $('#remove').attr("href", link);
-        //     $('#removeQuestionFromExam').modal('show');
-        // }
     </script>
 @endsection
 @section('content')
@@ -90,10 +74,10 @@
                         @endif
 						<div class="row justify-content-between px-3">
 							<div class="col">
-                                <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button">Return to dashboard</a>
+                                <a href="{{ route('admin') }}" style="color: #000000"class="btn general-use-button back">Return to dashboard</a>
                             </div>
                             <div class="col text-right">
-                                <a href="{{ route('create.exam') }}" style="color: #000000"class="btn general-use-button">Create another exam</a>
+                                <a href="{{ route('create.exam') }}" style="color: #000000"class="btn general-use-button forward">Create another exam</a>
                             </div>
 						</div>
 					</div>
@@ -158,7 +142,6 @@
                                                                 <td>{{$student->class}}</td>
                                                                 <td>{{$student->name}}</td>
                                                                 <td class="text-left">
-                                                                    {{-- <a class="btn detail-button" href="">Detail</a> --}}
                                                                     <a href="{{ route('exam.remove.student', [$exam->id, $student->id]) }}" class="btn create-button">Remove</a>
                                                                 </td>
                                                             </tr>
@@ -192,7 +175,6 @@
                                                             <td>{{$question->id}}</td>
                                                             <td class="text-right">
                                                                 <a class="btn detail-button" style="width: 100%" href="{{ route('get.question.detail', ['id' => $question->id]) }}">Detail</a>
-                                                                {{-- <button type="button" class="btn create-button" onclick="showRemoveQuestionAlert('{{  $question->id}}','{{ $question->question }}' )">Remove</button> --}}
                                                             </td>
                                                         </tr>
                                                         <?php $i++;?>
@@ -215,24 +197,4 @@
 			</div>
 		</div>
     </div>
-    {{-- Alert remove question from Exam
-    <div class="modal fade" id="removeQuestionFromExam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to remove this question from the exam?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modalContent">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="remove" >Remove</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
  @endsection

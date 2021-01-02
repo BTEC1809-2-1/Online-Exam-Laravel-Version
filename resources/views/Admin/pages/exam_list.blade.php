@@ -1,17 +1,12 @@
 @extends('Admin.layouts.admin')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
-    <style>
-         .exam-search-bar {
-            min-width: 250px;
-            max-width: 500px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/exam-list.css') }}">
 @endsection
 @section('script')
     <script>
         $(document).ready(function(){
-           
+
             $('td').each(function(){
                 if( $(this).text()=="Ready"){
                 $(this).css('color', 'blue');
@@ -36,8 +31,8 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="" class="btn create-button mx-2">Back to Dashboard</a>
-                        <a href="" class="btn create-button mx-2">Create new Exam</a>
+                        <a href="{{ route('admin') }}" class="btn create-button mx-2 back">Back to Dashboard</a>
+                        <a href="{{ route('create.exam') }}" class="btn create-button mx-2 forward">Create new Exam</a>
                         @if (\Session::has('error'))
                             <div class="alert alert-danger" role="alert">
                                 <ul>
