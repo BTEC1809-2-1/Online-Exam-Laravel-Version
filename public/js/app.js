@@ -49915,6 +49915,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ (function(module, exports) {
 /***/ "./resources/sass/question.scss":
 /*!**************************************!*\
   !*** ./resources/sass/question.scss ***!
