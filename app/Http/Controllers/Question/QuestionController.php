@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Services\Question\QuestionService;
 use App\Http\Requests\questionRequest;
 
+use function PHPSTORM_META\type;
+
 //TODO: change description
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,6 @@ class QuestionController extends Controller
 {
     protected $questionService;
     protected $answerService;
-
 
     /**
      * @param QuestionService $questionService
@@ -78,15 +79,18 @@ class QuestionController extends Controller
      * @return view question detail
      */
     public function getQuestionDetail($questionID){
+
         $question = $this->questionService->getQuestionDetail($questionID);
         $answers = $this->questionService->getQuestionAnswers($questionID);
         $is_correct = $answers->is_correct;
-        if($question->type == 'MC4')
-        {
-            $is_correct = json_decode($is_correct);
+
+        if($question->type == 'MC4') {
+            $is_correct = explode(',',$is_correct);
         }
+
         $answers = json_decode($answers->answer);
-        return view('Admin.pages.question_detail')->with(compact('question', 'answers', 'is_correct'));
+        return view('Admin.pages.question_detail')
+            ->with(compact('question', 'answers', 'is_correct'));
     }
 
     /**
@@ -97,15 +101,18 @@ class QuestionController extends Controller
      * @return view question list with status message
      */
     public function store(Request $request){
+
         $date =  date('Ymd')+date('Hsi');
         $questionID = 'Q'.$request->subject.$request->questionType.$date;
+
         if($this->questionService->createQuestion($request, $questionID, $date))
         {
             return redirect()->route('get.question.list')
-                    ->with('success', 'The question has been succsesfully add to the system')
-                    ->with('qID', $questionID);
+                ->with('success', 'The question has been succsesfully add to the system')
+                ->with('qID', $questionID);
         }
-        return redirect()->route('get.question.list')->with('error', 'Opps, some errors had been happend, your question has not been created');
+        return redirect()->route('get.question.list')
+            ->with('error', 'Opps, some errors had been happend, your question has not been created');
 
     }
 

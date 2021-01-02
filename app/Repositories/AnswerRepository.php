@@ -63,6 +63,7 @@ class AnswerRepository extends BaseRepository {
     public function saveSingleChoiceOrTrueFalseQuestionAnswers($request, $questionID, $date)
     {
         $answers = [];
+
         foreach($request->answer as $index=>$answer)
         {
             $answers[] = [
@@ -70,6 +71,7 @@ class AnswerRepository extends BaseRepository {
                 'content' => $answer
             ];
         }
+
         $data = [
             'id' => 'A'.$questionID.$date,
             'question_id' => $questionID,
@@ -80,6 +82,7 @@ class AnswerRepository extends BaseRepository {
             'updated_by' => Auth::user()->name,
             'updated_at' => now(),
         ];
+
         Answer::insert($data);
     }
 
@@ -102,10 +105,11 @@ class AnswerRepository extends BaseRepository {
                 'content' => $answer
             ];
         }
+
         if(is_array($request->is_correct))
         {
             $is_correct =  json_encode($request->is_correct);
-        }else {
+        } else {
             $is_correct =  $request->is_correct;
         }
 

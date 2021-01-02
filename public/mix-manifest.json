@@ -8,5 +8,6 @@
     "/css/create-exam.css": "/css/create-exam.css",
     "/css/exam-detail.css": "/css/exam-detail.css",
     "/js/changeQuestionsNumberByDuration.js": "/js/changeQuestionsNumberByDuration.js",
-    "/js/sidebarDecorations.js": "/js/sidebarDecorations.js"
+    "/js/sidebarDecorations.js": "/js/sidebarDecorations.js",
+    "/js/updateQuestion.js": "/js/updateQuestion.js"
 }
