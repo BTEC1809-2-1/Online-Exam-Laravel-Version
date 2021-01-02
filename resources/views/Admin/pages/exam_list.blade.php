@@ -11,8 +11,7 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            $('#examManagement').show();
-            $('#examList').css({'background-color':'#5eb44b', 'border-radius':'10px', 'color':'white'});
+           
             $('td').each(function(){
                 if( $(this).text()=="Ready"){
                 $(this).css('color', 'blue');

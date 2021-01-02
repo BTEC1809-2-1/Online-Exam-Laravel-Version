@@ -5,52 +5,15 @@ Question List
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/question.css') }}">
     <style>
-        body {
-            overflow-y: hidden;
-        }
-        .question-search-bar {
-            min-width: 250px;
-            max-width: 500px;
-        }
 
     </style>
 @endsection
 @section('script')
-<script>
-    $(document).ready(function(){
-        $('#questionManagement').show();
-        $('#questionList').css ({
-            'background-color':'#5eb44b',
-            'border-radius':'5px',
-            'color': 'white'});
-        $('#search').keyup(function()
-        {
-            var query = $(this).val();
-            if(query != '')
-            {
-                var _token = $('input[name="_token"]').val();
-                let classroom = $('#classroom').find(":selected").text();
-                $.ajax({
-                    url:"{{ route('student.search') }}",
-                    method:"POST",
-                    data:
-                    {
-                        query:query, _token:_token, classroom: classroom
-                    },
-                    success:function(data)
-                    {
-                        $('#resultList').fadeIn();
-                        $('#resultList').css({'background-color':'white'});
-                        $('#resultList').html(data);
-                    }
-                });
-            } else
-            {
-                $('#resultList').fadeOut();
-            }
-        });
-    });
-</script>
+    <script>
+        let route = "{{ route('question.findBy') }}";
+        let variable = '';
+    </script>
+    <script src="{{ URL::asset('js/ajaxSearch.js') }}"></script>
 @endsection
 @section('content')
     <div class="admin-content-body">
@@ -73,8 +36,8 @@ Question List
                 @endif
                 <div class="card question-list">
                     <div class="card-header">
-                        <a href="" class="btn create-button mx-2">Back to Dashboard</a>
-                        <a href="" class="btn create-button mx-2">Create new Question</a>
+                        <a href="{{ route("admin") }}" class="btn create-button mx-2 back">Back to Dashboard</a>
+                        <a href="{{ route('create.question') }}" class="btn create-button mx-2 forward">Create new Question</a>
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-end mb-3">
@@ -82,9 +45,13 @@ Question List
                                 <form class="form">
                                     @csrf
                                     <div class="row justify-content-end">
-                                        <input class="form-control mr-1 question-search-bar" type="search" placeholder="Search" aria-label="Search" id="search">
-                                        <button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
-                                        <div class="questionList"></div>
+                                        <div class="col-md-10">
+                                            <input class="form-control mr-1 question-search-bar" type="search" placeholder="Search" aria-label="Search" id="search">
+                                            <div class="questionList" id="resultList"></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn search-button my-2 my-sm-0" type="submit">Search</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
